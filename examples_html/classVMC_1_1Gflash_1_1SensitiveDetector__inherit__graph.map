@@ -1,0 +1,5 @@
+<map id="VMC::Gflash::SensitiveDetector" name="VMC::Gflash::SensitiveDetector">
+<area shape="rect" id="Node000001" title="The calorimeter sensitive detector." alt="" coords="5,79,208,105"/>
+<area shape="rect" id="Node000002" href="$classTNamed.html" title=" " alt="" coords="71,5,142,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,46,109,79,104,79,104,46"/>
+</map>

@@ -1,0 +1,29 @@
+<map id="examples/ExGarfield/include/GarfieldPhysics.h" name="examples/ExGarfield/include/GarfieldPhysics.h">
+<area shape="rect" id="Node000001" title="Definition of the GarfieldPhysics class." alt="" coords="765,5,936,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,77,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="765,33,471,52,284,71,92,96,92,91,283,65,471,47,765,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="100,94,147,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="765,32,648,37,499,49,333,68,163,96,162,91,332,62,498,43,647,32,765,26"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="171,94,228,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="765,34,533,54,390,72,244,96,243,91,390,67,533,49,764,29"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="252,94,371,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="765,41,387,96,386,91,764,36"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="395,94,564,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="765,48,553,93,551,88,764,42"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="588,94,766,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="808,49,719,90,716,85,806,44"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="790,94,911,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="853,46,853,78,848,78,848,46"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="935,94,1070,120"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="890,44,967,84,964,89,887,49"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1094,94,1230,120"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="929,44,1100,87,1099,92,928,49"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1255,94,1334,120"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="936,38,1240,91,1239,96,935,43"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="1358,94,1454,120"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="936,34,1119,58,1343,91,1342,96,1119,63,936,40"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="1479,94,1582,120"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="936,32,1170,55,1464,91,1464,96,1169,60,936,37"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="1605,94,1717,120"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="936,30,1222,52,1404,70,1590,91,1590,96,1403,75,1221,58,936,35"/>
+</map>

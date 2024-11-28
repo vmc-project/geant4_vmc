@@ -1,0 +1,9 @@
+<map id="TG4VRegionsManager" name="TG4VRegionsManager">
+<area shape="rect" id="Node000001" title="Base class for mangers for converting VMC cuts in energy in G4 regions." alt="" coords="86,79,238,105"/>
+<area shape="rect" id="Node000003" href="$classTG4RegionsManager.html" title="Manager class for converting VMC cuts in energy in G4 regions." alt="" coords="5,153,149,178"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,117,93,154,90,150,135,113"/>
+<area shape="rect" id="Node000004" href="$classTG4RegionsManager2.html" title="Manager class for setting VMC cuts in energy in G4 regions." alt="" coords="172,153,323,178"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="190,113,235,150,232,154,187,117"/>
+<area shape="rect" id="Node000002" href="$classTG4Verbose.html" title="Base class for defining the verbose level and a common messenger." alt="" coords="115,5,210,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,46,165,79,160,79,160,46"/>
+</map>
