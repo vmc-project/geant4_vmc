@@ -29,11 +29,14 @@
 #include "TG4ModelConfigurationManager.h"
 #include "TG4OpGeometryManager.h"
 #include "TG4RadiatorDescription.h"
-#include "TG4RootDetectorConstruction.h"
 #include "TG4SDManager.h"
 #include "TG4StateManager.h"
 #include "TG4VUserPostDetConstruction.h"
 #include "TG4VUserRegionConstruction.h"
+
+#ifdef USE_G4ROOT
+#include "TG4RootDetectorConstruction.h"
+#endif
 
 #include <G4FieldManager.hh>
 #include <G4LogicalVolumeStore.hh>
@@ -521,7 +524,9 @@ void TG4GeometryManager::FillMediumMapFromRoot()
       geoVolume = gGeoManager->GetVolume(volName.data());
     }
     else {
+#ifdef USE_G4ROOT
       geoVolume = fRootDetectorConstruction->GetVolume(lv);
+#endif
     }
 
     if (!geoVolume) {
