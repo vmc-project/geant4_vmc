@@ -115,7 +115,8 @@ class TG4RootDetectorConstruction : public G4VUserDetectorConstruction
   G4VPhysicalVolume* CreateG4PhysicalVolume(TGeoNode* node);
   G4Material* CreateG4Material(const TGeoMaterial* mat);
   G4RotationMatrix* CreateG4Rotation(const TGeoMatrix* matrix);
-  G4Element* CreateG4Element(TGeoElement* elem);
+  G4Element* CreateG4Element(TGeoElement* elem,
+                             Double_t zmixt = 0., Double_t amixt = 0.);
 
  public:
   TG4RootDetectorConstruction();
