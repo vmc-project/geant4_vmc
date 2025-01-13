@@ -1,0 +1,5 @@
+<map id="G4UserWorkerInitialization" name="G4UserWorkerInitialization">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,181,31"/>
+<area shape="rect" id="Node000002" href="$classTG4WorkerInitialization.html" title="Actions at start and end of run on a worker (call in MT mode only)" alt="" coords="15,79,171,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,46,96,79,90,79,90,46"/>
+</map>
