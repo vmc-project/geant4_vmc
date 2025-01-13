@@ -17,6 +17,27 @@
 
 #include <G4ProcessManager.hh>
 
+namespace
+{
+
+G4bool Contains(const G4String& name, const G4String& nameList)
+{
+  // Append a space to both searched name and the list
+  // in order to exclude a match for names which are only substrings of
+  // some name present in the list.
+  // Eg. when omega_c0 is in the list and omega is checked for a presence
+
+  G4String checkName(name);
+  checkName.append(" ");
+
+  G4String checkNameList(nameList);
+  checkNameList.append(" ");
+
+  return (checkNameList.find(checkName) != std::string::npos);
+}
+
+} // namespace
+
 //_____________________________________________________________________________
 TG4StackPopperPhysics::TG4StackPopperPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name),
@@ -76,7 +97,7 @@ void TG4StackPopperPhysics::ConstructProcess()
 
     // add this as an option
     if (fSelection.size() == 0 ||
-        fSelection.find(particle->GetParticleName()) != std::string::npos) {
+        Contains(particle->GetParticleName(), fSelection)) {
 
       if (VerboseLevel() > 1) {
         G4cout << "Adding StackPopper process to "
