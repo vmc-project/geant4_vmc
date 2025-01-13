@@ -23,6 +23,27 @@
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 
+namespace
+{
+
+G4bool Contains(const G4String& name, const G4String& nameList)
+{
+  // Append a space to both searched name and the list
+  // in order to exclude a match for names which are only substrings of
+  // some name present in the list.
+  // Eg. when omega_c0 is in the list and omega is checked for a presence
+
+  G4String checkName(name);
+  checkName.append(" ");
+
+  G4String checkNameList(nameList);
+  checkNameList.append(" ");
+
+  return (checkNameList.find(checkName) != std::string::npos);
+}
+
+} // namespace
+
 //_____________________________________________________________________________
 TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name),
@@ -96,7 +117,7 @@ void TG4ExtDecayerPhysics::ConstructProcess()
     // skip particles which do not have process manager
     if (!pmanager) continue;
 
-    if (fSelection.find(particle->GetParticleName()) != std::string::npos) {
+    if (Contains(particle->GetParticleName(), fSelection)) {
 
       if (VerboseLevel() > 1) {
         G4cout << "Switching off Geant4 decay table for: "
