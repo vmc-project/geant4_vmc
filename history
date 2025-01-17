@@ -9,6 +9,18 @@
 
 Tags (history):
 ===============
+  17/01/2025
+  v6-4-p2:
+    Geant4 VMC:
+    - Fix compilation with -DGeant4VMC_USE_G4Root=OFF: (#69)
+      (Added compilation flag for unprotected use of G4Root in TG4GeometryManager)
+    - Fix determination of particles for which to use external decayer (#70)
+      Particle selection was failing in case of particles with similar names (for example omega_c0 and anti_omega_c0)
+    - Apply same fix as in #70 to stack popper particle selection (#71)
+
+    Tested with VMC 2.0, Geant4 11.1.p3 (with embedded CLHEP 2.4.6.2)
+      Root 6.32/08, VGM 5.3.1
+
   16/08/2024
   v6-4-p1:
     Geant4 VMC:
