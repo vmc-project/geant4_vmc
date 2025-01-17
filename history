@@ -9,7 +9,7 @@
 
 Tags (history):
 ===============
-  17/01/2024
+  17/01/2025
   v6-1-update1-p10:
     Geant4 VMC:
     - Fix determination of particles for which to use external decayer (#70)
