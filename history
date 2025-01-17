@@ -9,6 +9,16 @@
 
 Tags (history):
 ===============
+  17/01/2024
+  v6-1-update1-p10:
+    Geant4 VMC:
+    - Fix determination of particles for which to use external decayer (#70)
+      Particle selection was failing in case of particles with similar names (for example omega_c0 and anti_omega_c0)
+    - Apply same fix as in #70 to stack popper particle selection (#71)
+
+    Tested with VMC 2.0, Geant4 11.0.p04 (with embedded CLHEP 2.4.5.1),
+      Root 6.32.08, VGM 5.0
+
   26/09/2023
   v6-1-update1-p9:
     Geant4 VMC:
