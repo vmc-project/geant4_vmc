@@ -16,7 +16,6 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4DetConstructionMessenger.h"
-#include "TG4FieldParameters.h"
 #include "TG4Globals.h"
 #include "TG4Verbose.h"
 
@@ -34,6 +33,7 @@ class TG4VUserPostDetConstruction;
 class TG4RadiatorDescription;
 class TG4RootDetectorConstruction;
 
+class G4FieldParameters;
 class G4LogicalVolume;
 class G4EquationOfMotion;
 class G4MagIntegratorStepper;
@@ -72,6 +72,7 @@ class TG4GeometryManager : public TG4Verbose
     const TG4G3CutVector& cuts, const TG4G3ControlVector& controls) const;
   void SetIsLocalField(G4bool isLocalField);
   void SetIsZeroField(G4bool isZeroField);
+  void SetIsMonopoleField(G4bool isMonopoleField);
   void SetIsUserMaxStep(G4bool isUserMaxStep);
   void SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep);
 
@@ -112,9 +113,8 @@ class TG4GeometryManager : public TG4Verbose
   void FillMediumMapFromG4();
   void FillMediumMapFromRoot();
   void FillMediumMap();
-  TG4FieldParameters* GetOrCreateFieldParameters(const G4String& volumeName);
   void CreateField(TVirtualMagField* magField,
-    TG4FieldParameters* fieldParameters, G4LogicalVolume* lv);
+    G4FieldParameters* fieldParameters, G4LogicalVolume* lv);
   void ConstructGlobalField();
   void ConstructZeroFields();
   void ConstructLocalFields();
@@ -147,9 +147,6 @@ class TG4GeometryManager : public TG4Verbose
   /// User geometry input
   G4String fUserGeometry;
 
-  /// Field parameters
-  std::vector<TG4FieldParameters*> fFieldParameters;
-
   /// Fields
   static G4ThreadLocal std::vector<TG4Field*>* fgFields;
 
@@ -170,6 +167,9 @@ class TG4GeometryManager : public TG4Verbose
 
   /// info if a cached magnetic field is in use
   G4bool fIsCachedMagneticField;
+
+  /// option to activate monopole field setup
+  G4bool fIsMonopoleField;
 
   /// option to activate max step defined in tracking media
   G4bool fIsUserMaxStep;

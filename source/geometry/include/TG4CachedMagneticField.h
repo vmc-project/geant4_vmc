@@ -15,13 +15,10 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "TG4FieldParameters.h"
 #include "TG4MagneticField.h"
 
 #include <G4ThreeVector.hh>
 #include <globals.hh>
-
-class TG4FieldParameters;
 
 class G4EquationOfMotion;
 class G4MagIntegratorStepper;
@@ -36,7 +33,7 @@ class TVirtualMagField;
 /// Overrides TG4MagneticField::GetFieldValue();
 /// it uses the value from a previous call in case the distance of the
 /// new point from a previous one is smaller than the value of
-/// TG4FieldParameters::fConstDistance.
+/// G4FieldParameters::fConstDistance.
 ///
 /// According to G4CachedMagneticField class.
 ///
@@ -49,8 +46,6 @@ class TG4CachedMagneticField : public TG4MagneticField
   virtual ~TG4CachedMagneticField();
 
   virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
-
-  // virtual void Update(const TG4FieldParameters& parameters);
   virtual void PrintStatistics() const;
 
   void ClearCounter();

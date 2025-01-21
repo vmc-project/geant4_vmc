@@ -33,10 +33,9 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   : G4UImessenger(),
     fGeometryManager(geometryManager),
     fDirectory(0),
-    fUpdateFieldCmd(0),
-    fCreateFieldParametersCmd(0),
     fIsLocalFieldCmd(0),
     fIsZeroFieldCmd(0),
+    fIsMonopoleFieldCmd(0),
     fSeparatorCmd(0),
     fPrintMaterialsCmd(0),
     fPrintMaterialsPropertiesCmd(0),
@@ -56,23 +55,6 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fDirectory = new G4UIdirectory("/mcDet/");
   fDirectory->SetGuidance("Detector construction control commands.");
 
-  fUpdateFieldCmd = new G4UIcmdWithoutParameter("/mcDet/updateMagField", this);
-  G4String guidance = "Update magnetic field.\n";
-  guidance +=
-    "This command must be called if the field parameters were changed \n";
-  guidance += "in the Idle state.";
-  fUpdateFieldCmd->SetGuidance(guidance);
-  fUpdateFieldCmd->AvailableForStates(G4State_Idle);
-
-  fCreateFieldParametersCmd =
-    new G4UIcmdWithAString("/mcDet/createMagFieldParameters", this);
-  fCreateFieldParametersCmd->SetGuidance(
-    "Create parameters (and their commands) for a local magnetic field \n");
-  fCreateFieldParametersCmd->SetGuidance(
-    "associated with the volume with the given name.");
-  fCreateFieldParametersCmd->SetParameterName("FieldVolName", false);
-  fCreateFieldParametersCmd->AvailableForStates(G4State_PreInit);
-
   fIsLocalFieldCmd = new G4UIcmdWithABool("/mcDet/setIsLocalMagField", this);
   fIsLocalFieldCmd->SetGuidance(
     "Get local magnetic fields from Root geometry.");
@@ -80,7 +62,7 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fIsLocalFieldCmd->AvailableForStates(G4State_PreInit);
 
   fIsZeroFieldCmd = new G4UIcmdWithABool("/mcDet/setIsZeroMagField", this);
-  guidance =
+  G4String guidance =
     "(In)activate propagating 'ifield = 0' flag defined in tracking media.\n";
   guidance +=
     "When activated: a zero local magnetic field is set to the volumes "
@@ -89,6 +71,12 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fIsZeroFieldCmd->SetGuidance(guidance);
   fIsZeroFieldCmd->SetParameterName("IsZeroField", false);
   fIsZeroFieldCmd->AvailableForStates(G4State_PreInit);
+
+  fIsMonopoleFieldCmd = new G4UIcmdWithABool("/mcDet/setIsMonopoleField", this);
+  fIsMonopoleFieldCmd->SetGuidance(
+    "Get local magnetic fields from Root geometry.");
+  fIsMonopoleFieldCmd->SetParameterName("IsMonopoleField", false);
+  fIsMonopoleFieldCmd->AvailableForStates(G4State_PreInit);
 
   fSeparatorCmd = new G4UIcmdWithAString("/mcDet/volNameSeparator", this);
   guidance =
@@ -188,10 +176,9 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   /// Destructor
 
   delete fDirectory;
-  delete fUpdateFieldCmd;
-  delete fCreateFieldParametersCmd;
   delete fIsLocalFieldCmd;
   delete fIsZeroFieldCmd;
+  delete fIsMonopoleFieldCmd;
   delete fSeparatorCmd;
   delete fPrintMaterialsCmd;
   delete fPrintMaterialsPropertiesCmd;
@@ -339,19 +326,17 @@ void TG4DetConstructionMessenger::SetNewValue(
 {
   /// Apply command to the associated object.
 
-  if (command == fUpdateFieldCmd) {
-    TG4GeometryManager::Instance()->UpdateField();
-  }
-  else if (command == fCreateFieldParametersCmd) {
-    TG4GeometryManager::Instance()->CreateFieldParameters(newValues);
-  }
-  else if (command == fIsLocalFieldCmd) {
+  if (command == fIsLocalFieldCmd) {
     TG4GeometryManager::Instance()->SetIsLocalField(
       fIsLocalFieldCmd->GetNewBoolValue(newValues));
   }
   else if (command == fIsZeroFieldCmd) {
     TG4GeometryManager::Instance()->SetIsZeroField(
       fIsZeroFieldCmd->GetNewBoolValue(newValues));
+  }
+  else if (command == fIsMonopoleFieldCmd) {
+    TG4GeometryManager::Instance()->SetIsMonopoleField(
+      fIsMonopoleFieldCmd->GetNewBoolValue(newValues));
   }
   else if (command == fSeparatorCmd) {
     char separator = newValues[0];

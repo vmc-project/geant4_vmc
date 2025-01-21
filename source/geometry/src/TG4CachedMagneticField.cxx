@@ -77,19 +77,6 @@ void TG4CachedMagneticField::GetFieldValue(
   fLastValue = G4ThreeVector(bfield[0], bfield[1], bfield[2]);
 }
 
-// //_____________________________________________________________________________
-// void TG4CachedMagneticField::Update(const TG4FieldParameters& parameters)
-// {
-// /// Update field with new field parameters
-
-//   // Update parameters in base class
-//   // TG4MagneticField::Update(parameters);
-
-//   // Const distance square
-//   fConstDistanceSquare
-//     = parameters.GetConstDistance()*parameters.GetConstDistance();
-// }
-
 //_____________________________________________________________________________
 void TG4CachedMagneticField::PrintStatistics() const
 {

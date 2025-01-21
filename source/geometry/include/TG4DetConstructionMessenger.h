@@ -32,10 +32,9 @@ class G4UIcmdWithADoubleAndUnit;
 /// \brief Messenger class that defines commands for TG4DetConstruction.
 ///
 /// Implements commands:
-/// - /mcDet/updateMagField
-/// - /mcDet/createMagFieldParameters fieldVolName
 /// - /mcDet/setIsLocalMagField true|false
 /// - /mcDet/setIsZeroMagField true|false
+/// - /mcDet/setIsMonopoleField true|false
 /// - /mcDet/volNameSeparator [char]  - for geomVMCtoGeant4 only
 /// - /mcDet/printMaterials
 /// - /mcDet/printMaterialsProperties
@@ -89,17 +88,14 @@ class TG4DetConstructionMessenger : public G4UImessenger
   //
   // commands data members
 
-  /// command: updateMagField
-  G4UIcmdWithoutParameter* fUpdateFieldCmd;
-
-  /// command: createMagFieldParameters
-  G4UIcmdWithAString* fCreateFieldParametersCmd;
-
   /// command: setIsLocalMagField
   G4UIcmdWithABool* fIsLocalFieldCmd;
 
   /// command: setIsZeroMagField
   G4UIcmdWithABool* fIsZeroFieldCmd;
+
+  /// command: setIsMonopole
+  G4UIcmdWithABool* fIsMonopoleFieldCmd;
 
   /// command: volumeNameSeparator
   G4UIcmdWithAString* fSeparatorCmd;
