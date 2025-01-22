@@ -43,10 +43,6 @@ class TG4Field
   G4Field* GetG4Field() const;
 
  private:
-  // methods
-  G4Field* CreateG4Field(
-    const G4FieldParameters& parameters, TVirtualMagField* magField);
-
   // data
   /// Geant4 field
   G4Field* fG4Field = nullptr;
