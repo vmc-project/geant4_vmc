@@ -16,7 +16,6 @@
 #include "TG4BiasingManager.h"
 #include "TG4Field.h"
 #include "TG4MagneticField.h"
-#include "TG4FieldParameters.h"
 #include "TG4G3ControlVector.h"
 #include "TG4G3CutVector.h"
 #include "TG4G3Units.h"
@@ -39,6 +38,8 @@
 #endif
 
 #include <G4FieldManager.hh>
+#include <G4FieldBuilder.hh>
+#include <G4FieldParameters.hh>
 #include <G4LogicalVolumeStore.hh>
 #include <G4Material.hh>
 #include <G4MonopoleFieldSetup.hh>
@@ -92,11 +93,11 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fEmModelsManager(0),
     fBiasingManager(0),
     fUserGeometry(userGeometry),
-    fFieldParameters(),
     fUserRegionConstruction(0),
     fUserPostDetConstruction(0),
     fIsLocalField(false),
     fIsZeroField(false),
+    fIsMonopoleField(false),
     fIsUserMaxStep(false),
     fIsMaxStepInLowDensityMaterials(true),
     fLimitDensity(fgDefaultLimitDensity),
@@ -110,8 +111,8 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
       "TG4GeometryManager:", "Cannot create two instances of singleton.");
   }
 
-  // Field parameters for global field
-  fFieldParameters.push_back(new TG4FieldParameters());
+  // Geant4 field builder, it creates field parameters for global field
+  G4FieldBuilder::Instance();
 
   CreateMCGeometry();
 
@@ -128,10 +129,6 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
 TG4GeometryManager::~TG4GeometryManager()
 {
   /// Destructor
-
-  for (G4int i = 0; i < G4int(fFieldParameters.size()); ++i) {
-    delete fFieldParameters[i];
-  }
 
   delete fgFields;
   // magnetic field objects are deleted via G4 kernel
@@ -569,15 +566,18 @@ void TG4GeometryManager::FillMediumMap()
 
 //_____________________________________________________________________________
 void TG4GeometryManager::CreateField(TVirtualMagField* magField,
-  TG4FieldParameters* fieldParameters, G4LogicalVolume* lv)
+  G4FieldParameters* fieldParameters, G4LogicalVolume* lv)
 {
   /// Create magnetic, electromagnetic or gravity field
 
   TG4Field* tg4Field = new TG4Field(*fieldParameters, magField, lv);
 
   if (VerboseLevel() > 0) {
+    G4String lvName;
+    if (lv != nullptr) lvName = lv->GetName();
+    auto fieldParameters = G4FieldBuilder::Instance()->GetFieldParameters(lvName);
     G4String fieldType =
-      TG4FieldParameters::FieldTypeName(fieldParameters->GetFieldType());
+      G4FieldParameters::FieldTypeName(fieldParameters->GetFieldType());
     G4bool isCachedMagneticField = (fieldParameters->GetConstDistance() > 0.);
     if (!lv) {
       fieldType = "Global";
@@ -592,7 +592,7 @@ void TG4GeometryManager::CreateField(TVirtualMagField* magField,
     }
 
     G4cout << fieldType << " field created with stepper ";
-    G4cout << TG4FieldParameters::StepperTypeName(
+    G4cout << G4FieldParameters::StepperTypeName(
                 fieldParameters->GetStepperType())
            << G4endl;
   }
@@ -610,12 +610,16 @@ void TG4GeometryManager::ConstructGlobalField()
 {
   /// Construct Geant4 global magnetic field from the field set to gMC
 
+  if (VerboseLevel() > 1)
+    G4cout << "TG4GeometryManager::ConstructGlobalField()" << G4endl;
+
   // Create global magnetic field
   if (gMC->GetMagField()) {
-    CreateField(gMC->GetMagField(), fFieldParameters[0], 0);
+    auto fieldParameters = G4FieldBuilder::Instance()->GetFieldParameters();
+    CreateField(gMC->GetMagField(), fieldParameters, nullptr);
 
     // create monopole field
-    if (fFieldParameters[0]->GetIsMonopole()) {
+    if (fIsMonopoleField) {
       G4cout << "Create G4MonopoleFieldSetup" << G4endl;
       G4MonopoleFieldSetup* monFieldSetup =
         G4MonopoleFieldSetup::GetMonopoleFieldSetup();
@@ -630,8 +634,9 @@ void TG4GeometryManager::ConstructGlobalField()
       }
       else {
         monFieldSetup->SetMagneticField(magField);
-        monFieldSetup->SetDefaultEquation(tg4Field->GetEquation());
-        monFieldSetup->SetDefaultStepper(tg4Field->GetStepper());
+        // TO DO: Update functions in G4MonopoleFieldSetup
+        // monFieldSetup->SetDefaultEquation(fieldParameters->GetEquationType());
+        // monFieldSetup->SetDefaultStepper(fieldParameters->GetStepperType());
         monFieldSetup->InitialiseAll();
       }
     }
@@ -712,27 +717,6 @@ void TG4GeometryManager::ConstructZeroFields()
 }
 
 //_____________________________________________________________________________
-TG4FieldParameters* TG4GeometryManager::GetOrCreateFieldParameters(
-  const G4String& volumeName)
-{
-  /// Get field parameters with the given volumeName or create them if they
-  /// do not exist yet
-
-  // Get user field parameters
-  TG4FieldParameters* fieldParameters = 0;
-  for (G4int i = 0; i < G4int(fFieldParameters.size()); ++i) {
-    if (fFieldParameters[i]->GetVolumeName() == volumeName) {
-      return fFieldParameters[i];
-    }
-  }
-
-  // Create field parameters if not yet defined
-  fieldParameters = new TG4FieldParameters(volumeName);
-  fFieldParameters.push_back(fieldParameters);
-  return fieldParameters;
-}
-
-//_____________________________________________________________________________
 void TG4GeometryManager::ConstructLocalFields()
 {
   /// Construct Geant4 local magnetic field from Root geometry.
@@ -775,8 +759,16 @@ void TG4GeometryManager::ConstructLocalFields()
     }
 
     // Get or create user field parameters
-    TG4FieldParameters* fieldParameters =
-      GetOrCreateFieldParameters(volumeName);
+    auto fieldBuilder = G4FieldBuilder::Instance();
+    // Activate this code when G4FieldBuilder::GetFieldParameters
+    // provides an option to suppress a warning if parameters do not exist
+    // auto fieldParameters = fieldBuilder->GetFieldParameters(volumeName);
+    // if (fieldParameters == nullptr) {
+    //   fieldParameters = fieldBuilder->CreateFieldParameters(volumeName);
+    // }
+
+    // Create G4 user field parameters
+    auto fieldParameters = fieldBuilder->CreateFieldParameters(volumeName);
 
     // Create magnetic field
     CreateField(magField, fieldParameters, lv);
@@ -850,6 +842,10 @@ void TG4GeometryManager::ConstructSDandField()
   if (fIsLocalField) {
     ConstructLocalFields();
   }
+
+  // Construct all Geant4 field objects
+  auto fieldBuilder = G4FieldBuilder::Instance();
+  fieldBuilder->ConstructFieldSetup();
 }
 
 //_____________________________________________________________________________
@@ -874,40 +870,6 @@ void TG4GeometryManager::FinishGeometry()
 
   if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::FinishGeometry done" << G4endl;
-}
-
-//_____________________________________________________________________________
-void TG4GeometryManager::UpdateField()
-{
-  /// Update magnetic field.
-  /// This function must be called if the field parameters were changed
-  /// in other than PreInit> phase.
-
-  if (!fgFields) {
-    TG4Globals::Warning(
-      "TG4GeometryManager", "UpdateField", "No magnetic field is defined.");
-    return;
-  }
-
-  if (VerboseLevel() > 1) G4cout << "TG4GeometryManager::UpdateField" << G4endl;
-
-  // Only the parameters defined in TG4Magnetic field can be updated when
-  // field already exists, so we can safely call the base class non virtual
-  // method
-  for (G4int i = 0; i < G4int(fgFields->size()); ++i) {
-    fgFields->at(i)->Update(*fFieldParameters[i]);
-  }
-}
-
-//_____________________________________________________________________________
-void TG4GeometryManager::CreateFieldParameters(const G4String& fieldVolName)
-{
-  /// Create local magnetic field parameters which can be then configured
-  /// by the user via UI commands.
-  /// The parameters are used in geometry only if a local magnetic field is
-  /// associated with the volumes with the given name
-
-  fFieldParameters.push_back(new TG4FieldParameters(fieldVolName));
 }
 
 //_____________________________________________________________________________
@@ -1011,6 +973,18 @@ void TG4GeometryManager::SetIsZeroField(G4bool isZeroField)
 }
 
 //_____________________________________________________________________________
+void TG4GeometryManager::SetIsMonopoleField(G4bool isMonopoleField)
+{
+  /// (In)Activate propagating monopole field setup
+
+  if (VerboseLevel() > 1)
+    G4cout << "TG4GeometryManager::SetIsMonopoleField: " << std::boolalpha
+           << isMonopoleField << G4endl;
+
+  fIsMonopoleField = isMonopoleField;
+}
+
+//_____________________________________________________________________________
 void TG4GeometryManager::SetIsUserMaxStep(G4bool isUserMaxStep)
 {
   /// (In)Activate the max step defined by user in tracking media
@@ -1056,34 +1030,16 @@ void TG4GeometryManager::SetUserPostDetConstruction(
 void TG4GeometryManager::SetUserEquationOfMotion(
   G4EquationOfMotion* equation, G4String volumeName)
 {
-  if (!volumeName.size()) {
-    // global field
-    fFieldParameters[0]->SetUserEquationOfMotion(equation);
-  }
-  else {
-    // local field
-    // Get or create user field parameters
-    TG4FieldParameters* fieldParameters =
-      GetOrCreateFieldParameters(volumeName);
-    fieldParameters->SetUserEquationOfMotion(equation);
-  }
+  auto fieldBuilder = G4FieldBuilder::Instance();
+  fieldBuilder->SetUserEquationOfMotion(equation, volumeName);
 }
 
 //_____________________________________________________________________________
 void TG4GeometryManager::SetUserStepper(
   G4MagIntegratorStepper* stepper, G4String volumeName)
 {
-  if (!volumeName.size()) {
-    // global field
-    fFieldParameters[0]->SetUserStepper(stepper);
-  }
-  else {
-    // local field
-    // Get or create user field parameters
-    TG4FieldParameters* fieldParameters =
-      GetOrCreateFieldParameters(volumeName);
-    fieldParameters->SetUserStepper(stepper);
-  }
+  auto fieldBuilder = G4FieldBuilder::Instance();
+  fieldBuilder->SetUserStepper(stepper, volumeName);
 }
 
 //_____________________________________________________________________________

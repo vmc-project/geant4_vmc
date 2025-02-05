@@ -160,9 +160,10 @@ void TG4ProcessMapPhysics::FillMap()
   pMap->Add(DECAY_MuAtom, kPDecay, kDCAY);                         // G4 value: 221
   pMap->Add(DECAY_External, kPDecay, kDCAY);                       // G4 value: 231
 
-  // G4TransportationProcessType: 91, 92
+  // G4TransportationProcessType: 91, 92, 93
   pMap->Add(TRANSPORTATION, kPTransportation, kNoG3Controls);         // G4 value: 91
   pMap->Add(COUPLED_TRANSPORTATION, kPTransportation, kNoG3Controls); // G4 value: 92
+  pMap->Add(TRANSPORTATION_WITH_MSC, kPMultipleScattering, kNoG3Controls); // G4 value: 93
 
   // G4FastSimulationProcessType: 301
   pMap->Add(FASTSIM_ManagerProcess, kPNull, kNoG3Controls);        // G4 value: 301

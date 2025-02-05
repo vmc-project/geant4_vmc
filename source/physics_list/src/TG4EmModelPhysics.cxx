@@ -32,9 +32,7 @@
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4RegionStore.hh>
-#include <G4TransportationManager.hh>
 #include <G4TransportationProcessType.hh>
-#include <G4TransportationWithMsc.hh>
 
 //
 // static methods
@@ -163,8 +161,7 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
     G4bool applyToTransportationProcess = false;
     if (emModel == kSpecialUrbanMscModel &&
         ((currentSubType == fMultipleScattering) ||
-         (currentSubType == TRANSPORTATION &&
-          (*processVector)[i]->GetProcessName() == "TransportationWithMsc"))) {
+         (currentSubType == TRANSPORTATION_WITH_MSC))) {
       subType = currentSubType;
       applyToTransportationProcess = (currentSubType == TRANSPORTATION);
     }
@@ -182,6 +179,12 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
       if (VerboseLevel() > 2) {
         G4cout << "Unwrapping biasing process: " << processName << G4endl;
       }
+    }
+
+    if (applyToTransportationProcess) {
+      // the transportation process with msc is not handled with EmConfigurator
+      // via "msc" process name
+      processName = "msc";
     }
 
     // CreateEM model
@@ -227,32 +230,9 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
                << " region(=material): " << regionName << G4endl;
       }
 
-      if (applyToTransportationProcess) {
-        // the transportation process is not handled with EmConfigurator
-        // the model must be set directly to the process
-        G4TransportationWithMsc* transportWithMsc =
-          static_cast<G4TransportationWithMsc*>((*processVector)[i]);
-        auto region = G4RegionStore::GetInstance()->GetRegion(regionName);
-        if (region != nullptr) {
-          if (VerboseLevel() > 2) {
-            G4cout << "[special UrbanMsc model added to G4TransportationWithMsc]"
-                   << G4endl;
-          }
-          transportWithMsc->
-            AddMscModel(static_cast<G4VMscModel*>(g4EmModel), -1, region);
-        }
-        else {
-          TString message;
-          message = "Failed to get region by name ";
-          message += regionName.c_str();
-          TG4Globals::Warning("TG4EmModelPhysics", "AddModel", message);
-        }
-      }
-      else {
-        G4LossTableManager::Instance()->EmConfigurator()->SetExtraEmModel(
-          particle->GetParticleName(), processName, g4EmModel, regionName, 0.0,
-          DBL_MAX, g4FluctModel);
-      }
+      G4LossTableManager::Instance()->EmConfigurator()->SetExtraEmModel(
+        particle->GetParticleName(), processName, g4EmModel, regionName, 0.0,
+        DBL_MAX, g4FluctModel);
     }
 
     if (!regions.size()) {
