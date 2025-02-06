@@ -30,6 +30,7 @@ class G4UIcmdWithAString;
 /// Implements commands:
 /// - /mcPhysics/physicsName/setModel modelName
 /// - /mcPhysics/physicsName/setParticles particleName1 particleName2 ...
+/// - /mcPhysics/physicsName/setExludedParticles particleName1 particleName2 ...
 /// - /mcPhysics/physicsName/setRegions regionName1 regionName2 ...
 /// - /mcPhysics/physicsName/setOneRegion regionName
 /// - /mcPhysics/physicsName/setEmModel modelName  (deprecated)
@@ -76,6 +77,9 @@ class TG4ModelConfigurationMessenger : public G4UImessenger
 
   /// setParticles command
   G4UIcmdWithAString* fSetParticlesCmd;
+
+  /// setExcludedParticles command
+  G4UIcmdWithAString* fSetExcludedParticlesCmd;
 
   /// setRegions command
   G4UIcmdWithAString* fSetRegionsCmd;

@@ -265,6 +265,27 @@ void TG4ModelConfigurationManager::SetModelParticles(
 }
 
 //_____________________________________________________________________________
+void TG4ModelConfigurationManager::SetModelExcludedParticles(
+  const G4String& modelName, const G4String& particles)
+{
+  /// Set particles for the physics model for given medium.
+
+  TG4ModelConfiguration* modelConfiguration =
+    GetModelConfiguration(modelName, "SetModelExcludedParticles");
+
+  if (!modelConfiguration) {
+    TString text = "The model configuration ";
+    text += modelName.data();
+    text += " is not defined.";
+    TG4Globals::Warning("TG4ModelConfigurationManager", "SetModelParticles",
+      text + TG4Globals::Endl() + TString("Setting will be ignored."));
+    return;
+  }
+
+  modelConfiguration->SetExcludedParticles(particles);
+}
+
+//_____________________________________________________________________________
 void TG4ModelConfigurationManager::SetModelRegions(
   const G4String& modelName, const G4String& regionsMedia)
 {

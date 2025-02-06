@@ -182,7 +182,6 @@ void TG4FastSimulationPhysics::AddFastSimulationProcess(
 
     // Get model name
     G4String modelName = (*it)->GetModelName();
-    G4String particles = (*it)->GetParticles();
 
     // Get or create fast simulation process
     G4FastSimulationManagerProcess* fastSimulationProcess =
@@ -195,10 +194,8 @@ void TG4FastSimulationPhysics::AddFastSimulationProcess(
       G4ParticleDefinition* particle = aParticleIterator->value();
       G4String particleName = particle->GetParticleName();
 
-      // skip particles which are not in selection
-      if (particles != "all" && (!(*it)->HasParticle(particleName))) {
-        continue;
-      }
+      // skip particles which are not in the model configuration selection
+      if (! (*it)->HasParticle(particleName) ) continue;
 
       // skip particles which do not have process manager
       if (!particle->GetProcessManager()) continue;

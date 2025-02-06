@@ -148,3 +148,22 @@ G4String TG4Globals::GetToken(Int_t i, const TString& s)
   else
     return tokens[i];
 }
+
+//_____________________________________________________________________________
+G4bool TG4Globals::Contains(const G4String& name, const G4String& nameList)
+{
+  /// Append a space to both searched name and the list
+  /// in order to exclude a match for names which are only substrings of
+  /// some name present in the list.
+  /// Eg. when omega_c0 is in the list and omega is checked for a presence
+
+  if (nameList.empty()) return false;
+
+  G4String checkName(name);
+  checkName.append(" ");
+
+  G4String checkNameList(nameList);
+  checkNameList.append(" ");
+
+  return (checkNameList.find(checkName) != std::string::npos);
+}

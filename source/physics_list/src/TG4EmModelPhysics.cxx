@@ -268,7 +268,6 @@ void TG4EmModelPhysics::AddModels(
 
     // Get model configuration
     TG4EmModel emModel = GetEmModel((*it)->GetModelName());
-    G4String particles = (*it)->GetParticles();
     const std::vector<G4String>& regions = (*it)->GetRegions();
 
     if (!regions.size()) {
@@ -287,11 +286,8 @@ void TG4EmModelPhysics::AddModels(
       G4ParticleDefinition* particle = aParticleIterator->value();
       G4String particleName = particle->GetParticleName();
 
-      // skip particles which are not in selection
-      if (particles != "all" &&
-          particles.find(particle->GetParticleName()) == std::string::npos) {
-        continue;
-      }
+      // skip particles which are not in the model configuration selection
+      if (! (*it)->HasParticle(particleName) ) continue;
 
       // skip also monopole (experimental)
       if (particle->GetParticleName() == "monopole") {

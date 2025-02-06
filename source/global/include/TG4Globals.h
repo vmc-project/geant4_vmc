@@ -87,6 +87,7 @@ class TG4Globals
   static G4String Help();
 
   static G4String GetToken(Int_t i, const TString& s);
+  static G4bool Contains(const G4String& name, const G4String& nameList);
 
  private:
   TG4Globals();
