@@ -11,7 +11,7 @@
 # I. Hrivnacova, 24/04/2014
 
 #---CMake required version -----------------------------------------------------
-cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16...3.27)
 
 #---Project G4Root -------------------------------------------------------------
 #

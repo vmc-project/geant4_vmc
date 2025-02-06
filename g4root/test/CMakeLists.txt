@@ -2,7 +2,7 @@
 
 #---Adding the OpNovice subdirectory explicitly
 
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16...3.27)
 
 
 set(CMAKE_MODULE_PATH
