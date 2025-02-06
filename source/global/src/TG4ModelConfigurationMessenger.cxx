@@ -52,6 +52,7 @@ TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
     fDirectory(0),
     fSetModelCmd(0),
     fSetParticlesCmd(0),
+    fSetExcludedParticlesCmd(0),
     fSetRegionsCmd(0)
 {
   /// Standard constructor
@@ -92,6 +93,15 @@ TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
   fSetParticlesCmd->SetParameterName("Particles", false);
   fSetParticlesCmd->AvailableForStates(G4State_PreInit);
 
+  // setExcludedParticles command
+  commandName = dirName + "setExcludedParticles";
+  fSetExcludedParticlesCmd = new G4UIcmdWithAString(commandName, this);
+  guidance = "Set to be excluded from the selected extra " + physicsName + "\n" +
+             "if 'all' was selected previously ";
+  fSetExcludedParticlesCmd->SetGuidance(guidance.c_str());
+  fSetExcludedParticlesCmd->SetParameterName("Particles", false);
+  fSetExcludedParticlesCmd->AvailableForStates(G4State_PreInit);
+
   // setRegions command
   commandName = dirName + "setRegions";
   fSetRegionsCmd = new G4UIcmdWithAString(commandName, this);
@@ -123,6 +133,7 @@ TG4ModelConfigurationMessenger::~TG4ModelConfigurationMessenger()
   delete fSetModelCmd;
   delete fSetEmModelCmd;
   delete fSetParticlesCmd;
+  delete fSetExcludedParticlesCmd;
   delete fSetRegionsCmd;
   delete fSetOneRegionCmd;
 }
@@ -143,6 +154,9 @@ void TG4ModelConfigurationMessenger::SetNewValue(
   }
   else if (command == fSetParticlesCmd) {
     fModelConfigurationManager->SetModelParticles(fSelectedModel, newValue);
+  }
+  else if (command == fSetExcludedParticlesCmd) {
+    fModelConfigurationManager->SetModelExcludedParticles(fSelectedModel, newValue);
   }
   else if (command == fSetRegionsCmd) {
     fModelConfigurationManager->SetModelRegions(fSelectedModel, newValue);

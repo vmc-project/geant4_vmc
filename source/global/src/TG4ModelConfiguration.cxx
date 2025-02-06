@@ -13,6 +13,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ModelConfiguration.h"
+#include "TG4Globals.h"
 
 #include <G4AnalysisUtilities.hh>
 
@@ -20,22 +21,6 @@
 
 namespace
 {
-
-G4bool Contains(const G4String& name, const G4String& nameList)
-{
-  // Append a space to both searched name and the list
-  // in order to exclude a match for names which are only substrings of
-  // some name present in the list.
-  // Eg. when Air2 is in the list and Air is checked for a presence
-
-  G4String checkName(name);
-  checkName.append(" ");
-
-  G4String checkNameList(nameList);
-  checkNameList.append(" ");
-
-  return (checkNameList.find(checkName) != std::string::npos);
-}
 
 void PrintNamesVector(const std::vector<G4String> names)
 {
@@ -109,9 +94,12 @@ void TG4ModelConfiguration::Print() const
 //_____________________________________________________________________________
 G4bool TG4ModelConfiguration::HasParticle(const G4String& particleName)
 {
-  /// Return true if given particle is in the particles list
+  /// Return true if given particle is in the particles list and is not
+  /// in the excluded list
 
-  return Contains(particleName, fParticles);
+  return
+    (fParticles == "all" || TG4Globals::Contains(particleName, fParticles)) &&
+    ! (TG4Globals::Contains(particleName, fExcludedParticles));
 }
 
 //_____________________________________________________________________________

@@ -41,6 +41,7 @@ class TG4ModelConfiguration
 
   // set methods
   void SetParticles(const G4String& particles);
+  void SetExcludedParticles(const G4String& particles);
   void SetRegionsMedia(const G4String& regionsMedia);
   void SetOneRegionMedium(const G4String& regionMedium);
   void SetOneRegion(const G4String& region);
@@ -49,6 +50,7 @@ class TG4ModelConfiguration
   // get methods
   const G4String& GetModelName() const;
   const G4String& GetParticles() const;
+  const G4String& GetExcludedParticles() const;
   const std::vector<G4String>& GetRegionsMedia() const;
   const std::vector<G4String>& GetRegions() const;
   G4VFastSimulationModel* GetFastSimulationModel() const;
@@ -65,6 +67,7 @@ class TG4ModelConfiguration
   // data members
   G4String fModelName;                 ///< the EM model name
   G4String fParticles;                 ///< the list of particle names
+  G4String fExcludedParticles;         ///< the list of excluded particle names
   std::vector<G4String> fRegionsMedia; ///< the vector of regions media
   std::vector<G4String>
     fRegions; ///< the vector of created regions (per materials)
@@ -77,6 +80,12 @@ inline void TG4ModelConfiguration::SetParticles(const G4String& particles)
 {
   /// Set the list of particles
   fParticles = particles;
+}
+
+inline void TG4ModelConfiguration::SetExcludedParticles(const G4String& particles)
+{
+  /// Set the list of particles
+  fExcludedParticles = particles;
 }
 
 inline void TG4ModelConfiguration::SetFastSimulationModel(
@@ -96,6 +105,12 @@ inline const G4String& TG4ModelConfiguration::GetParticles() const
 {
   /// Return the list of particles
   return fParticles;
+}
+
+inline const G4String& TG4ModelConfiguration::GetExcludedParticles() const
+{
+  /// Return the list of particles
+  return fExcludedParticles;
 }
 
 inline const std::vector<G4String>&
