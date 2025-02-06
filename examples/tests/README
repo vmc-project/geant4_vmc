@@ -1,0 +1,27 @@
+------------------------------------------------
+ The Virtual Monte Carlo examples
+ Copyright (C) 2007 - 2025 Ivana Hrivnacova
+ All rights reserved.
+
+ For the licensing terms see geant4_vmc/LICENSE.
+ Contact: root-vmc@cern.ch
+-------------------------------------------------
+
+
+tests
+=====
+
+Directory for utility programs for tests.
+
+
+listPLOptions.cxx
+-----------------
+
+Program to print the available base physics lists and EM options
+which can be then used in test_physics_lists.sh.
+
+To run the program:
+  ./listOptions [-b base lists ] [-em em options ] [-v verbose]
+      -b    list available base physics lists
+      -em   list available EM options
+      -v    precede lists with a title
