@@ -1,0 +1,7 @@
+<map id="examples/A01/geant4/include/B5MagneticField.hh" name="examples/A01/geant4/include/B5MagneticField.hh">
+<area shape="rect" id="Node000001" title="Definition of the B5MagneticField class." alt="" coords="127,5,311,46"/>
+<area shape="rect" id="Node000002" href="$A01DetectorConstruction_8cxx.html" title="Implementation of the A01DetectorConstruction class." alt="" coords="5,94,220,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,58,138,96,135,91,182,54"/>
+<area shape="rect" id="Node000003" href="$B5MagneticField_8cxx.html" title="Implementation of the B5MagneticField class." alt="" coords="244,94,410,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="257,54,304,91,301,96,254,58"/>
+</map>
