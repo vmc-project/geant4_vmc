@@ -1,9 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.30/00                        https://root.cern |
-  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
-  | From tags/v6-30-00@                                              |
-  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
+  | Welcome to ROOT 6.32.08                        https://root.cern |
+  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
+  | From tags/v6-32-08@v6-32-08                                      |
+  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -15,25 +15,23 @@ Loading VGM libraries ...
 Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
-Heed:
-    Database path: /Users/ivana/work/projects/vmc/dev/garfieldpp/Heed/heed++/database
 Processing test_ExGarfield.C("g4Config.C")...
 Constructing TG4RunConfiguration 
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 10 February 2022 )
+ Version 2.1 ( 6 February 2025 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6 ( 9 February 2024 )
+ Version 6.7 ( 7 February 2025 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-11-02-ref-00    (8-December-2023)
+ Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -49,8 +47,7 @@ G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
 Adding SpecialPhysicsList stepLimiter
 Going to create FastSimulation
 FastSimulation::FastSimulation
-RandomEngineRoot::Seed:
-    Seed: 624
+RandomEngineRoot::Seed: 1
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
 /mcVerbose/all 0
@@ -137,10 +134,11 @@ Info in <TGeoManager::Export>: Exporting Garfield_geometry ExGarfield VMC exampl
 
 =============================================================
  Virtual Geometry Model 
- Version 5.2 ( 8 June 2023 )
+ Version 5.3.1 ( 13 January 2025 )
  WWW : https://vmc-project.github.io/vgm-documentation/
 =============================================================
 
+Global field created with stepper DormandPrince745
 G4VUserPhysicsList::Construct()
 Construct processes 
 TG4ComposedPhysicsList::ConstructProcess
@@ -835,15 +833,14 @@ regions:   ArCO2
 ### Selected EmModels added to EM processes
 TG4FastSimulationPhysics::ConstructProcess 
 Construct Garfield model.
-MediumMagboltz::SetComposition:
-    Ar/CO2 (70/30)
+MediumMagboltz::SetComposition: Ar/CO2 (70/30)
 MediumMagboltz::Mixer:
     4000 linear energy steps between 0 and 40 eV.
-    ARGON ANISOTROPIC    2014¸
+    ARGON ANISOTROPIC    2014
       mass: 39.948 amu
       ionisation threshold: 15.7596 eV
       44 inelastic terms (44 excitations, 0 superelastic, 0 other)
-    CO2  2018 ANISOTROPIC    ¸
+    CO2  2018 ANISOTROPIC    
       mass: 44.0095 amu
       ionisation threshold: 13.776 eV
       144 inelastic terms (0 excitations, 35 superelastic, 109 other)
@@ -865,7 +862,7 @@ MediumMagboltz::ComputePhotonCollisionTable:
           3.00          ------------
           5.00          ------------
           7.00           192201.9746
-          9.00             2186.0412
+          9.00             2186.0410
          11.00               15.4051
          13.00               20.9412
          15.00               96.7932
@@ -883,13 +880,11 @@ MediumMagboltz::EnablePenningTransfer:
     Warning: present gas table has no ionisation rates.
     Ignore this message if you are using microscopic tracking only.
 MediumMagboltz::EnablePenningTransfer:
-    Penning transfer parameters for 44 excitation levels set to:
-      r      = 0.57
-      lambda = 0 cm
-MediumMagboltz::LoadGasFile: Reading ar_70_co2_30_1000mbar.gas.
-MediumMagboltz::LoadGasFile: Version 12
+    Penning transfer probability for 44 Ar excitation levels set to r = 0.57
 MediumMagboltz::LoadGasFile:
-    Gas composition set to Ar/CO2 (70/30)
+    Reading file ar_70_co2_30_1000mbar.gas.
+    Version 12.
+    Gas composition set to Ar/CO2 (70/30).
 end construct Garfield model.
 TG4FastSimulationPhysics::UpdateRegions
 Adding fast simulation model garfieldModel to regions ArCO2 
@@ -934,10 +929,13 @@ Bremsstrahlung energy threshold above which
   primary e+- is added to the list of secondary    100 TeV
 Bremsstrahlung energy threshold above which primary
   muon/hadron is added to the list of secondary    100 TeV
+Positron annihilation at rest model                SimplePositronium
+Enable 3 gamma annihilation on fly                 0
 Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
+Use Ricardo-Gerardo pair production model          0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -1060,7 +1058,7 @@ eBrem:  for e+  XStype:4  SubType=3
              eBremSB : Emin=    0 eV  Emax=    1 GeV  ModifiedTsai
             eBremLPM : Emin=    1 GeV Emax=  100 TeV  ModifiedTsai
 
-annihil:  for e+ XStype:2 SubType=5 BuildTable=0
+annihil:  for e+ XStype:2 SubType=5 AtRestModel:Simple BuildTable=0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg : Emin=    0 eV  Emax=  100 TeV
 
@@ -1115,7 +1113,7 @@ ionIoni:  for GenericIon  XStype:3  SubType=2
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.02
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-            BraggIon : Emin=    0 eV  Emax=    2 MeV
+               Bragg : Emin=    0 eV  Emax=    2 MeV
           BetheBloch : Emin=    2 MeV Emax=  100 TeV
       ===== EM models for the G4Region  ArCO2 ======
             PAIModel : Emin=    0 eV  Emax=  100 TeV  deltaVI
@@ -1622,7 +1620,7 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 =======================================================================
 ======       Geant4 Native Pre-compound Model Parameters       ========
 =======================================================================
-Type of pre-compound inverse x-section              3
+Type of pre-compound inverse x-section              1
 Pre-compound model active                           1
 Pre-compound excitation low energy                  100 keV
 Pre-compound excitation high energy                 30 MeV
@@ -1643,11 +1641,11 @@ Min energy per nucleon for multifragmentation       200 GeV
 Limit excitation energy for Fermi BreakUp           20 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
-Use discrete excitation energy of the residual      1
+Use discrete excitation energy of the residual      0
 Time limit for long lived isomeres                  1 ns 
 Isomer production flag                              1
 Internal e- conversion flag                         1
-Store e- internal conversion data                   0
+Store e- internal conversion data                   1
 Correlated gamma emission flag                      0
 Max 2J for sampling of angular correlations         10
 =======================================================================
@@ -1693,10 +1691,6 @@ Index : 4     used in the geometry : Yes
 
 ### Run 0 start.
  Start generating event Nr 1
-Sensor::SetArea:
-    -1.451 < x [cm] < 1.451
-    -1.451 < y [cm] < 1.451
-    -9.9975 < z [cm] < 10.0025
 TrackHeed::UpdateBoundingBox:
     Bounding box dimensions:
       x: 2.902 cm
@@ -1708,14 +1702,26 @@ TrackHeed::UpdateBoundingBox:
       y: 0 cm
       z: 0.0025 cm
 TrackHeed::Initialise:
+    Database path: /Users/ivana/work/projects/vmc/dev/garfieldpp/Heed/heed++/database/
+TrackHeed::Initialise:
     Cluster density:             28.1058 cm-1
     Stopping power (restricted): 2.29331 keV/cm
     Stopping power (incl. tail): 2.6907 keV/cm
-    W value:                     28.6688 eV
-    Fano factor:                 0.19
+    W value:                     28.38 eV
+    Fano factor:                 0.215
     Min. ionization potential:   13.79 eV
-   Absorber: total energy: 18.9235 MeV       total track length: 1.42175 cm
-        Gas: total energy: 4.72851 keV           avalanche size:      72       gain:       4
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+   Absorber: total energy: 12.1006 MeV       total track length: 1.00001 cm
+        Gas: total energy: 13.9442 keV           avalanche size:     242       gain:  4.7451
  Start generating event Nr 2
 TrackHeed::UpdateBoundingBox:
     Bounding box dimensions:
@@ -1727,8 +1733,28 @@ TrackHeed::UpdateBoundingBox:
       x: 0 cm
       y: 0 cm
       z: 0.0025 cm
-   Absorber: total energy: 12.0123 MeV       total track length: 1.00001 cm
-        Gas: total energy: 5.36783 keV           avalanche size:     130       gain: 4.48276
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+   Absorber: total energy: 13.0436 MeV       total track length: 1.00004 cm
+        Gas: total energy: 8.84802 keV           avalanche size:     336       gain: 4.30769
  Start generating event Nr 3
 TrackHeed::UpdateBoundingBox:
     Bounding box dimensions:
@@ -1750,73 +1776,33 @@ TrackHeed::UpdateBoundingBox:
       x: 0 cm
       y: 0 cm
       z: 0.0025 cm
-TrackHeed::UpdateBoundingBox:
-    Bounding box dimensions:
-      x: 2.902 cm
-      y: 2.902 cm
-      z: 20 cm
-TrackHeed::UpdateBoundingBox:
-    Center of bounding box:
-      x: 0 cm
-      y: 0 cm
-      z: 0.0025 cm
-TrackHeed::UpdateBoundingBox:
-    Bounding box dimensions:
-      x: 2.902 cm
-      y: 2.902 cm
-      z: 20 cm
-TrackHeed::UpdateBoundingBox:
-    Center of bounding box:
-      x: 0 cm
-      y: 0 cm
-      z: 0.0025 cm
-   Absorber: total energy: 13.6506 MeV       total track length: 1.00001 cm
-        Gas: total energy: 18.5584 keV           avalanche size:     419       gain: 3.95283
+   Absorber: total energy: 14.1239 MeV       total track length: 1.00001 cm
+        Gas: total energy: 7.34361 keV           avalanche size:     182       gain: 4.66667
  Start generating event Nr 4
-   Absorber: total energy: 12.0306 MeV       total track length: 1.00001 cm
-        Gas: total energy: 5.40513 keV           avalanche size:       0       gain:       0
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+   Absorber: total energy: 16.0069 MeV       total track length: 1.27945 cm
+        Gas: total energy: 4.11694 keV           avalanche size:      88       gain: 4.88889
  Start generating event Nr 5
-TrackHeed::UpdateBoundingBox:
-    Bounding box dimensions:
-      x: 2.902 cm
-      y: 2.902 cm
-      z: 20 cm
-TrackHeed::UpdateBoundingBox:
-    Center of bounding box:
-      x: 0 cm
-      y: 0 cm
-      z: 0.0025 cm
-TrackHeed::UpdateBoundingBox:
-    Bounding box dimensions:
-      x: 2.902 cm
-      y: 2.902 cm
-      z: 20 cm
-TrackHeed::UpdateBoundingBox:
-    Center of bounding box:
-      x: 0 cm
-      y: 0 cm
-      z: 0.0025 cm
-TrackHeed::UpdateBoundingBox:
-    Bounding box dimensions:
-      x: 2.902 cm
-      y: 2.902 cm
-      z: 20 cm
-TrackHeed::UpdateBoundingBox:
-    Center of bounding box:
-      x: 0 cm
-      y: 0 cm
-      z: 0.0025 cm
-TrackHeed::UpdateBoundingBox:
-    Bounding box dimensions:
-      x: 2.902 cm
-      y: 2.902 cm
-      z: 20 cm
-TrackHeed::UpdateBoundingBox:
-    Center of bounding box:
-      x: 0 cm
-      y: 0 cm
-      z: 0.0025 cm
-   Absorber: total energy: 32.6366 MeV       total track length: 2.48286 cm
-        Gas: total energy: 4.23413 keV           avalanche size:       0       gain:       0
-Time of this run:   User=1.350000s Real=1.353393s Sys=0.010000s
+   Absorber: total energy: 12.6127 MeV       total track length: 1.00001 cm
+        Gas: total energy: 5.25883 keV           avalanche size:       0       gain:       0
+Time of this run:   User=10.510000s Real=11.474573s Sys=0.340000s
 Number of events processed: 5

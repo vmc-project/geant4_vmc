@@ -1,9 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.30/00                        https://root.cern |
-  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
-  | From tags/v6-30-00@                                              |
-  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
+  | Welcome to ROOT 6.32.08                        https://root.cern |
+  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
+  | From tags/v6-32-08@v6-32-08                                      |
+  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -19,18 +19,18 @@ Processing test_A01_1.C("g4Config1.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 10 February 2022 )
+ Version 2.1 ( 6 February 2025 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6 ( 9 February 2024 )
+ Version 6.7 ( 7 February 2025 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-11-02-ref-00    (8-December-2023)
+ Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -202,8 +202,9 @@ Checking overlaps for volume wirePlane2Physical:0 (G4Box) ... OK!
 Checking overlaps for volume EMcalorimeterPhysical:0 (G4Box) ... OK! 
 Checking overlaps for volume HadCalorimeterPhysical:0 (G4Box) ... OK! 
 Checking overlaps for volume HadCalScintiPhysical:0 (G4Box) ... OK! 
- G4ChordFinder: stepperDriverId: 2
 Global field created with stepper DormandPrince745
+Global field created with stepper DormandPrince745
+ G4ChordFinder: stepperDriverId: 2
 
  hInelastic FTFP_BERT : threshold between BERT and FTFP is over the interval 
  for pions :   3 to 6 GeV
@@ -249,10 +250,13 @@ Bremsstrahlung energy threshold above which
   primary e+- is added to the list of secondary    100 TeV
 Bremsstrahlung energy threshold above which primary
   muon/hadron is added to the list of secondary    100 TeV
+Positron annihilation at rest model                SimplePositronium
+Enable 3 gamma annihilation on fly                 0
 Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
+Use Ricardo-Gerardo pair production model          0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -371,7 +375,7 @@ eBrem:  for e+  XStype:4  SubType=3
              eBremSB : Emin=    0 eV  Emax=    1 GeV  ModifiedTsai
             eBremLPM : Emin=    1 GeV Emax=  100 TeV  ModifiedTsai
 
-annihil:  for e+ XStype:2 SubType=5 BuildTable=0
+annihil:  for e+ XStype:2 SubType=5 AtRestModel:Simple BuildTable=0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg : Emin=    0 eV  Emax=  100 TeV
 
@@ -423,7 +427,7 @@ ionIoni:  for GenericIon  XStype:3  SubType=2
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.02
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-            BraggIon : Emin=    0 eV  Emax=    2 MeV
+               Bragg : Emin=    0 eV  Emax=    2 MeV
           BetheBloch : Emin=    2 MeV Emax=  100 TeV
 
 msc:  for alpha  SubType= 10
@@ -905,7 +909,7 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 =======================================================================
 ======       Geant4 Native Pre-compound Model Parameters       ========
 =======================================================================
-Type of pre-compound inverse x-section              3
+Type of pre-compound inverse x-section              1
 Pre-compound model active                           1
 Pre-compound excitation low energy                  100 keV
 Pre-compound excitation high energy                 30 MeV
@@ -926,11 +930,11 @@ Min energy per nucleon for multifragmentation       200 GeV
 Limit excitation energy for Fermi BreakUp           20 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
-Use discrete excitation energy of the residual      1
+Use discrete excitation energy of the residual      0
 Time limit for long lived isomeres                  1 ns 
 Isomer production flag                              1
 Internal e- conversion flag                         1
-Store e- internal conversion data                   0
+Store e- internal conversion data                   1
 Correlated gamma emission flag                      0
 Max 2J for sampling of angular correlations         10
 =======================================================================
@@ -977,53 +981,53 @@ Index : 4     used in the geometry : Yes
 ### Run 0 start.
 
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
+Hodoscope1 has 5 hits.
 Hodoscope2 has 1 hits.
-Chamber1 has 528 hits.
-Chamber2 has 493 hits.
-EmCalorimeter has 45 hits. Total Edep is 89283.7 (MeV)
-HadCalorimeter has 8 hits. Total Edep is 13.3814 (MeV)
+Chamber1 has 571 hits.
+Chamber2 has 509 hits.
+EmCalorimeter has 38 hits. Total Edep is 84456.2 (MeV)
+HadCalorimeter has 6 hits. Total Edep is 5.3456 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 2 hits.
 Hodoscope2 has 1 hits.
-Chamber1 has 523 hits.
-Chamber2 has 516 hits.
-EmCalorimeter has 36 hits. Total Edep is 18155 (MeV)
-HadCalorimeter has 18 hits. Total Edep is 2611.88 (MeV)
+Chamber1 has 550 hits.
+Chamber2 has 519 hits.
+EmCalorimeter has 36 hits. Total Edep is 18267.3 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 2626.47 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
+Hodoscope1 has 3 hits.
 Hodoscope2 has 1 hits.
-Chamber1 has 525 hits.
-Chamber2 has 487 hits.
-EmCalorimeter has 64 hits. Total Edep is 29286.1 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 1765.39 (MeV)
+Chamber1 has 520 hits.
+Chamber2 has 484 hits.
+EmCalorimeter has 63 hits. Total Edep is 31220.7 (MeV)
+HadCalorimeter has 19 hits. Total Edep is 1805.78 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
+Hodoscope1 has 6 hits.
 Hodoscope2 has 1 hits.
-Chamber1 has 441 hits.
-Chamber2 has 211 hits.
-EmCalorimeter has 48 hits. Total Edep is 10013.2 (MeV)
-HadCalorimeter has 13 hits. Total Edep is 385.928 (MeV)
+Chamber1 has 414 hits.
+Chamber2 has 194 hits.
+EmCalorimeter has 52 hits. Total Edep is 8516.45 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 425.319 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
+Hodoscope1 has 1 hits.
 Hodoscope2 has 1 hits.
-Chamber1 has 526 hits.
-Chamber2 has 514 hits.
-EmCalorimeter has 54 hits. Total Edep is 27854.9 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 136.238 (MeV)
-Time of this run:   User=2.250000s Real=2.272965s Sys=0.020000s
+Chamber1 has 520 hits.
+Chamber2 has 502 hits.
+EmCalorimeter has 52 hits. Total Edep is 27525.6 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 75.3999 (MeV)
+Time of this run:   User=2.680000s Real=2.995915s Sys=0.120000s
 Number of events processed: 5
-Real time 0:00:03, CP time 3.120
+Real time 0:00:04, CP time 3.950
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.30/00                        https://root.cern |
-  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
-  | From tags/v6-30-00@                                              |
-  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
+  | Welcome to ROOT 6.32.08                        https://root.cern |
+  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
+  | From tags/v6-32-08@v6-32-08                                      |
+  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -1039,18 +1043,18 @@ Processing test_A01_2.C("g4Config1.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 10 February 2022 )
+ Version 2.1 ( 6 February 2025 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6 ( 9 February 2024 )
+ Version 6.7 ( 7 February 2025 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-11-02-ref-00    (8-December-2023)
+ Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -1222,6 +1226,7 @@ Checking overlaps for volume wirePlane2Physical:0 (G4Box) ... OK!
 Checking overlaps for volume EMcalorimeterPhysical:0 (G4Box) ... OK! 
 Checking overlaps for volume HadCalorimeterPhysical:0 (G4Box) ... OK! 
 Checking overlaps for volume HadCalScintiPhysical:0 (G4Box) ... OK! 
+Global field created with stepper DormandPrince745
  G4ChordFinder: stepperDriverId: 2
 
  hInelastic FTFP_BERT : threshold between BERT and FTFP is over the interval 
@@ -1268,10 +1273,13 @@ Bremsstrahlung energy threshold above which
   primary e+- is added to the list of secondary    100 TeV
 Bremsstrahlung energy threshold above which primary
   muon/hadron is added to the list of secondary    100 TeV
+Positron annihilation at rest model                SimplePositronium
+Enable 3 gamma annihilation on fly                 0
 Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
+Use Ricardo-Gerardo pair production model          0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -1390,7 +1398,7 @@ eBrem:  for e+  XStype:4  SubType=3
              eBremSB : Emin=    0 eV  Emax=    1 GeV  ModifiedTsai
             eBremLPM : Emin=    1 GeV Emax=  100 TeV  ModifiedTsai
 
-annihil:  for e+ XStype:2 SubType=5 BuildTable=0
+annihil:  for e+ XStype:2 SubType=5 AtRestModel:Simple BuildTable=0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg : Emin=    0 eV  Emax=  100 TeV
 
@@ -1442,7 +1450,7 @@ ionIoni:  for GenericIon  XStype:3  SubType=2
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.02
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-            BraggIon : Emin=    0 eV  Emax=    2 MeV
+               Bragg : Emin=    0 eV  Emax=    2 MeV
           BetheBloch : Emin=    2 MeV Emax=  100 TeV
 
 msc:  for alpha  SubType= 10
@@ -1924,7 +1932,7 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 =======================================================================
 ======       Geant4 Native Pre-compound Model Parameters       ========
 =======================================================================
-Type of pre-compound inverse x-section              3
+Type of pre-compound inverse x-section              1
 Pre-compound model active                           1
 Pre-compound excitation low energy                  100 keV
 Pre-compound excitation high energy                 30 MeV
@@ -1945,11 +1953,11 @@ Min energy per nucleon for multifragmentation       200 GeV
 Limit excitation energy for Fermi BreakUp           20 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
-Use discrete excitation energy of the residual      1
+Use discrete excitation energy of the residual      0
 Time limit for long lived isomeres                  1 ns 
 Isomer production flag                              1
 Internal e- conversion flag                         1
-Store e- internal conversion data                   0
+Store e- internal conversion data                   1
 Correlated gamma emission flag                      0
 Max 2J for sampling of angular correlations         10
 =======================================================================
@@ -1996,44 +2004,44 @@ Index : 4     used in the geometry : Yes
 ### Run 0 start.
 
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 1 hits.
-Hodoscope2 has 1 hits.
-Chamber1 has 554 hits.
-Chamber2 has 497 hits.
-EmCalorimeter has 42 hits. Total Edep is 86185.8 (MeV)
-HadCalorimeter has 5 hits. Total Edep is 11.7334 (MeV)
-
->>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
-Hodoscope2 has 1 hits.
-Chamber1 has 541 hits.
-Chamber2 has 514 hits.
-EmCalorimeter has 25 hits. Total Edep is 18209.3 (MeV)
-HadCalorimeter has 16 hits. Total Edep is 2589.55 (MeV)
-
->>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 4 hits.
 Hodoscope2 has 1 hits.
-Chamber1 has 532 hits.
-Chamber2 has 504 hits.
-EmCalorimeter has 60 hits. Total Edep is 26280.3 (MeV)
-HadCalorimeter has 17 hits. Total Edep is 1848.27 (MeV)
+Chamber1 has 552 hits.
+Chamber2 has 495 hits.
+EmCalorimeter has 42 hits. Total Edep is 82794.9 (MeV)
+HadCalorimeter has 7 hits. Total Edep is 3.1679 (MeV)
 
->>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 7 hits.
+>>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 1 hits.
 Hodoscope2 has 1 hits.
-Chamber1 has 436 hits.
-Chamber2 has 180 hits.
-EmCalorimeter has 45 hits. Total Edep is 4834.42 (MeV)
-HadCalorimeter has 13 hits. Total Edep is 361.225 (MeV)
+Chamber1 has 528 hits.
+Chamber2 has 526 hits.
+EmCalorimeter has 16 hits. Total Edep is 18144.9 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 2657.53 (MeV)
 
->>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
+>>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 3 hits.
 Hodoscope2 has 1 hits.
-Chamber1 has 543 hits.
-Chamber2 has 505 hits.
-EmCalorimeter has 62 hits. Total Edep is 26420.1 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 166.788 (MeV)
-Time of this run:   User=2.050000s Real=2.073274s Sys=0.020000s
+Chamber1 has 507 hits.
+Chamber2 has 499 hits.
+EmCalorimeter has 68 hits. Total Edep is 32207.5 (MeV)
+HadCalorimeter has 19 hits. Total Edep is 2188.84 (MeV)
+
+>>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 4 hits.
+Hodoscope2 has 1 hits.
+Chamber1 has 455 hits.
+Chamber2 has 154 hits.
+EmCalorimeter has 53 hits. Total Edep is 7431.52 (MeV)
+HadCalorimeter has 12 hits. Total Edep is 383.901 (MeV)
+
+>>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 2 hits.
+Hodoscope2 has 1 hits.
+Chamber1 has 528 hits.
+Chamber2 has 528 hits.
+EmCalorimeter has 51 hits. Total Edep is 28588 (MeV)
+HadCalorimeter has 14 hits. Total Edep is 128.143 (MeV)
+Time of this run:   User=2.340000s Real=2.581734s Sys=0.080000s
 Number of events processed: 5
-Real time 0:00:02, CP time 2.910
+Real time 0:00:03, CP time 3.580
