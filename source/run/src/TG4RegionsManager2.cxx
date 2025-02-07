@@ -51,8 +51,13 @@ void TG4RegionsManager2::DefineRegions()
   auto g4RegionStore = G4RegionStore::GetInstance();
 
   // Get world volume & material
-  auto worldLV = TG4GeometryServices::Instance()->GetWorld()->GetLogicalVolume();
+  auto worldPV = TG4GeometryServices::Instance()->GetWorld();
+  auto worldLV = worldPV->GetLogicalVolume();
   auto worldMaterial = worldLV->GetMaterial();
+
+  // Get default production cuts
+  auto defaultProductionCuts
+    = G4ProductionCutsTable::GetProductionCutsTable()->GetDefaultProductionCuts();
 
   // Define region for each logical volume
   G4int counter = 0;
@@ -81,6 +86,8 @@ void TG4RegionsManager2::DefineRegions()
         lv->GetRegion()->GetName() == materialName) {
         if (VerboseLevel() > 1) {
            G4cout << "   "
+                  // << lv->GetRegion() << " "
+                  // << lv->GetRegion()->GetName()
                   << "has already region set, skipping" << G4endl;
         }
         continue;
@@ -110,8 +117,15 @@ void TG4RegionsManager2::DefineRegions()
     }
     region = new G4Region(regionName);
     region->AddRootLogicalVolume(lv);
+    region->UsedInMassGeometry(true);
+    region->SetProductionCuts(defaultProductionCuts);
     ++counter;
   }
+
+  // Update material lists in regions
+  // (to make the regions ready for UpdateProductionCutsTable by us
+  //  as this happens earlier then G4RunManagerKernel::UpdateRegion() call)
+  g4RegionStore->UpdateMaterialList(worldPV);
 
   if (fIsCheck) {
     CheckRegionsInGeometry();
