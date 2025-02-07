@@ -9,6 +9,55 @@
 
 Tags (history):
 ===============
+  07/02/2025
+  v6-7:
+    Geant4 VMC:
+    - Migration to Geant4 11.3: (#72)
+      - Integration of G4FieldBuilder:
+        - Removed commands for session magnetic field parameters
+          (now available in Geant4 in /field):
+            /mcMagField/*
+            /mcDet/updateMagField
+            /mcDet/createMagFieldParameters fieldVolName
+        - Added command to activate monopole field setup
+          (monopole is not covered by G4FieldBuilder)
+            /mcDet/setIsMonopoleField true|false
+        - Removed TG4CachedMagneticField
+          (G4CachedMagneticField is created automatically by G4FieldBuilder
+           if 'constDistance' parameter is set.)
+      - Taking into account new TRANSPORTATION_WITH_MSC subtype
+    - Other developments:
+      - Ability to create elements with arbitrary isotope composition (#65, #67)
+      - Added a possibility to exclude particles from a model configuration (#73):
+        - Added a UI command:
+          /mcPhysics/physicsName/setExludedParticles particleName1 particleName2 ...
+          Example:
+            /mcPhysics/emModel/setEmModel  PAI
+            /mcPhysics/emModel/setRegions  TRD_Gas-mix
+            /mcPhysics/emModel/setParticles  all
+            /mcPhysics/emModel/setExcludedParticles  GenericIon alpha
+
+    - cmake: Updated cmake_minimum_required in all CMake files (#75)
+
+    Examples:
+    - Added 'tests' directory with 'listPLOptions' program (#74)
+    - cmake: Updated cmake_minimum_required in all CMake file (#75)
+
+    Fixes:
+    Geant4 VMC:
+    - Fix & improvements in new setting productions cuts per energy (#59)
+    - Special treatment of SpecialUrbanMscModel when G4TransportationWithMsc is in use (#64)
+    - Fix compilation with -DGeant4VMC_USE_G4Root=OFF: (#69)
+    - Fix determination of particles for which to use external decayer (#70),
+      stack popper (#71) and extra EM models (#73)
+    - Fix a failure in new way of applying VMC cuts with Geant4 11.3
+      (observed in ALICE): #76
+    Examples:
+    - test-suite: set ROOT_INCLUDE_PATH if builddir is passed (#60)
+
+    Tested with VMC 2.1, Geant4 11.3 (with embedded CLHEP 2.4.7.1)
+      Root 6.33/08, VGM 5.2.1, Garfield 5.0
+
   09/02/2024
   v6-6:
     Geant4 VMC:
