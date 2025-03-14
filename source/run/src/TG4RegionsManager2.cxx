@@ -148,8 +148,14 @@ void TG4RegionsManager2::UpdateProductionCutsTable()
   // G4cout << "g4ProductionCutsTable size: " << g4ProductionCutsTable->GetTableSize() << G4endl;
 
   // update table (create materials cut couples)
-  g4ProductionCutsTable->CreateCoupleTables(); 
+  g4ProductionCutsTable->CreateCoupleTables();
   // G4cout << "g4ProductionCutsTable size after update: " << g4ProductionCutsTable->GetTableSize() << G4endl;
+  // reset materials to force cuts recalculation
+  for (std::size_t i = 0; i < g4ProductionCutsTable->GetTableSize(); ++i) {
+    auto couple = const_cast<G4MaterialCutsCouple*>(g4ProductionCutsTable->GetMaterialCutsCouple(i));
+    auto material = couple->GetMaterial();
+    couple->SetMaterial(material);
+  }
 
   for (std::size_t i = 0; i < g4ProductionCutsTable->GetTableSize(); ++i) {
     auto couple = g4ProductionCutsTable->GetMaterialCutsCouple(i);

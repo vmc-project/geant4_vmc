@@ -15,7 +15,6 @@
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3ControlVector.h"
 #include "TG4G3CutVector.h"
-#include "TG4G3Defaults.h"
 #include "TG4G3Units.h"
 
 #include <G4ParticleDefinition.hh>
