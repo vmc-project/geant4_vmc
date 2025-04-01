@@ -9,6 +9,14 @@
 
 Tags (history):
 ===============
+  01/04/2025
+  v6-7-p1:
+    Geant4 VMC:
+    - Fixed setting productions cuts per energy in MT mode (#78)
+
+    Tested with VMC 2.1, Geant4 11.3 (with embedded CLHEP 2.4.7.1)
+      Root 6.33/08, VGM 5.2.1, Garfield 5.0
+
   07/02/2025
   v6-7:
     Geant4 VMC:
