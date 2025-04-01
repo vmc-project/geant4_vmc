@@ -1,0 +1,9 @@
+<map id="examples/TR/src/SensitiveDetector.cxx" name="examples/TR/src/SensitiveDetector.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the SensitiveDetector class." alt="" coords="120,5,297,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,140,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,49,107,88,105,84,173,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="163,94,254,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="211,46,211,78,206,78,206,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="278,94,374,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="239,44,297,83,294,87,236,49"/>
+</map>

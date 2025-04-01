@@ -1,0 +1,7 @@
+<map id="G4ParticleDefinition" name="G4ParticleDefinition">
+<area shape="rect" id="Node000001" title=" " alt="" coords="50,5,186,31"/>
+<area shape="rect" id="Node000002" href="$classG4Monopole.html" title=" " alt="" coords="5,79,100,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,44,65,80,62,77,95,40"/>
+<area shape="rect" id="Node000003" href="$classTG4UserParticle.html" title="The class for user particle definition." alt="" coords="124,79,242,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,40,174,77,170,80,137,44"/>
+</map>
