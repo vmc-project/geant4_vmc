@@ -44,6 +44,7 @@
 #else
 #include <G4RunManager.hh>
 #endif
+#include <G4ScoringManager.hh>
 
 #include <G4UIExecutive.hh>
 #include <G4UImanager.hh>
@@ -142,6 +143,11 @@ TG4RunManager::TG4RunManager(
     fRegionsManager = fgMasterInstance->fRegionsManager;
     fRootUISession = fgMasterInstance->fRootUISession;
     fGeantUISession = fgMasterInstance->fGeantUISession;
+  }
+
+  if (runConfiguration->IsUseOfG4Scoring()) {
+    // activate G4 command-line scoring
+    G4ScoringManager::GetScoringManager();
   }
 
   if (VerboseLevel() > 1) {

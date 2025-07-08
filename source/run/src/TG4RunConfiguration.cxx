@@ -49,6 +49,7 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
     fSpecialControls(false),
     fSpecialCuts(false),
     fSpecialCutsOld(false),
+    fUseOfG4Scoring(false),
     fAGDDMessenger(0),
     fGDMLMessenger(0),
     fParameters()
