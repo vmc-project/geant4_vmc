@@ -44,13 +44,17 @@
 #else
 #include <G4RunManager.hh>
 #endif
+
 #include <G4ScoringManager.hh>
+#include "G4AnalysisManager.hh"
+#include "G4TScoreNtupleWriter.hh"
 
 #include <G4UIExecutive.hh>
 #include <G4UImanager.hh>
 #include <G4UIsession.hh>
 #include <G4Version.hh>
 #include <Randomize.hh>
+
 
 #ifdef USE_G4ROOT
 #include <TG4RootNavMgr.h>
@@ -91,6 +95,7 @@ TG4RunManager::TG4RunManager(
     fRegionsManager(0),
     fGeantUISession(0),
     fRootUISession(0),
+    fG4ScoreNtupleWriter(0),
     fRootUIOwner(false),
     fARGC(argc),
     fARGV(argv),
@@ -132,6 +137,23 @@ TG4RunManager::TG4RunManager(
 
     // create and configure G4 run manager
     ConfigureRunManager();
+
+    if (runConfiguration->IsUseOfG4Scoring()) {
+      // activate G4 command-line scoring
+      G4ScoringManager::GetScoringManager();
+
+      // Activate score ntuple writer
+      // The verbose level can be also set via UI commands
+      // /score/ntuple/writerVerbose level
+      // The default file type ("root") can be changed in xml, csv, hdf5
+      // scoreNtupleWriter.SetDefaultFileType("xml");
+      auto scoreNtupleWriter = new G4TScoreNtupleWriter<G4AnalysisManager>;
+      scoreNtupleWriter->SetVerboseLevel(1);
+      scoreNtupleWriter->SetNtupleMerging(true);
+      // Note: merging ntuples is available only with Root output
+      // (the default in G4TScoreNtupleWriter)
+      fG4ScoreNtupleWriter = scoreNtupleWriter;
+    }
   }
   else {
     // Get G4 worker run manager
@@ -143,11 +165,6 @@ TG4RunManager::TG4RunManager(
     fRegionsManager = fgMasterInstance->fRegionsManager;
     fRootUISession = fgMasterInstance->fRootUISession;
     fGeantUISession = fgMasterInstance->fGeantUISession;
-  }
-
-  if (runConfiguration->IsUseOfG4Scoring()) {
-    // activate G4 command-line scoring
-    G4ScoringManager::GetScoringManager();
   }
 
   if (VerboseLevel() > 1) {
@@ -166,6 +183,7 @@ TG4RunManager::~TG4RunManager()
     delete fRunConfiguration;
     delete fRegionsManager;
     delete fGeantUISession;
+    delete fG4ScoreNtupleWriter;
     delete fRunManager;
     if (fRootUIOwner) delete fRootUISession;
     fgMasterInstance = 0;
