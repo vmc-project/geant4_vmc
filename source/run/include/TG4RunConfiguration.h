@@ -102,6 +102,7 @@ class TG4RunConfiguration
   void SetMTApplication(Bool_t mtApplication);
   void SetParameter(const TString& name, Double_t value);
   void SetSpecialCutsOld();
+  void SetUseOfG4Scoring();
 
   // get methods
   TString GetUserGeometry() const;
@@ -110,6 +111,7 @@ class TG4RunConfiguration
   Bool_t IsSpecialControls() const;
   Bool_t IsSpecialCuts() const;
   Bool_t IsSpecialCutsOld() const;
+  Bool_t IsUseOfG4Scoring() const;
   Bool_t IsMTApplication() const;
 
  protected:
@@ -122,6 +124,7 @@ class TG4RunConfiguration
   Bool_t fSpecialControls;          ///< option for special controls
   Bool_t fSpecialCuts;              ///< option for special cuts
   Bool_t fSpecialCutsOld;           ///< option for special cuts old
+  Bool_t fUseOfG4Scoring;           ///< option to activate G4 commmand-line scoring
   G4UImessenger* fAGDDMessenger;    //!< XML messenger
   G4UImessenger* fGDMLMessenger;    //!< XML messenger
 
@@ -141,10 +144,21 @@ class TG4RunConfiguration
 
 // inline functions
 
+/// Activate G4 commmand-line scoring
+inline void TG4RunConfiguration::SetUseOfG4Scoring()
+{
+  fUseOfG4Scoring = true;
+}
+
 /// Return physics list selection
 inline TString TG4RunConfiguration::GetPhysicsListSelection() const
 { 
   return fPhysicsListSelection;
+}
+
+inline Bool_t TG4RunConfiguration::IsUseOfG4Scoring() const
+{
+  return fUseOfG4Scoring;
 }
 
 #endif // TG4V_RUN_CONFIGURATION_H
