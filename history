@@ -9,6 +9,25 @@
 
 Tags (history):
 ===============
+  10/07/2025
+  v6-6-update1-p3:
+    Geant4 VMC:
+    - Added an option to activate Geant4 command-line scoring (#79)
+      - The activation should be done via calling
+         'TG4RunConfiguration::SetUseOfG4Scoring()' in user g4Config.C
+      - The scoring (mesh, scorers etc.) can be then defined via
+         Geant UI commands defined in '/score' directory in g4config.in
+      - The scoring data are then automatically saved for each mesh
+         in a 'mesh_name.txt' file at the end of run
+    - cmake: Updated cmake_minimum_required in all CMake files (#75)
+
+    Examples:
+    - cmake: Updated cmake_minimum_required in all CMake file (#75)
+
+    Tested with VMC 2.1, Geant4 11.2.p2 (with embedded CLHEP 2.4.7.1)
+      Root 6.36/02, VGM 5.3.1
+
+
   13/01/2025
   v6-6-p3:
     Geant4 VMC:
