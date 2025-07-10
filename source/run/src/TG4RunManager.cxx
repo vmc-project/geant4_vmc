@@ -45,11 +45,15 @@
 #include <G4RunManager.hh>
 #endif
 
+#include <G4ScoringManager.hh>
+#include <G4VScoringMesh.hh>
+
 #include <G4UIExecutive.hh>
 #include <G4UImanager.hh>
 #include <G4UIsession.hh>
 #include <G4Version.hh>
 #include <Randomize.hh>
+
 
 #ifdef USE_G4ROOT
 #include <TG4RootNavMgr.h>
@@ -131,6 +135,11 @@ TG4RunManager::TG4RunManager(
 
     // create and configure G4 run manager
     ConfigureRunManager();
+
+    if (runConfiguration->IsUseOfG4Scoring()) {
+      // activate G4 command-line scoring
+      G4ScoringManager::GetScoringManager();
+    }
   }
   else {
     // Get G4 worker run manager
@@ -600,6 +609,16 @@ Bool_t TG4RunManager::FinishRun()
 
   G4bool result = !TG4SDServices::Instance()->GetIsStopRun();
   TG4SDServices::Instance()->SetIsStopRun(false);
+
+  if (fRunConfiguration->IsUseOfG4Scoring()) {
+    // Dump all scoring meshes in file
+    auto g4ScoringManager = G4ScoringManager::GetScoringManager();
+    for (std::size_t i = 0; i < g4ScoringManager->GetNumberOfMesh(); ++i) {
+      auto meshName = g4ScoringManager->GetMesh(i)->GetWorldName();
+      auto fileName = meshName + ".txt";
+      g4ScoringManager->DumpAllQuantitiesToFile(meshName, fileName);
+    }
+  }
 
   return result;
 }
