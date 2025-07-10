@@ -1,0 +1,8 @@
+<map id="examples/ExGarfield/run_g4.C" name="examples/ExGarfield/run_g4.C">
+<area shape="rect" id="Node000001" title="Macro for loading libraries to run Example ExGarfield with Geant4." alt="" coords="5,5,144,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="26,168,123,193"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,47,61,81,60,119,68,152,62,153,55,120,56,80,65,46"/>
+<area shape="rect" id="Node000003" href="$ExGarfield_2set__g4__vis_8C.html" title="Macro for setting G4 visualization for ExGarfield example." alt="" coords="69,94,165,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="87,45,106,79,101,81,83,48"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="112,121,92,156,87,153,108,119"/>
+</map>

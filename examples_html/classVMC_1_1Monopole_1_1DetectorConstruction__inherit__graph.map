@@ -1,0 +1,5 @@
+<map id="VMC::Monopole::DetectorConstruction" name="VMC::Monopole::DetectorConstruction">
+<area shape="rect" id="Node000001" title="The detector construction (via TGeo )" alt="" coords="5,79,246,105"/>
+<area shape="rect" id="Node000002" href="$classTObject.html" title=" " alt="" coords="92,5,159,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,46,128,79,123,79,123,46"/>
+</map>
