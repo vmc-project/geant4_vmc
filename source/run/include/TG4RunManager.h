@@ -28,7 +28,6 @@ class TG4VRegionsManager;
 
 class G4RunManager;
 class G4UIExecutive;
-class G4VScoreNtupleWriter;
 
 class TApplication;
 class TMCManager;
@@ -109,7 +108,6 @@ class TG4RunManager : public TG4Verbose
   TG4VRegionsManager* fRegionsManager;    ///< regions manager
   G4UIExecutive* fGeantUISession;         ///< G4 UI
   TApplication* fRootUISession;           ///< Root UI
-  G4VScoreNtupleWriter* fG4ScoreNtupleWriter; ///< Geant4 scoring ntuple writer
   G4bool fRootUIOwner;                    ///< ownership of Root UI
   G4int fARGC;                            ///< argc
   char** fARGV;                           ///< argv

@@ -46,8 +46,7 @@
 #endif
 
 #include <G4ScoringManager.hh>
-#include "G4AnalysisManager.hh"
-#include "G4TScoreNtupleWriter.hh"
+#include <G4VScoringMesh.hh>
 
 #include <G4UIExecutive.hh>
 #include <G4UImanager.hh>
@@ -95,7 +94,6 @@ TG4RunManager::TG4RunManager(
     fRegionsManager(0),
     fGeantUISession(0),
     fRootUISession(0),
-    fG4ScoreNtupleWriter(0),
     fRootUIOwner(false),
     fARGC(argc),
     fARGV(argv),
@@ -141,18 +139,6 @@ TG4RunManager::TG4RunManager(
     if (runConfiguration->IsUseOfG4Scoring()) {
       // activate G4 command-line scoring
       G4ScoringManager::GetScoringManager();
-
-      // Activate score ntuple writer
-      // The verbose level can be also set via UI commands
-      // /score/ntuple/writerVerbose level
-      // The default file type ("root") can be changed in xml, csv, hdf5
-      // scoreNtupleWriter.SetDefaultFileType("xml");
-      auto scoreNtupleWriter = new G4TScoreNtupleWriter<G4AnalysisManager>;
-      scoreNtupleWriter->SetVerboseLevel(1);
-      scoreNtupleWriter->SetNtupleMerging(true);
-      // Note: merging ntuples is available only with Root output
-      // (the default in G4TScoreNtupleWriter)
-      fG4ScoreNtupleWriter = scoreNtupleWriter;
     }
   }
   else {
@@ -183,7 +169,6 @@ TG4RunManager::~TG4RunManager()
     delete fRunConfiguration;
     delete fRegionsManager;
     delete fGeantUISession;
-    delete fG4ScoreNtupleWriter;
     delete fRunManager;
     if (fRootUIOwner) delete fRootUISession;
     fgMasterInstance = 0;
@@ -624,6 +609,16 @@ Bool_t TG4RunManager::FinishRun()
 
   G4bool result = !TG4SDServices::Instance()->GetIsStopRun();
   TG4SDServices::Instance()->SetIsStopRun(false);
+
+  if (fRunConfiguration->IsUseOfG4Scoring()) {
+    // Dump all scoring meshes in file
+    auto g4ScoringManager = G4ScoringManager::GetScoringManager();
+    for (std::size_t i = 0; i < g4ScoringManager->GetNumberOfMesh(); ++i) {
+      auto meshName = g4ScoringManager->GetMesh(i)->GetWorldName();
+      auto fileName = meshName + ".txt";
+      g4ScoringManager->DumpAllQuantitiesToFile(meshName, fileName);
+    }
+  }
 
   return result;
 }
