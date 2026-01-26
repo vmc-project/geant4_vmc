@@ -45,15 +45,11 @@
 #include <G4RunManager.hh>
 #endif
 
-#include <G4ScoringManager.hh>
-#include <G4VScoringMesh.hh>
-
 #include <G4UIExecutive.hh>
 #include <G4UImanager.hh>
 #include <G4UIsession.hh>
 #include <G4Version.hh>
 #include <Randomize.hh>
-
 
 #ifdef USE_G4ROOT
 #include <TG4RootNavMgr.h>
@@ -68,6 +64,8 @@
 #include <TRint.h>
 #include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
+#include <G4ScoringManager.hh>
+#include <G4VScoringMesh.hh>
 
 namespace
 {
@@ -132,14 +130,12 @@ TG4RunManager::TG4RunManager(
 
   if (isMaster) {
     fgMasterInstance = this;
-
-    // create and configure G4 run manager
-    ConfigureRunManager();
-
     if (runConfiguration->IsUseOfG4Scoring()) {
       // activate G4 command-line scoring
       G4ScoringManager::GetScoringManager();
     }
+    // create and configure G4 run manager
+    ConfigureRunManager();
   }
   else {
     // Get G4 worker run manager
@@ -477,7 +473,8 @@ void TG4RunManager::LateInitialize()
   TG4PhysicsManager::Instance()->SetProcessActivation();
   TG4PhysicsManager::Instance()->RetrieveOpBoundaryProcess();
 
-  // late initialize step manager
+  // late initialize SD and step manager
+  TG4SDManager::Instance()->LateInitialize(fRunConfiguration->GetScoreWeightCalculatorG4());
   TG4StepManager::Instance()->LateInitialize();
 
   // late initialize action classes

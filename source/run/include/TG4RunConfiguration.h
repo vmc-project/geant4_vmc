@@ -18,7 +18,10 @@
 #include <Rtypes.h>
 #include <TString.h>
 
+#include <G4Step.hh>
 #include <map>
+#include <functional>
+#include <globals.hh>
 
 class TG4DetConstruction;
 class TG4TrackingAction;
@@ -36,6 +39,9 @@ class G4UserEventAction;
 class G4UserStackingAction;
 class G4RunManager;
 class G4UImessenger;
+
+using TG4ScoreWeightCalculator = std::function<G4double(const Int_t pdg, const Double_t ekin)>;
+using ScoreWeightCalculatorG4  = std::function<G4double(const G4Step* step)>;
 
 /// \ingroup run
 /// \brief Takes care of creating Geant4 user action classes using VMC
@@ -103,7 +109,7 @@ class TG4RunConfiguration
   void SetParameter(const TString& name, Double_t value);
   void SetSpecialCutsOld();
   void SetUseOfG4Scoring();
-
+  void SetScoreWeightCalculator(TG4ScoreWeightCalculator swc);
   // get methods
   TString GetUserGeometry() const;
   TString GetPhysicsListSelection() const;
@@ -113,7 +119,7 @@ class TG4RunConfiguration
   Bool_t IsSpecialCutsOld() const;
   Bool_t IsUseOfG4Scoring() const;
   Bool_t IsMTApplication() const;
-
+  ScoreWeightCalculatorG4 GetScoreWeightCalculatorG4() const;
  protected:
   // data members
   TString fUserGeometry;            ///< way of building geometry
@@ -127,7 +133,7 @@ class TG4RunConfiguration
   Bool_t fUseOfG4Scoring;           ///< option to activate G4 commmand-line scoring
   G4UImessenger* fAGDDMessenger;    //!< XML messenger
   G4UImessenger* fGDMLMessenger;    //!< XML messenger
-
+  TG4ScoreWeightCalculator fScoreWeightCalculator; //! User Scoring Weight Calculator
   /// The map of special parameters which need to be set before creating TGeant4
   /// Actually used for monopole properties:
   /// monopoleMass, monopoleElCharge, monopoleMagCharge
@@ -144,7 +150,6 @@ class TG4RunConfiguration
 
 // inline functions
 
-/// Activate G4 commmand-line scoring
 inline void TG4RunConfiguration::SetUseOfG4Scoring()
 {
   fUseOfG4Scoring = true;
@@ -159,6 +164,22 @@ inline TString TG4RunConfiguration::GetPhysicsListSelection() const
 inline Bool_t TG4RunConfiguration::IsUseOfG4Scoring() const
 {
   return fUseOfG4Scoring;
+}
+
+inline ScoreWeightCalculatorG4 TG4RunConfiguration::GetScoreWeightCalculatorG4() const
+{
+  ScoreWeightCalculatorG4 swc = [this](const G4Step* step) -> G4double {
+    Double_t ekin = step->GetTrack()->GetKineticEnergy();
+    Int_t pdg = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
+    return (fScoreWeightCalculator)(pdg, ekin);
+      
+  };
+  return swc;
+}
+
+inline void TG4RunConfiguration::SetScoreWeightCalculator(TG4ScoreWeightCalculator swc)
+{
+  fScoreWeightCalculator = swc;
 }
 
 #endif // TG4V_RUN_CONFIGURATION_H

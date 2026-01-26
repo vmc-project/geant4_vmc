@@ -16,13 +16,16 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <globals.hh>
-
+#include <functional>
 #include <Rtypes.h>
 
 class TG4SDServices;
 class TG4SDConstruction;
 
 class TVirtualMCSensitiveDetector;
+class G4Step;
+
+using ScoreWeightCalculatorG4 = std::function<G4double(const G4Step*)>;
 
 /// \ingroup digits_hits
 /// \brief Geant4 implementation of the TVirtualMC interface methods
@@ -41,6 +44,7 @@ class TG4SDManager
 
   // methods
   void Initialize();
+  void LateInitialize(ScoreWeightCalculatorG4 calc);
 
   // TVirtualMC methods
   Int_t VolId(const Text_t* volName) const;
