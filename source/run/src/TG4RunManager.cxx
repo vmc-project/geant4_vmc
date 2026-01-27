@@ -54,7 +54,6 @@
 #include <G4Version.hh>
 #include <Randomize.hh>
 
-
 #ifdef USE_G4ROOT
 #include <TG4RootNavMgr.h>
 #endif
@@ -132,14 +131,12 @@ TG4RunManager::TG4RunManager(
 
   if (isMaster) {
     fgMasterInstance = this;
-
-    // create and configure G4 run manager
-    ConfigureRunManager();
-
     if (runConfiguration->IsUseOfG4Scoring()) {
       // activate G4 command-line scoring
       G4ScoringManager::GetScoringManager();
     }
+    // create and configure G4 run manager
+    ConfigureRunManager();
   }
   else {
     // Get G4 worker run manager
@@ -476,6 +473,12 @@ void TG4RunManager::LateInitialize()
   // activate/inactivate physics processes
   TG4PhysicsManager::Instance()->SetProcessActivation();
   TG4PhysicsManager::Instance()->RetrieveOpBoundaryProcess();
+
+  // late initialize SD manager
+  // (needed only if user sets score weight calculator)
+  if (fRunConfiguration->IsUseOfScoreWeighting()) {
+    TG4SDManager::Instance()->LateInitialize(fRunConfiguration->GetScoreWeightCalculator());
+  }
 
   // late initialize step manager
   TG4StepManager::Instance()->LateInitialize();
