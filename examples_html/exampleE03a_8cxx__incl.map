@@ -1,0 +1,31 @@
+<map id="examples/E03/E03a/exampleE03a.cxx" name="examples/E03/E03a/exampleE03a.cxx">
+<area shape="rect" id="Node000001" title="The Geant4 VMC example E03a application executable." alt="" coords="530,5,718,46"/>
+<area shape="rect" id="Node000002" href="$Ex03MCApplication_8h.html" title="Definition of the Ex03MCApplication class." alt="" coords="376,94,520,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="581,49,490,90,488,85,579,44"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="544,94,704,120"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="627,46,627,78,622,78,622,46"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="729,94,805,120"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="661,44,733,84,730,88,659,49"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,168,166,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="387,123,163,167,162,162,386,118"/>
+<area shape="rect" id="Node000004" href="$Ex03CalorimeterSD_8h.html" title="Definition of the Ex03CalorimeterSD class." alt="" coords="190,168,333,193"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="417,123,308,164,307,159,416,118"/>
+<area shape="rect" id="Node000007" href="$E03a_2include_2Ex03DetectorConstruction_8h.html" title="Definition of the Ex03DetectorConstruction class." alt="" coords="358,168,539,193"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="451,120,451,152,446,152,446,120"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="563,168,725,193"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="482,118,598,159,596,165,481,123"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="749,168,856,193"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="509,118,735,163,734,168,508,123"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="88,241,198,267"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="243,196,177,235,175,231,240,192"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="222,241,304,267"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="264,194,265,225,260,226,259,194"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="330,241,377,267"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="434,196,383,234,380,230,431,192"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="400,241,491,267"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="450,194,449,226,444,226,445,193"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="515,241,592,267"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="468,192,525,230,522,235,465,196"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="617,241,690,267"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="484,191,605,233,603,238,482,196"/>
+</map>

@@ -1,0 +1,23 @@
+<map id="TNamed" name="TNamed">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,228,77,254"/>
+<area shape="rect" id="Node000002" href="$classA01DriftChamberSD.html" title="The calorimeter sensitive detector." alt="" coords="157,5,295,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="43,212,51,174,66,127,89,80,105,59,123,40,155,23,158,28,126,44,109,62,94,83,71,129,56,175,48,213"/>
+<area shape="rect" id="Node000003" href="$classA01EmCalorimeterSD.html" title="The EM calorimeter sensitive detector." alt="" coords="152,55,300,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="48,212,74,150,95,117,123,89,151,75,153,80,126,94,100,120,79,152,53,214"/>
+<area shape="rect" id="Node000004" href="$classA01HadCalorimeterSD.html" title="The hadron calorimeter sensitive detector." alt="" coords="150,104,302,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="55,213,83,174,102,155,123,139,148,127,150,132,126,143,106,159,87,178,59,216"/>
+<area shape="rect" id="Node000005" href="$classA01HodoscopeSD.html" title="The calorimeter sensitive detector." alt="" coords="162,153,290,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="72,216,124,188,160,176,162,181,126,193,74,221"/>
+<area shape="rect" id="Node000006" href="$classEx02TrackerSD.html" title="The tracker sensitive detector." alt="" coords="170,203,282,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="92,231,169,221,170,226,92,237"/>
+<area shape="rect" id="Node000007" href="$classEx03CalorimeterSD.html" title="The calorimeter sensitive detector." alt="" coords="159,252,292,278"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="92,245,159,254,158,259,92,250"/>
+<area shape="rect" id="Node000008" href="$classEx03cCalorimeterSD.html" title="The calorimeter sensitive detector." alt="" coords="156,301,296,327"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="74,260,126,288,157,298,156,303,124,293,72,265"/>
+<area shape="rect" id="Node000009" href="$classVMC_1_1ExGarfield_1_1SensitiveDetector.html" title="The calorimeter sensitive detector." alt="" coords="139,351,313,392"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="60,265,88,302,126,337,146,348,143,353,123,342,84,306,56,268"/>
+<area shape="rect" id="Node000010" href="$classVMC_1_1Gflash_1_1SensitiveDetector.html" title="The calorimeter sensitive detector." alt="" coords="125,416,327,442"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="51,268,61,300,77,336,98,371,126,401,146,413,143,418,123,406,94,375,72,338,56,301,46,270"/>
+<area shape="rect" id="Node000011" href="$classVMC_1_1TR_1_1SensitiveDetector.html" title="The absorber sensitive detector." alt="" coords="135,465,317,491"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="48,268,55,310,69,360,92,410,108,432,126,452,142,463,139,467,123,456,103,436,87,412,64,361,49,311,42,269"/>
+</map>

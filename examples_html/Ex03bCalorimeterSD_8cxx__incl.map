@@ -1,0 +1,23 @@
+<map id="examples/E03/E03b/src/Ex03bCalorimeterSD.cxx" name="examples/E03/E03b/src/Ex03bCalorimeterSD.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the Ex03bCalorimeterSD class." alt="" coords="610,5,776,46"/>
+<area shape="rect" id="Node000002" href="$Ex03bCalorimeterSD_8h.html" title="Definition of the Ex03bCalorimeterSD class." alt="" coords="74,94,224,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="610,42,240,95,239,90,609,36"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="248,94,354,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="610,46,370,94,369,89,609,41"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="379,94,560,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="638,49,519,91,517,86,637,44"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="584,94,674,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="680,48,651,83,647,80,675,45"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="698,94,819,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="712,45,741,80,737,83,707,48"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="842,94,979,120"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="749,44,864,86,862,91,747,49"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1003,94,1069,120"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="777,43,989,91,987,96,776,48"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1093,94,1190,120"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="778,38,1078,91,1077,96,777,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,168,115,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="136,122,89,160,85,156,133,118"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="139,168,338,193"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="166,118,213,156,210,160,163,122"/>
+</map>

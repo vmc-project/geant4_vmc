@@ -1,0 +1,18 @@
+<map id="TVirtualMCStack" name="TVirtualMCStack">
+<area shape="rect" id="Node000001" title=" " alt="" coords="253,5,373,31"/>
+<area shape="rect" id="Node000002" href="$classEx01MCStack.html" title="Implementation of the TVirtualMCStack interface." alt="" coords="5,79,109,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,38,101,81,100,76,254,33"/>
+<area shape="rect" id="Node000003" href="$classEx02MCStack.html" title="Implementation of the TVirtualMCStack interface." alt="" coords="133,79,237,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="279,41,208,81,206,76,277,37"/>
+<area shape="rect" id="Node000004" href="$classEx03MCStack.html" title="Implementation of the TVirtualMCStack interface." alt="" coords="261,79,365,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="256,43,253,52,253,60,266,77,262,80,248,62,248,51,251,41"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="273,44,271,62,281,77,276,80,266,63,267,44"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="290,45,289,62,295,78,290,79,284,63,284,45"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="307,46,309,78,303,79,302,46"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="324,46,323,79,317,78,319,46"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="342,45,342,63,336,79,331,78,337,62,336,45"/>
+<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="359,44,360,63,350,80,345,77,355,62,353,44"/>
+<area shape="poly" id="edge10_Node000001_Node000004" title=" " alt="" coords="375,41,378,51,378,62,364,80,360,77,373,60,373,52,370,43"/>
+<area shape="rect" id="Node000005" href="$classEx03cMCStack.html" title="Implementation of the TVirtualMCStack interface." alt="" coords="388,79,499,105"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="349,36,423,76,420,81,347,41"/>
+</map>

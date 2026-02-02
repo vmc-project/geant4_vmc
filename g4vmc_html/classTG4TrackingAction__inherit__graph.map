@@ -1,0 +1,7 @@
+<map id="TG4TrackingAction" name="TG4TrackingAction">
+<area shape="rect" id="Node000001" title="Actions at the beginnig and at the end of track." alt="" coords="89,79,222,105"/>
+<area shape="rect" id="Node000002" href="$classG4UserTrackingAction.html" title=" " alt="" coords="5,5,159,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,40,145,77,141,80,103,44"/>
+<area shape="rect" id="Node000003" href="$classTG4Verbose.html" title="Base class for defining the verbose level and a common messenger." alt="" coords="183,5,277,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="208,44,170,81,166,77,205,40"/>
+</map>

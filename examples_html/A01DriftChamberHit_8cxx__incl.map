@@ -1,0 +1,13 @@
+<map id="examples/A01/src/A01DriftChamberHit.cxx" name="examples/A01/src/A01DriftChamberHit.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the A01DriftChamberHit class." alt="" coords="33,5,209,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,96,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,48,74,84,70,80,102,45"/>
+<area shape="rect" id="Node000003" href="$A01DriftChamberHit_8h.html" title="Definition of the A01DriftChamberHit class." alt="" coords="120,94,267,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,45,174,80,170,84,137,48"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="56,168,130,193"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="178,122,124,160,121,156,175,118"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="154,168,232,193"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="196,120,196,152,190,152,190,120"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="256,168,341,193"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="213,118,270,156,267,161,210,122"/>
+</map>

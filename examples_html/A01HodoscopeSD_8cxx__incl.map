@@ -1,0 +1,27 @@
+<map id="examples/A01/src/A01HodoscopeSD.cxx" name="examples/A01/src/A01HodoscopeSD.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the A01HodoscopeSD class." alt="" coords="348,5,566,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,96,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="354,49,112,96,111,91,353,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="120,94,240,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="389,49,238,92,237,87,387,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="264,94,400,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="428,49,365,88,363,83,425,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="424,94,490,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="460,46,460,78,454,78,454,46"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="514,94,611,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="485,44,536,82,532,86,482,49"/>
+<area shape="rect" id="Node000007" href="$A01HodoscopeHit_8h.html" title="Definition of the A01HodoscopeHit class." alt="" coords="635,94,772,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="520,44,652,86,651,91,518,49"/>
+<area shape="rect" id="Node000011" href="$A01HodoscopeSD_8h.html" title="Definition of the A01HodoscopeSD class." alt="" coords="828,94,966,120"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="567,44,815,88,814,93,566,49"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="509,168,608,193"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="680,123,598,163,596,158,678,118"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="632,168,709,193"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="701,121,685,155,680,152,696,119"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="734,168,818,193"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="718,118,755,155,751,158,714,122"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="842,168,952,193"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="900,120,900,152,894,152,894,120"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="976,168,1058,193"/>
+<area shape="poly" id="edge12_Node000011_Node000013" title=" " alt="" coords="919,118,985,157,982,162,916,123"/>
+</map>

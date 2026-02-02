@@ -1,0 +1,17 @@
+<map id="examples/Monopole/src/DetectorConstruction.cxx" name="examples/Monopole/src/DetectorConstruction.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the DetectorConstruction class." alt="" coords="362,5,531,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,96,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="362,46,112,96,111,91,361,41"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="119,94,230,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="379,49,232,92,230,87,378,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="254,94,367,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="414,49,345,88,343,84,411,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="392,94,501,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="449,46,449,78,444,78,444,46"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="525,94,586,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="475,44,528,82,525,87,472,49"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="610,94,707,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="500,44,613,86,611,91,499,49"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="731,94,884,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="532,43,738,88,737,93,531,48"/>
+</map>

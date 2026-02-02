@@ -1,0 +1,9 @@
+<map id="G4VUserDetectorConstruction" name="G4VUserDetectorConstruction">
+<area shape="rect" id="Node000001" title=" " alt="" coords="176,5,374,31"/>
+<area shape="rect" id="Node000002" href="$classA01DetectorConstruction.html" title="The detector construction (defined via Geant4)" alt="" coords="5,79,172,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,39,121,81,119,76,228,34"/>
+<area shape="rect" id="Node000003" href="$classB4DetectorConstruction.html" title=" " alt="" coords="196,79,355,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="260,46,260,63,264,78,259,79,255,63,255,46"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="278,46,278,79,272,79,272,46"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="295,46,295,63,292,79,286,78,290,63,290,46"/>
+</map>

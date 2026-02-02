@@ -1,0 +1,25 @@
+<map id="G4VPhysicsConstructor" name="G4VPhysicsConstructor">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,179,166,204"/>
+<area shape="rect" id="Node000002" href="$classG4MonopolePhysics.html" title=" " alt="" coords="228,153,368,179"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,177,227,172,227,177,181,183"/>
+<area shape="rect" id="Node000003" href="$classTG4VPhysicsConstructor.html" title="Abstract base class for physics constructors with verbose." alt="" coords="214,203,382,228"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,200,214,203,213,209,181,205"/>
+<area shape="rect" id="Node000004" href="$classTG4EmModelPhysics.html" title="Physics builder which activates a selected EM energy loss and/or fluctuations model." alt="" coords="458,5,605,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="378,192,380,190,394,172,401,154,403,116,405,78,413,59,428,40,457,23,460,28,432,44,418,62,411,79,408,117,406,155,399,174,384,193,381,196"/>
+<area shape="rect" id="Node000005" href="$classTG4ExtDecayerPhysics.html" title="The builder for external decayer." alt="" coords="453,55,610,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="376,192,380,190,391,178,397,166,403,141,409,115,416,102,428,89,451,76,454,81,432,94,421,105,414,117,408,142,402,168,395,181,384,193,380,197"/>
+<area shape="rect" id="Node000006" href="$classTG4FastSimulationPhysics.html" title="Physics builder which activates selected fast simulation models." alt="" coords="442,104,621,130"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="372,194,380,189,395,177,404,164,413,151,429,139,452,128,455,133,431,143,417,155,408,167,399,181,384,194,375,198"/>
+<area shape="rect" id="Node000007" href="$classTG4ProcessMapPhysics.html" title="The special builder which fills the VMC process map." alt="" coords="449,153,614,179"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="377,196,467,177,468,182,378,201"/>
+<area shape="rect" id="Node000008" href="$classTG4SpecialCutsPhysics.html" title="The builder for special cuts process." alt="" coords="450,203,613,228"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="398,213,450,213,450,218,398,218"/>
+<area shape="rect" id="Node000009" href="$classTG4StackPopperPhysics.html" title="The builder for stack popper process." alt="" coords="448,252,615,278"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="378,230,468,249,467,254,377,235"/>
+<area shape="rect" id="Node000010" href="$classTG4StepLimiterPhysics.html" title="The builder for step limiter process." alt="" coords="452,301,611,327"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="333,235,378,262,431,288,463,298,462,303,429,293,376,267,330,240"/>
+<area shape="rect" id="Node000011" href="$classTG4TransitionRadiationPhysics.html" title="The builder for transition radiation processes." alt="" coords="430,351,633,376"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="320,239,367,289,398,315,431,337,456,348,454,352,429,342,395,320,364,293,316,242"/>
+<area shape="rect" id="Node000012" href="$classTG4UserParticlesPhysics.html" title="The builder for user defined particles." alt="" coords="446,400,617,426"/>
+<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="314,241,333,275,359,315,392,354,431,387,452,397,450,402,429,391,388,358,355,318,328,278,310,244"/>
+</map>
