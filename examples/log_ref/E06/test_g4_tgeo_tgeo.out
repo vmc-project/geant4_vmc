@@ -1,16 +1,16 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.32.08                        https://root.cern |
-  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
-  | From tags/v6-32-08@v6-32-08                                      |
-  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
+  | Welcome to ROOT 6.36.06                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 17 2025, 11:26:33                   |
+  | From tags/v6-36-06@v6-36-06                                      |
+  | With Apple clang version 17.0.0 (clang-1700.0.13.5)              |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+36
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -24,7 +24,7 @@ Processing test_E06.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.7 ( 7 February 2025 )
+ Version 6.8 ( 2 February 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -47,7 +47,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
+ Geant4 version Name: geant4-11-04    (5-December-2025)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -90,7 +90,7 @@ The material properties REFLECTIVITY set for optical surface AirSurface
 The material properties EFFICIENCY set for optical surface AirSurface
 Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
 Adding HadronPhysicsList FTFP_BERT_EMZ
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT_EMZ>  EMoption= 4
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT_EMZ>
 <<< Geant4 Physics List simulation engine: FTFP_BERT
 
 G4VModularPhysicsList::ReplacePhysics: G4EmStandard with type : 2 is replaced with G4EmStandard_opt4
@@ -147,8 +147,7 @@ OpMieHG is created
 OpBoundary is created 
 OpWLS is created 
 OpWLS2 is created 
-### Birks coefficients used in run time
-   Water     0.126 mm/MeV     0.0126 g/cm^2/MeV  massFactor=  640.135 effCharge= 22
+Cerenkov is created.
 =======================================================================
 ======                         Optical Physics Parameters      ========
 =======================================================================
@@ -257,7 +256,7 @@ Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
-Use Ricardo-Gerardo pair production model          0
+Use RiGe 5D e+e- pair production model by muons    0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -271,7 +270,7 @@ Lowest muon/hadron kinetic energy                  1 keV
 Use ICRU90 data                                    1
 Fluctuations of dE/dx are enabled                  1
 Type of fluctuation model for leptons and hadrons  Urban
-Use built-in Birks satuaration                     1
+Use built-in Birks saturation                      0
 Build CSDA range enabled                           0
 Use cut as a final range enabled                   0
 Enable angular generator interface                 1
@@ -439,7 +438,7 @@ hBrems:  for proton  XStype:1  SubType=3
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -508,7 +507,7 @@ hBrems:  for anti_proton  XStype:1  SubType=3
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -540,7 +539,7 @@ hBrems:  for kaon+  XStype:1  SubType=3
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -572,7 +571,7 @@ hBrems:  for kaon-  XStype:1  SubType=3
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -604,7 +603,7 @@ muBrems:  for mu+  XStype:1  SubType=3
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -636,7 +635,7 @@ muBrems:  for mu-  XStype:1  SubType=3
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -668,7 +667,7 @@ hBrems:  for pi+  XStype:1  SubType=3
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -700,7 +699,7 @@ hBrems:  for pi-  XStype:1  SubType=3
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -952,10 +951,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 =======================================================================
 ======       Geant4 Native Pre-compound Model Parameters       ========
 =======================================================================
+Type of pre-compound model                          0
 Type of pre-compound inverse x-section              1
 Pre-compound model active                           1
-Pre-compound excitation low energy                  100 keV
-Pre-compound excitation high energy                 30 MeV
+Pre-compound excitation low energy                  0.1 MeV 
+Pre-compound excitation high energy                 15 MeV 
 Angular generator for pre-compound model            1
 Use NeverGoBack option for pre-compound model       0
 Use SoftCutOff option for pre-compound model        0
@@ -968,9 +968,9 @@ Use HETC submodel for pre-compound model            0
 Type of de-excitation inverse x-section             3
 Type of de-excitation factory                       Evaporation+GEM
 Number of de-excitation channels                    68
-Min excitation energy                               10 eV 
-Min energy per nucleon for multifragmentation       200 GeV
-Limit excitation energy for Fermi BreakUp           20 MeV
+Type of Fermi BreakUp model                         ModelVI
+Min excitation energy                               0.01 keV 
+Min energy per nucleon for multifragmentation       2e+05 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
@@ -1002,41 +1002,41 @@ Index : 1     used in the geometry : Yes
 
 ### Run 0 start.
 >>> Event 0
-Number of optical photons produced in this event : 1649
+Number of optical photons produced in this event : 1622
 >>> Event 1
-Number of optical photons produced in this event : 1681
+Number of optical photons produced in this event : 1714
 >>> Event 2
-Number of optical photons produced in this event : 1731
+Number of optical photons produced in this event : 1762
 >>> Event 3
-Number of optical photons produced in this event : 1648
+Number of optical photons produced in this event : 1765
 >>> Event 4
-Number of optical photons produced in this event : 1692
+Number of optical photons produced in this event : 1712
 >>> Event 5
-Number of optical photons produced in this event : 1569
+Number of optical photons produced in this event : 1808
 >>> Event 6
-Number of optical photons produced in this event : 1670
+Number of optical photons produced in this event : 1595
 >>> Event 7
-Number of optical photons produced in this event : 1850
+Number of optical photons produced in this event : 1661
 >>> Event 8
-Number of optical photons produced in this event : 1681
+Number of optical photons produced in this event : 1668
 >>> Event 9
-Number of optical photons produced in this event : 1646
-Time of this run:   User=0.410000s Real=0.422738s Sys=0.010000s
+Number of optical photons produced in this event : 1600
+Time of this run:   User=0.340000s Real=0.342635s Sys=0.000000s
 Number of events processed: 10
-Number of optical photons produced in this run : 16817
+Number of optical photons produced in this run : 16907
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.32.08                        https://root.cern |
-  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
-  | From tags/v6-32-08@v6-32-08                                      |
-  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
+  | Welcome to ROOT 6.36.06                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 17 2025, 11:26:33                   |
+  | From tags/v6-36-06@v6-36-06                                      |
+  | With Apple clang version 17.0.0 (clang-1700.0.13.5)              |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+36
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -1050,7 +1050,7 @@ Processing test_E06_2.C("g4tgeoConfig1.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.7 ( 7 February 2025 )
+ Version 6.8 ( 2 February 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -1073,7 +1073,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
+ Geant4 version Name: geant4-11-04    (5-December-2025)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -1116,7 +1116,7 @@ The material properties REFLECTIVITY set for optical surface AirSurface
 The material properties EFFICIENCY set for optical surface AirSurface
 Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
 Adding HadronPhysicsList FTFP_BERT_EMV
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT_EMV>  EMoption= 1
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT_EMV>
 <<< Geant4 Physics List simulation engine: FTFP_BERT
 
 G4VModularPhysicsList::ReplacePhysics: G4EmStandard with type : 2 is replaced with G4EmStandard_opt1
@@ -1173,8 +1173,7 @@ OpMieHG is created
 OpBoundary is created 
 OpWLS is created 
 OpWLS2 is created 
-### Birks coefficients used in run time
-   Water     0.126 mm/MeV     0.0126 g/cm^2/MeV  massFactor=  640.135 effCharge= 22
+Cerenkov is created.
 =======================================================================
 ======                         Optical Physics Parameters      ========
 =======================================================================
@@ -1283,7 +1282,7 @@ Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
-Use Ricardo-Gerardo pair production model          0
+Use RiGe 5D e+e- pair production model by muons    0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -1297,7 +1296,7 @@ Lowest muon/hadron kinetic energy                  1 keV
 Use ICRU90 data                                    0
 Fluctuations of dE/dx are enabled                  1
 Type of fluctuation model for leptons and hadrons  Universal
-Use built-in Birks satuaration                     1
+Use built-in Birks saturation                      0
 Build CSDA range enabled                           0
 Use cut as a final range enabled                   0
 Enable angular generator interface                 0
@@ -1428,7 +1427,7 @@ hBrems:  for proton  XStype:1  SubType=3
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1486,7 +1485,7 @@ hBrems:  for anti_proton  XStype:1  SubType=3
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1518,7 +1517,7 @@ hBrems:  for kaon+  XStype:1  SubType=3
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1550,7 +1549,7 @@ hBrems:  for kaon-  XStype:1  SubType=3
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1582,7 +1581,7 @@ muBrems:  for mu+  XStype:1  SubType=3
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1614,7 +1613,7 @@ muBrems:  for mu-  XStype:1  SubType=3
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1646,7 +1645,7 @@ hBrems:  for pi+  XStype:1  SubType=3
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1678,7 +1677,7 @@ hBrems:  for pi-  XStype:1  SubType=3
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1930,10 +1929,11 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
 =======================================================================
 ======       Geant4 Native Pre-compound Model Parameters       ========
 =======================================================================
+Type of pre-compound model                          0
 Type of pre-compound inverse x-section              1
 Pre-compound model active                           1
-Pre-compound excitation low energy                  100 keV
-Pre-compound excitation high energy                 30 MeV
+Pre-compound excitation low energy                  0.1 MeV 
+Pre-compound excitation high energy                 15 MeV 
 Angular generator for pre-compound model            1
 Use NeverGoBack option for pre-compound model       0
 Use SoftCutOff option for pre-compound model        0
@@ -1946,9 +1946,9 @@ Use HETC submodel for pre-compound model            0
 Type of de-excitation inverse x-section             3
 Type of de-excitation factory                       Evaporation+GEM
 Number of de-excitation channels                    68
-Min excitation energy                               10 eV 
-Min energy per nucleon for multifragmentation       200 GeV
-Limit excitation energy for Fermi BreakUp           20 MeV
+Type of Fermi BreakUp model                         ModelVI
+Min excitation energy                               0.01 keV 
+Min energy per nucleon for multifragmentation       2e+05 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
@@ -1982,16 +1982,16 @@ Index : 1     used in the geometry : Yes
 >>> Event 0
  G4VParticleChange::CheckSecondary : 
  The global time of secondary goes back compared to the parent !!
- ParentTime(ns)=15.9831 SecondaryTime(ns)= 15.9831 Difference(ns)=1.77636e-15
- Ekin(MeV)=3.57613e-06opticalphoton created by Undefined
+ ParentTime(ns)=0.951338 SecondaryTime(ns)= 0.951338 Difference(ns)=1.11022e-16
+ Ekin(MeV)=2.12455e-06opticalphoton created by Undefined
       -----------------------------------------------
         G4VParticleChange Information 
-        TrackID             : 343
-        ParentID            : 93
+        TrackID             : 312
+        ParentID            : 94
         Particle            : opticalphoton
-        Kinetic energy (MeV): 3.5761274e-06
-        Position (mm)       : (3137.9557,1356.5557,640.78663)
-        Direction           : (0.90214777,0.39009643,0.18426656)
+        Kinetic energy (MeV): 2.12455e-06
+        Position (mm)       : (186.65232,86.383588,-26.720971)
+        Direction           : (0.8993669,0.41766884,-0.12919719)
         PhysicsVolume       : TANK
         Material            : Water
       -----------------------------------------------
@@ -2007,19 +2007,19 @@ Index : 1     used in the geometry : Yes
         Charge (eplus)      :                    0
         MagneticMoment      :                    0
                          =  :                    0*[e hbar]/[2 m]
-        Position - x (mm)   :            3137.9557
-        Position - y (mm)   :            1356.5557
-        Position - z (mm)   :            640.78663
-        Time (ns)           :            15.980224
+        Position - x (mm)   :            186.65232
+        Position - y (mm)   :            86.383588
+        Position - z (mm)   :           -26.720971
+        Time (ns)           :           0.94801173
         Proper Time (ns)    :                    0
-        Momentum Direct - x :           0.90214777
-        Momentum Direct - y :           0.39009643
-        Momentum Direct - z :           0.18426656
-        Kinetic Energy (MeV):        3.5761274e-06
-        Velocity  (/c)      :           0.72587474
-        Polarization - x    :          -0.04265288
-        Polarization - y    :           0.50566291
-        Polarization - z    :          -0.86167613
+        Momentum Direct - x :            0.8993669
+        Momentum Direct - y :           0.41766884
+        Momentum Direct - z :          -0.12919719
+        Kinetic Energy (MeV):          2.12455e-06
+        Velocity  (/c)      :           0.72772072
+        Polarization - x    :          -0.43719467
+        Polarization - y    :           0.85919971
+        Polarization - z    :          -0.26577561
 
 -------- WWWW ------- G4Exception-START -------- WWWW -------
 *** G4Exception : TRACK001
@@ -2030,16 +2030,16 @@ Secondary with illegal time and/or energy and/or momentum
 
  G4VParticleChange::CheckSecondary : 
  The global time of secondary goes back compared to the parent !!
- ParentTime(ns)=15.9831 SecondaryTime(ns)= 15.9831 Difference(ns)=1.77636e-15
- Ekin(MeV)=3.57613e-06opticalphoton created by Undefined
+ ParentTime(ns)=0.951338 SecondaryTime(ns)= 0.951338 Difference(ns)=1.11022e-16
+ Ekin(MeV)=2.12455e-06opticalphoton created by Undefined
       -----------------------------------------------
         G4VParticleChange Information 
-        TrackID             : 343
-        ParentID            : 93
+        TrackID             : 312
+        ParentID            : 94
         Particle            : opticalphoton
-        Kinetic energy (MeV): 3.5761274e-06
-        Position (mm)       : (3137.9557,1356.5557,640.78663)
-        Direction           : (0.90214777,0.39009643,0.18426656)
+        Kinetic energy (MeV): 2.12455e-06
+        Position (mm)       : (186.65232,86.383588,-26.720971)
+        Direction           : (0.8993669,0.41766884,-0.12919719)
         PhysicsVolume       : TANK
         Material            : Water
       -----------------------------------------------
@@ -2055,19 +2055,19 @@ Secondary with illegal time and/or energy and/or momentum
         Charge (eplus)      :                    0
         MagneticMoment      :                    0
                          =  :                    0*[e hbar]/[2 m]
-        Position - x (mm)   :            3137.9557
-        Position - y (mm)   :            1356.5557
-        Position - z (mm)   :            640.78663
-        Time (ns)           :            15.980224
+        Position - x (mm)   :            186.65232
+        Position - y (mm)   :            86.383588
+        Position - z (mm)   :           -26.720971
+        Time (ns)           :           0.94801173
         Proper Time (ns)    :                    0
-        Momentum Direct - x :           0.90214777
-        Momentum Direct - y :           0.39009643
-        Momentum Direct - z :           0.18426656
-        Kinetic Energy (MeV):        3.5761274e-06
-        Velocity  (/c)      :           0.72587474
-        Polarization - x    :          -0.04265288
-        Polarization - y    :           0.50566291
-        Polarization - z    :          -0.86167613
+        Momentum Direct - x :            0.8993669
+        Momentum Direct - y :           0.41766884
+        Momentum Direct - z :          -0.12919719
+        Kinetic Energy (MeV):          2.12455e-06
+        Velocity  (/c)      :           0.72772072
+        Polarization - x    :          -0.43719467
+        Polarization - y    :           0.85919971
+        Polarization - z    :          -0.26577561
 
 -------- WWWW ------- G4Exception-START -------- WWWW -------
 *** G4Exception : TRACK001
@@ -2078,16 +2078,16 @@ Secondary with illegal time and/or energy and/or momentum
 
  G4VParticleChange::CheckSecondary : 
  The global time of secondary goes back compared to the parent !!
- ParentTime(ns)=15.9831 SecondaryTime(ns)= 15.9831 Difference(ns)=1.77636e-15
- Ekin(MeV)=3.57613e-06opticalphoton created by Undefined
+ ParentTime(ns)=0.951338 SecondaryTime(ns)= 0.951338 Difference(ns)=1.11022e-16
+ Ekin(MeV)=2.12455e-06opticalphoton created by Undefined
       -----------------------------------------------
         G4VParticleChange Information 
-        TrackID             : 343
-        ParentID            : 93
+        TrackID             : 312
+        ParentID            : 94
         Particle            : opticalphoton
-        Kinetic energy (MeV): 3.5761274e-06
-        Position (mm)       : (3137.9557,1356.5557,640.78663)
-        Direction           : (0.90214777,0.39009643,0.18426656)
+        Kinetic energy (MeV): 2.12455e-06
+        Position (mm)       : (186.65232,86.383588,-26.720971)
+        Direction           : (0.8993669,0.41766884,-0.12919719)
         PhysicsVolume       : TANK
         Material            : Water
       -----------------------------------------------
@@ -2103,19 +2103,19 @@ Secondary with illegal time and/or energy and/or momentum
         Charge (eplus)      :                    0
         MagneticMoment      :                    0
                          =  :                    0*[e hbar]/[2 m]
-        Position - x (mm)   :            3137.9557
-        Position - y (mm)   :            1356.5557
-        Position - z (mm)   :            640.78663
-        Time (ns)           :            15.980224
+        Position - x (mm)   :            186.65232
+        Position - y (mm)   :            86.383588
+        Position - z (mm)   :           -26.720971
+        Time (ns)           :           0.94801173
         Proper Time (ns)    :                    0
-        Momentum Direct - x :           0.90214777
-        Momentum Direct - y :           0.39009643
-        Momentum Direct - z :           0.18426656
-        Kinetic Energy (MeV):        3.5761274e-06
-        Velocity  (/c)      :           0.72587474
-        Polarization - x    :          -0.04265288
-        Polarization - y    :           0.50566291
-        Polarization - z    :          -0.86167613
+        Momentum Direct - x :            0.8993669
+        Momentum Direct - y :           0.41766884
+        Momentum Direct - z :          -0.12919719
+        Kinetic Energy (MeV):          2.12455e-06
+        Velocity  (/c)      :           0.72772072
+        Polarization - x    :          -0.43719467
+        Polarization - y    :           0.85919971
+        Polarization - z    :          -0.26577561
 
 -------- WWWW ------- G4Exception-START -------- WWWW -------
 *** G4Exception : TRACK001
@@ -2126,16 +2126,16 @@ Secondary with illegal time and/or energy and/or momentum
 
  G4VParticleChange::CheckSecondary : 
  The global time of secondary goes back compared to the parent !!
- ParentTime(ns)=14.9653 SecondaryTime(ns)= 14.9653 Difference(ns)=1.77636e-15
- Ekin(MeV)=2.61129e-06opticalphoton created by Undefined
+ ParentTime(ns)=126.309 SecondaryTime(ns)= 126.309 Difference(ns)=1.42109e-14
+ Ekin(MeV)=3.30288e-06opticalphoton created by Undefined
       -----------------------------------------------
         G4VParticleChange Information 
-        TrackID             : 821
-        ParentID            : 79
+        TrackID             : 447
+        ParentID            : 90
         Particle            : opticalphoton
-        Kinetic energy (MeV): 2.6112907e-06
-        Position (mm)       : (3040.535,-62.895465,-1185.5078)
-        Direction           : (0.93151237,-0.019269009,-0.36319885)
+        Kinetic energy (MeV): 3.3028772e-06
+        Position (mm)       : (-1562.8692,4436.8915,1411.0896)
+        Direction           : (0.73882783,0.455543,0.49660246)
         PhysicsVolume       : TANK
         Material            : Water
       -----------------------------------------------
@@ -2151,19 +2151,19 @@ Secondary with illegal time and/or energy and/or momentum
         Charge (eplus)      :                    0
         MagneticMoment      :                    0
                          =  :                    0*[e hbar]/[2 m]
-        Position - x (mm)   :             3040.535
-        Position - y (mm)   :           -62.895465
-        Position - z (mm)   :           -1185.5078
-        Time (ns)           :            14.965213
+        Position - x (mm)   :           -1562.8692
+        Position - y (mm)   :            4436.8915
+        Position - z (mm)   :            1411.0896
+        Time (ns)           :            126.30613
         Proper Time (ns)    :                    0
-        Momentum Direct - x :           0.93151237
-        Momentum Direct - y :         -0.019269009
-        Momentum Direct - z :          -0.36319885
-        Kinetic Energy (MeV):        2.6112907e-06
-        Velocity  (/c)      :           0.72753909
-        Polarization - x    :          -0.36370964
-        Polarization - y    :         -0.049350686
-        Polarization - z    :          -0.93020418
+        Momentum Direct - x :           0.73882783
+        Momentum Direct - y :             0.455543
+        Momentum Direct - z :           0.49660246
+        Kinetic Energy (MeV):        3.3028772e-06
+        Velocity  (/c)      :           0.72168214
+        Polarization - x    :          -0.61440738
+        Polarization - y    :           0.54291906
+        Polarization - z    :           0.57248796
 
 -------- WWWW ------- G4Exception-START -------- WWWW -------
 *** G4Exception : TRACK001
@@ -2174,16 +2174,16 @@ Secondary with illegal time and/or energy and/or momentum
 
  G4VParticleChange::CheckSecondary : 
  The global time of secondary goes back compared to the parent !!
- ParentTime(ns)=14.9653 SecondaryTime(ns)= 14.9653 Difference(ns)=1.77636e-15
- Ekin(MeV)=2.61129e-06opticalphoton created by Undefined
+ ParentTime(ns)=126.309 SecondaryTime(ns)= 126.309 Difference(ns)=1.42109e-14
+ Ekin(MeV)=3.30288e-06opticalphoton created by Undefined
       -----------------------------------------------
         G4VParticleChange Information 
-        TrackID             : 821
-        ParentID            : 79
+        TrackID             : 447
+        ParentID            : 90
         Particle            : opticalphoton
-        Kinetic energy (MeV): 2.6112907e-06
-        Position (mm)       : (3040.535,-62.895465,-1185.5078)
-        Direction           : (0.93151237,-0.019269009,-0.36319885)
+        Kinetic energy (MeV): 3.3028772e-06
+        Position (mm)       : (-1562.8692,4436.8915,1411.0896)
+        Direction           : (0.73882783,0.455543,0.49660246)
         PhysicsVolume       : TANK
         Material            : Water
       -----------------------------------------------
@@ -2199,19 +2199,19 @@ Secondary with illegal time and/or energy and/or momentum
         Charge (eplus)      :                    0
         MagneticMoment      :                    0
                          =  :                    0*[e hbar]/[2 m]
-        Position - x (mm)   :             3040.535
-        Position - y (mm)   :           -62.895465
-        Position - z (mm)   :           -1185.5078
-        Time (ns)           :            14.965213
+        Position - x (mm)   :           -1562.8692
+        Position - y (mm)   :            4436.8915
+        Position - z (mm)   :            1411.0896
+        Time (ns)           :            126.30613
         Proper Time (ns)    :                    0
-        Momentum Direct - x :           0.93151237
-        Momentum Direct - y :         -0.019269009
-        Momentum Direct - z :          -0.36319885
-        Kinetic Energy (MeV):        2.6112907e-06
-        Velocity  (/c)      :           0.72753909
-        Polarization - x    :          -0.36370964
-        Polarization - y    :         -0.049350686
-        Polarization - z    :          -0.93020418
+        Momentum Direct - x :           0.73882783
+        Momentum Direct - y :             0.455543
+        Momentum Direct - z :           0.49660246
+        Kinetic Energy (MeV):        3.3028772e-06
+        Velocity  (/c)      :           0.72168214
+        Polarization - x    :          -0.61440738
+        Polarization - y    :           0.54291906
+        Polarization - z    :           0.57248796
 
 -------- WWWW ------- G4Exception-START -------- WWWW -------
 *** G4Exception : TRACK001
@@ -2222,16 +2222,16 @@ Secondary with illegal time and/or energy and/or momentum
 
  G4VParticleChange::CheckSecondary : 
  The global time of secondary goes back compared to the parent !!
- ParentTime(ns)=14.9653 SecondaryTime(ns)= 14.9653 Difference(ns)=1.77636e-15
- Ekin(MeV)=2.61129e-06opticalphoton created by Undefined
+ ParentTime(ns)=126.309 SecondaryTime(ns)= 126.309 Difference(ns)=1.42109e-14
+ Ekin(MeV)=3.30288e-06opticalphoton created by Undefined
       -----------------------------------------------
         G4VParticleChange Information 
-        TrackID             : 821
-        ParentID            : 79
+        TrackID             : 447
+        ParentID            : 90
         Particle            : opticalphoton
-        Kinetic energy (MeV): 2.6112907e-06
-        Position (mm)       : (3040.535,-62.895465,-1185.5078)
-        Direction           : (0.93151237,-0.019269009,-0.36319885)
+        Kinetic energy (MeV): 3.3028772e-06
+        Position (mm)       : (-1562.8692,4436.8915,1411.0896)
+        Direction           : (0.73882783,0.455543,0.49660246)
         PhysicsVolume       : TANK
         Material            : Water
       -----------------------------------------------
@@ -2247,19 +2247,19 @@ Secondary with illegal time and/or energy and/or momentum
         Charge (eplus)      :                    0
         MagneticMoment      :                    0
                          =  :                    0*[e hbar]/[2 m]
-        Position - x (mm)   :             3040.535
-        Position - y (mm)   :           -62.895465
-        Position - z (mm)   :           -1185.5078
-        Time (ns)           :            14.965213
+        Position - x (mm)   :           -1562.8692
+        Position - y (mm)   :            4436.8915
+        Position - z (mm)   :            1411.0896
+        Time (ns)           :            126.30613
         Proper Time (ns)    :                    0
-        Momentum Direct - x :           0.93151237
-        Momentum Direct - y :         -0.019269009
-        Momentum Direct - z :          -0.36319885
-        Kinetic Energy (MeV):        2.6112907e-06
-        Velocity  (/c)      :           0.72753909
-        Polarization - x    :          -0.36370964
-        Polarization - y    :         -0.049350686
-        Polarization - z    :          -0.93020418
+        Momentum Direct - x :           0.73882783
+        Momentum Direct - y :             0.455543
+        Momentum Direct - z :           0.49660246
+        Kinetic Energy (MeV):        3.3028772e-06
+        Velocity  (/c)      :           0.72168214
+        Polarization - x    :          -0.61440738
+        Polarization - y    :           0.54291906
+        Polarization - z    :           0.57248796
 
 -------- WWWW ------- G4Exception-START -------- WWWW -------
 *** G4Exception : TRACK001
@@ -2270,16 +2270,16 @@ Secondary with illegal time and/or energy and/or momentum
 
  G4VParticleChange::CheckSecondary : 
  The global time of secondary goes back compared to the parent !!
- ParentTime(ns)=119.815 SecondaryTime(ns)= 119.815 Difference(ns)=1.42109e-14
- Ekin(MeV)=4.12585e-06opticalphoton created by Undefined
+ ParentTime(ns)=30.0521 SecondaryTime(ns)= 30.0521 Difference(ns)=3.55271e-15
+ Ekin(MeV)=3.91014e-06opticalphoton created by Undefined
       -----------------------------------------------
         G4VParticleChange Information 
-        TrackID             : 820
-        ParentID            : 79
+        TrackID             : 527
+        ParentID            : 88
         Particle            : opticalphoton
-        Kinetic energy (MeV): 4.1258512e-06
-        Position (mm)       : (1138.8415,3413.6445,761.2062)
-        Direction           : (-0.84651112,-0.49074298,0.20637405)
+        Kinetic energy (MeV): 3.9101386e-06
+        Position (mm)       : (4454.7889,-2683.1299,-1810.3302)
+        Direction           : (-0.58199621,-0.79712842,-0.16083124)
         PhysicsVolume       : TANK
         Material            : Water
       -----------------------------------------------
@@ -2295,19 +2295,19 @@ Secondary with illegal time and/or energy and/or momentum
         Charge (eplus)      :                    0
         MagneticMoment      :                    0
                          =  :                    0*[e hbar]/[2 m]
-        Position - x (mm)   :            1138.8415
-        Position - y (mm)   :            3413.6445
-        Position - z (mm)   :             761.2062
-        Time (ns)           :            119.81092
+        Position - x (mm)   :            4454.7889
+        Position - y (mm)   :           -2683.1299
+        Position - z (mm)   :           -1810.3302
+        Time (ns)           :            30.048571
         Proper Time (ns)    :                    0
-        Momentum Direct - x :          -0.84651112
-        Momentum Direct - y :          -0.49074298
-        Momentum Direct - z :           0.20637405
-        Kinetic Energy (MeV):        4.1258512e-06
-        Velocity  (/c)      :           0.72223437
-        Polarization - x    :          -0.38077806
-        Polarization - y    :          -0.92453429
-        Polarization - z    :         -0.015633411
+        Momentum Direct - x :          -0.58199621
+        Momentum Direct - y :          -0.79712842
+        Momentum Direct - z :          -0.16083124
+        Kinetic Energy (MeV):        3.9101386e-06
+        Velocity  (/c)      :           0.72699708
+        Polarization - x    :          -0.45441897
+        Polarization - y    :          -0.67635286
+        Polarization - z    :          -0.57969838
 
 -------- WWWW ------- G4Exception-START -------- WWWW -------
 *** G4Exception : TRACK001
@@ -2318,16 +2318,16 @@ Secondary with illegal time and/or energy and/or momentum
 
  G4VParticleChange::CheckSecondary : 
  The global time of secondary goes back compared to the parent !!
- ParentTime(ns)=119.815 SecondaryTime(ns)= 119.815 Difference(ns)=1.42109e-14
- Ekin(MeV)=4.12585e-06opticalphoton created by Undefined
+ ParentTime(ns)=30.0521 SecondaryTime(ns)= 30.0521 Difference(ns)=3.55271e-15
+ Ekin(MeV)=3.91014e-06opticalphoton created by Undefined
       -----------------------------------------------
         G4VParticleChange Information 
-        TrackID             : 820
-        ParentID            : 79
+        TrackID             : 527
+        ParentID            : 88
         Particle            : opticalphoton
-        Kinetic energy (MeV): 4.1258512e-06
-        Position (mm)       : (1138.8415,3413.6445,761.2062)
-        Direction           : (-0.84651112,-0.49074298,0.20637405)
+        Kinetic energy (MeV): 3.9101386e-06
+        Position (mm)       : (4454.7889,-2683.1299,-1810.3302)
+        Direction           : (-0.58199621,-0.79712842,-0.16083124)
         PhysicsVolume       : TANK
         Material            : Water
       -----------------------------------------------
@@ -2343,19 +2343,19 @@ Secondary with illegal time and/or energy and/or momentum
         Charge (eplus)      :                    0
         MagneticMoment      :                    0
                          =  :                    0*[e hbar]/[2 m]
-        Position - x (mm)   :            1138.8415
-        Position - y (mm)   :            3413.6445
-        Position - z (mm)   :             761.2062
-        Time (ns)           :            119.81092
+        Position - x (mm)   :            4454.7889
+        Position - y (mm)   :           -2683.1299
+        Position - z (mm)   :           -1810.3302
+        Time (ns)           :            30.048571
         Proper Time (ns)    :                    0
-        Momentum Direct - x :          -0.84651112
-        Momentum Direct - y :          -0.49074298
-        Momentum Direct - z :           0.20637405
-        Kinetic Energy (MeV):        4.1258512e-06
-        Velocity  (/c)      :           0.72223437
-        Polarization - x    :          -0.38077806
-        Polarization - y    :          -0.92453429
-        Polarization - z    :         -0.015633411
+        Momentum Direct - x :          -0.58199621
+        Momentum Direct - y :          -0.79712842
+        Momentum Direct - z :          -0.16083124
+        Kinetic Energy (MeV):        3.9101386e-06
+        Velocity  (/c)      :           0.72699708
+        Polarization - x    :          -0.45441897
+        Polarization - y    :          -0.67635286
+        Polarization - z    :          -0.57969838
 
 -------- WWWW ------- G4Exception-START -------- WWWW -------
 *** G4Exception : TRACK001
@@ -2366,16 +2366,16 @@ Secondary with illegal time and/or energy and/or momentum
 
  G4VParticleChange::CheckSecondary : 
  The global time of secondary goes back compared to the parent !!
- ParentTime(ns)=119.815 SecondaryTime(ns)= 119.815 Difference(ns)=1.42109e-14
- Ekin(MeV)=4.12585e-06opticalphoton created by Undefined
+ ParentTime(ns)=30.0521 SecondaryTime(ns)= 30.0521 Difference(ns)=3.55271e-15
+ Ekin(MeV)=3.91014e-06opticalphoton created by Undefined
       -----------------------------------------------
         G4VParticleChange Information 
-        TrackID             : 820
-        ParentID            : 79
+        TrackID             : 527
+        ParentID            : 88
         Particle            : opticalphoton
-        Kinetic energy (MeV): 4.1258512e-06
-        Position (mm)       : (1138.8415,3413.6445,761.2062)
-        Direction           : (-0.84651112,-0.49074298,0.20637405)
+        Kinetic energy (MeV): 3.9101386e-06
+        Position (mm)       : (4454.7889,-2683.1299,-1810.3302)
+        Direction           : (-0.58199621,-0.79712842,-0.16083124)
         PhysicsVolume       : TANK
         Material            : Water
       -----------------------------------------------
@@ -2391,19 +2391,19 @@ Secondary with illegal time and/or energy and/or momentum
         Charge (eplus)      :                    0
         MagneticMoment      :                    0
                          =  :                    0*[e hbar]/[2 m]
-        Position - x (mm)   :            1138.8415
-        Position - y (mm)   :            3413.6445
-        Position - z (mm)   :             761.2062
-        Time (ns)           :            119.81092
+        Position - x (mm)   :            4454.7889
+        Position - y (mm)   :           -2683.1299
+        Position - z (mm)   :           -1810.3302
+        Time (ns)           :            30.048571
         Proper Time (ns)    :                    0
-        Momentum Direct - x :          -0.84651112
-        Momentum Direct - y :          -0.49074298
-        Momentum Direct - z :           0.20637405
-        Kinetic Energy (MeV):        4.1258512e-06
-        Velocity  (/c)      :           0.72223437
-        Polarization - x    :          -0.38077806
-        Polarization - y    :          -0.92453429
-        Polarization - z    :         -0.015633411
+        Momentum Direct - x :          -0.58199621
+        Momentum Direct - y :          -0.79712842
+        Momentum Direct - z :          -0.16083124
+        Kinetic Energy (MeV):        3.9101386e-06
+        Velocity  (/c)      :           0.72699708
+        Polarization - x    :          -0.45441897
+        Polarization - y    :          -0.67635286
+        Polarization - z    :          -0.57969838
 
 -------- WWWW ------- G4Exception-START -------- WWWW -------
 *** G4Exception : TRACK001
@@ -2412,36 +2412,36 @@ Secondary with illegal time and/or energy and/or momentum
 *** This is just a warning message. ***
 -------- WWWW -------- G4Exception-END --------- WWWW -------
 
-Number of optical photons produced in this event : 1513
-Number of feedback photons produced in this event : 1772
->>> Event 1
-Number of optical photons produced in this event : 1548
-Number of feedback photons produced in this event : 1708
->>> Event 2
-Number of optical photons produced in this event : 1358
-Number of feedback photons produced in this event : 1513
->>> Event 3
 Number of optical photons produced in this event : 1401
-Number of feedback photons produced in this event : 1639
+Number of feedback photons produced in this event : 1677
+>>> Event 1
+Number of optical photons produced in this event : 1413
+Number of feedback photons produced in this event : 1625
+>>> Event 2
+Number of optical photons produced in this event : 1436
+Number of feedback photons produced in this event : 1643
+>>> Event 3
+Number of optical photons produced in this event : 1359
+Number of feedback photons produced in this event : 1634
 >>> Event 4
-Number of optical photons produced in this event : 1518
-Number of feedback photons produced in this event : 1730
+Number of optical photons produced in this event : 1412
+Number of feedback photons produced in this event : 1654
 >>> Event 5
-Number of optical photons produced in this event : 1476
-Number of feedback photons produced in this event : 1697
+Number of optical photons produced in this event : 1381
+Number of feedback photons produced in this event : 1678
 >>> Event 6
-Number of optical photons produced in this event : 1364
-Number of feedback photons produced in this event : 1538
+Number of optical photons produced in this event : 1427
+Number of feedback photons produced in this event : 1733
 >>> Event 7
-Number of optical photons produced in this event : 1407
-Number of feedback photons produced in this event : 1603
+Number of optical photons produced in this event : 1333
+Number of feedback photons produced in this event : 1547
 >>> Event 8
-Number of optical photons produced in this event : 1494
-Number of feedback photons produced in this event : 1749
+Number of optical photons produced in this event : 1510
+Number of feedback photons produced in this event : 1751
 >>> Event 9
-Number of optical photons produced in this event : 1493
-Number of feedback photons produced in this event : 1716
-Time of this run:   User=0.450000s Real=0.562611s Sys=0.020000s
+Number of optical photons produced in this event : 1432
+Number of feedback photons produced in this event : 1513
+Time of this run:   User=0.380000s Real=0.381513s Sys=0.000000s
 Number of events processed: 10
-Number of optical photons produced in this run : 14572
-Number of feedback photons produced in this run : 16665
+Number of optical photons produced in this run : 14104
+Number of feedback photons produced in this run : 16455

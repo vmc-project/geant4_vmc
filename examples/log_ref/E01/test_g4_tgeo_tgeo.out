@@ -1,16 +1,16 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.32.08                        https://root.cern |
-  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
-  | From tags/v6-32-08@v6-32-08                                      |
-  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
+  | Welcome to ROOT 6.36.06                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 17 2025, 11:26:33                   |
+  | From tags/v6-36-06@v6-36-06                                      |
+  | With Apple clang version 17.0.0 (clang-1700.0.13.5)              |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+36
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -24,7 +24,7 @@ Processing test_E01.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.7 ( 7 February 2025 )
+ Version 6.8 ( 2 February 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -47,7 +47,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
+ Geant4 version Name: geant4-11-04    (5-December-2025)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -118,7 +118,7 @@ Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
-Use Ricardo-Gerardo pair production model          0
+Use RiGe 5D e+e- pair production model by muons    0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -132,7 +132,7 @@ Lowest muon/hadron kinetic energy                  1 keV
 Use ICRU90 data                                    0
 Fluctuations of dE/dx are enabled                  1
 Type of fluctuation model for leptons and hadrons  Urban
-Use built-in Birks satuaration                     0
+Use built-in Birks saturation                      0
 Build CSDA range enabled                           0
 Use cut as a final range enabled                   0
 Enable angular generator interface                 0
@@ -269,7 +269,7 @@ hBrems:  for proton  XStype:1  SubType=3
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -327,7 +327,7 @@ hBrems:  for anti_proton  XStype:1  SubType=3
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -359,7 +359,7 @@ hBrems:  for kaon+  XStype:1  SubType=3
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -391,7 +391,7 @@ hBrems:  for kaon-  XStype:1  SubType=3
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -423,7 +423,7 @@ muBrems:  for mu+  XStype:1  SubType=3
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -455,7 +455,7 @@ muBrems:  for mu-  XStype:1  SubType=3
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -487,7 +487,7 @@ hBrems:  for pi+  XStype:1  SubType=3
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -519,7 +519,7 @@ hBrems:  for pi-  XStype:1  SubType=3
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -820,7 +820,7 @@ Track 191 0 0  in CALB  Lead
 Track 200 0 0  in CALB  Lead
 Track 200 0 0  in EXPH  ArgonGas
 Track 300 0 0  in EXPH  ArgonGas
-Time of this run:   User=0.010000s Real=0.001104s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.001046s Sys=0.000000s
 Number of events processed: 1
 Transformation for /EXPH_1/CALB_1/LAYB_9: 
 matrix global_1 - tr=1  rot=0  refl=0  scl=0 shr=0 reg=0 own=0

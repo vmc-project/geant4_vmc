@@ -1,16 +1,16 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.32.08                        https://root.cern |
-  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
-  | From tags/v6-32-08@v6-32-08                                      |
-  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
+  | Welcome to ROOT 6.36.06                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 17 2025, 11:26:33                   |
+  | From tags/v6-36-06@v6-36-06                                      |
+  | With Apple clang version 17.0.0 (clang-1700.0.13.5)              |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4b.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+36
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -27,13 +27,13 @@ Processing test_E03_1.C("g4ConfigOld.C",kTRUE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.7 ( 7 February 2025 )
+ Version 6.8 ( 2 February 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
+ Geant4 version Name: geant4-11-04    (5-December-2025)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -42,7 +42,7 @@ Processing test_E03_1.C("g4ConfigOld.C",kTRUE)...
 **************************************************************
 
 Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>
 <<< Geant4 Physics List simulation engine: FTFP_BERT
 
 
@@ -131,7 +131,7 @@ Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
-Use Ricardo-Gerardo pair production model          0
+Use RiGe 5D e+e- pair production model by muons    0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -145,7 +145,7 @@ Lowest muon/hadron kinetic energy                  1 keV
 Use ICRU90 data                                    0
 Fluctuations of dE/dx are enabled                  1
 Type of fluctuation model for leptons and hadrons  Urban
-Use built-in Birks satuaration                     0
+Use built-in Birks saturation                      0
 Build CSDA range enabled                           0
 Use cut as a final range enabled                   0
 Enable angular generator interface                 0
@@ -282,7 +282,7 @@ hBrems:  for proton  XStype:1  SubType=3
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -340,7 +340,7 @@ hBrems:  for anti_proton  XStype:1  SubType=3
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -372,7 +372,7 @@ hBrems:  for kaon+  XStype:1  SubType=3
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -404,7 +404,7 @@ hBrems:  for kaon-  XStype:1  SubType=3
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -436,7 +436,7 @@ muBrems:  for mu+  XStype:1  SubType=3
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -468,7 +468,7 @@ muBrems:  for mu-  XStype:1  SubType=3
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -500,7 +500,7 @@ hBrems:  for pi+  XStype:1  SubType=3
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -532,7 +532,7 @@ hBrems:  for pi-  XStype:1  SubType=3
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -784,10 +784,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 =======================================================================
 ======       Geant4 Native Pre-compound Model Parameters       ========
 =======================================================================
+Type of pre-compound model                          0
 Type of pre-compound inverse x-section              1
 Pre-compound model active                           1
-Pre-compound excitation low energy                  100 keV
-Pre-compound excitation high energy                 30 MeV
+Pre-compound excitation low energy                  0.1 MeV 
+Pre-compound excitation high energy                 15 MeV 
 Angular generator for pre-compound model            1
 Use NeverGoBack option for pre-compound model       0
 Use SoftCutOff option for pre-compound model        0
@@ -800,9 +801,9 @@ Use HETC submodel for pre-compound model            0
 Type of de-excitation inverse x-section             3
 Type of de-excitation factory                       Evaporation+GEM
 Number of de-excitation channels                    68
-Min excitation energy                               10 eV 
-Min energy per nucleon for multifragmentation       200 GeV
-Limit excitation energy for Fermi BreakUp           20 MeV
+Type of Fermi BreakUp model                         ModelVI
+Min excitation energy                               0.01 keV 
+Min energy per nucleon for multifragmentation       2e+05 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
@@ -842,39 +843,39 @@ Index : 2     used in the geometry : Yes
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 897.552       total track length (cm):  69.0234
-   Gap:      total energy (MeV): 47.7912       total track length (cm):  24.0842
+   Absorber: total energy (MeV): 866.351       total track length (cm):  66.9037
+   Gap:      total energy (MeV): 67.5316       total track length (cm):  35.5294
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 892.199       total track length (cm):  68.2485
-   Gap:      total energy (MeV):  28.668       total track length (cm):  14.4683
+   Absorber: total energy (MeV): 924.212       total track length (cm):   71.505
+   Gap:      total energy (MeV): 32.8311       total track length (cm):  16.2264
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 913.382       total track length (cm):  70.2376
-   Gap:      total energy (MeV): 31.2123       total track length (cm):  16.5094
+   Absorber: total energy (MeV): 921.994       total track length (cm):  71.9682
+   Gap:      total energy (MeV): 38.0704       total track length (cm):  19.3067
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 916.073       total track length (cm):  70.7758
-   Gap:      total energy (MeV):  25.995       total track length (cm):   13.046
+   Absorber: total energy (MeV): 924.126       total track length (cm):  71.6724
+   Gap:      total energy (MeV): 29.7071       total track length (cm):   15.039
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 895.484       total track length (cm):   69.505
-   Gap:      total energy (MeV): 33.9112       total track length (cm):  17.3446
-Time of this run:   User=0.080000s Real=0.096990s Sys=0.000000s
+   Absorber: total energy (MeV): 931.811       total track length (cm):  72.8687
+   Gap:      total energy (MeV): 27.3399       total track length (cm):  13.7621
+Time of this run:   User=0.070000s Real=0.073895s Sys=0.000000s
 Number of events processed: 5
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.32.08                        https://root.cern |
-  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
-  | From tags/v6-32-08@v6-32-08                                      |
-  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
+  | Welcome to ROOT 6.36.06                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 17 2025, 11:26:33                   |
+  | From tags/v6-36-06@v6-36-06                                      |
+  | With Apple clang version 17.0.0 (clang-1700.0.13.5)              |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4b.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+36
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -892,13 +893,13 @@ Processing test_E03_2.C("g4ConfigOld.C",kTRUE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.7 ( 7 February 2025 )
+ Version 6.8 ( 2 February 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
+ Geant4 version Name: geant4-11-04    (5-December-2025)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -907,7 +908,7 @@ Processing test_E03_2.C("g4ConfigOld.C",kTRUE)...
 **************************************************************
 
 Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>
 <<< Geant4 Physics List simulation engine: FTFP_BERT
 
 
@@ -1002,7 +1003,7 @@ Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
-Use Ricardo-Gerardo pair production model          0
+Use RiGe 5D e+e- pair production model by muons    0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -1016,7 +1017,7 @@ Lowest muon/hadron kinetic energy                  1 keV
 Use ICRU90 data                                    0
 Fluctuations of dE/dx are enabled                  1
 Type of fluctuation model for leptons and hadrons  Urban
-Use built-in Birks satuaration                     0
+Use built-in Birks saturation                      0
 Build CSDA range enabled                           0
 Use cut as a final range enabled                   0
 Enable angular generator interface                 0
@@ -1153,7 +1154,7 @@ hBrems:  for proton  XStype:1  SubType=3
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1211,7 +1212,7 @@ hBrems:  for anti_proton  XStype:1  SubType=3
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1243,7 +1244,7 @@ hBrems:  for kaon+  XStype:1  SubType=3
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1275,7 +1276,7 @@ hBrems:  for kaon-  XStype:1  SubType=3
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1307,7 +1308,7 @@ muBrems:  for mu+  XStype:1  SubType=3
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1339,7 +1340,7 @@ muBrems:  for mu-  XStype:1  SubType=3
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1371,7 +1372,7 @@ hBrems:  for pi+  XStype:1  SubType=3
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1403,7 +1404,7 @@ hBrems:  for pi-  XStype:1  SubType=3
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1655,10 +1656,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 =======================================================================
 ======       Geant4 Native Pre-compound Model Parameters       ========
 =======================================================================
+Type of pre-compound model                          0
 Type of pre-compound inverse x-section              1
 Pre-compound model active                           1
-Pre-compound excitation low energy                  100 keV
-Pre-compound excitation high energy                 30 MeV
+Pre-compound excitation low energy                  0.1 MeV 
+Pre-compound excitation high energy                 15 MeV 
 Angular generator for pre-compound model            1
 Use NeverGoBack option for pre-compound model       0
 Use SoftCutOff option for pre-compound model        0
@@ -1671,9 +1673,9 @@ Use HETC submodel for pre-compound model            0
 Type of de-excitation inverse x-section             3
 Type of de-excitation factory                       Evaporation+GEM
 Number of de-excitation channels                    68
-Min excitation energy                               10 eV 
-Min energy per nucleon for multifragmentation       200 GeV
-Limit excitation energy for Fermi BreakUp           20 MeV
+Type of Fermi BreakUp model                         ModelVI
+Min excitation energy                               0.01 keV 
+Min energy per nucleon for multifragmentation       2e+05 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
@@ -2411,177 +2413,187 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -0.840   -4.274   -1.679     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -1.167   -4.248   -2.277     0.1932    0.0000    0.682    0.682     ABSO  Compton scattering
-#   2    -1.188   -4.282   -2.208     0.0000    0.0880    0.080    0.763     ABSO  Photoelectric effect
+#   1    -0.927   -4.267   -1.838     0.0000    0.0159    0.182    0.182     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 77     Parent ID = 76
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -1.188   -4.282   -2.208     0.1051    0.0000    0.000    0.000     ABSO  No active process
-#   1    -1.188   -4.282   -2.208     0.0000    0.1051    0.003    0.003     ABSO  Energy loss
+#   0    -0.927   -4.267   -1.838     0.4951    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.929   -4.268   -1.840     0.0000    0.4951    0.033    0.033     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 78     Parent ID = 76
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -1.167   -4.248   -2.277     0.3178    0.0000    0.000    0.000     ABSO  No active process
-#   1    -1.167   -4.248   -2.278     0.0000    0.3178    0.017    0.017     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 79     Parent ID = 75
+  Particle = gamma     Track ID = 78     Parent ID = 75
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -0.840   -4.274   -1.679     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.708   -4.285   -1.437     0.5110    0.0000    0.275    0.275     ABSO  Rayleigh effect
-#   2    -0.500   -4.296   -1.060     0.5110    0.0000    0.431    0.706     ABSO  Transportation
-#   3    -0.500   -4.296   -1.060     0.5110    0.0000    0.000    0.706     GAPX  No active process
-#   4     0.000   -4.323   -0.154     0.5110    0.0000    1.035    1.742     GAPX  Transportation
-#   5     0.000   -4.323   -0.154     0.5110    0.0000    0.000    1.742     ABSO  No active process
-#   6     0.193   -4.333    0.196     0.0000    0.0001    0.400    2.142     ABSO  Photoelectric effect
+#   1    -0.814   -4.277   -1.631     0.0000    0.0880    0.054    0.054     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 80     Parent ID = 79
+  Particle = e-     Track ID = 79     Parent ID = 78
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0     0.193   -4.333    0.196     0.5109    0.0000    0.000    0.000     ABSO  No active process
-#   1     0.195   -4.333    0.197     0.0000    0.5109    0.034    0.034     ABSO  Energy loss
+#   0    -0.814   -4.277   -1.631     0.4230    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.813   -4.276   -1.630     0.0000    0.4230    0.026    0.026     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 81     Parent ID = 74
+  Particle = e-     Track ID = 80     Parent ID = 74
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -0.832   -4.274   -1.680     2.4798    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.811   -4.273   -1.681     1.8212    0.5164    0.056    0.056     ABSO  Energy loss
-#   2    -0.814   -4.270   -1.682     0.7878    0.0468    0.005    0.061     ABSO  Bremstrahlung
-#   3    -0.815   -4.267   -1.684     0.4694    0.0721    0.007    0.068     ABSO  Energy loss
-#   4    -0.814   -4.269   -1.683     0.0000    0.4694    0.030    0.098     ABSO  Energy loss
+#   1    -0.832   -4.274   -1.680     2.3882    0.0000    0.000    0.000     ABSO  Bremstrahlung
+#   2    -0.829   -4.274   -1.680     2.2718    0.0491    0.004    0.004     ABSO  Energy loss
+#   3    -0.820   -4.277   -1.678     2.1369    0.1144    0.011    0.015     ABSO  Bremstrahlung
+#   4    -0.820   -4.287   -1.690     1.7454    0.3200    0.037    0.052     ABSO  Energy loss
+#   5    -0.820   -4.282   -1.698     1.5031    0.1534    0.014    0.066     ABSO  Energy loss
+#   6    -0.825   -4.275   -1.700     0.7259    0.1475    0.016    0.082     ABSO  Bremstrahlung
+#   7    -0.828   -4.273   -1.699     0.0000    0.7259    0.055    0.137     ABSO  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 81     Parent ID = 80
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -0.825   -4.275   -1.700     0.6297    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.795   -3.913   -1.635     0.3028    0.0000    0.370    0.370     ABSO  Compton scattering
+#   2    -0.500   -3.881   -1.729     0.3028    0.0000    0.311    0.681     ABSO  Transportation
+#   3    -0.500   -3.881   -1.729     0.3028    0.0000    0.000    0.681     GAPX  No active process
+#   4     0.000   -3.828   -1.887     0.3028    0.0000    0.527    1.208     GAPX  Transportation
+#   5     0.000   -3.828   -1.887     0.3028    0.0000    0.000    1.208     ABSO  No active process
+#   6     0.605   -3.764   -2.079     0.0000    0.0880    0.637    1.846     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 82     Parent ID = 81
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.815   -4.267   -1.684     0.2463    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.814   -4.267   -1.684     0.0000    0.2463    0.012    0.012     ABSO  Energy loss
+#   0     0.605   -3.764   -2.079     0.2148    0.0000    0.000    0.000     ABSO  No active process
+#   1     0.605   -3.764   -2.080     0.0000    0.2148    0.009    0.009     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 83     Parent ID = 81
+  Particle = e-     Track ID = 83     Parent ID = 81
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.814   -4.270   -1.682     0.9866    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.826   -4.245   -1.696     0.5009    0.0000    0.030    0.030     ABSO  Compton scattering
-#   2    -1.102   -3.185   -0.989     0.0000    0.0880    1.303    1.334     ABSO  Photoelectric effect
+#   0    -0.795   -3.913   -1.635     0.3269    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.795   -3.912   -1.635     0.0000    0.3269    0.018    0.018     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 84     Parent ID = 83
+  Particle = e-     Track ID = 84     Parent ID = 80
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -1.102   -3.185   -0.989     0.4129    0.0000    0.000    0.000     ABSO  No active process
-#   1    -1.102   -3.184   -0.988     0.0000    0.4129    0.024    0.024     ABSO  Bremstrahlung
+#   0    -0.820   -4.282   -1.698     0.0889    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.820   -4.282   -1.698     0.0000    0.0889    0.002    0.002     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 85     Parent ID = 83
+  Particle = e-     Track ID = 85     Parent ID = 80
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.826   -4.245   -1.696     0.4856    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.827   -4.244   -1.697     0.0925    0.3346    0.028    0.028     ABSO  Energy loss
-#   2    -0.827   -4.244   -1.697     0.0000    0.0925    0.002    0.031     ABSO  Energy loss
+#   0    -0.820   -4.287   -1.690     0.0715    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.820   -4.287   -1.690     0.0000    0.0715    0.002    0.002     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 86     Parent ID = 85
+  Particle = gamma     Track ID = 86     Parent ID = 80
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.827   -4.244   -1.697     0.0585    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.827   -4.244   -1.697     0.0000    0.0585    0.001    0.001     ABSO  Energy loss
+#   0    -0.820   -4.277   -1.678     0.0205    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.820   -4.277   -1.679     0.0000    0.0009    0.001    0.001     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 87     Parent ID = 81
+  Particle = e-     Track ID = 87     Parent ID = 86
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.811   -4.273   -1.681     0.1423    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.811   -4.273   -1.681     0.0000    0.1423    0.005    0.005     ABSO  Energy loss
+#   0    -0.820   -4.277   -1.679     0.0196    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.820   -4.277   -1.679     0.0000    0.0196    0.000    0.000     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 88     Parent ID = 0
+  Particle = e-     Track ID = 88     Parent ID = 80
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -0.829   -4.274   -1.680     0.0673    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.829   -4.274   -1.680     0.0000    0.0673    0.001    0.001     ABSO  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 89     Parent ID = 80
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -0.832   -4.274   -1.680     0.0915    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.820   -4.267   -1.686     0.0000    0.0880    0.015    0.015     ABSO  Photoelectric effect
+
+****************************************************************************************************
+  Particle = e-     Track ID = 90     Parent ID = 89
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -0.820   -4.267   -1.686     0.0035    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.820   -4.267   -1.686     0.0000    0.0035    0.000    0.000     ABSO  Energy loss
+
+****************************************************************************************************
+  Particle = e-     Track ID = 91     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.903   -0.263   -0.144     0.0603    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.903   -0.263   -0.144     0.0000    0.0603    0.001    0.001     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 89     Parent ID = 0
+  Particle = gamma     Track ID = 92     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.931   -0.245   -0.135     0.5731    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.704   -0.421   -0.202     0.2796    0.0000    0.294    0.294     ABSO  Compton scattering
-#   2    -6.725   -0.486   -0.129     0.0000    0.0880    0.099    0.394     ABSO  Photoelectric effect
-
-****************************************************************************************************
-  Particle = e-     Track ID = 90     Parent ID = 89
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.725   -0.486   -0.129     0.1916    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.725   -0.486   -0.129     0.0000    0.1916    0.008    0.008     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = e-     Track ID = 91     Parent ID = 89
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.704   -0.421   -0.202     0.2935    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.704   -0.421   -0.202     0.2073    0.0751    0.005    0.005     ABSO  Bremstrahlung
-#   2    -6.703   -0.421   -0.202     0.0000    0.2073    0.009    0.013     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 92     Parent ID = 91
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.704   -0.421   -0.202     0.0110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.704   -0.421   -0.201     0.0000    0.0025    0.001    0.001     ABSO  Photoelectric effect
+#   1    -6.500   -0.580   -0.262     0.5731    0.0000    0.560    0.560     ABSO  Transportation
+#   2    -6.500   -0.580   -0.262     0.5731    0.0000    0.000    0.560     GAPX  No active process
+#   3    -6.000   -0.969   -0.409     0.5731    0.0000    0.650    1.211     GAPX  Transportation
+#   4    -6.000   -0.969   -0.409     0.5731    0.0000    0.000    1.211     ABSO  No active process
+#   5    -5.422   -1.418   -0.580     0.1916    0.0000    0.751    1.962     ABSO  Compton scattering
+#   6    -5.450   -1.356   -0.515     0.0000    0.0159    0.094    2.055     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 93     Parent ID = 92
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.704   -0.421   -0.201     0.0086    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.704   -0.421   -0.201     0.0000    0.0086    0.000    0.000     ABSO  Energy loss
+#   0    -5.450   -1.356   -0.515     0.1758    0.0000    0.000    0.000     ABSO  No active process
+#   1    -5.450   -1.356   -0.514     0.0000    0.1758    0.007    0.007     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 94     Parent ID = 0
+  Particle = e-     Track ID = 94     Parent ID = 92
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -5.422   -1.418   -0.580     0.3814    0.0000    0.000    0.000     ABSO  No active process
+#   1    -5.422   -1.419   -0.580     0.0000    0.3814    0.023    0.023     ABSO  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 95     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.973   -0.212   -0.120     0.0588    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.973   -0.212   -0.120     0.0000    0.0031    0.001    0.001     ABSO  Photoelectric effect
+#   1    -6.967   -0.217   -0.123     0.0000    0.0152    0.009    0.009     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 95     Parent ID = 94
+  Particle = e-     Track ID = 96     Parent ID = 95
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.973   -0.212   -0.120     0.0558    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.973   -0.212   -0.120     0.0000    0.0558    0.001    0.001     ABSO  Energy loss
+#   0    -6.967   -0.217   -0.123     0.0436    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.967   -0.217   -0.123     0.0000    0.0436    0.001    0.001     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 96     Parent ID = 0
+  Particle = e-     Track ID = 97     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.994   -0.190   -0.111     0.1461    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.994   -0.191   -0.111     0.0000    0.1461    0.005    0.005     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 97     Parent ID = 0
+  Particle = gamma     Track ID = 98     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.022   -0.155   -0.093     0.1866    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.002   -0.187   -0.109     0.0000    0.0880    0.041    0.041     ABSO  Photoelectric effect
+#   1    -7.005   -0.183   -0.107     0.0000    0.0880    0.036    0.036     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 98     Parent ID = 97
+  Particle = e-     Track ID = 99     Parent ID = 98
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.002   -0.187   -0.109     0.0986    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.002   -0.187   -0.109     0.0000    0.0986    0.003    0.003     ABSO  Energy loss
+#   0    -7.005   -0.183   -0.107     0.0986    0.0000    0.000    0.000     ABSO  No active process
+#   1    -7.005   -0.183   -0.107     0.0000    0.0986    0.003    0.003     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 99     Parent ID = 0
+  Particle = gamma     Track ID = 100     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.023   -0.154   -0.092     6.2290    0.0000    0.000    0.000     ABSO  No active process
@@ -2598,56 +2610,56 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  11    -3.044   -6.000   -2.988     6.2290    0.0000    1.307    7.642     WRLD  Transportation
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 100     Parent ID = 0
+  Particle = gamma     Track ID = 101     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.050   -0.120   -0.054     0.2196    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.042   -0.134   -0.067     0.0000    0.0880    0.020    0.020     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 101     Parent ID = 100
+  Particle = e-     Track ID = 102     Parent ID = 101
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.042   -0.134   -0.067     0.1316    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.042   -0.134   -0.067     0.0000    0.1316    0.004    0.004     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 102     Parent ID = 0
+  Particle = e-     Track ID = 103     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.069   -0.075   -0.020     0.0992    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.069   -0.075   -0.020     0.0000    0.0992    0.003    0.003     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 103     Parent ID = 0
+  Particle = gamma     Track ID = 104     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.069   -0.074   -0.019     0.3073    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.908   -0.480   -0.276     0.0000    0.0880    0.506    0.506     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 104     Parent ID = 103
+  Particle = e-     Track ID = 105     Parent ID = 104
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.908   -0.480   -0.276     0.2193    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.908   -0.480   -0.276     0.0000    0.2193    0.010    0.010     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 105     Parent ID = 0
+  Particle = gamma     Track ID = 106     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.143   -0.051   -0.023     0.0163    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.142   -0.051   -0.023     0.0000    0.0130    0.000    0.000     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 106     Parent ID = 105
+  Particle = e-     Track ID = 107     Parent ID = 106
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.142   -0.051   -0.023     0.0032    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.142   -0.051   -0.023     0.0000    0.0032    0.000    0.000     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 107     Parent ID = 0
+  Particle = gamma     Track ID = 108     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.164   -0.047   -0.024     1.2709    0.0000    0.000    0.000     ABSO  No active process
@@ -2663,14 +2675,14 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  10    -3.800    0.044    0.220     0.0000    0.0880    0.691    3.835     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 108     Parent ID = 107
+  Particle = e-     Track ID = 109     Parent ID = 108
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -3.800    0.044    0.220     0.3498    0.0000    0.000    0.000     ABSO  No active process
 #   1    -3.801    0.045    0.220     0.0000    0.3498    0.020    0.020     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 109     Parent ID = 107
+  Particle = e-     Track ID = 110     Parent ID = 108
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -4.080   -0.585    0.269     0.8331    0.0000    0.000    0.000     ABSO  No active process
@@ -2679,21 +2691,21 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   3    -4.078   -0.584    0.272     0.0000    0.3976    0.024    0.043     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 110     Parent ID = 109
+  Particle = e-     Track ID = 111     Parent ID = 110
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -4.078   -0.585    0.271     0.1042    0.0000    0.000    0.000     ABSO  No active process
 #   1    -4.078   -0.585    0.271     0.0000    0.1042    0.003    0.003     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 111     Parent ID = 109
+  Particle = e-     Track ID = 112     Parent ID = 110
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -4.077   -0.587    0.270     0.0953    0.0000    0.000    0.000     ABSO  No active process
 #   1    -4.077   -0.587    0.270     0.0000    0.0953    0.003    0.003     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 112     Parent ID = 0
+  Particle = gamma     Track ID = 113     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.183   -0.042   -0.026     3.4734    0.0000    0.000    0.000     ABSO  No active process
@@ -2701,7 +2713,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   2    -6.955   -0.105   -0.020     0.0000    0.0880    0.085    0.239     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 113     Parent ID = 112
+  Particle = e-     Track ID = 114     Parent ID = 113
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.955   -0.105   -0.020     2.8098    0.0000    0.000    0.000     ABSO  No active process
@@ -2713,35 +2725,35 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   6    -6.932   -0.119   -0.029     0.0000    0.1571    0.006    0.197     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 114     Parent ID = 113
+  Particle = gamma     Track ID = 115     Parent ID = 114
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.932   -0.120   -0.029     0.3587    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.981    0.090   -0.047     0.0000    0.0880    0.217    0.217     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 115     Parent ID = 114
+  Particle = e-     Track ID = 116     Parent ID = 115
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.981    0.090   -0.047     0.2707    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.981    0.091   -0.047     0.0000    0.2707    0.013    0.013     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 116     Parent ID = 113
+  Particle = e-     Track ID = 117     Parent ID = 114
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.933   -0.123   -0.030     0.2172    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.934   -0.122   -0.030     0.0000    0.2172    0.010    0.010     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 117     Parent ID = 113
+  Particle = e-     Track ID = 118     Parent ID = 114
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.928   -0.113   -0.027     0.0728    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.928   -0.113   -0.027     0.0000    0.0728    0.002    0.002     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 118     Parent ID = 113
+  Particle = gamma     Track ID = 119     Parent ID = 114
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.949   -0.107   -0.022     0.2246    0.0000    0.000    0.000     ABSO  No active process
@@ -2749,35 +2761,35 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   2    -6.883   -0.188    0.037     0.0000    0.0880    0.105    0.144     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 119     Parent ID = 118
+  Particle = e-     Track ID = 120     Parent ID = 119
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.883   -0.188    0.037     0.0805    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.882   -0.188    0.037     0.0000    0.0805    0.002    0.002     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 120     Parent ID = 118
+  Particle = e-     Track ID = 121     Parent ID = 119
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.911   -0.112   -0.029     0.0561    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.911   -0.112   -0.029     0.0000    0.0561    0.001    0.001     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 121     Parent ID = 113
+  Particle = gamma     Track ID = 122     Parent ID = 114
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.952   -0.107   -0.021     0.0409    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.951   -0.108   -0.023     0.0000    0.0152    0.002    0.002     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 122     Parent ID = 121
+  Particle = e-     Track ID = 123     Parent ID = 122
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.951   -0.108   -0.023     0.0257    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.951   -0.108   -0.023     0.0000    0.0257    0.000    0.000     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 123     Parent ID = 112
+  Particle = e-     Track ID = 124     Parent ID = 113
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.034   -0.074   -0.013     0.5756    0.0000    0.000    0.000     ABSO  No active process
@@ -2785,56 +2797,56 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   2    -7.032   -0.075   -0.010     0.0000    0.4076    0.025    0.027     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 124     Parent ID = 123
+  Particle = e-     Track ID = 125     Parent ID = 124
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.033   -0.074   -0.012     0.1085    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.033   -0.074   -0.012     0.0000    0.1085    0.003    0.003     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 125     Parent ID = 0
+  Particle = gamma     Track ID = 126     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.198   -0.040   -0.028     0.0774    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.074   -0.061   -0.008     0.0000    0.0159    0.127    0.127     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 126     Parent ID = 125
+  Particle = e-     Track ID = 127     Parent ID = 126
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.074   -0.061   -0.008     0.0615    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.074   -0.061   -0.008     0.0000    0.0615    0.001    0.001     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 127     Parent ID = 0
+  Particle = gamma     Track ID = 128     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.248   -0.028   -0.027     0.3006    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.061   -0.075   -0.016     0.0000    0.0880    0.193    0.193     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 128     Parent ID = 127
+  Particle = e-     Track ID = 129     Parent ID = 128
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.061   -0.075   -0.016     0.2126    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.061   -0.075   -0.016     0.0000    0.2126    0.009    0.009     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 129     Parent ID = 0
+  Particle = gamma     Track ID = 130     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.260   -0.025   -0.028     0.0160    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.259   -0.025   -0.028     0.0000    0.0130    0.001    0.001     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 130     Parent ID = 129
+  Particle = e-     Track ID = 131     Parent ID = 130
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.259   -0.025   -0.028     0.0030    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.259   -0.025   -0.028     0.0000    0.0030    0.000    0.000     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 131     Parent ID = 0
+  Particle = gamma     Track ID = 132     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.452   -0.000   -0.003     0.9549    0.0000    0.000    0.000     ABSO  No active process
@@ -2843,59 +2855,59 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   3    -6.773   -0.079    0.370     0.0000    0.0880    0.087    1.013     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 132     Parent ID = 131
+  Particle = e-     Track ID = 133     Parent ID = 132
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.773   -0.079    0.370     0.0979    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.773   -0.079    0.370     0.0000    0.0979    0.003    0.003     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 133     Parent ID = 131
+  Particle = e-     Track ID = 134     Parent ID = 132
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -6.790   -0.089    0.455     0.2987    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.790   -0.089    0.456     0.0000    0.2987    0.016    0.016     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 134     Parent ID = 131
+  Particle = e-     Track ID = 135     Parent ID = 132
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.134    0.002   -0.036     0.4702    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.132    0.002   -0.037     0.0000    0.4702    0.030    0.030     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 135     Parent ID = 0
+  Particle = gamma     Track ID = 136     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.468   -0.000   -0.002     0.0122    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.465   -0.000   -0.002     0.0000    0.0036    0.002    0.002     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 136     Parent ID = 135
+  Particle = e-     Track ID = 137     Parent ID = 136
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.465   -0.000   -0.002     0.0086    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.465   -0.000   -0.002     0.0000    0.0086    0.000    0.000     ABSO  Energy loss
 --- End of event 
-   Absorber: total energy (MeV):  41.853       total track length (cm):    3.121
+   Absorber: total energy (MeV):  41.853       total track length (cm):    3.132
    Gap:      total energy (MeV):   1.918       total track length (cm):    1.085
 --- Finish event 
-Time of this run:   User=0.000000s Real=0.012015s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.004709s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.32.08                        https://root.cern |
-  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
-  | From tags/v6-32-08@v6-32-08                                      |
-  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
+  | Welcome to ROOT 6.36.06                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 17 2025, 11:26:33                   |
+  | From tags/v6-36-06@v6-36-06                                      |
+  | With Apple clang version 17.0.0 (clang-1700.0.13.5)              |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4b.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+36
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -2913,13 +2925,13 @@ Processing test_E03_3.C("g4ConfigOld.C",kTRUE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.7 ( 7 February 2025 )
+ Version 6.8 ( 2 February 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
+ Geant4 version Name: geant4-11-04    (5-December-2025)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -2928,7 +2940,7 @@ Processing test_E03_3.C("g4ConfigOld.C",kTRUE)...
 **************************************************************
 
 Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>
 <<< Geant4 Physics List simulation engine: FTFP_BERT
 
 
@@ -3023,7 +3035,7 @@ Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
-Use Ricardo-Gerardo pair production model          0
+Use RiGe 5D e+e- pair production model by muons    0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -3037,7 +3049,7 @@ Lowest muon/hadron kinetic energy                  1 keV
 Use ICRU90 data                                    0
 Fluctuations of dE/dx are enabled                  1
 Type of fluctuation model for leptons and hadrons  Urban
-Use built-in Birks satuaration                     0
+Use built-in Birks saturation                      0
 Build CSDA range enabled                           0
 Use cut as a final range enabled                   0
 Enable angular generator interface                 0
@@ -3174,7 +3186,7 @@ hBrems:  for proton  XStype:1  SubType=3
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -3232,7 +3244,7 @@ hBrems:  for anti_proton  XStype:1  SubType=3
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -3264,7 +3276,7 @@ hBrems:  for kaon+  XStype:1  SubType=3
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -3296,7 +3308,7 @@ hBrems:  for kaon-  XStype:1  SubType=3
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -3328,7 +3340,7 @@ muBrems:  for mu+  XStype:1  SubType=3
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -3360,7 +3372,7 @@ muBrems:  for mu-  XStype:1  SubType=3
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -3392,7 +3404,7 @@ hBrems:  for pi+  XStype:1  SubType=3
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -3424,7 +3436,7 @@ hBrems:  for pi-  XStype:1  SubType=3
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -3676,10 +3688,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 =======================================================================
 ======       Geant4 Native Pre-compound Model Parameters       ========
 =======================================================================
+Type of pre-compound model                          0
 Type of pre-compound inverse x-section              1
 Pre-compound model active                           1
-Pre-compound excitation low energy                  100 keV
-Pre-compound excitation high energy                 30 MeV
+Pre-compound excitation low energy                  0.1 MeV 
+Pre-compound excitation high energy                 15 MeV 
 Angular generator for pre-compound model            1
 Use NeverGoBack option for pre-compound model       0
 Use SoftCutOff option for pre-compound model        0
@@ -3692,9 +3705,9 @@ Use HETC submodel for pre-compound model            0
 Type of de-excitation inverse x-section             3
 Type of de-excitation factory                       Evaporation+GEM
 Number of de-excitation channels                    68
-Min excitation energy                               10 eV 
-Min energy per nucleon for multifragmentation       200 GeV
-Limit excitation energy for Fermi BreakUp           20 MeV
+Type of Fermi BreakUp model                         ModelVI
+Min excitation energy                               0.01 keV 
+Min energy per nucleon for multifragmentation       2e+05 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
@@ -3772,31 +3785,31 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.463    0.000   -0.001    81.9564    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.430    0.014   -0.004    63.2147   18.7417    0.035    0.035     ABSO  Energy loss
-#   2    -7.405    0.026   -0.008    45.5225   17.6922    0.028    0.063     ABSO  Energy loss
-#   3    -7.386    0.035   -0.010    27.1584   18.3641    0.022    0.085     ABSO  Energy loss
-#   4    -7.372    0.040   -0.011     7.6186   19.5397    0.015    0.099     ABSO  Energy loss
-#   5    -7.370    0.041   -0.011     0.0000    7.6186    0.003    0.102     ABSO  Energy loss
+#   1    -7.430    0.014   -0.004    63.2379   18.7185    0.035    0.035     ABSO  Energy loss
+#   2    -7.405    0.026   -0.008    45.5797   17.6581    0.028    0.063     ABSO  Energy loss
+#   3    -7.386    0.035   -0.010    27.2583   18.3215    0.022    0.085     ABSO  Energy loss
+#   4    -7.372    0.040   -0.011     7.6982   19.5601    0.015    0.099     ABSO  Energy loss
+#   5    -7.370    0.041   -0.011     0.0000    7.6982    0.003    0.102     ABSO  Energy loss
 --- End of event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.144
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish event 
-Time of this run:   User=0.000000s Real=0.000823s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.000618s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.32.08                        https://root.cern |
-  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
-  | From tags/v6-32-08@v6-32-08                                      |
-  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
+  | Welcome to ROOT 6.36.06                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 17 2025, 11:26:33                   |
+  | From tags/v6-36-06@v6-36-06                                      |
+  | With Apple clang version 17.0.0 (clang-1700.0.13.5)              |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4b.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+36
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -3813,13 +3826,13 @@ Processing test_E03_4.C("g4ConfigOld.C",kTRUE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.7 ( 7 February 2025 )
+ Version 6.8 ( 2 February 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
+ Geant4 version Name: geant4-11-04    (5-December-2025)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -3828,7 +3841,7 @@ Processing test_E03_4.C("g4ConfigOld.C",kTRUE)...
 **************************************************************
 
 Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>
 <<< Geant4 Physics List simulation engine: FTFP_BERT
 
 
@@ -3917,7 +3930,7 @@ Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
-Use Ricardo-Gerardo pair production model          0
+Use RiGe 5D e+e- pair production model by muons    0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -3931,7 +3944,7 @@ Lowest muon/hadron kinetic energy                  1 keV
 Use ICRU90 data                                    0
 Fluctuations of dE/dx are enabled                  1
 Type of fluctuation model for leptons and hadrons  Urban
-Use built-in Birks satuaration                     0
+Use built-in Birks saturation                      0
 Build CSDA range enabled                           0
 Use cut as a final range enabled                   0
 Enable angular generator interface                 0
@@ -4068,7 +4081,7 @@ hBrems:  for proton  XStype:1  SubType=3
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -4126,7 +4139,7 @@ hBrems:  for anti_proton  XStype:1  SubType=3
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -4158,7 +4171,7 @@ hBrems:  for kaon+  XStype:1  SubType=3
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -4190,7 +4203,7 @@ hBrems:  for kaon-  XStype:1  SubType=3
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -4222,7 +4235,7 @@ muBrems:  for mu+  XStype:1  SubType=3
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -4254,7 +4267,7 @@ muBrems:  for mu-  XStype:1  SubType=3
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -4286,7 +4299,7 @@ hBrems:  for pi+  XStype:1  SubType=3
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -4318,7 +4331,7 @@ hBrems:  for pi-  XStype:1  SubType=3
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -4570,10 +4583,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 =======================================================================
 ======       Geant4 Native Pre-compound Model Parameters       ========
 =======================================================================
+Type of pre-compound model                          0
 Type of pre-compound inverse x-section              1
 Pre-compound model active                           1
-Pre-compound excitation low energy                  100 keV
-Pre-compound excitation high energy                 30 MeV
+Pre-compound excitation low energy                  0.1 MeV 
+Pre-compound excitation high energy                 15 MeV 
 Angular generator for pre-compound model            1
 Use NeverGoBack option for pre-compound model       0
 Use SoftCutOff option for pre-compound model        0
@@ -4586,9 +4600,9 @@ Use HETC submodel for pre-compound model            0
 Type of de-excitation inverse x-section             3
 Type of de-excitation factory                       Evaporation+GEM
 Number of de-excitation channels                    68
-Min excitation energy                               10 eV 
-Min energy per nucleon for multifragmentation       200 GeV
-Limit excitation energy for Fermi BreakUp           20 MeV
+Type of Fermi BreakUp model                         ModelVI
+Min excitation energy                               0.01 keV 
+Min energy per nucleon for multifragmentation       2e+05 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
@@ -4648,7 +4662,7 @@ Index : 2     used in the geometry : Yes
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-   Absorber: total energy (MeV): 1755.68       total track length (cm):  136.869
-   Gap:      total energy (MeV): 62.0807       total track length (cm):  31.6285
-Time of this run:   User=0.040000s Real=0.032239s Sys=0.000000s
+   Absorber: total energy (MeV): 1461.84       total track length (cm):  114.578
+   Gap:      total energy (MeV):  69.988       total track length (cm):  36.3961
+Time of this run:   User=0.030000s Real=0.025351s Sys=0.000000s
 Number of events processed: 1

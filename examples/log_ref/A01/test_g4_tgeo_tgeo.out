@@ -1,16 +1,16 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.32.08                        https://root.cern |
-  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
-  | From tags/v6-32-08@v6-32-08                                      |
-  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
+  | Welcome to ROOT 6.36.06                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 17 2025, 11:26:33                   |
+  | From tags/v6-36-06@v6-36-06                                      |
+  | With Apple clang version 17.0.0 (clang-1700.0.13.5)              |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+36
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -24,7 +24,7 @@ Processing test_A01_1.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.7 ( 7 February 2025 )
+ Version 6.8 ( 2 February 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -42,7 +42,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
+ Geant4 version Name: geant4-11-04    (5-December-2025)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -61,7 +61,7 @@ G4 Stat: instantiated 18 logical volumes
                       114 physical volumes
 Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
 Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>
 <<< Geant4 Physics List simulation engine: FTFP_BERT
 
 
@@ -143,7 +143,7 @@ Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
-Use Ricardo-Gerardo pair production model          0
+Use RiGe 5D e+e- pair production model by muons    0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -157,7 +157,7 @@ Lowest muon/hadron kinetic energy                  1 keV
 Use ICRU90 data                                    0
 Fluctuations of dE/dx are enabled                  1
 Type of fluctuation model for leptons and hadrons  Urban
-Use built-in Birks satuaration                     0
+Use built-in Birks saturation                      0
 Build CSDA range enabled                           0
 Use cut as a final range enabled                   0
 Enable angular generator interface                 0
@@ -294,7 +294,7 @@ hBrems:  for proton  XStype:1  SubType=3
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -352,7 +352,7 @@ hBrems:  for anti_proton  XStype:1  SubType=3
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -384,7 +384,7 @@ hBrems:  for kaon+  XStype:1  SubType=3
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -416,7 +416,7 @@ hBrems:  for kaon-  XStype:1  SubType=3
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -448,7 +448,7 @@ muBrems:  for mu+  XStype:1  SubType=3
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -480,7 +480,7 @@ muBrems:  for mu-  XStype:1  SubType=3
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -512,7 +512,7 @@ hBrems:  for pi+  XStype:1  SubType=3
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -544,7 +544,7 @@ hBrems:  for pi-  XStype:1  SubType=3
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -796,10 +796,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 =======================================================================
 ======       Geant4 Native Pre-compound Model Parameters       ========
 =======================================================================
+Type of pre-compound model                          0
 Type of pre-compound inverse x-section              1
 Pre-compound model active                           1
-Pre-compound excitation low energy                  100 keV
-Pre-compound excitation high energy                 30 MeV
+Pre-compound excitation low energy                  0.1 MeV 
+Pre-compound excitation high energy                 15 MeV 
 Angular generator for pre-compound model            1
 Use NeverGoBack option for pre-compound model       0
 Use SoftCutOff option for pre-compound model        0
@@ -812,9 +813,9 @@ Use HETC submodel for pre-compound model            0
 Type of de-excitation inverse x-section             3
 Type of de-excitation factory                       Evaporation+GEM
 Number of de-excitation channels                    68
-Min excitation energy                               10 eV 
-Min energy per nucleon for multifragmentation       200 GeV
-Limit excitation energy for Fermi BreakUp           20 MeV
+Type of Fermi BreakUp model                         ModelVI
+Min excitation energy                               0.01 keV 
+Min energy per nucleon for multifragmentation       2e+05 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
@@ -875,60 +876,60 @@ Index : 5     used in the geometry : Yes
 ### Run 0 start.
 
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 1 hits.
-Hodoscope2 has 10 hits.
-Chamber1 has 526 hits.
-Chamber2 has 496 hits.
-EmCalorimeter has 44 hits. Total Edep is 83433.1 (MeV)
-HadCalorimeter has 6 hits. Total Edep is 17.4103 (MeV)
+Hodoscope1 has 3 hits.
+Hodoscope2 has 8 hits.
+Chamber1 has 519 hits.
+Chamber2 has 498 hits.
+EmCalorimeter has 42 hits. Total Edep is 84971.1 (MeV)
+HadCalorimeter has 7 hits. Total Edep is 4.71283 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 3 hits.
-Chamber1 has 542 hits.
-Chamber2 has 520 hits.
-EmCalorimeter has 17 hits. Total Edep is 18943.1 (MeV)
-HadCalorimeter has 6 hits. Total Edep is 2521.86 (MeV)
+Hodoscope1 has 2 hits.
+Hodoscope2 has 4 hits.
+Chamber1 has 523 hits.
+Chamber2 has 511 hits.
+EmCalorimeter has 16 hits. Total Edep is 18585.4 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 2670.93 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 4 hits.
-Hodoscope2 has 12 hits.
-Chamber1 has 536 hits.
-Chamber2 has 474 hits.
-EmCalorimeter has 63 hits. Total Edep is 31678.7 (MeV)
-HadCalorimeter has 17 hits. Total Edep is 1707.49 (MeV)
+Hodoscope2 has 10 hits.
+Chamber1 has 519 hits.
+Chamber2 has 477 hits.
+EmCalorimeter has 67 hits. Total Edep is 28868.3 (MeV)
+HadCalorimeter has 17 hits. Total Edep is 1598.86 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
+Hodoscope1 has 7 hits.
 Hodoscope2 has 7 hits.
-Chamber1 has 434 hits.
-Chamber2 has 186 hits.
-EmCalorimeter has 48 hits. Total Edep is 6410.76 (MeV)
-HadCalorimeter has 12 hits. Total Edep is 293.154 (MeV)
+Chamber1 has 447 hits.
+Chamber2 has 163 hits.
+EmCalorimeter has 57 hits. Total Edep is 7311.3 (MeV)
+HadCalorimeter has 11 hits. Total Edep is 345.136 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 2 hits.
-Hodoscope2 has 11 hits.
-Chamber1 has 516 hits.
-Chamber2 has 524 hits.
-EmCalorimeter has 51 hits. Total Edep is 28186.7 (MeV)
-HadCalorimeter has 17 hits. Total Edep is 117.976 (MeV)
-Time of this run:   User=3.300000s Real=3.596795s Sys=0.110000s
+Hodoscope2 has 6 hits.
+Chamber1 has 534 hits.
+Chamber2 has 526 hits.
+EmCalorimeter has 45 hits. Total Edep is 29389.7 (MeV)
+HadCalorimeter has 12 hits. Total Edep is 93.4184 (MeV)
+Time of this run:   User=2.800000s Real=2.813470s Sys=0.010000s
 Number of events processed: 5
-Real time 0:00:04, CP time 4.610
+Real time 0:00:03, CP time 3.630
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.32.08                        https://root.cern |
-  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 04 2024, 10:06:11                   |
-  | From tags/v6-32-08@v6-32-08                                      |
-  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
+  | Welcome to ROOT 6.36.06                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 17 2025, 11:26:33                   |
+  | From tags/v6-36-06@v6-36-06                                      |
+  | With Apple clang version 17.0.0 (clang-1700.0.13.5)              |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+36
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -942,7 +943,7 @@ Processing test_A01_2.C("g4tgeoConfig2.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.7 ( 7 February 2025 )
+ Version 6.8 ( 2 February 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -960,7 +961,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-03-ref-00    (6-December-2024)
+ Geant4 version Name: geant4-11-04    (5-December-2025)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -979,7 +980,7 @@ G4 Stat: instantiated 18 logical volumes
                       114 physical volumes
 Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
 Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>
 <<< Geant4 Physics List simulation engine: FTFP_BERT
 
 
@@ -1044,7 +1045,7 @@ Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
-Use Ricardo-Gerardo pair production model          0
+Use RiGe 5D e+e- pair production model by muons    0
 Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
@@ -1058,7 +1059,7 @@ Lowest muon/hadron kinetic energy                  1 keV
 Use ICRU90 data                                    0
 Fluctuations of dE/dx are enabled                  1
 Type of fluctuation model for leptons and hadrons  Urban
-Use built-in Birks satuaration                     0
+Use built-in Birks saturation                      0
 Build CSDA range enabled                           0
 Use cut as a final range enabled                   0
 Enable angular generator interface                 0
@@ -1195,7 +1196,7 @@ hBrems:  for proton  XStype:1  SubType=3
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1253,7 +1254,7 @@ hBrems:  for anti_proton  XStype:1  SubType=3
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
+      Sampling table 17x1001, from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1285,7 +1286,7 @@ hBrems:  for kaon+  XStype:1  SubType=3
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1317,7 +1318,7 @@ hBrems:  for kaon-  XStype:1  SubType=3
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
+      Sampling table 18x1001, from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1349,7 +1350,7 @@ muBrems:  for mu+  XStype:1  SubType=3
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1381,7 +1382,7 @@ muBrems:  for mu-  XStype:1  SubType=3
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
+      Sampling table 21x1001, from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1413,7 +1414,7 @@ hBrems:  for pi+  XStype:1  SubType=3
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1445,7 +1446,7 @@ hBrems:  for pi-  XStype:1  SubType=3
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
+      Sampling table 20x1001, from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1697,10 +1698,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 =======================================================================
 ======       Geant4 Native Pre-compound Model Parameters       ========
 =======================================================================
+Type of pre-compound model                          0
 Type of pre-compound inverse x-section              1
 Pre-compound model active                           1
-Pre-compound excitation low energy                  100 keV
-Pre-compound excitation high energy                 30 MeV
+Pre-compound excitation low energy                  0.1 MeV 
+Pre-compound excitation high energy                 15 MeV 
 Angular generator for pre-compound model            1
 Use NeverGoBack option for pre-compound model       0
 Use SoftCutOff option for pre-compound model        0
@@ -1713,9 +1715,9 @@ Use HETC submodel for pre-compound model            0
 Type of de-excitation inverse x-section             3
 Type of de-excitation factory                       Evaporation+GEM
 Number of de-excitation channels                    68
-Min excitation energy                               10 eV 
-Min energy per nucleon for multifragmentation       200 GeV
-Limit excitation energy for Fermi BreakUp           20 MeV
+Type of Fermi BreakUp model                         ModelVI
+Min excitation energy                               0.01 keV 
+Min energy per nucleon for multifragmentation       2e+05 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
@@ -1776,44 +1778,44 @@ Index : 5     used in the geometry : Yes
 ### Run 0 start.
 
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 1 hits.
-Hodoscope2 has 14 hits.
-Chamber1 has 544 hits.
-Chamber2 has 506 hits.
-EmCalorimeter has 37 hits. Total Edep is 89189.2 (MeV)
-HadCalorimeter has 6 hits. Total Edep is 4.72771 (MeV)
+Hodoscope1 has 3 hits.
+Hodoscope2 has 11 hits.
+Chamber1 has 523 hits.
+Chamber2 has 469 hits.
+EmCalorimeter has 41 hits. Total Edep is 85173 (MeV)
+HadCalorimeter has 7 hits. Total Edep is 8.34794 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 1 hits.
+Hodoscope1 has 2 hits.
 Hodoscope2 has 3 hits.
-Chamber1 has 535 hits.
-Chamber2 has 515 hits.
-EmCalorimeter has 12 hits. Total Edep is 18718.7 (MeV)
-HadCalorimeter has 5 hits. Total Edep is 2636.79 (MeV)
+Chamber1 has 517 hits.
+Chamber2 has 522 hits.
+EmCalorimeter has 15 hits. Total Edep is 18781.4 (MeV)
+HadCalorimeter has 4 hits. Total Edep is 2499.05 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 14 hits.
-Chamber1 has 531 hits.
-Chamber2 has 504 hits.
-EmCalorimeter has 65 hits. Total Edep is 27772.6 (MeV)
-HadCalorimeter has 16 hits. Total Edep is 1889.65 (MeV)
+Hodoscope1 has 2 hits.
+Hodoscope2 has 10 hits.
+Chamber1 has 526 hits.
+Chamber2 has 483 hits.
+EmCalorimeter has 52 hits. Total Edep is 29158.8 (MeV)
+HadCalorimeter has 17 hits. Total Edep is 1756.56 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 7 hits.
-Hodoscope2 has 7 hits.
-Chamber1 has 427 hits.
-Chamber2 has 180 hits.
-EmCalorimeter has 42 hits. Total Edep is 6718.11 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 414.144 (MeV)
+Hodoscope2 has 9 hits.
+Chamber1 has 483 hits.
+Chamber2 has 198 hits.
+EmCalorimeter has 47 hits. Total Edep is 8809.92 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 373.409 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 2 hits.
-Hodoscope2 has 5 hits.
-Chamber1 has 528 hits.
-Chamber2 has 529 hits.
-EmCalorimeter has 47 hits. Total Edep is 29046.1 (MeV)
-HadCalorimeter has 12 hits. Total Edep is 70.8394 (MeV)
-Time of this run:   User=2.940000s Real=3.160583s Sys=0.080000s
+Hodoscope2 has 7 hits.
+Chamber1 has 536 hits.
+Chamber2 has 521 hits.
+EmCalorimeter has 55 hits. Total Edep is 28374.3 (MeV)
+HadCalorimeter has 17 hits. Total Edep is 149.345 (MeV)
+Time of this run:   User=2.770000s Real=2.787617s Sys=0.010000s
 Number of events processed: 5
-Real time 0:00:04, CP time 4.160
+Real time 0:00:03, CP time 3.600
