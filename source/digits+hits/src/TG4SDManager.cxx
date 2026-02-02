@@ -20,6 +20,11 @@
 #include "TG4SDConstruction.h"
 #include "TG4SDServices.h"
 
+#include "G4MultiFunctionalDetector.hh"
+#include "G4ScoringManager.hh"
+#include "G4VPrimitiveScorer.hh"
+#include "G4VScoringMesh.hh"
+
 #include <TVirtualMC.h>
 
 TG4SDManager* TG4SDManager::fgInstance = 0;
@@ -65,6 +70,48 @@ void TG4SDManager::Initialize()
   // G4cout << "TG4SDManager::Initialize" << G4endl;
   fSDConstruction->Construct();
   // G4cout << "TG4SDManager::Initialize done" << G4endl;
+}
+
+//_____________________________________________________________________________
+void TG4SDManager::LateInitialize(TG4ScoreWeightCalculator swc)
+{
+  // Apply score weight if use of Geant4 scoring is activated
+
+   auto g4ScoringManager = G4ScoringManager::GetScoringManagerIfExist();
+   if (g4ScoringManager == nullptr ) return;
+
+   fScoreWeightCalculator = swc;
+
+   G4ScoreWeightCalculator g4Swc = [&calculator = fScoreWeightCalculator](const G4Step* step) -> G4double {
+     Double_t ekin = step->GetTrack()->GetKineticEnergy();
+     Int_t pdg = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
+     return calculator(pdg, ekin);
+   };
+
+   // Loop over existing scoring meshes
+  auto nofMesh = g4ScoringManager->GetNumberOfMesh();
+  if (nofMesh < 1) return;
+  // G4cout << "Processing scorers for " << nofMesh << " meshes" << G4endl;
+  std::size_t counter = 0;
+  for (std::size_t i = 0; i < nofMesh; ++i) {
+    auto mesh = g4ScoringManager->GetMesh((G4int)i);
+    const auto mfd = mesh->GetMFD();
+    G4int nps = mfd->GetNumberOfPrimitives();
+    for (G4int i = 0; i < nps; ++i) {
+      auto scorer = mfd->GetPrimitive(i);
+      // G4cout << "Looping over " << scorer->GetName() << G4endl;
+      if (scorer->IsScoreWeighted()) {
+        // G4cout << " is weightScoring activated "  << scorer->IsScoreWeighted() << G4endl;
+        scorer->SetScoreWeightCalculator(g4Swc);
+        ++counter;
+      }
+    }
+  }
+
+  if (counter > 0) {
+    G4cout << "### User score weight calculator set to " << counter << " scorers."
+           << G4endl;
+  }
 }
 
 //_____________________________________________________________________________

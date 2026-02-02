@@ -15,6 +15,8 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
+#include "TG4ScoreWeightCalculator.h"
+
 #include <Rtypes.h>
 #include <TString.h>
 
@@ -103,6 +105,7 @@ class TG4RunConfiguration
   void SetParameter(const TString& name, Double_t value);
   void SetSpecialCutsOld();
   void SetUseOfG4Scoring();
+  void SetScoreWeightCalculator(TG4ScoreWeightCalculator swc);
 
   // get methods
   TString GetUserGeometry() const;
@@ -112,7 +115,9 @@ class TG4RunConfiguration
   Bool_t IsSpecialCuts() const;
   Bool_t IsSpecialCutsOld() const;
   Bool_t IsUseOfG4Scoring() const;
+  Bool_t IsUseOfScoreWeighting() const;
   Bool_t IsMTApplication() const;
+  TG4ScoreWeightCalculator GetScoreWeightCalculator() const;
 
  protected:
   // data members
@@ -125,9 +130,10 @@ class TG4RunConfiguration
   Bool_t fSpecialCuts;              ///< option for special cuts
   Bool_t fSpecialCutsOld;           ///< option for special cuts old
   Bool_t fUseOfG4Scoring;           ///< option to activate G4 commmand-line scoring
+  Bool_t fUseOfScoreWeighting;      ///< option to activate score weighting
   G4UImessenger* fAGDDMessenger;    //!< XML messenger
   G4UImessenger* fGDMLMessenger;    //!< XML messenger
-
+  TG4ScoreWeightCalculator fScoreWeightCalculator; //!< User Scoring Weight Calculator
   /// The map of special parameters which need to be set before creating TGeant4
   /// Actually used for monopole properties:
   /// monopoleMass, monopoleElCharge, monopoleMagCharge
@@ -150,6 +156,13 @@ inline void TG4RunConfiguration::SetUseOfG4Scoring()
   fUseOfG4Scoring = true;
 }
 
+/// Set User Scoring Weight Calculator
+inline void TG4RunConfiguration::SetScoreWeightCalculator(TG4ScoreWeightCalculator swc)
+{
+  fUseOfScoreWeighting = true;
+  fScoreWeightCalculator = swc;
+}
+
 /// Return physics list selection
 inline TString TG4RunConfiguration::GetPhysicsListSelection() const
 { 
@@ -159,6 +172,16 @@ inline TString TG4RunConfiguration::GetPhysicsListSelection() const
 inline Bool_t TG4RunConfiguration::IsUseOfG4Scoring() const
 {
   return fUseOfG4Scoring;
+}
+
+inline Bool_t TG4RunConfiguration::IsUseOfScoreWeighting() const
+{
+  return fUseOfScoreWeighting;
+}
+
+inline TG4ScoreWeightCalculator TG4RunConfiguration::GetScoreWeightCalculator() const
+{
+  return fScoreWeightCalculator;
 }
 
 #endif // TG4V_RUN_CONFIGURATION_H
