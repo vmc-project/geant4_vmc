@@ -15,8 +15,9 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include <globals.hh>
+#include "TG4ScoreWeightCalculator.h"
 
+#include <globals.hh>
 #include <Rtypes.h>
 
 class TG4SDServices;
@@ -41,6 +42,7 @@ class TG4SDManager
 
   // methods
   void Initialize();
+  void LateInitialize(TG4ScoreWeightCalculator swc);
 
   // TVirtualMC methods
   Int_t VolId(const Text_t* volName) const;
@@ -77,6 +79,9 @@ class TG4SDManager
 
   /// services related with sensitive detectors
   TG4SDServices* fSDServices;
+
+  /// score weight calculator
+  TG4ScoreWeightCalculator fScoreWeightCalculator;
 
   /// buffer for volume name
   mutable G4String fNameBuffer;
