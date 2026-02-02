@@ -9,6 +9,31 @@
 
 Tags (history):
 ===============
+  02/02/2026
+  v6-8:
+    Geant4 VMC:
+    - Migration to Geant4 11.4:
+      - No migration for the existing code required,
+        but however the added interface to user score weighting
+        requires Geant4 11.4
+    - Added an option to activate Geant4 command-line scoring (#79):
+      - The activation should be done via calling
+          'TG4RunConfiguration::SetUseOfG4Scoring()' in user g4Config.C
+      - The scoring (mesh, scorers etc.) can be then defined via
+        Geant UI commands defined in '/score' directory in g4config.in
+      - The scoring data are then automatically saved for each mesh
+        in a 'mesh_name.txt' file at the end of run
+    - Added interface to user score weighting: (#81)
+      - Added TG4ScoreWeightCalculator type for user scoreweight function
+        that takes (pdg, ekin) as arguments and its setter to the TG4RunConfiguration class:
+           'void SetScoreWeightCalculator(TG4ScoreWeightCalculator swc);'
+      - The user function is then, in TG4SDManager::LateInitialize(), wrapped to G4ScoreWeightCalculator
+        function that takes (const G4Step*) as argument and applied to all Geant4 scorers with activated score weighting.
+
+    Fixes:
+    Geant4 VMC:
+    -  Fixed setting productions cuts per energy in MT mode; (#78)
+
   07/02/2025
   v6-7:
     Geant4 VMC:
