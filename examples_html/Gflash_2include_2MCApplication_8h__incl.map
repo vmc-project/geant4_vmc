@@ -1,0 +1,27 @@
+<map id="examples/Gflash/include/MCApplication.h" name="examples/Gflash/include/MCApplication.h">
+<area shape="rect" id="Node000001" title="Definition of the Gflash::MCApplication class." alt="" coords="463,5,625,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,166,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="463,44,172,93,171,88,462,38"/>
+<area shape="rect" id="Node000003" href="$Gflash_2include_2DetectorConstruction_8h.html" title="Definition of the Gflash::DetectorConstruction class." alt="" coords="190,94,344,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="476,49,325,92,324,87,474,44"/>
+<area shape="rect" id="Node000008" href="$Gflash_2include_2SensitiveDetector_8h.html" title="Definition of the Gflash::SensitiveDetector class." alt="" coords="392,94,526,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="525,48,485,85,481,81,521,44"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="550,94,712,120"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="567,44,608,81,604,85,564,48"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="736,94,843,120"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="606,44,738,86,736,91,605,49"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="867,94,968,120"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="626,42,852,89,851,94,625,47"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="32,168,78,193"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="232,123,94,169,92,164,230,118"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="102,168,192,193"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="248,123,182,162,179,157,245,118"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="216,168,294,193"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="267,120,262,153,257,152,262,119"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="318,168,392,193"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="283,118,330,156,327,160,280,122"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="416,168,526,193"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="463,119,469,152,464,153,458,120"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="550,168,632,193"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="482,118,557,158,554,162,480,123"/>
+</map>
