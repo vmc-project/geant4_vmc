@@ -141,7 +141,7 @@ void TG4ProcessMapPhysics::FillMap()
   pMap->Add(fNuOscillation, kPHadronic, kHADR);                    // G4 value: 165
   pMap->Add(fNuElectron, kPHadronic, kHADR);                       // G4 value: 166
   pMap->Add(fNuNucleus, kPHadronic, kHADR);                        // G4 value: 167
-  pMap->Add(fRadioactiveDecay, kPDecay, kDCAY);                    // G4 value: 210
+  pMap->Add(fRadioactiveDecay, kPRadDecay, kDCAY);                 // G4 value: 210
   pMap->Add(fEMDissociation, kPHadronic, kHADR);                   // G4 value: 310
     // No process defined with this code
 
