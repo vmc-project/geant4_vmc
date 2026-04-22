@@ -9,6 +9,25 @@
 
 Tags (history):
 ===============
+  22/04/2026
+  v6-6-update2-p3:
+    Geant4 VMC:
+    - Radioactive decay code separated from particle decay (#83)
+      (Requires vmc version 2.2)
+    - Added interface to user score weighting: (#81)
+      Added TG4ScoreWeightCalculator type for user scoreweight function
+      that takes (pdg, ekin) as arguments and its setter to the TG4RunConfiguration
+      class:
+        void SetScoreWeightCalculator(TG4ScoreWeightCalculator swc);
+      The user function is then, in TG4SDManager::LateInitialize(), wrapped to
+      G4ScoreWeightCalculator function that takes (const G4Step*) as argument and
+      applied to all Geant4 scorers with activated score weighting.
+      (Requires Geant4 v11.2.0-alice2 from alisw )
+
+    Tested with VMC 2.2, Geant4 v11.2.0-alice (with embedded CLHEP 2.4.7.1)
+      Root 6.36/02, VGM 5.3.1
+
+
   10/07/2025
   v6-6-update1-p3:
     Geant4 VMC:
