@@ -22,6 +22,7 @@ else()
 add_subdirectory(E03a)
 add_subdirectory(E03b)
 add_subdirectory(E03c)
+add_subdirectory(E03d)
 endif()
 
 #----------------------------------------------------------------------------
