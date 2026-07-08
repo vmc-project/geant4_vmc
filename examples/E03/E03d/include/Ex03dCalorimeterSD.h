@@ -10,14 +10,14 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file  Ex03CalorimeterSD.h
-/// \brief Definition of the Ex03CalorimeterSD class
+/// \file  Ex03dCalorimeterSD.h
+/// \brief Definition of the Ex03dCalorimeterSD class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo: \n
 /// Id: ExN03CalorimeterSD.hh,v 1.4 2002/01/09 17:24:11 ranjard Exp
 /// GEANT4 tag Name: geant4-05-00
 ///
-/// \author I. Hrivnacova; IPN, Orsay
+/// \author Radoslaw Karabowicz; GSI
 
 #include <TNamed.h>
 #include <vector>
@@ -30,17 +30,20 @@ class TVirtualMC;
 /// \ingroup E03
 /// \brief The calorimeter sensitive detector
 ///
-/// \date 06/03/2003
-/// \author I. Hrivnacova; IPN, Orsay
+/// A variant of the Ex03CalorimeterSD class
+/// updated for RNTuple output.
+///
+/// \date 07/07/2026
+/// \author Radoslaw Karabowicz; GSI
 
-class Ex03CalorimeterSD : public TNamed
+class Ex03dCalorimeterSD : public TNamed
 {
  public:
-  Ex03CalorimeterSD(const char* name, Ex03DetectorConstruction* detector);
-  Ex03CalorimeterSD(
-    const Ex03CalorimeterSD& origin, Ex03DetectorConstruction* detector);
-  Ex03CalorimeterSD();
-  virtual ~Ex03CalorimeterSD();
+  Ex03dCalorimeterSD(const char* name, Ex03DetectorConstruction* detector);
+  Ex03dCalorimeterSD(
+    const Ex03dCalorimeterSD& origin, Ex03DetectorConstruction* detector);
+  Ex03dCalorimeterSD();
+  virtual ~Ex03dCalorimeterSD();
 
   // methods
   void Initialize();
@@ -68,12 +71,12 @@ class Ex03CalorimeterSD : public TNamed
   Int_t fGapVolId;                     ///< The gap volume Id
   Int_t fVerboseLevel;                 ///< Verbosity level
 
-  ClassDef(Ex03CalorimeterSD, 1) // Ex03CalorimeterSD
+  ClassDef(Ex03dCalorimeterSD, 1) // Ex03dCalorimeterSD
 };
 
 /// Set verbose level
 /// \param level The new verbose level value
-inline void Ex03CalorimeterSD::SetVerboseLevel(Int_t level)
+inline void Ex03dCalorimeterSD::SetVerboseLevel(Int_t level)
 {
   fVerboseLevel = level;
 }

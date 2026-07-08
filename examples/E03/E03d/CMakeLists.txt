@@ -8,7 +8,7 @@
 #-------------------------------------------------
 
 # CMake Configuration file for the VMC E03d example
-# I. Hrivnacova, 31/01/2014
+# Radoslaw Karabowicz; GSI, 07/07/2026
 
 #----------------------------------------------------------------------------
 # Setup the project
@@ -54,13 +54,13 @@ include_directories(
 #
 ROOT_GENERATE_DICTIONARY(
   ${library_name}_dict
-  Ex03Particle.h
-  Ex03MCApplication.h
-  Ex03MCStack.h
+  Ex03dParticle.h
+  Ex03dMCApplication.h
+  Ex03dMCStack.h
   Ex03DetectorConstruction.h
   Ex03DetectorConstructionOld.h
   Ex03CalorHit.h
-  Ex03CalorimeterSD.h
+  Ex03dCalorimeterSD.h
   Ex03PrimaryGenerator.h
   MODULE ${library_name}
   LINKDEF include/${program_name}LinkDef.h)

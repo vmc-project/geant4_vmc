@@ -7,42 +7,42 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file E03/src/Ex03MCStack.cxx
-/// \brief Implementation of the Ex03MCStack class
+/// \file E03/src/Ex03dMCStack.cxx
+/// \brief Implementation of the Ex03dMCStack class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \date 06/03/2002
-/// \author I. Hrivnacova; IPN, Orsay
+/// \date 07/07/2026
+/// \author Radoslaw Karabowicz; GSI
 
 #include <Riostream.h>
 #include <TError.h>
 #include <TParticle.h>
 
-#include "Ex03MCStack.h"
+#include "Ex03dMCStack.h"
 #include "TMCRootManager.h"
 
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(Ex03MCStack)
+ClassImp(Ex03dMCStack)
   /// \endcond
 
 //_____________________________________________________________________________
-Ex03MCStack::Ex03MCStack(Int_t size)
+Ex03dMCStack::Ex03dMCStack(Int_t size)
 {
   /// Standard constructor
   /// \param size  The stack size
 }
 
 //_____________________________________________________________________________
-Ex03MCStack::Ex03MCStack()
+Ex03dMCStack::Ex03dMCStack()
 {
   /// Default constructor
 }
 
 //_____________________________________________________________________________
-Ex03MCStack::~Ex03MCStack()
+Ex03dMCStack::~Ex03dMCStack()
 {
   /// Destructor
 
@@ -52,12 +52,12 @@ Ex03MCStack::~Ex03MCStack()
 // private methods
 
 // public methods
-void Ex03MCStack::Register() {
+void Ex03dMCStack::Register() {
     TMCRootManager::Instance()->Register("particles", fExParticles);
 }
 
 //_____________________________________________________________________________
-void Ex03MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
+void Ex03dMCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   Double_t px, Double_t py, Double_t pz, Double_t e, Double_t vx, Double_t vy,
   Double_t vz, Double_t tof, Double_t polx, Double_t poly, Double_t polz,
   TMCProcess mech, Int_t& ntr, Double_t weight, Int_t is)
@@ -96,7 +96,7 @@ void Ex03MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   particle->SetWeight(weight);
   particle->SetUniqueID(mech);
 
-  fExParticles->push_back(Ex03Particle(pdg, is, parent, trackId, kFirstDaughter, kLastDaughter, px, py, pz, e, vx, vy, vz, tof));
+  fExParticles->push_back(Ex03dParticle(pdg, is, parent, trackId, kFirstDaughter, kLastDaughter, px, py, pz, e, vx, vy, vz, tof));
   auto exParticle = &fExParticles->back();
 
   exParticle->SetPolarisation(polx, poly, polz);
@@ -110,7 +110,7 @@ void Ex03MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
 }
 
 //_____________________________________________________________________________
-TParticle* Ex03MCStack::PopNextTrack(Int_t& itrack)
+TParticle* Ex03dMCStack::PopNextTrack(Int_t& itrack)
 {
   /// Get next particle for tracking from the stack.
   /// \return       The popped particle object
@@ -131,7 +131,7 @@ TParticle* Ex03MCStack::PopNextTrack(Int_t& itrack)
 }
 
 //_____________________________________________________________________________
-TParticle* Ex03MCStack::PopPrimaryForTracking(Int_t i)
+TParticle* Ex03dMCStack::PopPrimaryForTracking(Int_t i)
 {
   /// Return \em i -th particle in fParticles.
   /// \return   The popped primary particle object
@@ -144,11 +144,11 @@ TParticle* Ex03MCStack::PopPrimaryForTracking(Int_t i)
 }
 
 //_____________________________________________________________________________
-void Ex03MCStack::Print(Option_t* /*option*/) const
+void Ex03dMCStack::Print(Option_t* /*option*/) const
 {
   /// Print info for all particles.
 
-  cout << "Ex03MCStack Info  " << endl;
+  cout << "Ex03dMCStack Info  " << endl;
   cout << "Total number of particles:   " << GetNtrack() << endl;
   cout << "Number of primary particles: " << GetNprimary() << endl;
 
@@ -156,7 +156,7 @@ void Ex03MCStack::Print(Option_t* /*option*/) const
 }
 
 //_____________________________________________________________________________
-void Ex03MCStack::Reset()
+void Ex03dMCStack::Reset()
 {
   /// Delete contained particles, reset particles array and stack.
 
@@ -167,7 +167,7 @@ void Ex03MCStack::Reset()
 }
 
 //_____________________________________________________________________________
-void Ex03MCStack::SetCurrentTrack(Int_t track)
+void Ex03dMCStack::SetCurrentTrack(Int_t track)
 {
   /// Set the current track number to a given value.
   /// \param  track The current track number
@@ -176,14 +176,14 @@ void Ex03MCStack::SetCurrentTrack(Int_t track)
 }
 
 //_____________________________________________________________________________
-Int_t Ex03MCStack::GetNtrack() const
+Int_t Ex03dMCStack::GetNtrack() const
 {
   /// \return  The total number of all tracks.
   return fParticles->size();
 }
 
 //_____________________________________________________________________________
-Int_t Ex03MCStack::GetNprimary() const
+Int_t Ex03dMCStack::GetNprimary() const
 {
   /// \return  The total number of primary tracks.
 
@@ -191,7 +191,7 @@ Int_t Ex03MCStack::GetNprimary() const
 }
 
 //_____________________________________________________________________________
-TParticle* Ex03MCStack::GetCurrentTrack() const
+TParticle* Ex03dMCStack::GetCurrentTrack() const
 {
   /// \return  The current track particle
 
@@ -204,7 +204,7 @@ TParticle* Ex03MCStack::GetCurrentTrack() const
 }
 
 //_____________________________________________________________________________
-Int_t Ex03MCStack::GetCurrentTrackNumber() const
+Int_t Ex03dMCStack::GetCurrentTrackNumber() const
 {
   /// \return  The current track number
 
@@ -212,7 +212,7 @@ Int_t Ex03MCStack::GetCurrentTrackNumber() const
 }
 
 //_____________________________________________________________________________
-Int_t Ex03MCStack::GetCurrentParentTrackNumber() const
+Int_t Ex03dMCStack::GetCurrentParentTrackNumber() const
 {
   /// \return  The current track parent ID.
 
@@ -225,7 +225,7 @@ Int_t Ex03MCStack::GetCurrentParentTrackNumber() const
 }
 
 //_____________________________________________________________________________
-TParticle* Ex03MCStack::GetParticle(Int_t id) const
+TParticle* Ex03dMCStack::GetParticle(Int_t id) const
 {
   /// \return   The \em id -th particle in fParticles
   /// \param id The index of the particle to be returned

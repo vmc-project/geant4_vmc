@@ -1,74 +1,58 @@
-// @(#)root/eg:$Id$
-// Author: Rene Brun , Federico Carminati  26/04/99
+#ifndef EX03_PARTICLE_H
+#define EX03_PARTICLE_H
 
-/*************************************************************************
- * Copyright (C) 1995-2000, Rene Brun and Fons Rademakers.               *
- * All rights reserved.                                                  *
- *                                                                       *
- * For the licensing terms see $ROOTSYS/LICENSE.                         *
- * For the list of contributors see $ROOTSYS/README/CREDITS.             *
- *************************************************************************/
-//////////////////////////////////////////////////////////////////////////
-//                                                                      //
-// Ex03Particle: defines  equivalent of HEPEVT particle                    //
-//////////////////////////////////////////////////////////////////////////
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2014 - 2018 Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: root-vmc@cern.ch
+//-------------------------------------------------
 
-#ifndef EX03_Particle
-#define EX03_Particle
+/// \file  Ex03dParticle.h
+/// \brief Definition of the Ex03dParticle class
+///
+/// Simplified version of ROOT's TParticle to store in RNTuple
+///
+/// \author Radoslaw Karabowicz; GSI
 
 #include "TLorentzVector.h"
 
-class Ex03Particle {
+/// \ingroup E03
+/// \brief Replacement of the TParticle
+///
+/// A variant of the TParticle class
+/// that can be stored in the RNTuple.
+///
 
+/// \date 07/07/2026
+/// \author Radoslaw Karabowicz, GSI
 
-protected:
-
-  Int_t          fPdgCode;              // PDG code of the particle
-  Int_t          fStatusCode;           // generation status code
-  Int_t          fMother[2];            // Indices of the mother particles
-  Int_t          fDaughter[2];          // Indices of the daughter particles
-  Float_t        fWeight;               // particle weight
-
-  Double_t       fCalcMass;             // Calculated mass
-
-  Double_t       fPx;                   // x component of momentum
-  Double_t       fPy;                   // y component of momentum
-  Double_t       fPz;                   // z component of momentum
-  Double_t       fE;                    // Energy
-
-  Double_t       fVx;                   // x of production vertex
-  Double_t       fVy;                   // y of production vertex
-  Double_t       fVz;                   // z of production vertex
-  Double_t       fVt;                   // t of production vertex
-
-  Double_t       fPolarTheta;           // Polar angle of polarisation
-  Double_t       fPolarPhi;             // azymutal angle of polarisation
-
-  Int_t fParticlePDG;   // PDG number
-  //----------------------------------------------------------------------------
-  //  functions
-  //----------------------------------------------------------------------------
+class Ex03dParticle
+{
 public:
                                 // ****** constructors and destructor
-   Ex03Particle();
+   Ex03dParticle();
 
-   Ex03Particle(Int_t pdg, Int_t status,
+   Ex03dParticle(Int_t pdg, Int_t status,
              Int_t mother1, Int_t mother2,
              Int_t daughter1, Int_t daughter2,
              Double_t px, Double_t py, Double_t pz, Double_t etot,
              Double_t vx, Double_t vy, Double_t vz, Double_t time);
 
-   Ex03Particle(Int_t pdg, Int_t status,
+   Ex03dParticle(Int_t pdg, Int_t status,
              Int_t mother1, Int_t mother2,
              Int_t daughter1, Int_t daughter2,
              const TLorentzVector &p,
              const TLorentzVector &v);
 
-   Ex03Particle(const Ex03Particle &part);
+   Ex03dParticle(const Ex03dParticle &part);
 
-    ~Ex03Particle();
+    ~Ex03dParticle();
 
-   Ex03Particle& operator=(const Ex03Particle&);
+   // methods
+   Ex03dParticle& operator=(const Ex03dParticle&);
 
    Double_t       Ek              ()            const { return fE-fCalcMass;                                    }
    Int_t          GetStatusCode   ()            const { return fStatusCode;                                     }
@@ -104,7 +88,7 @@ public:
    void           Momentum(TLorentzVector &v)   const { v.SetPxPyPzE(fPx,fPy,fPz,fE);                           }
    void           ProductionVertex(TLorentzVector &v) const { v.SetXYZT(fVx,fVy,fVz,fVt);                       }
 
-   Double_t       Theta(const Ex03Particle &p) // Returns the angle between momenta of particles
+   Double_t       Theta(const Ex03dParticle &p) // Returns the angle between momenta of particles
    {
       Double_t v = P()*p.P();
       if (v == 0) v = 1; else v = (fPx*p.Px()+fPy*p.Py()+fPz*p.Pz())/v;
@@ -160,7 +144,36 @@ public:
    void           SetProductionVertex(Double_t vx, Double_t vy, Double_t vz, Double_t t)   {fVx=vx; fVy=vy; fVz=vz; fVt=t;}
    void           SetProductionVertex(const TLorentzVector& v)                             {SetProductionVertex(v.X(),v.Y(),v.Z(),v.T());}
 
-    //   ClassDef(Ex03Particle,1)  // Ex03Particle vertex particle information
+ protected:
+  // data members
+
+  Int_t          fPdgCode;              // PDG code of the particle
+  Int_t          fStatusCode;           // generation status code
+  Int_t          fMother[2];            // Indices of the mother particles
+  Int_t          fDaughter[2];          // Indices of the daughter particles
+  Float_t        fWeight;               // particle weight
+
+  Double_t       fCalcMass;             // Calculated mass
+
+  Double_t       fPx;                   // x component of momentum
+  Double_t       fPy;                   // y component of momentum
+  Double_t       fPz;                   // z component of momentum
+  Double_t       fE;                    // Energy
+
+  Double_t       fVx;                   // x of production vertex
+  Double_t       fVy;                   // y of production vertex
+  Double_t       fVz;                   // z of production vertex
+  Double_t       fVt;                   // t of production vertex
+
+  Double_t       fPolarTheta;           // Polar angle of polarisation
+  Double_t       fPolarPhi;             // azymutal angle of polarisation
+
+  Int_t fParticlePDG;   // PDG number
+  //----------------------------------------------------------------------------
+  //  functions
+  //----------------------------------------------------------------------------
+
+    //   ClassDef(Ex03dParticle,1)  // Ex03dParticle vertex particle information
 };
 
 #endif

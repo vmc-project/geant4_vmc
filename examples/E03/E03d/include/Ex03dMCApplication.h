@@ -10,38 +10,41 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03MCApplication.h
-/// \brief Definition of the Ex03MCApplication class
+/// \file Ex03dMCApplication.h
+/// \brief Definition of the Ex03dMCApplication class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \author I. Hrivnacova; IPN, Orsay
+/// \author Radoslaw Karabowicz; GSI
 
 #include <TVirtualMCApplication.h>
 
-#include "Ex03CalorimeterSD.h"
+#include "Ex03dCalorimeterSD.h"
 #include "Ex03DetectorConstruction.h"
 #include "TMCRootManager.h"
 
 #include <TGeoUniformMagField.h>
 #include <TMCVerbose.h>
 
-class Ex03MCStack;
+class Ex03dMCStack;
 class Ex03PrimaryGenerator;
-
 
 /// \ingroup E03
 /// \brief Implementation of the TVirtualMCApplication
 ///
-/// \date 06/03/2003
-/// \author I. Hrivnacova; IPN, Orsay
+/// A variant of the Ex03MCApplication class
+/// updated for RNTuple output.
+///
 
-class Ex03MCApplication : public TVirtualMCApplication
+/// \date 07/07/2026
+/// \author Radoslaw Karabowicz, GSI
+
+class Ex03dMCApplication : public TVirtualMCApplication
 {
  public:
-  Ex03MCApplication(const char* name, const char* title);
-  Ex03MCApplication();
-  virtual ~Ex03MCApplication();
+  Ex03dMCApplication(const char* name, const char* title);
+  Ex03dMCApplication();
+  virtual ~Ex03dMCApplication();
 
   // methods
   void InitMC(const char* setup, TMCRootManager::StorageMode storageMode = TMCRootManager::kRNTuple);
@@ -74,7 +77,7 @@ class Ex03MCApplication : public TVirtualMCApplication
 
   // get methods
   Ex03DetectorConstruction* GetDetectorConstruction() const;
-  Ex03CalorimeterSD* GetCalorimeterSD() const;
+  Ex03dCalorimeterSD* GetCalorimeterSD() const;
   Ex03PrimaryGenerator* GetPrimaryGenerator() const;
 
   // method for tests
@@ -82,7 +85,7 @@ class Ex03MCApplication : public TVirtualMCApplication
 
  private:
   // methods
-  Ex03MCApplication(const Ex03MCApplication& origin);
+  Ex03dMCApplication(const Ex03dMCApplication& origin);
   void RegisterStack();
 
   // data members
@@ -90,9 +93,9 @@ class Ex03MCApplication : public TVirtualMCApplication
   Int_t fPrintModulo;  ///< The event modulus number to be printed
   Int_t fEventNo;      ///< Event counter
   TMCVerbose fVerbose; ///< VMC verbose helper
-  Ex03MCStack* fStack; ///< VMC stack
+  Ex03dMCStack* fStack; ///< VMC stack
   Ex03DetectorConstruction* fDetConstruction; ///< Dector construction
-  Ex03CalorimeterSD* fCalorimeterSD;          ///< Calorimeter SD
+  Ex03dCalorimeterSD* fCalorimeterSD;          ///< Calorimeter SD
   Ex03PrimaryGenerator* fPrimaryGenerator;    ///< Primary generator
   TGeoUniformMagField* fMagField;             ///< Magnetic field
   Bool_t fOldGeometry; ///< Option for geometry definition
@@ -101,61 +104,61 @@ class Ex03MCApplication : public TVirtualMCApplication
 
   TMCRootManager::StorageMode fStorageMode {TMCRootManager::kTTree};
 
-  ClassDef(Ex03MCApplication, 1) // Interface to MonteCarlo application
+  ClassDef(Ex03dMCApplication, 1) // Interface to MonteCarlo application
 };
 
 // inline functions
 
 /// Set the event modulus number to be printed
 /// \param value  The new event modulus number value
-inline void Ex03MCApplication::SetPrintModulo(Int_t value)
+inline void Ex03dMCApplication::SetPrintModulo(Int_t value)
 {
   fPrintModulo = value;
 }
 
 /// Set verbosity
 /// \param verboseLevel  The new verbose level value
-inline void Ex03MCApplication::SetVerboseLevel(Int_t verboseLevel)
+inline void Ex03dMCApplication::SetVerboseLevel(Int_t verboseLevel)
 {
   fVerbose.SetLevel(verboseLevel);
 }
 
 // Set magnetic field
 // \param bz  The new field value in z
-inline void Ex03MCApplication::SetField(Double_t bz)
+inline void Ex03dMCApplication::SetField(Double_t bz)
 {
   fMagField->SetFieldValue(0., 0., bz);
 }
 
 /// \return The detector construction
 inline Ex03DetectorConstruction*
-Ex03MCApplication::GetDetectorConstruction() const
+Ex03dMCApplication::GetDetectorConstruction() const
 {
   return fDetConstruction;
 }
 
 /// \return The calorimeter sensitive detector
-inline Ex03CalorimeterSD* Ex03MCApplication::GetCalorimeterSD() const
+inline Ex03dCalorimeterSD* Ex03dMCApplication::GetCalorimeterSD() const
 {
   return fCalorimeterSD;
 }
 
 /// \return The primary generator
-inline Ex03PrimaryGenerator* Ex03MCApplication::GetPrimaryGenerator() const
+inline Ex03PrimaryGenerator* Ex03dMCApplication::GetPrimaryGenerator() const
 {
   return fPrimaryGenerator;
 }
 
 /// Switch on/off the old geometry definition  (via VMC functions)
 /// \param oldGeometry  If true, geometry definition via VMC functions
-inline void Ex03MCApplication::SetOldGeometry(Bool_t oldGeometry)
+inline void Ex03dMCApplication::SetOldGeometry(Bool_t oldGeometry)
 {
   fOldGeometry = oldGeometry;
 }
 
 /// Switch on/off special process controls
 /// \param isControls  If true, special process controls setting is activated
-inline void Ex03MCApplication::SetControls(Bool_t isControls)
+inline void Ex03dMCApplication::SetControls(Bool_t isControls)
 {
   fIsControls = isControls;
 }

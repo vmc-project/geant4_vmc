@@ -19,6 +19,8 @@ Example03
            TVirtualMCSensitiveDetector interface
   - E03c - adapted from E03a demonstrating the usage of sharing event
            simulation amongs multiple different engines.
+  - E03d - adapted from E03a allowing to store the data
+           in the RNTuple output.
 
   Demonstrates:
     Geometry - divided volume (Gsdvn)
@@ -65,6 +67,7 @@ Macros:
   load_g3a.C      - macro to load the libraries (variant E03a) to run the example with Geant3
   load_g3b.C      - macro to load the libraries (variant E03b) to run the example with Geant3
   load_g3c.C      - macro to load the libraries (variant E03c) to run the example with Geant3
+  load_g3d.C      - macro to load the libraries (variant E03d) to run the example with Geant3
   run_g3.C        - macro for running example
   g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry(default)
   g3Config.C      - configuration macro for G3 with native geometry
@@ -75,6 +78,7 @@ Macros:
   load_g4a.C      - macro to load the libraries (variant E03a) to run the example with Geant4
   load_g4b.C      - macro to load the libraries (variant E03b) to run the example with Geant4
   load_g4c.C      - macro to load the libraries (variant E03c) to run the example with Geant4
+  load_g4d.C      - macro to load the libraries (variant E03d) to run the example with Geant4
   run_g4.C        - macro for running example
   g4Config.C      - configuration macro - G4 native geometry navigation (default)
   g4Config1.C     - configuration macro - geometry defined via Geant4
@@ -137,3 +141,15 @@ To run example (Ex03c)
   With G3 and G4 + TGeo (no other geometry available):
   root[0] .x load_multi.C
   root[1] .x run_multi.C
+
+
+To run example (Ex03d)
+======================
+
+  To get the output file with RNTuple (RExample03.root) execute:
+  root[0] .x load_g4d.C
+  root[1] .x run_g4_rntuple.C
+
+  To get the output file with TTree (TExample03.root) execute:
+  root[0] .x load_g4d.C
+  root[1] .x run_g4_ttree.C

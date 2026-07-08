@@ -10,16 +10,16 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file  E03/include/Ex03MCStack.h
-/// \brief Definition of the Ex03MCStack class
+/// \file  E03/include/Ex03dMCStack.h
+/// \brief Definition of the Ex03dMCStack class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \author I. Hrivnacova; IPN, Orsay
+/// \author Radoslaw Karabowicz; GSI
 
 #include <TVirtualMCStack.h>
 
-#include "Ex03Particle.h"
+#include "Ex03dParticle.h"
 #include "TParticle.h"
 
 
@@ -29,15 +29,18 @@
 /// \ingroup E03
 /// \brief Implementation of the TVirtualMCStack interface
 ///
-/// \date 06/03/2003
-/// \author I. Hrivnacova; IPN, Orsay
+/// A variant of the Ex03MCStack class
+/// updated for RNTuple output.
+///
+/// \date 07/07/2026
+/// \author Radoslaw Karabowicz; GSI
 
-class Ex03MCStack : public TVirtualMCStack
+class Ex03dMCStack : public TVirtualMCStack
 {
  public:
-  Ex03MCStack(Int_t size);
-  Ex03MCStack();
-  virtual ~Ex03MCStack();
+  Ex03dMCStack(Int_t size);
+  Ex03dMCStack();
+  virtual ~Ex03dMCStack();
 
   // methods
   virtual void PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg, Double_t px,
@@ -67,11 +70,11 @@ class Ex03MCStack : public TVirtualMCStack
   std::stack<TParticle*> fStack;                                    //! < The stack of particles (transient)
   std::vector<TParticle>* fParticles {new std::vector<TParticle>};  //! < The vector of particle (persistent)
   //    libc++abi: terminating due to uncaught exception of type ROOT::RException: TParticle cannot be stored natively in RNTuple
-  std::vector<Ex03Particle>* fExParticles {new std::vector<Ex03Particle>};  //! < The vector of particle (persistent)
+  std::vector<Ex03dParticle>* fExParticles {new std::vector<Ex03dParticle>};  //! < The vector of particle (persistent)
   Int_t fCurrentTrack {-1};                                         /// < The current track number
   Int_t fNPrimary {0};                                              /// < The number of primaries
 
-  ClassDef(Ex03MCStack, 1) // Ex03MCStack
+  ClassDef(Ex03dMCStack, 1) // Ex03dMCStack
 };
 
 #endif // EX03_STACK_H

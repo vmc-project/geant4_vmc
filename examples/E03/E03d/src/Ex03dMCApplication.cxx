@@ -7,17 +7,17 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03MCApplication.cxx
-/// \brief Implementation of the Ex03MCApplication class
+/// \file Ex03dMCApplication.cxx
+/// \brief Implementation of the Ex03dMCApplication class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \date 06/03/2002
-/// \author I. Hrivnacova; IPN, Orsay
+/// \date 07/07/2026
+/// \author Radoslaw Karabowicz; GSI
 
-#include "Ex03MCApplication.h"
+#include "Ex03dMCApplication.h"
 #include "Ex03DetectorConstructionOld.h"
-#include "Ex03MCStack.h"
+#include "Ex03dMCStack.h"
 #include "Ex03PrimaryGenerator.h"
 
 #include <TMCRootManager.h>
@@ -37,11 +37,11 @@
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(Ex03MCApplication)
+ClassImp(Ex03dMCApplication)
   /// \endcond
 
   //_____________________________________________________________________________
-  Ex03MCApplication::Ex03MCApplication(const char* name, const char* title)
+  Ex03dMCApplication::Ex03dMCApplication(const char* name, const char* title)
   : TVirtualMCApplication(name, title),
     fRootManager(0),
     fPrintModulo(1),
@@ -67,13 +67,13 @@ ClassImp(Ex03MCApplication)
        << endl;
 
   // Create a user stack
-  fStack = new Ex03MCStack(1000);
+  fStack = new Ex03dMCStack(1000);
 
   // Create detector construction
   fDetConstruction = new Ex03DetectorConstruction();
 
   // Create a calorimeter SD
-  fCalorimeterSD = new Ex03CalorimeterSD("Calorimeter", fDetConstruction);
+  fCalorimeterSD = new Ex03dCalorimeterSD("Calorimeter", fDetConstruction);
 
   // Create a primary generator
   fPrimaryGenerator = new Ex03PrimaryGenerator(fStack);
@@ -83,7 +83,7 @@ ClassImp(Ex03MCApplication)
 }
 
 //_____________________________________________________________________________
-Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
+Ex03dMCApplication::Ex03dMCApplication(const Ex03dMCApplication& origin)
   : TVirtualMCApplication(origin.GetName(), origin.GetTitle()),
     fRootManager(0),
     fPrintModulo(origin.fPrintModulo),
@@ -102,11 +102,11 @@ Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
   /// mode) \param origin   The source MC application
 
   // Create new user stack
-  fStack = new Ex03MCStack(1000);
+  fStack = new Ex03dMCStack(1000);
 
   // Create a calorimeter SD
   fCalorimeterSD =
-    new Ex03CalorimeterSD(*(origin.fCalorimeterSD), fDetConstruction);
+    new Ex03dCalorimeterSD(*(origin.fCalorimeterSD), fDetConstruction);
 
   // Create a primary generator
   fPrimaryGenerator =
@@ -118,7 +118,7 @@ Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
 }
 
 //_____________________________________________________________________________
-Ex03MCApplication::Ex03MCApplication()
+Ex03dMCApplication::Ex03dMCApplication()
   : TVirtualMCApplication(),
     fRootManager(0),
     fPrintModulo(1),
@@ -136,7 +136,7 @@ Ex03MCApplication::Ex03MCApplication()
 }
 
 //_____________________________________________________________________________
-Ex03MCApplication::~Ex03MCApplication()
+Ex03dMCApplication::~Ex03dMCApplication()
 {
   /// Destructor
 
@@ -154,14 +154,13 @@ Ex03MCApplication::~Ex03MCApplication()
 //
 
 //_____________________________________________________________________________
-void Ex03MCApplication::RegisterStack()
+void Ex03dMCApplication::RegisterStack()
 {
   /// Register stack in the Root manager.
 
   if (fRootManager) {
-    // cout << "Ex03MCApplication::RegisterStack: " << endl;
+    // cout << "Ex03dMCApplication::RegisterStack: " << endl;
     fStack->Register();
-    fRootManager->Register("stack", fStack);
   }
 }
 
@@ -170,7 +169,7 @@ void Ex03MCApplication::RegisterStack()
 //
 
 //_____________________________________________________________________________
-void Ex03MCApplication::InitMC(const char* setup, TMCRootManager::StorageMode storageMode)
+void Ex03dMCApplication::InitMC(const char* setup, TMCRootManager::StorageMode storageMode)
 {
   fStorageMode = storageMode;
   /// Initialize MC.
@@ -189,16 +188,20 @@ void Ex03MCApplication::InitMC(const char* setup, TMCRootManager::StorageMode st
     }
   }
 
+  TString fileModifier = "T";
+  if (fStorageMode == TMCRootManager::kRNTuple)
+     fileModifier = "R";
+
 // MT support available from root v 5.34/18
 #if ROOT_VERSION_CODE >= 336402
   // Create Root manager
   if (!gMC->IsMT()) {
-    fRootManager = new TMCRootManager(GetName(), TMCRootManager::kWrite, storageMode);
+     fRootManager = new TMCRootManager(fileModifier + GetName(), TMCRootManager::kWrite, storageMode);
     // fRootManager->SetDebug(true);
   }
 #else
   // Create Root manager
-  fRootManager = new TMCRootManager(GetName(), TMCRootManager::kWrite, storageMode);
+  fRootManager = new TMCRootManager(fileModifier + GetName(), TMCRootManager::kWrite, storageMode);
   // fRootManager->SetDebug(true);
 #endif
 
@@ -214,7 +217,7 @@ void Ex03MCApplication::InitMC(const char* setup, TMCRootManager::StorageMode st
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::RunMC(Int_t nofEvents)
+void Ex03dMCApplication::RunMC(Int_t nofEvents)
 {
   /// Run MC.
   /// \param nofEvents Number of events to be processed
@@ -226,12 +229,12 @@ void Ex03MCApplication::RunMC(Int_t nofEvents)
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::FinishRun()
+void Ex03dMCApplication::FinishRun()
 {
   /// Finish MC run.
 
   fVerbose.FinishRun();
-  // cout << "Ex03MCApplication::FinishRun: " << endl;
+  // cout << "Ex03dMCApplication::FinishRun: " << endl;
   if (fRootManager) {
     fRootManager->WriteAll();
     fRootManager->Close();
@@ -239,18 +242,22 @@ void Ex03MCApplication::FinishRun()
 }
 
 //_____________________________________________________________________________
-TVirtualMCApplication* Ex03MCApplication::CloneForWorker() const
+TVirtualMCApplication* Ex03dMCApplication::CloneForWorker() const
 {
-  return new Ex03MCApplication(*this);
+  return new Ex03dMCApplication(*this);
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::InitOnWorker()
+void Ex03dMCApplication::InitOnWorker()
 {
   // Create Root manager
   Int_t threadRank = 1;
   // The real thread rank will be set in MCRootManager
-  fRootManager = new TMCRootManager(GetName(), fStorageMode, TMCRootManager::kWrite, threadRank);
+  TString fileModifier = "T";
+  if (fStorageMode == TMCRootManager::kRNTuple)
+     fileModifier = "R";
+
+  fRootManager = new TMCRootManager(fileModifier + GetName(), fStorageMode, TMCRootManager::kWrite, threadRank);
 
   // Set data to MC
   gMC->SetStack(fStack);
@@ -260,9 +267,9 @@ void Ex03MCApplication::InitOnWorker()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::FinishRunOnWorker()
+void Ex03dMCApplication::FinishRunOnWorker()
 {
-  // cout << "Ex03MCApplication::FinishWorkerRun: " << endl;
+  // cout << "Ex03dMCApplication::FinishWorkerRun: " << endl;
   if (fRootManager) {
     fRootManager->WriteAll();
     fRootManager->Close();
@@ -270,7 +277,7 @@ void Ex03MCApplication::FinishRunOnWorker()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::ReadEvent(Int_t i)
+void Ex03dMCApplication::ReadEvent(Int_t i)
 {
   /// Read \em i -th event and prints hits.
   /// \param i The number of event to be read
@@ -284,7 +291,7 @@ void Ex03MCApplication::ReadEvent(Int_t i)
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::ConstructGeometry()
+void Ex03dMCApplication::ConstructGeometry()
 {
   /// Construct geometry using detector contruction class.
   /// The detector contruction class is using TGeo functions or
@@ -306,7 +313,7 @@ void Ex03MCApplication::ConstructGeometry()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::InitGeometry()
+void Ex03dMCApplication::InitGeometry()
 {
   /// Initialize geometry
   fVerbose.InitGeometry();
@@ -322,7 +329,7 @@ void Ex03MCApplication::InitGeometry()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::AddParticles()
+void Ex03dMCApplication::AddParticles()
 {
   /// Example of user defined particle with user defined decay mode
 
@@ -371,7 +378,7 @@ void Ex03MCApplication::AddParticles()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::AddIons()
+void Ex03dMCApplication::AddIons()
 {
   /// Example of user defined ion
 
@@ -381,7 +388,7 @@ void Ex03MCApplication::AddIons()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::GeneratePrimaries()
+void Ex03dMCApplication::GeneratePrimaries()
 {
   /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
 
@@ -394,7 +401,7 @@ void Ex03MCApplication::GeneratePrimaries()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::BeginEvent()
+void Ex03dMCApplication::BeginEvent()
 {
   /// User actions at beginning of event
 
@@ -418,7 +425,7 @@ void Ex03MCApplication::BeginEvent()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::BeginPrimary()
+void Ex03dMCApplication::BeginPrimary()
 {
   /// User actions at beginning of a primary track.
   /// If test for user defined decay is activated,
@@ -432,7 +439,7 @@ void Ex03MCApplication::BeginPrimary()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::PreTrack()
+void Ex03dMCApplication::PreTrack()
 {
   /// User actions at beginning of each track
   /// If test for user defined decay is activated,
@@ -449,7 +456,7 @@ void Ex03MCApplication::PreTrack()
         fStack->GetParticle(parentID)->GetPdgCode() == kK0Short &&
         fStack->GetCurrentTrack()->GetUniqueID() == kPDecay) {
       // The production process is saved as TParticle unique ID
-      // via Ex03MCStack
+      // via Ex03dMCStack
 
       cout << "      Current track " << fStack->GetCurrentTrack()->GetName()
            << "  is a decay product of Parent ID = "
@@ -459,7 +466,7 @@ void Ex03MCApplication::PreTrack()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::Stepping()
+void Ex03dMCApplication::Stepping()
 {
   /// User actions at each step
 
@@ -480,7 +487,7 @@ void Ex03MCApplication::Stepping()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::PostTrack()
+void Ex03dMCApplication::PostTrack()
 {
   /// User actions after finishing of each track
 
@@ -488,7 +495,7 @@ void Ex03MCApplication::PostTrack()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::FinishPrimary()
+void Ex03dMCApplication::FinishPrimary()
 {
   /// User actions after finishing of a primary track
 
@@ -500,7 +507,7 @@ void Ex03MCApplication::FinishPrimary()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::FinishEvent()
+void Ex03dMCApplication::FinishEvent()
 {
   /// User actions after finishing of an event
 

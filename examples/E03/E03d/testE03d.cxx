@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file testE03.cxx
-/// \brief The Geant4 VMC example E03 test application
+/// \file testE03d.cxx
+/// \brief The Geant4 VMC example E03d test application
 ///
 /// The Geant4 VMC test application
 /// with explicitely instantiated TGeant3 or TGeant4 and linked
@@ -16,7 +16,7 @@
 ///
 /// <pre>
 /// Usage:
-/// testE03
+/// testE03d
 ///   [-g4g,  --g4-geometry]:        Geant4 VMC geometry option
 ///   [-g4pl, --g4-physics-list]:    Geant4 physics list selection
 ///   [-g4sp, --g4-special-physics]: Geant4 special physics selection
@@ -30,13 +30,13 @@
 /// Note that the g4* and g3* options are available only when built
 /// with the corresponding VMC_WITH_Geant4 or VMC_WITH_Geant3 option.
 /// Root macro with arguments should be passed within '', eg.
-///  --root-macro 'test_E03_1.C("",kFALSE)'
+///  --root-macro 'test_E03d_1.C("",kFALSE)'
 /// </pre>
 ///
 /// \date 26/02/2014
-/// \author I. Hrivnacova; IPN, Orsay
+/// \author Radoslaw Karabowicz; GSI
 
-#include "Ex03MCApplication.h"
+#include "Ex03dMCApplication.h"
 
 #ifdef USE_GEANT4
 #include "Ex03RunConfiguration1.h"
@@ -223,8 +223,8 @@ int main(int argc, char** argv)
   // end of code to process arguments
 
   // Create MC application (thread local)
-  Ex03MCApplication* appl =
-    new Ex03MCApplication("ExampleE03", "The exampleE03 MC application");
+  Ex03dMCApplication* appl =
+    new Ex03dMCApplication("ExampleE03", "The exampleE03 MC application");
 
 #ifdef USE_GEANT4
   if (g4Geometry.find("VMC") != std::string::npos) {
@@ -293,7 +293,7 @@ int main(int argc, char** argv)
 
   // Run example
   if (!rootMacro.size()) {
-    appl->InitMC("");
+     appl->InitMC("", TMCRootManager::kRNTuple);
 #ifdef USE_GEANT4
     // Setting Geant4 visualization
     if (g4VisMacro.size()) {

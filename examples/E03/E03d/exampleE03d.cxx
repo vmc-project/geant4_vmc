@@ -10,10 +10,10 @@
 /// \file exampleE03d.cxx
 /// \brief The Geant4 VMC example E03d application executable
 ///
-/// \date 26/02/2014
-/// \author I. Hrivnacova; IPN, Orsay
+/// \date 07/07/2026
+/// \author Radoslaw Karabowicz; GSI
 
-#include "Ex03MCApplication.h"
+#include "Ex03dMCApplication.h"
 #include "Ex03PrimaryGenerator.h"
 
 #ifdef USE_GEANT4
@@ -38,8 +38,8 @@ int main(int argc, char** argv)
 #endif
 
   // Create MC application (thread local)
-  Ex03MCApplication* appl =
-    new Ex03MCApplication("ExampleE03", "The exampleE03 MC application");
+  Ex03dMCApplication* appl =
+    new Ex03dMCApplication("ExampleE03", "The exampleE03 MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(20);
   appl->SetPrintModulo(1);
 
@@ -65,14 +65,14 @@ int main(int argc, char** argv)
 #endif
 
   // Run example
-  appl->InitMC("");
+  appl->InitMC("", TMCRootManager::kRNTuple);
 
 #ifdef USE_GEANT4
   // Setting Geant4 visualization
   geant4->ProcessGeantMacro("g4vis.in");
 #endif
 
-  appl->RunMC(5);
+  appl->RunMC(1000);
 
   delete appl;
 }
