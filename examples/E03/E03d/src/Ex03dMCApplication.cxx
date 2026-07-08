@@ -17,8 +17,8 @@
 
 #include "Ex03dMCApplication.h"
 #include "Ex03DetectorConstructionOld.h"
-#include "Ex03dMCStack.h"
 #include "Ex03PrimaryGenerator.h"
+#include "Ex03dMCStack.h"
 
 #include <TMCRootManager.h>
 
@@ -169,13 +169,16 @@ void Ex03dMCApplication::RegisterStack()
 //
 
 //_____________________________________________________________________________
-void Ex03dMCApplication::InitMC(const char* setup, TMCRootManager::StorageMode storageMode)
+void Ex03dMCApplication::InitMC(
+  const char* setup, TMCRootManager::StorageMode storageMode)
 {
   fStorageMode = storageMode;
   /// Initialize MC.
   /// The selection of the concrete MC is done in the macro.
   /// \param setup The name of the configuration macro
-  cout << "InitMC with " << (storageMode==TMCRootManager::kTTree?"TTree":"RNTuple") << " storage" << endl;
+  cout << "InitMC with "
+       << (storageMode == TMCRootManager::kTTree ? "TTree" : "RNTuple")
+       << " storage" << endl;
 
   fVerbose.InitMC();
 
@@ -189,19 +192,20 @@ void Ex03dMCApplication::InitMC(const char* setup, TMCRootManager::StorageMode s
   }
 
   TString fileModifier = "T";
-  if (fStorageMode == TMCRootManager::kRNTuple)
-     fileModifier = "R";
+  if (fStorageMode == TMCRootManager::kRNTuple) fileModifier = "R";
 
 // MT support available from root v 5.34/18
 #if ROOT_VERSION_CODE >= 336402
   // Create Root manager
   if (!gMC->IsMT()) {
-     fRootManager = new TMCRootManager(fileModifier + GetName(), TMCRootManager::kWrite, storageMode);
+    fRootManager = new TMCRootManager(
+      fileModifier + GetName(), TMCRootManager::kWrite, storageMode);
     // fRootManager->SetDebug(true);
   }
 #else
   // Create Root manager
-  fRootManager = new TMCRootManager(fileModifier + GetName(), TMCRootManager::kWrite, storageMode);
+  fRootManager = new TMCRootManager(
+    fileModifier + GetName(), TMCRootManager::kWrite, storageMode);
   // fRootManager->SetDebug(true);
 #endif
 
@@ -212,8 +216,7 @@ void Ex03dMCApplication::InitMC(const char* setup, TMCRootManager::StorageMode s
 
   RegisterStack();
 
-  if (fRootManager)
-      fRootManager->CreateRNTuple();
+  if (fRootManager) fRootManager->CreateRNTuple();
 }
 
 //_____________________________________________________________________________
@@ -254,10 +257,10 @@ void Ex03dMCApplication::InitOnWorker()
   Int_t threadRank = 1;
   // The real thread rank will be set in MCRootManager
   TString fileModifier = "T";
-  if (fStorageMode == TMCRootManager::kRNTuple)
-     fileModifier = "R";
+  if (fStorageMode == TMCRootManager::kRNTuple) fileModifier = "R";
 
-  fRootManager = new TMCRootManager(fileModifier + GetName(), fStorageMode, TMCRootManager::kWrite, threadRank);
+  fRootManager = new TMCRootManager(
+    fileModifier + GetName(), fStorageMode, TMCRootManager::kWrite, threadRank);
 
   // Set data to MC
   gMC->SetStack(fStack);
@@ -281,7 +284,7 @@ void Ex03dMCApplication::ReadEvent(Int_t i)
 {
   /// Read \em i -th event and prints hits.
   /// \param i The number of event to be read
-  if ( ! fRootManager ) {
+  if (!fRootManager) {
     fRootManager = new TMCRootManager(GetName(), TMCRootManager::kRead);
   }
 
@@ -324,8 +327,7 @@ void Ex03dMCApplication::InitGeometry()
 
   fCalorimeterSD->Initialize();
 
-  if (!fIsMaster)
-     fRootManager->CreateRNTuple();
+  if (!fIsMaster) fRootManager->CreateRNTuple();
 }
 
 //_____________________________________________________________________________

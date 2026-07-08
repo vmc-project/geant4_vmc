@@ -22,7 +22,6 @@
 #include "Ex03dParticle.h"
 #include "TParticle.h"
 
-
 #include <stack>
 #include <vector>
 
@@ -67,12 +66,17 @@ class Ex03dMCStack : public TVirtualMCStack
 
  private:
   // data members
-  std::stack<TParticle*> fStack;                                    //! < The stack of particles (transient)
-  std::vector<TParticle>* fParticles {new std::vector<TParticle>};  //! < The vector of particle (persistent)
-  //    libc++abi: terminating due to uncaught exception of type ROOT::RException: TParticle cannot be stored natively in RNTuple
-  std::vector<Ex03dParticle>* fExParticles {new std::vector<Ex03dParticle>};  //! < The vector of particle (persistent)
-  Int_t fCurrentTrack {-1};                                         /// < The current track number
-  Int_t fNPrimary {0};                                              /// < The number of primaries
+  std::stack<TParticle*> fStack; //! < The stack of particles (transient)
+  std::vector<TParticle>* fParticles{
+    new std::vector<TParticle>
+  }; //! < The vector of particle (persistent)
+  //    libc++abi: terminating due to uncaught exception of type
+  //    ROOT::RException: TParticle cannot be stored natively in RNTuple
+  std::vector<Ex03dParticle>* fExParticles{
+    new std::vector<Ex03dParticle>
+  };                         //! < The vector of particle (persistent)
+  Int_t fCurrentTrack{ -1 }; /// < The current track number
+  Int_t fNPrimary{ 0 };      /// < The number of primaries
 
   ClassDef(Ex03dMCStack, 1) // Ex03dMCStack
 };

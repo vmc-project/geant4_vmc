@@ -28,8 +28,8 @@ using namespace std;
 ClassImp(Ex03dMCStack)
   /// \endcond
 
-//_____________________________________________________________________________
-Ex03dMCStack::Ex03dMCStack(Int_t size)
+  //_____________________________________________________________________________
+  Ex03dMCStack::Ex03dMCStack(Int_t size)
 {
   /// Standard constructor
   /// \param size  The stack size
@@ -52,8 +52,9 @@ Ex03dMCStack::~Ex03dMCStack()
 // private methods
 
 // public methods
-void Ex03dMCStack::Register() {
-    TMCRootManager::Instance()->Register("particles", fExParticles);
+void Ex03dMCStack::Register()
+{
+  TMCRootManager::Instance()->Register("particles", fExParticles);
 }
 
 //_____________________________________________________________________________
@@ -89,14 +90,16 @@ void Ex03dMCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   const Int_t kLastDaughter = -1;
 
   Int_t trackId = GetNtrack();
-  fParticles->push_back(TParticle(pdg, is, parent, trackId, kFirstDaughter, kLastDaughter, px, py, pz, e, vx, vy, vz, tof));
+  fParticles->push_back(TParticle(pdg, is, parent, trackId, kFirstDaughter,
+    kLastDaughter, px, py, pz, e, vx, vy, vz, tof));
   auto particle = &fParticles->back();
 
   particle->SetPolarisation(polx, poly, polz);
   particle->SetWeight(weight);
   particle->SetUniqueID(mech);
 
-  fExParticles->push_back(Ex03dParticle(pdg, is, parent, trackId, kFirstDaughter, kLastDaughter, px, py, pz, e, vx, vy, vz, tof));
+  fExParticles->push_back(Ex03dParticle(pdg, is, parent, trackId,
+    kFirstDaughter, kLastDaughter, px, py, pz, e, vx, vy, vz, tof));
   auto exParticle = &fExParticles->back();
 
   exParticle->SetPolarisation(polx, poly, polz);

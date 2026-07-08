@@ -66,10 +66,12 @@ class Ex03dCalorimeterSD : public TNamed
   // data members
   TVirtualMC* fMC;                     ///< The VMC implementation
   Ex03DetectorConstruction* fDetector; ///< Detector construction
-  std::vector<Ex03CalorHit>* fCalCollection {new std::vector<Ex03CalorHit>};  //! < The vector of particle (persistent)
-  Int_t fAbsorberVolId;                ///< The absorber volume Id
-  Int_t fGapVolId;                     ///< The gap volume Id
-  Int_t fVerboseLevel;                 ///< Verbosity level
+  std::vector<Ex03CalorHit>* fCalCollection{
+    new std::vector<Ex03CalorHit>
+  };                    //! < The vector of particle (persistent)
+  Int_t fAbsorberVolId; ///< The absorber volume Id
+  Int_t fGapVolId;      ///< The gap volume Id
+  Int_t fVerboseLevel;  ///< Verbosity level
 
   ClassDef(Ex03dCalorimeterSD, 1) // Ex03dCalorimeterSD
 };

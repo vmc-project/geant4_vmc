@@ -50,8 +50,8 @@ Ex03dCalorimeterSD::Ex03dCalorimeterSD(
   /// \param name      The calorimeter hits collection name
   /// \param detector  The detector construction
 
-   for (Int_t i = 0; i < fDetector->GetNbOfLayers() + 1; i++)
-      fCalCollection->push_back(Ex03CalorHit());
+  for (Int_t i = 0; i < fDetector->GetNbOfLayers() + 1; i++)
+    fCalCollection->push_back(Ex03CalorHit());
 }
 
 //_____________________________________________________________________________
@@ -71,17 +71,13 @@ Ex03dCalorimeterSD::Ex03dCalorimeterSD(
   /// \param origin    The source object (on master).
   /// \param detector  The detector construction
 
-   for (Int_t i = 0; i < fDetector->GetNbOfLayers() + 1; i++)
-      fCalCollection->push_back(Ex03CalorHit());
+  for (Int_t i = 0; i < fDetector->GetNbOfLayers() + 1; i++)
+    fCalCollection->push_back(Ex03CalorHit());
 }
 
 //_____________________________________________________________________________
 Ex03dCalorimeterSD::Ex03dCalorimeterSD()
-  : TNamed(),
-    fDetector(0),
-    fAbsorberVolId(0),
-    fGapVolId(0),
-    fVerboseLevel(1)
+  : TNamed(), fDetector(0), fAbsorberVolId(0), fGapVolId(0), fVerboseLevel(1)
 {
   /// Default constructor
 }
@@ -112,8 +108,7 @@ void Ex03dCalorimeterSD::ResetHits()
 {
   /// Reset all hits in the hits collection.
 
-  for (Int_t i = 0; i < fCalCollection->size(); i++)
-    GetHit(i)->Reset();
+  for (Int_t i = 0; i < fCalCollection->size(); i++) GetHit(i)->Reset();
 }
 
 //
@@ -185,8 +180,9 @@ void Ex03dCalorimeterSD::EndOfEvent()
 void Ex03dCalorimeterSD::Register()
 {
   /// Register the hits collection in Root manager.
-  TMCRootManager::Instance()->Register ("hits", fCalCollection);
-  //  TMCRootManager::Instance()->Register("hits", "std::vector<Ex03CalorHit>", &fCalCollection);
+  TMCRootManager::Instance()->Register("hits", fCalCollection);
+  //  TMCRootManager::Instance()->Register("hits", "std::vector<Ex03CalorHit>",
+  //  &fCalCollection);
 }
 
 //_____________________________________________________________________________

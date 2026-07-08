@@ -19,8 +19,8 @@
 
 #include <TVirtualMCApplication.h>
 
-#include "Ex03dCalorimeterSD.h"
 #include "Ex03DetectorConstruction.h"
+#include "Ex03dCalorimeterSD.h"
 #include "TMCRootManager.h"
 
 #include <TGeoUniformMagField.h>
@@ -47,7 +47,8 @@ class Ex03dMCApplication : public TVirtualMCApplication
   virtual ~Ex03dMCApplication();
 
   // methods
-  void InitMC(const char* setup, TMCRootManager::StorageMode storageMode = TMCRootManager::kRNTuple);
+  void InitMC(const char* setup,
+    TMCRootManager::StorageMode storageMode = TMCRootManager::kRNTuple);
   void RunMC(Int_t nofEvents);
   void FinishRun();
   void ReadEvent(Int_t i);
@@ -90,19 +91,19 @@ class Ex03dMCApplication : public TVirtualMCApplication
 
   // data members
   mutable TMCRootManager* fRootManager; //!< Root manager
-  Int_t fPrintModulo;  ///< The event modulus number to be printed
-  Int_t fEventNo;      ///< Event counter
-  TMCVerbose fVerbose; ///< VMC verbose helper
+  Int_t fPrintModulo;   ///< The event modulus number to be printed
+  Int_t fEventNo;       ///< Event counter
+  TMCVerbose fVerbose;  ///< VMC verbose helper
   Ex03dMCStack* fStack; ///< VMC stack
   Ex03DetectorConstruction* fDetConstruction; ///< Dector construction
-  Ex03dCalorimeterSD* fCalorimeterSD;          ///< Calorimeter SD
+  Ex03dCalorimeterSD* fCalorimeterSD;         ///< Calorimeter SD
   Ex03PrimaryGenerator* fPrimaryGenerator;    ///< Primary generator
   TGeoUniformMagField* fMagField;             ///< Magnetic field
   Bool_t fOldGeometry; ///< Option for geometry definition
   Bool_t fIsControls;  ///< Option to activate special controls
   Bool_t fIsMaster;    ///< If is on master thread
 
-  TMCRootManager::StorageMode fStorageMode {TMCRootManager::kTTree};
+  TMCRootManager::StorageMode fStorageMode{ TMCRootManager::kTTree };
 
   ClassDef(Ex03dMCApplication, 1) // Interface to MonteCarlo application
 };

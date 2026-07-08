@@ -25,7 +25,7 @@
 #pragma link C++ class Ex03PrimaryGenerator + ;
 #pragma link C++ class Ex03dParticle + ;
 #pragma link C++ class std::stack < TParticle*, deque < TParticle*>> + ;
-#pragma link C++ class std::vector<Ex03CalorHit> + ;
-#pragma link C++ class std::vector<Ex03dParticle> + ;
+#pragma link C++ class std::vector < Ex03CalorHit> + ;
+#pragma link C++ class std::vector < Ex03dParticle> + ;
 
 #endif
