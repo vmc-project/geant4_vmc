@@ -96,7 +96,8 @@ Ex03dMCApplication::Ex03dMCApplication(const Ex03dMCApplication& origin)
     fMagField(0),
     fOldGeometry(origin.fOldGeometry),
     fIsMaster(kFALSE),
-    fStorageMode(origin.fStorageMode)
+    fStorageMode(origin.fStorageMode),
+    fParallelRNTupleWriter(origin.fParallelRNTupleWriter)
 {
   /// Copy constructor for cloning application on workers (in multithreading
   /// mode) \param origin   The source MC application
@@ -177,7 +178,7 @@ void Ex03dMCApplication::InitMC(
   /// The selection of the concrete MC is done in the macro.
   /// \param setup The name of the configuration macro
   cout << "InitMC with "
-       << (storageMode == TMCRootManager::kTTree ? "TTree" : "RNTuple")
+       << (fStorageMode == TMCRootManager::kTTree ? "TTree" : "RNTuple")
        << " storage" << endl;
 
   fVerbose.InitMC();
@@ -199,24 +200,37 @@ void Ex03dMCApplication::InitMC(
   // Create Root manager
   if (!gMC->IsMT()) {
     fRootManager = new TMCRootManager(
-      fileModifier + GetName(), TMCRootManager::kWrite, storageMode);
+      fileModifier + GetName(), fStorageMode, TMCRootManager::kWrite);
     // fRootManager->SetDebug(true);
+  }
+  else if (fStorageMode == TMCRootManager::kRNTuple) {
+    fRootManager = new TMCRootManager(
+      fileModifier + GetName(), fStorageMode, TMCRootManager::kWrite);
   }
 #else
   // Create Root manager
-  fRootManager = new TMCRootManager(
-    fileModifier + GetName(), TMCRootManager::kWrite, storageMode);
+  fRootManager =
+    new TMCRootManager(fileModifier + GetName(), TMCRootManager::kWrite);
   // fRootManager->SetDebug(true);
 #endif
+
+  RegisterStack();
+
+  if (fStorageMode == TMCRootManager::kRNTuple) {
+    if (!gMC->IsMT()) {
+      fRootManager->CreateRNTuple();
+    }
+    else {
+      fRootManager->CreateRNTuple(true);
+      fParallelRNTupleWriter =
+        std::move(fRootManager->GetParallelRNTupleWriter());
+    }
+  }
 
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
   gMC->Init();
   gMC->BuildPhysics();
-
-  RegisterStack();
-
-  if (fRootManager) fRootManager->CreateRNTuple();
 }
 
 //_____________________________________________________________________________
@@ -256,17 +270,24 @@ void Ex03dMCApplication::InitOnWorker()
   // Create Root manager
   Int_t threadRank = 1;
   // The real thread rank will be set in MCRootManager
-  TString fileModifier = "T";
-  if (fStorageMode == TMCRootManager::kRNTuple) fileModifier = "R";
-
-  fRootManager = new TMCRootManager(
-    fileModifier + GetName(), fStorageMode, TMCRootManager::kWrite, threadRank);
+  if (fStorageMode == TMCRootManager::kRNTuple) {
+    fRootManager = new TMCRootManager(fParallelRNTupleWriter);
+  }
+  else {
+    TString fileModifier = "T";
+    fRootManager = new TMCRootManager(fileModifier + GetName(), fStorageMode,
+      TMCRootManager::kWrite, threadRank);
+  }
 
   // Set data to MC
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
 
   RegisterStack();
+
+  if (fStorageMode == TMCRootManager::kRNTuple) {
+    fRootManager->CreateRNTuple(true, true);
+  }
 }
 
 //_____________________________________________________________________________
@@ -275,7 +296,7 @@ void Ex03dMCApplication::FinishRunOnWorker()
   // cout << "Ex03dMCApplication::FinishWorkerRun: " << endl;
   if (fRootManager) {
     fRootManager->WriteAll();
-    fRootManager->Close();
+    if (fStorageMode != TMCRootManager::kRNTuple) fRootManager->Close();
   }
 }
 
@@ -326,8 +347,6 @@ void Ex03dMCApplication::InitGeometry()
   if (fIsControls) fDetConstruction->SetControls();
 
   fCalorimeterSD->Initialize();
-
-  if (!fIsMaster) fRootManager->CreateRNTuple();
 }
 
 //_____________________________________________________________________________

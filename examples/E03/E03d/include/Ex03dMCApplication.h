@@ -104,6 +104,7 @@ class Ex03dMCApplication : public TVirtualMCApplication
   Bool_t fIsMaster;    ///< If is on master thread
 
   TMCRootManager::StorageMode fStorageMode{ TMCRootManager::kTTree };
+  std::shared_ptr<RNTParaWriter> fParallelRNTupleWriter;
 
   ClassDef(Ex03dMCApplication, 1) // Interface to MonteCarlo application
 };
