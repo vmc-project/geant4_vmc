@@ -270,17 +270,17 @@ void Ex03MCApplication::FinishRunOnWorker()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::ReadEvent(Int_t i)
+void Ex03MCApplication::ReadEvent(Int_t i,  Int_t threadId)
 {
   /// Read \em i -th event and prints hits.
   /// \param i The number of event to be read
 
   if ( ! fRootManager ) {
-    fRootManager = new TMCRootManager(GetName(), TMCRootManager::kRead);
+    fRootManager = new TMCRootManager(GetName(), TMCRootManager::kRead, threadId);
+    fCalorimeterSD->Register();
+    RegisterStack();
   }
 
-  fCalorimeterSD->Register();
-  RegisterStack();
   fRootManager->ReadEvent(i);
 }
 

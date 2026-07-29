@@ -60,7 +60,8 @@ class Ex03MCStack : public TVirtualMCStack
 
  private:
   // data members
-  std::stack<TParticle*> fStack; //!< The stack of particles (transient)
+  /// The stack of particles (transient)
+  std::stack<TParticle*> fStack; //!
   TClonesArray* fParticles;      ///< The array of particle (persistent)
   Int_t fCurrentTrack;           ///< The current track number
   Int_t fNPrimary;               ///< The number of primaries

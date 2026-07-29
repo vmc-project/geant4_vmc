@@ -13,7 +13,7 @@
 
 #include "set_g4_vis.C"
 
-void run_g4(const TString& configMacro = "g4Config.C")
+void run_g4(const TString& configMacro = "g4tgeoConfig.C")
 {
 /// Macro function for running Example03 with Geant4 from
 /// Root interactive session
@@ -25,7 +25,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   Ex03MCApplication* appl
     =  new Ex03MCApplication("Example03", "The example03 MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(20);
-  appl->SetPrintModulo(1);
+  appl->SetPrintModulo(100);
 
   appl->InitMC(configMacro);
 
@@ -35,7 +35,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   // Enter in Geant4 interactive session
   //((TGeant4*)gMC)->StartGeantUI();
 
-  appl->RunMC(5);
+  appl->RunMC(1000);
 
   delete appl;
 }

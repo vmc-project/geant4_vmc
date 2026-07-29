@@ -25,14 +25,14 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   Ex03MCApplication* appl
     =  new Ex03MCApplication("Example03", "The example03 MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(20);
-  appl->SetPrintModulo(1);
+  appl->SetPrintModulo(100);
 
   appl->InitMC(configMacro);
 
   // visualization setting
   set_g3_vis();
 
-  appl->RunMC(5);
+  appl->RunMC(1000);
 
   delete appl;
 }

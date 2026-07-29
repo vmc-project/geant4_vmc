@@ -33,6 +33,34 @@ ClassImp(Ex03dCalorimeterSD)
 
   using namespace std;
 
+// static methods
+
+//_____________________________________________________________________________
+void Ex03dCalorimeterSD::PrintTotal(std::vector<Ex03CalorHit>* collection)
+{
+  /// Print the total values for all layers for the given collection
+
+  Double_t totEAbs = 0.;
+  Double_t totLAbs = 0.;
+  Double_t totEGap = 0.;
+  Double_t totLGap = 0.;
+
+  Int_t nofHits = collection->size();
+  for (auto& hit : *collection) {
+    totEAbs += hit.GetEdepAbs();
+    totLAbs += hit.GetTrakAbs();
+    totEGap += hit.GetEdepGap();
+    totLGap += hit.GetTrakGap();
+  }
+
+  cout << "   Absorber: total energy (MeV): " << setw(7) << totEAbs * 1.0e03
+       << "       total track length (cm):  " << setw(7) << totLAbs << endl
+       << "   Gap:      total energy (MeV): " << setw(7) << totEGap * 1.0e03
+       << "       total track length (cm):  " << setw(7) << totLGap << endl;
+}
+
+// constructors/destructor
+
 //_____________________________________________________________________________
 Ex03dCalorimeterSD::Ex03dCalorimeterSD(
   const char* name, Ex03DetectorConstruction* detector)
@@ -118,10 +146,6 @@ void Ex03dCalorimeterSD::ResetHits()
 //_____________________________________________________________________________
 void Ex03dCalorimeterSD::Initialize()
 {
-  /// Register hits collection in the Root manager;
-  /// set sensitive volumes.
-  if (TMCRootManager::Instance()) Register();
-
   // Keep the pointer to TVirtualMC object as a data member
   // to avoid a possible performance penalty due to a frequent retrieval
   // from the thread-local storage
@@ -181,8 +205,6 @@ void Ex03dCalorimeterSD::Register()
 {
   /// Register the hits collection in Root manager.
   TMCRootManager::Instance()->Register("hits", fCalCollection);
-  //  TMCRootManager::Instance()->Register("hits", "std::vector<Ex03CalorHit>",
-  //  &fCalCollection);
 }
 
 //_____________________________________________________________________________
@@ -202,21 +224,5 @@ void Ex03dCalorimeterSD::PrintTotal() const
 {
   /// Print the total values for all layers.
 
-  Double_t totEAbs = 0.;
-  Double_t totLAbs = 0.;
-  Double_t totEGap = 0.;
-  Double_t totLGap = 0.;
-
-  Int_t nofHits = fCalCollection->size();
-  for (Int_t i = 0; i < nofHits; i++) {
-    totEAbs += GetHit(i)->GetEdepAbs();
-    totLAbs += GetHit(i)->GetTrakAbs();
-    totEGap += GetHit(i)->GetEdepGap();
-    totLGap += GetHit(i)->GetTrakGap();
-  }
-
-  cout << "   Absorber: total energy (MeV): " << setw(7) << totEAbs * 1.0e03
-       << "       total track length (cm):  " << setw(7) << totLAbs << endl
-       << "   Gap:      total energy (MeV): " << setw(7) << totEGap * 1.0e03
-       << "       total track length (cm):  " << setw(7) << totLGap << endl;
+  PrintTotal(fCalCollection);
 }

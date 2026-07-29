@@ -51,7 +51,8 @@ class Ex03dMCApplication : public TVirtualMCApplication
     TMCRootManager::StorageMode storageMode = TMCRootManager::kRNTuple);
   void RunMC(Int_t nofEvents);
   void FinishRun();
-  void ReadEvent(Int_t i);
+  void ReadEvent(Int_t i, TMCRootManager::StorageMode storageMode = TMCRootManager::kRNTuple, 
+                 Int_t threadId = -1);
 
   virtual TVirtualMCApplication* CloneForWorker() const;
   virtual void InitOnWorker();
@@ -87,7 +88,7 @@ class Ex03dMCApplication : public TVirtualMCApplication
  private:
   // methods
   Ex03dMCApplication(const Ex03dMCApplication& origin);
-  void RegisterStack();
+  void RegisterData();
 
   // data members
   mutable TMCRootManager* fRootManager; //!< Root manager
@@ -102,9 +103,6 @@ class Ex03dMCApplication : public TVirtualMCApplication
   Bool_t fOldGeometry; ///< Option for geometry definition
   Bool_t fIsControls;  ///< Option to activate special controls
   Bool_t fIsMaster;    ///< If is on master thread
-
-  TMCRootManager::StorageMode fStorageMode{ TMCRootManager::kTTree };
-  std::shared_ptr<RNTParaWriter> fParallelRNTupleWriter;
 
   ClassDef(Ex03dMCApplication, 1) // Interface to MonteCarlo application
 };
