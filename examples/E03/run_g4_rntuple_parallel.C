@@ -8,13 +8,13 @@
 //-------------------------------------------------
 
 /// \ingroup E03
-/// \file E03/run_g4_rntuple.C
-/// \brief Macro for running Example03d with Geant4
-///        with kRNTuple output mode
+/// \file E03/run_g4_rntuple_parallel.C
+/// \brief Macro for running Example03d with Geant4.
+///        with kRNTupleParallel output mode
 
 #include "set_g4_vis.C"
 
-void run_g4_rntuple(const TString& configMacro = "g4tgeoConfig.C")
+void run_g4_rntuple_parallel(const TString& configMacro = "g4tgeoConfig.C")
 {
 /// Macro function for running Example03 with Geant4 from
 /// Root interactive session
@@ -28,7 +28,7 @@ void run_g4_rntuple(const TString& configMacro = "g4tgeoConfig.C")
   appl->GetPrimaryGenerator()->SetNofPrimaries(20);
   appl->SetPrintModulo(100);
 
-  appl->InitMC(configMacro, TMCRootManager::kRNTuple);
+  appl->InitMC(configMacro, TMCRootManager::kRNTupleParallel);
 
   // Visualization setting
   //set_g4_vis();

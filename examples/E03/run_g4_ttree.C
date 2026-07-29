@@ -8,8 +8,9 @@
 //-------------------------------------------------
 
 /// \ingroup E03
-/// \file E03/run_g4.C
-/// \brief Macro for running Example03 with Geant4.
+/// \file E03/run_g4_ttree.C
+/// \brief Macro for running Example03d with Geant4
+///        with kTTree output mode
 
 #include "set_g4_vis.C"
 
