@@ -45,6 +45,9 @@ class Ex03dCalorimeterSD : public TNamed
   Ex03dCalorimeterSD();
   virtual ~Ex03dCalorimeterSD();
 
+  // static methods
+  static void PrintTotal(std::vector<Ex03CalorHit>* collection);
+
   // methods
   void Initialize();
   Bool_t ProcessHits();

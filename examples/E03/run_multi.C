@@ -27,7 +27,7 @@ void run_multi(const TString& configMacro1 = "g3tgeoConfig.C", const TString& co
   auto appl = new Ex03MCApplication("Example03", "The example03 MC application", kTRUE, kTRUE);
   // appl->SetVerboseLevel(4);
   appl->GetPrimaryGenerator()->SetNofPrimaries(20);
-  appl->SetPrintModulo(1);
+  appl->SetPrintModulo(100);
 
   appl->InitMC({configMacro1.Data(), configMacro2.Data()});
 
@@ -36,7 +36,7 @@ void run_multi(const TString& configMacro1 = "g3tgeoConfig.C", const TString& co
   // set_g3_vis();
   // set_g4_vis();
 
-  appl->RunMC(5);
+  appl->RunMC(1000);
 
   delete appl;
 }

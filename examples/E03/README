@@ -146,6 +146,10 @@ To run example (Ex03c)
 To run example (Ex03d)
 ======================
 
+  To get the output file with RNTuple woth parallel writing (PRExample03.root) execute:
+  root[0] .x load_g4d.C
+  root[1] .x run_g4_rntuple_parallel.C
+
   To get the output file with RNTuple (RExample03.root) execute:
   root[0] .x load_g4d.C
   root[1] .x run_g4_rntuple.C

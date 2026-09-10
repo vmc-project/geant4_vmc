@@ -49,9 +49,9 @@ Ex03dMCStack::~Ex03dMCStack()
   delete fParticles;
 }
 
-// private methods
-
 // public methods
+
+//_____________________________________________________________________________
 void Ex03dMCStack::Register()
 {
   TMCRootManager::Instance()->Register("particles", fExParticles);

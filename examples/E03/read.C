@@ -18,12 +18,13 @@ void read()
 /// via load_g4a[b,c].C.
 
   // MC application
+  Int_t threadId = 1;
   Ex03MCApplication* appl
     =  new Ex03MCApplication("Example03", "The example03 MC application");
 
   for (Int_t i=0; i<5; i++) {
     cout << "   Event no " << i+1 << ":" << endl;
-    appl->ReadEvent(i);
+    appl->ReadEvent(i, threadId);
     appl->GetCalorimeterSD()->PrintTotal();
     cout << endl;
   }

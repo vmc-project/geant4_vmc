@@ -8,12 +8,13 @@
 //-------------------------------------------------
 
 /// \ingroup E03
-/// \file E03/run_g4.C
-/// \brief Macro for running Example03 with Geant4.
+/// \file E03/run_g4_rntuple_parallel.C
+/// \brief Macro for running Example03d with Geant4.
+///        with kRNTupleParallel output mode
 
 #include "set_g4_vis.C"
 
-void run_g4(const TString& configMacro = "g4tgeoConfig.C")
+void run_g4_rntuple_parallel(const TString& configMacro = "g4tgeoConfig.C")
 {
 /// Macro function for running Example03 with Geant4 from
 /// Root interactive session
@@ -22,15 +23,15 @@ void run_g4(const TString& configMacro = "g4tgeoConfig.C")
 /// \param configMacro configuration macro name, default \ref E03/g4Config.C
 
   // MC application
-  Ex03MCApplication* appl
-    =  new Ex03MCApplication("Example03", "The example03 MC application");
+  Ex03dMCApplication* appl
+    =  new Ex03dMCApplication("Example03", "The example03 MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(20);
   appl->SetPrintModulo(100);
 
-  appl->InitMC(configMacro);
+  appl->InitMC(configMacro, TMCRootManager::kRNTupleParallel);
 
   // Visualization setting
-  set_g4_vis();
+  //set_g4_vis();
 
   // Enter in Geant4 interactive session
   //((TGeant4*)gMC)->StartGeantUI();

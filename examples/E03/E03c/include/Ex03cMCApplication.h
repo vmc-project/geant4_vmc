@@ -56,7 +56,7 @@ class Ex03cMCApplication : public TVirtualMCApplication
   void InitMC();
   void RunMC(Int_t nofEvents);
   void FinishRun();
-  void ReadEvent(Int_t i);
+  void ReadEvent(Int_t i, Int_t threadId = -1);
 
   virtual TVirtualMCApplication* CloneForWorker() const;
   virtual void InitOnWorker();

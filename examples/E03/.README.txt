@@ -16,6 +16,8 @@
            TVirtualMCSensitiveDetector interface
   - E03c - adapted from E03a demonstrating the usage of sharing event
           simulation amongs multiple different engines.
+  - E03d - adapted from E03a allowing to store the data
+           in the RNTuple output.
 
   It demonstrates:
     - Geometry - divided volume (Gsdvn)
@@ -61,6 +63,7 @@
   \link     E03/load_g3a.C load_g3a.C    \endlink - macro to load the libraries (variant E03a) to run the example with Geant3
   \link     E03/load_g3b.C load_g3b.C    \endlink - macro to load the libraries (variant E03b) to run the example with Geant3
   \link     E03/load_g3c.C load_g3c.C    \endlink - macro to load the libraries (variant E03c) to run the example with Geant3
+  \link     E03/load_g3d.C load_g3d.C    \endlink - macro to load the libraries (variant E03d) to run the example with Geant3
   \link       E03/run_g3.C run_g3.C      \endlink - macro for running example
   \link E03/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry(default)
   \link     E03/g3Config.C g3Config.C    \endlink - configuration macro for G3 with native geometry
@@ -72,6 +75,7 @@
   \link      E03/load_g4a.C load_g4a.C     \endlink - macro to load the libraries (variant E03a) to run the example with Geant4
   \link      E03/load_g4b.C load_g4b.C     \endlink - macro to load the libraries (variant E03b) to run the example with Geant4
   \link      E03/load_g4c.C load_g4c.C     \endlink - macro to load the libraries (variant E03c) to run the example with Geant4
+  \link      E03/load_g4d.C load_g4d.C     \endlink - macro to load the libraries (variant E03d) to run the example with Geant4
   \link        E03/run_g4.C run_g4.C       \endlink - macro for running example
   \link      E03/g4Config.C g4Config.C     \endlink - configuration macro - G4 native geometry navigation (default)
   \link     E03/g4Config1.C g4Config1.C    \endlink - configuration macro - geometry defined via Geant4
@@ -132,7 +136,28 @@
   root[1] .x \link E03/run_multi.C run_multi.C\endlink
   </pre>
 
-\section e03_s6 Classes
+\section e03_s6 To run the Ex03d variant with output type selection:
+
+  <pre>
+  To get the output file with RNTuple woth parallel writing (PRExample03.root) execute:
+  root[0] .x load_g4d.C
+  root[1] .x run_g4_rntuple_parallel.C
+  </pre>
+
+  <pre>
+  To get the output file with RNTuple (RExample03.root) execute:
+  root[0] .x load_g4d.C
+  root[1] .x run_g4_rntuple.C
+  </pre>
+
+  <pre>
+  To get the output file with TTree (TExample03.root) execute:
+  root[0] .x load_g4d.C
+  root[1] .x run_g4_ttree.C
+  </pre>
+
+
+\section e03_s7 Classes
 
 The documentation of all classes and the basic macros for this example
 is availabe on \link E03 this page \endlink.

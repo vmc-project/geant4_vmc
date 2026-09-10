@@ -20,8 +20,6 @@
 #include "Ex03PrimaryGenerator.h"
 #include "Ex03dMCStack.h"
 
-#include <TMCRootManager.h>
-
 #include <Riostream.h>
 #include <TGeoManager.h>
 #include <TGeoUniformMagField.h>
@@ -95,9 +93,7 @@ Ex03dMCApplication::Ex03dMCApplication(const Ex03dMCApplication& origin)
     fPrimaryGenerator(0),
     fMagField(0),
     fOldGeometry(origin.fOldGeometry),
-    fIsMaster(kFALSE),
-    fStorageMode(origin.fStorageMode),
-    fParallelRNTupleWriter(origin.fParallelRNTupleWriter)
+    fIsMaster(kFALSE)
 {
   /// Copy constructor for cloning application on workers (in multithreading
   /// mode) \param origin   The source MC application
@@ -155,13 +151,14 @@ Ex03dMCApplication::~Ex03dMCApplication()
 //
 
 //_____________________________________________________________________________
-void Ex03dMCApplication::RegisterStack()
+void Ex03dMCApplication::RegisterData()
 {
   /// Register stack in the Root manager.
 
   if (fRootManager) {
-    // cout << "Ex03dMCApplication::RegisterStack: " << endl;
+    // cout << "Ex03dMCApplication::RegisterData: " << endl;
     fStack->Register();
+    fCalorimeterSD->Register();
   }
 }
 
@@ -173,13 +170,9 @@ void Ex03dMCApplication::RegisterStack()
 void Ex03dMCApplication::InitMC(
   const char* setup, TMCRootManager::StorageMode storageMode)
 {
-  fStorageMode = storageMode;
   /// Initialize MC.
   /// The selection of the concrete MC is done in the macro.
   /// \param setup The name of the configuration macro
-  cout << "InitMC with "
-       << (fStorageMode == TMCRootManager::kTTree ? "TTree" : "RNTuple")
-       << " storage" << endl;
 
   fVerbose.InitMC();
 
@@ -192,39 +185,20 @@ void Ex03dMCApplication::InitMC(
     }
   }
 
-  TString fileModifier = "T";
-  if (fStorageMode == TMCRootManager::kRNTuple) fileModifier = "R";
+  // The write optins must be set before creating TMCRootManager object
+  TMCRootManager::SetStorageMode(storageMode);
+  TMCRootManager::SetDebug(false);
+  TString fileModifier = TMCRootManager::GetFileModifier(storageMode);
 
-// MT support available from root v 5.34/18
-#if ROOT_VERSION_CODE >= 336402
   // Create Root manager
-  if (!gMC->IsMT()) {
+  if ((!gMC->IsMT()) || (storageMode != TMCRootManager::kTTree)) {
     fRootManager = new TMCRootManager(
-      fileModifier + GetName(), fStorageMode, TMCRootManager::kWrite);
-    // fRootManager->SetDebug(true);
+      fileModifier + GetName(), TMCRootManager::kWrite);
   }
-  else if (fStorageMode == TMCRootManager::kRNTuple) {
-    fRootManager = new TMCRootManager(
-      fileModifier + GetName(), fStorageMode, TMCRootManager::kWrite);
-  }
-#else
-  // Create Root manager
-  fRootManager =
-    new TMCRootManager(fileModifier + GetName(), TMCRootManager::kWrite);
-  // fRootManager->SetDebug(true);
-#endif
 
-  RegisterStack();
-
-  if (fStorageMode == TMCRootManager::kRNTuple) {
-    if (!gMC->IsMT()) {
-      fRootManager->CreateRNTuple();
-    }
-    else {
-      fRootManager->CreateRNTuple(true);
-      fParallelRNTupleWriter =
-        std::move(fRootManager->GetParallelRNTupleWriter());
-    }
+  RegisterData();
+  if (fRootManager) {
+    fRootManager->CreateRNTuple();
   }
 
   gMC->SetStack(fStack);
@@ -270,24 +244,19 @@ void Ex03dMCApplication::InitOnWorker()
   // Create Root manager
   Int_t threadRank = 1;
   // The real thread rank will be set in MCRootManager
-  if (fStorageMode == TMCRootManager::kRNTuple) {
-    fRootManager = new TMCRootManager(fParallelRNTupleWriter);
-  }
-  else {
-    TString fileModifier = "T";
-    fRootManager = new TMCRootManager(fileModifier + GetName(), fStorageMode,
-      TMCRootManager::kWrite, threadRank);
-  }
+
+  auto storageMode = TMCRootManager::GetStorageMode();
+  auto fileModifier = TMCRootManager::GetFileModifier(storageMode);
+
+  fRootManager = new TMCRootManager(
+     fileModifier + GetName(), TMCRootManager::kWrite, threadRank);
 
   // Set data to MC
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
 
-  RegisterStack();
-
-  if (fStorageMode == TMCRootManager::kRNTuple) {
-    fRootManager->CreateRNTuple(true, true);
-  }
+  RegisterData();
+  fRootManager->CreateRNTuple();
 }
 
 //_____________________________________________________________________________
@@ -296,21 +265,28 @@ void Ex03dMCApplication::FinishRunOnWorker()
   // cout << "Ex03dMCApplication::FinishWorkerRun: " << endl;
   if (fRootManager) {
     fRootManager->WriteAll();
-    if (fStorageMode != TMCRootManager::kRNTuple) fRootManager->Close();
+    fRootManager->Close();
   }
 }
 
 //_____________________________________________________________________________
-void Ex03dMCApplication::ReadEvent(Int_t i)
+void Ex03dMCApplication::ReadEvent(Int_t i, TMCRootManager::StorageMode storageMode,
+                                   Int_t threadId)
 {
   /// Read \em i -th event and prints hits.
-  /// \param i The number of event to be read
+
   if (!fRootManager) {
-    fRootManager = new TMCRootManager(GetName(), TMCRootManager::kRead);
+    TMCRootManager::SetStorageMode(storageMode);
+    TMCRootManager::SetDebug(false);
+    TString fileModifier = TMCRootManager::GetFileModifier(storageMode);
+
+    std::cout << "Go to create Root manager: " << fileModifier + GetName() << std:: endl;
+
+    fRootManager = new TMCRootManager(
+      fileModifier + GetName(), TMCRootManager::kRead, threadId);
+    RegisterData();
   }
 
-  fCalorimeterSD->Register();
-  RegisterStack();
   fRootManager->ReadEvent(i);
 }
 
