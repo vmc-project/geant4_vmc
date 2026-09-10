@@ -24,6 +24,7 @@ Example03
 
   Demonstrates:
     Geometry - divided volume (Gsdvn)
+    Geometry - nested assemblies and volume hierarchy queries (E03a test)
     Definition of sensitive volumes
     Definition of VMC sensitive detectors (new since v3.7)
     Physics - hadronics processes off

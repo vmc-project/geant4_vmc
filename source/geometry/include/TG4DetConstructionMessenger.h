@@ -49,6 +49,7 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcDet/setNewRadiator volumeName xtrModel foilNumber
 /// - /mcDet/setRadiatorLayer materialName thickness [fluctuation]
 /// - /mcDet/setRadiatorStrawTube gasMaterialName wallThickness gassThickness
+/// - /mcDet/setAccountAssemblyLevels true|false
 ///
 /// The following command is deprecated, it will be removed in the next version
 /// - /mcDet/setRadiator volumeName xtrModel foilMaterial gasMaterial
@@ -143,6 +144,9 @@ class TG4DetConstructionMessenger : public G4UImessenger
   /// This command is now deprecated, will be removed in the next version.
   /// It is replaced with a simpler setNewRadiator command.
   G4UIcommand* fSetRadiatorCmd;
+
+  /// command: setAccountAssemblyLevels
+  G4UIcmdWithABool* fAccountAssemblyLevelsCmd;
 
   /// current radiator description
   TG4RadiatorDescription* fRadiatorDescription;

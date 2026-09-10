@@ -48,6 +48,7 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     fSetRadiatorLayerCmd(0),
     fSetRadiatorStrawTubeCmd(0),
     fSetRadiatorCmd(0),
+    fAccountAssemblyLevelsCmd(0),
     fRadiatorDescription(0)
 {
   /// Standard constructor
@@ -168,6 +169,14 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   // This command is now deprecated, will be removed in the next version.
   // It is replaced with a simple setNewRadiator command.
   CreateSetRadiatorCmd();
+
+  fAccountAssemblyLevelsCmd =
+    new G4UIcmdWithABool("/mcDet/setAccountAssemblyLevels", this);
+  fAccountAssemblyLevelsCmd->SetGuidance(
+    "Activate accounting assemblies in the volume level hierarchy.");
+  fAccountAssemblyLevelsCmd->SetParameterName(
+    "AccountAssemblyLevels", false);
+  fAccountAssemblyLevelsCmd->AvailableForStates(G4State_PreInit);
 }
 
 //_____________________________________________________________________________
@@ -194,6 +203,7 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fSetRadiatorLayerCmd;
   delete fSetRadiatorStrawTubeCmd;
   delete fSetRadiatorCmd;
+  delete fAccountAssemblyLevelsCmd;
 }
 
 //
@@ -478,5 +488,9 @@ void TG4DetConstructionMessenger::SetNewValue(
       radiatorDescription->SetStrawTube(
         strawTubeMaterial, 0.53 * CLHEP::mm, 3.14159 * CLHEP::mm);
     }
+  }
+  else if (command == fAccountAssemblyLevelsCmd) {
+    TG4GeometryServices::Instance()->SetAccountAssemblyLevels(
+      fAccountAssemblyLevelsCmd->GetNewBoolValue(newValues));
   }
 }

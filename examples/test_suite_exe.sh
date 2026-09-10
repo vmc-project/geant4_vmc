@@ -292,6 +292,11 @@ do
         $EXE -g4g geomRootToGeant4 -g4uc "field" -g4vm "" -rm "test_E03_6.C(\"\", kFALSE)" >& tmpfile
         if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
         cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+        if [ "$OPTION" = "E03a" ]; then
+          $EXE -g4g geomRootToGeant4 -g4vm "" -a yes -rm "test_E03_8.C(\"\", kFALSE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+        fi
         evaluate_test "$TMP_FAILED"
 
         start_test "... Running test with G4, geometry via TGeo, TGeo navigation"
@@ -313,6 +318,11 @@ do
         $EXE -g4g geomRoot -g4uc "field" -g4vm "" -rm "test_E03_6.C(\"\", kFALSE)" >& tmpfile
         if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
         cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+        if [ "$OPTION" = "E03a" ]; then
+          $EXE -g4g geomRoot -g4vm "" -a yes -rm "test_E03_8.C(\"\", kFALSE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+        fi
         evaluate_test "$TMP_FAILED"
 
         if [ "$TEST_OLDGEOM" = "1" ]; then

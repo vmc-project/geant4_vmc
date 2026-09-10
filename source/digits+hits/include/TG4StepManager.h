@@ -31,8 +31,6 @@
 #include <TMCProcess.h>
 #include <TString.h>
 
-#include <vector>
-
 class TG4Limits;
 class TG4TrackManager;
 class TG4SteppingAction;
@@ -44,20 +42,6 @@ class G4VPhysicalVolume;
 class TLorentzVector;
 class TVector3;
 struct TMCParticleStatus;
-
-/// \ingroup digits_hits
-/// The volume levels one Geant4 placement stands for.
-///
-/// VGM has no Geant4 equivalent of a TGeo assembly: it places the first
-/// non-assembly descendant directly and keeps the collapsed chain in the
-/// placement name, outermost first, e.g.
-/// \code &ITSULayer0_1%ITSUHalfBarrel0_0%ITSUStave0_0%ITSUChip0 \endcode
-/// Empty for an ordinary placement.
-struct TG4AssemblyLevels
-{
-  std::vector<G4String> fNames; ///< outermost first; last is the placed volume
-  std::vector<G4int> fCopyNos;  ///< -1 where the Geant4 copy number applies
-};
 
 /// \brief Geant4 implementation of the TVirtualMC interface methods
 /// for access to Geant4 at step level.
@@ -179,8 +163,6 @@ class TG4StepManager
   const G4VTouchable* GetCurrentTouchable() const;
   G4VPhysicalVolume* GetCurrentOffPhysicalVolume(
     G4int off, G4bool warn = false) const;
-  void BuildAssemblyLevels() const;
-  const TG4AssemblyLevels& GetAssemblyLevels(const G4VPhysicalVolume* pv) const;
   G4VPhysicalVolume* GetOffLevel(G4int off, G4int& component) const;
 
   // static data members
@@ -211,12 +193,6 @@ class TG4StepManager
 
   /// buffer for current volume name or path
   mutable G4String fNameBuffer;
-
-  /// assembly levels per placement, indexed by its Geant4 instance id
-  mutable std::vector<TG4AssemblyLevels> fAssemblyLevels;
-
-  /// whether fAssemblyLevels has been filled
-  mutable G4bool fAssemblyLevelsBuilt;
 
   /// volume copy number offset
   G4int fCopyNoOffset;
