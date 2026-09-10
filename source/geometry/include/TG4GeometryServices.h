@@ -30,6 +30,7 @@
 #include <TMCOptical.h>
 
 #include <map>
+#include <vector>
 
 class TG4MediumMap;
 class TG4NameMap;
@@ -44,6 +45,20 @@ class G4UserLimits;
 class G4OpticalSurface;
 
 class TGeoHMatrix;
+
+/// \ingroup geometry
+/// The volume levels one Geant4 placement stands for.
+///
+/// VGM has no Geant4 equivalent of a TGeo assembly: it places the first
+/// non-assembly descendant directly and keeps the collapsed chain in the
+/// placement name, outermost first, e.g.
+/// \code &ITSULayer0_1%ITSUHalfBarrel0_0%ITSUStave0_0%ITSUChip0 \endcode
+/// Empty for an ordinary placement.
+struct TG4AssemblyLevels
+{
+  std::vector<G4String> fNames; ///< outermost first; last is the placed volume
+  std::vector<G4int> fCopyNos;  ///< -1 where the Geant4 copy number applies
+};
 
 /// \ingroup geometry
 /// \brief Services for accessing to Geant4 geometry
@@ -63,6 +78,8 @@ class TG4GeometryServices : public TG4Verbose
   static TG4GeometryServices* Instance();
 
   // methods
+  void BuildAssemblyLevels();
+  const TG4AssemblyLevels& GetAssemblyLevels(const G4VPhysicalVolume* pv) const;
   // utilities
   G4double* CreateG4doubleArray(Float_t* array, G4int size, G4bool copyValues = true) const;
   G4double* CreateG4doubleArray(Double_t* array, G4int size, G4bool copyValues = true) const;
@@ -96,6 +113,7 @@ class TG4GeometryServices : public TG4Verbose
   void SetWorld(G4VPhysicalVolume* world);
   void SetIsG3toG4(G4bool isG3toG4);
   void SetG3toG4Separator(char separator);
+  void SetAccountAssemblyLevels(G4bool option);
 
   // get methods
   // volumes
@@ -162,6 +180,15 @@ class TG4GeometryServices : public TG4Verbose
 
   /// top physical volume (world)
   G4VPhysicalVolume* fWorld;
+
+  /// option to account assembly levels in the volume level hierarchy
+  G4bool fAccountAssemblyLevels;
+
+  /// assembly levels per placement, indexed by its Geant4 instance id
+  std::vector<TG4AssemblyLevels> fAssemblyLevels;
+
+  /// whether fAssemblyLevels has been filled
+  G4bool fAssemblyLevelsBuilt;
 };
 
 // inline methods
@@ -182,6 +209,12 @@ inline void TG4GeometryServices::SetIsG3toG4(G4bool isG3toG4)
 {
   /// Set the info if user geometry is defined via G3toG4
   fIsG3toG4 = isG3toG4;
+}
+
+inline void TG4GeometryServices::SetAccountAssemblyLevels(G4bool option)
+{
+  /// Set the option to account assembly levels in the volume level hierarchy
+  fAccountAssemblyLevels = option;
 }
 
 inline G4VPhysicalVolume* TG4GeometryServices::GetWorld() const

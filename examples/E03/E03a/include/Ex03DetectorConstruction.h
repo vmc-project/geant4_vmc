@@ -53,6 +53,7 @@ class Ex03DetectorConstruction : public TObject
   void SetCalorSizeYZ(Double_t value);
   void SetAbsorberThickness(Double_t value);
   void SetGapThickness(Double_t value);
+  void SetUseAssemblies(Bool_t value);
 
   //
   // get methods
@@ -77,6 +78,9 @@ class Ex03DetectorConstruction : public TObject
 
   /// \return The gap thickness
   Double_t GetGapThickness() const { return fGapThickness; }
+
+  /// \return Whether the alternative geometry with assemblies is enabled
+  Bool_t GetUseAssemblies() const { return fUseAssemblies; }
 
  private:
   // helper type for setting cuts
@@ -110,7 +114,16 @@ class Ex03DetectorConstruction : public TObject
   TString fAbsorberMaterial; ///< The absorber material name
   TString fGapMaterial;      ///< The gap material name
 
+  Bool_t fUseAssemblies; ///< Option to place the calorimeter in assemblies
+
   ClassDef(Ex03DetectorConstruction, 1) // Ex03DetectorConstruction
 };
+
+/// Enable or disable the alternative geometry with assemblies
+/// \param value  If true, place the calorimeter in nested assemblies
+inline void Ex03DetectorConstruction::SetUseAssemblies(Bool_t value)
+{
+  fUseAssemblies = value;
+}
 
 #endif // EX03_DETECTOR_CONSTRUCTION_H

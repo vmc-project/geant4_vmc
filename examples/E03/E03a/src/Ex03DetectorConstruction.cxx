@@ -27,6 +27,7 @@
 #include <TGeoElement.h>
 #include <TGeoManager.h>
 #include <TGeoMaterial.h>
+#include <TGeoVolume.h>
 #include <TList.h>
 #include <TThread.h>
 #include <TVirtualMC.h>
@@ -54,7 +55,8 @@ ClassImp(Ex03DetectorConstruction)
     fGapThickness(0.),
     fDefaultMaterial("Galactic"),
     fAbsorberMaterial("Lead"),
-    fGapMaterial("liquidArgon")
+    fGapMaterial("liquidArgon"),
+    fUseAssemblies(kFALSE)
 {
   /// Default constuctor
 
@@ -286,12 +288,25 @@ void Ex03DetectorConstruction::ConstructGeometry()
     calo[0] = fCalorThickness / 2.;
     calo[1] = fCalorSizeYZ / 2.;
     calo[2] = fCalorSizeYZ / 2.;
-    gGeoManager->Volume("CALO", "BOX", defaultMediumId, calo, 3);
+    TGeoVolume* calorimeter =
+      gGeoManager->Volume("CALO", "BOX", defaultMediumId, calo, 3);
 
     Double_t posX = 0.;
     Double_t posY = 0.;
     Double_t posZ = 0.;
-    gGeoManager->Node("CALO", 1, "WRLD", posX, posY, posZ, 0, kTRUE, ubuf);
+    if (fUseAssemblies) {
+      auto innerAssembly = new TGeoVolumeAssembly("E03InnerAssembly");
+      innerAssembly->AddNode(calorimeter, 1);
+
+      auto outerAssembly = new TGeoVolumeAssembly("E03OuterAssembly");
+      outerAssembly->AddNode(innerAssembly, 22);
+
+      top->AddNode(outerAssembly, 11);
+    }
+    else {
+      gGeoManager->Node(
+        "CALO", 1, "WRLD", posX, posY, posZ, 0, kTRUE, ubuf);
+    }
 
     // Divide  calorimeter along X axis to place layers
     //

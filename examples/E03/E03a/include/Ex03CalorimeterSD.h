@@ -65,6 +65,7 @@ class Ex03CalorimeterSD : public TNamed
   TClonesArray* fCalCollection;        ///< Hits collection
   Int_t fAbsorberVolId;                ///< The absorber volume Id
   Int_t fGapVolId;                     ///< The gap volume Id
+  Bool_t fAssemblyHierarchyPrinted;    ///< Whether assembly levels were printed
   Int_t fVerboseLevel;                 ///< Verbosity level
 
   ClassDef(Ex03CalorimeterSD, 1) // Ex03CalorimeterSD

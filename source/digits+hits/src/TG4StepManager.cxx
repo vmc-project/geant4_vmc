@@ -25,7 +25,6 @@
 #include "TG4TrackManager.h"
 
 #include <G4AffineTransform.hh>
-#include <G4PhysicalVolumeStore.hh>
 #include <G4Navigator.hh>
 #include <G4OpticalPhoton.hh>
 #include <G4ProcessManager.hh>
@@ -40,12 +39,6 @@
 
 #include <TLorentzVector.h>
 
-#ifdef USE_VGM
-#include "RootGM/volumes/Placement.h"
-#endif
-
-#include <algorithm>
-#include <cstdlib>
 #include <TMCParticleStatus.h>
 #include <TMath.h>
 #include <TVector3.h>
@@ -61,8 +54,6 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
     fLimitsModifiedOnFly(0),
     fSteppingManager(0),
     fNameBuffer(),
-    fAssemblyLevels(),
-    fAssemblyLevelsBuilt(false),
     fCopyNoOffset(0),
     fDivisionCopyNoOffset(0),
     fTrackManager(0),
@@ -177,68 +168,6 @@ const G4VTouchable* TG4StepManager::GetCurrentTouchable() const
 }
 
 //_____________________________________________________________________________
-void TG4StepManager::BuildAssemblyLevels() const
-{
-  /// Decompose every VGM assembly-composite placement name once, so that the
-  /// per-step lookup below is a plain array index.
-
-  fAssemblyLevelsBuilt = true;
-
-#ifdef USE_VGM
-  if (!RootGM::Placement::GetIncludeAssembliesInNames()) return;
-  const char prefix = RootGM::Placement::GetNamePrefix();
-  const char separator = RootGM::Placement::GetNameSeparator();
-
-  const G4PhysicalVolumeStore* store = G4PhysicalVolumeStore::GetInstance();
-  G4int maxId = -1;
-  for (G4VPhysicalVolume* pv : *store)
-    maxId = std::max(maxId, pv->GetInstanceID());
-  if (maxId < 0) return;
-  fAssemblyLevels.resize(maxId + 1);
-
-  for (G4VPhysicalVolume* pv : *store) {
-    const G4String& name = pv->GetName();
-    if (name.size() < 2 || name[0] != prefix) continue;
-
-    TG4AssemblyLevels levels;
-    for (std::size_t start = 1; start <= name.size();) {
-      const std::size_t sep = name.find(separator, start);
-      levels.fNames.push_back(name.substr(
-        start, sep == G4String::npos ? G4String::npos : sep - start));
-      levels.fCopyNos.push_back(-1);
-      if (sep == G4String::npos) break;
-      start = sep + 1;
-    }
-    if (levels.fNames.size() < 2) continue;
-
-    // every component but the last is a collapsed node named "<volume>_<copyNo>"
-    for (std::size_t i = 0; i + 1 < levels.fNames.size(); ++i) {
-      G4String& part = levels.fNames[i];
-      const std::size_t us = part.rfind('_');
-      if (us == G4String::npos || us + 1 >= part.size()) continue;
-      if (part.find_first_not_of("0123456789", us + 1) != G4String::npos) continue;
-      levels.fCopyNos[i] = std::atoi(part.c_str() + us + 1);
-      part.resize(us);
-    }
-    fAssemblyLevels[pv->GetInstanceID()] = levels;
-  }
-#endif
-}
-
-//_____________________________________________________________________________
-const TG4AssemblyLevels& TG4StepManager::GetAssemblyLevels(
-  const G4VPhysicalVolume* pv) const
-{
-  static const TG4AssemblyLevels kNone;
-
-  if (!fAssemblyLevelsBuilt) BuildAssemblyLevels();
-
-  const G4int id = pv->GetInstanceID();
-  if (id < 0 || id >= G4int(fAssemblyLevels.size())) return kNone;
-  return fAssemblyLevels[id];
-}
-
-//_____________________________________________________________________________
 G4VPhysicalVolume* TG4StepManager::GetOffLevel(
   G4int off, G4int& component) const
 {
@@ -255,7 +184,8 @@ G4VPhysicalVolume* TG4StepManager::GetOffLevel(
     G4VPhysicalVolume* pv = touchable->GetVolume(level);
     if (pv == 0) break;
 
-    const TG4AssemblyLevels& levels = GetAssemblyLevels(pv);
+    const TG4AssemblyLevels& levels =
+      TG4GeometryServices::Instance()->GetAssemblyLevels(pv);
     const G4int nofLevels =
       levels.fNames.empty() ? 1 : G4int(levels.fNames.size());
 
@@ -532,7 +462,8 @@ Int_t TG4StepManager::CurrentVolOffID(Int_t off, Int_t& copyNo) const
 
   G4int component = -1;
   if (G4VPhysicalVolume* pv = GetOffLevel(off, component)) {
-    const TG4AssemblyLevels& levels = GetAssemblyLevels(pv);
+    const TG4AssemblyLevels& levels =
+      TG4GeometryServices::Instance()->GetAssemblyLevels(pv);
     const G4int encoded =
       (component >= 0 && component < G4int(levels.fCopyNos.size()))
         ? levels.fCopyNos[component]
@@ -584,7 +515,8 @@ const char* TG4StepManager::CurrentVolOffName(Int_t off) const
 
   G4int component = -1;
   if (G4VPhysicalVolume* pv = GetOffLevel(off, component)) {
-    const TG4AssemblyLevels& levels = GetAssemblyLevels(pv);
+    const TG4AssemblyLevels& levels =
+      TG4GeometryServices::Instance()->GetAssemblyLevels(pv);
     const G4String& name =
       (component >= 0 && component < G4int(levels.fNames.size()))
         ? levels.fNames[component]

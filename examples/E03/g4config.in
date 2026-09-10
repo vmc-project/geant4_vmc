@@ -19,6 +19,7 @@
 #/mcVerbose/trackManager 2
 #/mcVerbose/geometryManager 2
 #/mcVerbose/regionsManager 2
+#/mcDet/setAccountAssemblyLevels false
 
 /control/cout/ignoreThreadsExcept 0
 

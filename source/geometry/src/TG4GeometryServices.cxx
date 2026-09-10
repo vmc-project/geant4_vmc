@@ -39,10 +39,16 @@
 #include "Riostream.h"
 #include <TGeoMatrix.h>
 
+#ifdef USE_VGM
+#include "RootGM/volumes/Placement.h"
+#endif
+
 // Moved after Root includes to avoid shadowed variables
 // generated from short units names
 #include <G4SystemOfUnits.hh>
 
+#include <algorithm>
+#include <cstdlib>
 #include <iomanip>
 #include <math.h>
 #include <vector>
@@ -58,7 +64,10 @@ TG4GeometryServices::TG4GeometryServices()
     fIsG3toG4(false),
     fMediumMap(0),
     fOpSurfaceMap(0),
-    fWorld(0)
+    fWorld(0),
+    fAccountAssemblyLevels(true),
+    fAssemblyLevels(),
+    fAssemblyLevelsBuilt(false)
 {
   /// Default constructor
 
@@ -201,6 +210,79 @@ G4double* TG4GeometryServices::ConvertAtomWeight(
 //
 // public methods
 //
+
+//_____________________________________________________________________________
+void TG4GeometryServices::BuildAssemblyLevels()
+{
+  /// Decompose every VGM assembly-composite placement name once, so that the
+  /// per-step lookup below is a plain array index.
+
+  fAssemblyLevels.clear();
+  fAssemblyLevelsBuilt = true;
+
+  // Do nothing if accounting assembly levels is switched off
+  if (!fAccountAssemblyLevels) return;
+
+#ifdef USE_VGM
+  if (!RootGM::Placement::GetIncludeAssembliesInNames()) return;
+  const char prefix = RootGM::Placement::GetNamePrefix();
+  const char separator = RootGM::Placement::GetNameSeparator();
+
+  const G4PhysicalVolumeStore* store = G4PhysicalVolumeStore::GetInstance();
+  G4int maxId = -1;
+  for (G4VPhysicalVolume* pv : *store)
+    maxId = std::max(maxId, pv->GetInstanceID());
+  if (maxId < 0) return;
+  fAssemblyLevels.resize(maxId + 1);
+
+  for (G4VPhysicalVolume* pv : *store) {
+    const G4String& name = pv->GetName();
+    if (name.size() < 2 || name[0] != prefix) continue;
+
+    TG4AssemblyLevels levels;
+    for (std::size_t start = 1; start <= name.size();) {
+      const std::size_t sep = name.find(separator, start);
+      levels.fNames.push_back(name.substr(
+        start, sep == G4String::npos ? G4String::npos : sep - start));
+      levels.fCopyNos.push_back(-1);
+      if (sep == G4String::npos) break;
+      start = sep + 1;
+    }
+    if (levels.fNames.size() < 2) continue;
+
+    // every component but the last is a collapsed node named "<volume>_<copyNo>"
+    for (std::size_t i = 0; i + 1 < levels.fNames.size(); ++i) {
+      G4String& part = levels.fNames[i];
+      const std::size_t us = part.rfind('_');
+      if (us == G4String::npos || us + 1 >= part.size()) continue;
+      if (part.find_first_not_of("0123456789", us + 1) != G4String::npos) continue;
+      levels.fCopyNos[i] = std::atoi(part.c_str() + us + 1);
+      part.resize(us);
+    }
+    fAssemblyLevels[pv->GetInstanceID()] = levels;
+  }
+
+  if (VerboseLevel() > 1) {
+    G4cout << "### AssemblyLevels constructed." << G4endl;
+  }
+#endif
+}
+
+//_____________________________________________________________________________
+const TG4AssemblyLevels& TG4GeometryServices::GetAssemblyLevels(
+  const G4VPhysicalVolume* pv) const
+{
+  static const TG4AssemblyLevels kNone;
+
+  if (!fAssemblyLevelsBuilt) {
+    return kNone;
+  }
+
+  const G4int id = pv->GetInstanceID();
+  if (id < 0 || id >= G4int(fAssemblyLevels.size())) return kNone;
+
+  return fAssemblyLevels[id];
+}
 
 //_____________________________________________________________________________
 G4double* TG4GeometryServices::CreateG4doubleArray(
