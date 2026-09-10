@@ -804,6 +804,9 @@ void TG4GeometryManager::ConstructGeometry()
   // Fill medium map
   FillMediumMap();
 
+  // Build assembly levels structures
+  TG4GeometryServices::Instance()->BuildAssemblyLevels();
+
   // VMC application construct geometry for optical processes
   TG4StateManager::Instance()->SetNewState(kConstructOpGeometry);
   TVirtualMCApplication::Instance()->ConstructOpGeometry();

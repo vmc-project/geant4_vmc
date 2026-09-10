@@ -22,6 +22,7 @@
 ///   [-g4sp, --g4-special-physics]: Geant4 special physics selection
 ///   [-g4m,  --g4-macro]:           Geant4 macro
 ///   [-g4vm, --g4-vis-macro]:       Geant4 visualization macro
+///   [-a,    --use-assemblies]:      Use the alternative assembly geometry
 ///   [-g3g,  --g3-geometry]:        Geant3 geometry option
 ///   (TGeant3,TGeant3TGeo)
 ///   [-rm,   --root-macro]:         Root macro
@@ -74,6 +75,9 @@ void PrintUsage(std::string programName)
     << std::endl;
   std::cerr << "   [-g4m,  --g4-macro]:           Geant4 macro" << std::endl;
   std::cerr << "   [-g4vm, --g4-vis-macro]:       Geant4 visualization macro"
+            << std::endl;
+  std::cerr << "   [-a,    --use-assemblies]:      Use the alternative assembly "
+               "geometry (yes,no)"
             << std::endl;
   std::cerr << "   [-g4uc, --g4-user-class]:      Geant4 user class "
             << "                                  (geometry, regions, "
@@ -165,6 +169,7 @@ int main(int argc, char** argv)
 #endif
   std::string rootMacro = "";
   std::string verbose = "yes";
+  std::string useAssemblies = "no";
 
   for (Int_t i = 1; i < argc; i = i + 2) {
     std::cout << "processing " << argv[i] << " with " << argv[i + 1]
@@ -204,10 +209,18 @@ int main(int argc, char** argv)
     else if (std::string(argv[i]) == "--verbose" ||
              std::string(argv[i]) == "-v")
       verbose = argv[i + 1];
+    else if (std::string(argv[i]) == "--use-assemblies" ||
+             std::string(argv[i]) == "-a")
+      useAssemblies = argv[i + 1];
     else {
       PrintUsage("testE03");
       return 1;
     }
+  }
+
+  if (useAssemblies != "yes" && useAssemblies != "no") {
+    PrintUsage("testE03");
+    return 1;
   }
 
   if (verbose == "yes") {
@@ -225,6 +238,10 @@ int main(int argc, char** argv)
   // Create MC application (thread local)
   Ex03MCApplication* appl =
     new Ex03MCApplication("ExampleE03", "The exampleE03 MC application");
+
+  if (useAssemblies == "yes") {
+    appl->GetDetectorConstruction()->SetUseAssemblies(kTRUE);
+  }
 
 #ifdef USE_GEANT4
   if (g4Geometry.find("VMC") != std::string::npos) {

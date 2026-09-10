@@ -338,6 +338,9 @@ do
         run_test_case "$RUNG4_OPT test_E03_5.C(\"g4Config4.C\",kFALSE)"
         run_test_case "$RUNG4_OPT test_E03_6.C(\"g4Config5.C\",kFALSE)"
         run_test_case "$RUNG4_OPT test_E03_7.C(\"g4Config6.C\",kFALSE)"
+        if [ "$OPTION" = "E03a" ]; then
+          run_test_case "$RUNG4_OPT test_E03_8.C(\"g4Config.C\",kFALSE)"
+        fi
         finish_test "$OUT_SUB/test_g4_tgeo_nat.out"
 
         start_test "... Running test with G4, geometry via TGeo, TGeo navigation"
@@ -348,6 +351,9 @@ do
         run_test_case "$RUNG4_OPT test_E03_5.C(\"g4tgeoConfig4.C\",kFALSE)"
         run_test_case "$RUNG4_OPT test_E03_6.C(\"g4tgeoConfig5.C\",kFALSE)"
         run_test_case "$RUNG4_OPT test_E03_7.C(\"g4tgeoConfig6.C\",kFALSE)"
+        if [ "$OPTION" = "E03a" ]; then
+          run_test_case "$RUNG4_OPT test_E03_8.C(\"g4tgeoConfig.C\",kFALSE)"
+        fi
         finish_test "$OUT_SUB/test_g4_tgeo_tgeo.out"
 
         if [ "$TEST_OLDGEOM" = "1" ]; then

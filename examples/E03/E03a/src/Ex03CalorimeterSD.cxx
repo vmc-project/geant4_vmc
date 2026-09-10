@@ -42,6 +42,7 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(
     fCalCollection(0),
     fAbsorberVolId(0),
     fGapVolId(0),
+    fAssemblyHierarchyPrinted(kFALSE),
     fVerboseLevel(1)
 {
   /// Standard constructor.
@@ -65,6 +66,7 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(
     fCalCollection(0),
     fAbsorberVolId(origin.fAbsorberVolId),
     fGapVolId(origin.fGapVolId),
+    fAssemblyHierarchyPrinted(kFALSE),
     fVerboseLevel(origin.fVerboseLevel)
 {
   /// Copy constructor (for clonig on worker thread in MT mode).
@@ -86,6 +88,7 @@ Ex03CalorimeterSD::Ex03CalorimeterSD()
     fCalCollection(0),
     fAbsorberVolId(0),
     fGapVolId(0),
+    fAssemblyHierarchyPrinted(kFALSE),
     fVerboseLevel(1)
 {
   /// Default constructor
@@ -152,6 +155,18 @@ Bool_t Ex03CalorimeterSD::ProcessHits()
   Int_t id = fMC->CurrentVolID(copyNo);
 
   if (id != fAbsorberVolId && id != fGapVolId) return false;
+
+  if (fDetector->GetUseAssemblies() && !fAssemblyHierarchyPrinted) {
+    fAssemblyHierarchyPrinted = kTRUE;
+    cout << "Assembly volume hierarchy:" << endl;
+    for (Int_t off = 0; off <= 6; ++off) {
+      Int_t offCopyNo = -1;
+      TString offName = fMC->CurrentVolOffName(off);
+      Int_t offId = fMC->CurrentVolOffID(off, offCopyNo);
+      cout << "  off=" << off << " name=" << offName << " id=" << offId
+           << " copyNo=" << offCopyNo << endl;
+    }
+  }
 
   fMC->CurrentVolOffID(2, copyNo);
   // cout << "Got copyNo "<< copyNo << " " << fMC->CurrentVolPath() << endl;
