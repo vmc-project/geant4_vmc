@@ -1,0 +1,35 @@
+<map id="examples/TR/src/MCApplication.cxx" name="examples/TR/src/MCApplication.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the MCApplication class." alt="" coords="1071,5,1300,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,121,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1070,25,662,41,402,57,136,81,136,76,402,52,662,35,1070,19"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="145,79,298,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1070,28,735,47,314,81,314,76,735,42,1070,22"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="322,79,436,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1071,28,793,47,451,81,451,76,792,42,1071,23"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="460,79,592,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1071,32,860,53,607,81,607,76,859,48,1071,27"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="616,79,750,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1099,34,766,81,765,76,1099,29"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="775,79,911,105"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1128,34,917,78,916,73,1127,29"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="935,79,1026,105"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1152,34,1030,76,1029,71,1150,29"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1049,79,1162,105"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1174,34,1132,71,1128,67,1170,30"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1186,79,1348,105"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1201,30,1244,67,1240,71,1198,34"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1372,79,1428,105"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1223,29,1359,74,1357,79,1221,34"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="1452,79,1551,105"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1240,29,1438,73,1437,79,1239,34"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="1574,79,1672,105"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1268,29,1560,76,1559,81,1267,34"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="1696,79,1779,105"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="1301,28,1476,47,1681,76,1680,81,1476,52,1301,33"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="1804,79,1880,105"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="1301,24,1523,43,1654,57,1788,76,1788,81,1653,63,1522,48,1300,29"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="1904,79,2038,105"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="1301,24,1566,45,1890,76,1889,81,1565,50,1301,30"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="2062,79,2158,105"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="1301,20,1632,37,1837,53,2046,76,2046,81,1836,59,1631,43,1301,26"/>
+</map>

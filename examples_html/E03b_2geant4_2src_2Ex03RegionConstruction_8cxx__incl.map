@@ -1,0 +1,15 @@
+<map id="examples/E03/E03b/geant4/src/Ex03RegionConstruction.cxx" name="examples/E03/E03b/geant4/src/Ex03RegionConstruction.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the Ex03RegionConstruction class." alt="" coords="437,5,647,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,178,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="437,48,176,93,175,88,436,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="202,94,365,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="478,49,339,92,337,86,477,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="389,94,530,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="524,48,485,85,482,81,520,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="554,94,698,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="565,44,604,81,600,85,561,48"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="722,94,818,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="600,44,721,86,720,91,598,49"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="842,94,986,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="636,44,842,88,841,93,635,49"/>
+</map>

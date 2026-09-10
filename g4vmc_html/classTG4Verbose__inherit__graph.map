@@ -1,0 +1,83 @@
+<map id="TG4Verbose" name="TG4Verbose">
+<area shape="rect" id="Node000001" title="Base class for defining the verbose level and a common messenger." alt="" coords="5,672,100,698"/>
+<area shape="rect" id="Node000002" href="$classTG4ComposedPhysicsList.html" title="The Geant4 VMC physics list builder." alt="" coords="163,5,339,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="51,656,54,526,67,341,79,247,95,160,117,89,130,62,146,40,161,28,164,33,150,44,135,64,122,91,100,162,84,248,72,342,60,526,57,656"/>
+<area shape="rect" id="Node000003" href="$classTG4CrossSectionManager.html" title="The manager class for accessing hadronic cross sections." alt="" coords="164,55,338,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="52,656,56,534,70,365,82,278,98,199,119,134,132,109,146,90,162,77,165,81,150,93,136,112,124,136,103,201,87,279,75,365,62,535,57,656"/>
+<area shape="rect" id="Node000004" href="$classTG4EmPhysicsList.html" title="The standard EM physics list." alt="" coords="184,104,318,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="52,657,58,544,73,389,85,310,101,239,121,180,133,157,146,139,163,126,183,118,185,123,166,131,150,143,137,159,126,182,106,240,90,311,78,390,63,545,57,657"/>
+<area shape="rect" id="Node000005" href="$classTG4EventAction.html" title="Actions at the beginning and the end of event." alt="" coords="193,153,309,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="53,656,60,553,76,413,89,342,104,278,123,225,146,188,167,173,192,166,193,171,169,178,150,192,128,227,109,279,94,343,82,413,65,553,58,656"/>
+<area shape="rect" id="Node000006" href="$classTG4ExtDecayer.html" title="Implements the G4VExtDecayer abstract class with the TVirtualMCDecayer." alt="" coords="195,203,306,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="53,656,62,562,80,437,92,374,107,317,125,270,146,238,168,222,194,215,195,220,171,227,150,241,130,272,112,318,97,375,85,438,68,562,59,656"/>
+<area shape="rect" id="Node000007" href="$classTG4ExtraPhysicsList.html" title="The physics list with extra physics builders." alt="" coords="179,252,322,278"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="54,656,65,572,83,461,110,356,127,315,146,287,161,276,178,268,180,273,164,280,150,291,131,318,115,358,88,463,70,573,59,657"/>
+<area shape="rect" id="Node000008" href="$classTG4GeoTrackManager.html" title="The manager class for collecting TGeo tracks for visualization." alt="" coords="174,301,328,327"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="55,656,67,581,87,485,113,395,129,360,146,336,172,320,175,325,149,340,133,363,118,397,92,487,72,582,60,657"/>
+<area shape="rect" id="Node000009" href="$classTG4GeometryManager.html" title="The manager class for building Geant4 geometry depending on a selected user input." alt="" coords="175,351,327,376"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="51,657,56,600,70,527,82,488,98,451,119,416,146,385,173,369,176,374,149,390,123,419,103,453,87,490,75,528,61,600,57,657"/>
+<area shape="rect" id="Node000010" href="$classTG4GeometryServices.html" title="Services for accessing to Geant4 geometry." alt="" coords="174,400,328,426"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="53,656,61,608,77,548,104,487,123,459,146,435,172,419,175,424,149,439,127,463,109,490,82,550,66,609,59,657"/>
+<area shape="rect" id="Node000011" href="$classTG4HadronPhysicsList.html" title="The hadron physics list helper class." alt="" coords="173,449,329,475"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="56,656,67,617,84,571,110,524,127,503,146,484,171,470,173,475,149,488,131,506,114,527,89,573,72,619,62,657"/>
+<area shape="rect" id="Node000012" href="$classTG4MCGeometry.html" title="Geant4 implementation of the TVirtualMCGeometry interface." alt="" coords="190,499,312,524"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="61,656,92,594,116,561,146,533,166,522,188,515,190,520,169,527,149,538,120,565,97,597,66,659"/>
+<area shape="rect" id="Node000013" href="$classTG4ModelConfigurationManager.html" title="The model configuration vector with suitable setters and a messenger." alt="" coords="148,548,354,574"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="69,658,102,619,123,599,146,583,170,572,173,577,149,587,126,603,106,622,73,661"/>
+<area shape="rect" id="Node000015" href="$classTG4OpGeometryManager.html" title="Geant4 implementation of the TVirtualMC interface methods for definition of material properties for o..." alt="" coords="166,597,336,623"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="86,661,147,632,181,621,182,626,149,637,89,666"/>
+<area shape="rect" id="Node000016" href="$classTG4ParticlesChecker.html" title="A helper class for comparing the basic particles properties in between Root and Geant4." alt="" coords="178,647,324,672"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="115,674,177,666,178,671,115,680"/>
+<area shape="rect" id="Node000017" href="$classTG4ParticlesManager.html" title="Provides mapping between TDatabasePDG and Geant4 particles." alt="" coords="177,696,324,722"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="116,690,177,697,176,703,115,695"/>
+<area shape="rect" id="Node000018" href="$classTG4PhysicsManager.html" title="Geant4 implementation of the TVirtualMC interface methods for building Geant4 physics and access to i..." alt="" coords="180,745,322,771"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="89,703,149,732,183,742,181,747,147,737,87,708"/>
+<area shape="rect" id="Node000019" href="$classTG4PrimaryGeneratorAction.html" title="Primary generator action defined via TVirtualMCStack and TVirtualMCApplication." alt="" coords="159,795,343,820"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="73,708,106,747,126,765,149,781,173,792,170,797,146,786,123,770,102,750,69,712"/>
+<area shape="rect" id="Node000020" href="$classTG4RunAction.html" title="Actions at the beginning and the end of run." alt="" coords="198,844,304,870"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="66,711,97,772,120,804,149,831,172,843,198,850,196,855,170,848,146,835,116,808,92,775,61,713"/>
+<area shape="rect" id="Node000021" href="$classTG4RunManager.html" title="Geant4 implementation of the TVirtualMC interface methods for access to Geant4 at run level." alt="" coords="191,893,310,919"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="62,712,72,751,89,796,114,842,149,880,169,892,191,899,190,904,167,897,146,884,110,845,84,798,67,752,57,713"/>
+<area shape="rect" id="Node000022" href="$classTG4SDConstruction.html" title="Sensitive detector construction." alt="" coords="182,943,320,968"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="59,713,66,760,82,819,109,879,127,906,149,929,165,940,183,947,181,952,163,945,146,934,123,909,104,882,77,821,61,761,54,713"/>
+<area shape="rect" id="Node000023" href="$classTG4SpecialControlsV2.html" title="The manager class for G3 process controls." alt="" coords="174,992,328,1018"/>
+<area shape="poly" id="edge22_Node000001_Node000023" title=" " alt="" coords="57,713,61,769,75,841,87,879,103,915,123,949,149,979,175,994,172,999,146,983,119,953,98,918,82,881,70,842,56,770,51,713"/>
+<area shape="rect" id="Node000024" href="$classTG4SpecialPhysicsList.html" title="The Geant4 VMC special physics list helper class." alt="" coords="172,1041,330,1067"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="60,713,73,787,92,882,118,971,133,1005,149,1028,173,1043,170,1047,146,1032,129,1008,113,973,87,883,67,788,55,714"/>
+<area shape="rect" id="Node000025" href="$classTG4SpecialStackingAction.html" title="Defines a special stacking mechanism." alt="" coords="162,1091,340,1116"/>
+<area shape="poly" id="edge24_Node000001_Node000025" title=" " alt="" coords="59,713,70,797,89,907,115,1011,131,1051,150,1078,164,1088,160,1092,146,1081,127,1053,110,1013,83,908,65,798,54,714"/>
+<area shape="rect" id="Node000026" href="$classTG4StateManager.html" title="The manager class for application state." alt="" coords="187,1140,314,1166"/>
+<area shape="poly" id="edge25_Node000001_Node000026" title=" " alt="" coords="59,713,68,807,85,931,97,994,112,1050,130,1096,150,1127,167,1139,188,1147,186,1152,164,1144,146,1131,125,1099,107,1052,92,995,80,932,62,807,53,714"/>
+<area shape="rect" id="Node000027" href="$classTG4TrackManager.html" title="The class for storing G4 tracks in VMC sack." alt="" coords="186,1189,316,1215"/>
+<area shape="poly" id="edge26_Node000001_Node000027" title=" " alt="" coords="58,713,66,816,82,956,94,1026,109,1090,128,1141,150,1176,166,1189,186,1196,185,1201,164,1193,146,1180,123,1144,104,1091,89,1027,77,956,60,817,53,714"/>
+<area shape="rect" id="Node000028" href="$classTG4TrackingAction.html" title="Actions at the beginnig and at the end of track." alt="" coords="184,1239,318,1264"/>
+<area shape="poly" id="edge27_Node000001_Node000028" title=" " alt="" coords="57,713,63,825,79,979,91,1057,106,1129,126,1187,150,1226,166,1238,185,1245,183,1250,163,1242,146,1229,121,1189,101,1130,85,1058,73,980,58,825,52,713"/>
+<area shape="rect" id="Node000029" href="$classTG4VPhysicsConstructor.html" title="Abstract base class for physics constructors with verbose." alt="" coords="167,1288,335,1314"/>
+<area shape="poly" id="edge28_Node000001_Node000029" title=" " alt="" coords="57,713,62,835,75,1004,87,1090,103,1168,124,1232,136,1257,150,1275,168,1288,165,1293,146,1279,132,1259,119,1234,98,1169,82,1090,70,1004,56,835,52,713"/>
+<area shape="rect" id="Node000039" href="$classTG4VRegionsManager.html" title="Base class for mangers for converting VMC cuts in energy in G4 regions." alt="" coords="175,1509,327,1535"/>
+<area shape="poly" id="edge38_Node000001_Node000039" title=" " alt="" coords="57,713,63,815,77,968,105,1146,125,1237,150,1325,172,1380,198,1432,243,1508,238,1510,193,1435,167,1382,145,1327,120,1239,100,1147,72,969,58,816,52,714"/>
+<area shape="rect" id="Node000014" href="$classTG4BiasingManager.html" title="The biasing manager." alt="" coords="434,548,573,574"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="370,558,434,558,434,564,370,564"/>
+<area shape="rect" id="Node000030" href="$classTG4EmModelPhysics.html" title="Physics builder which activates a selected EM energy loss and/or fluctuations model." alt="" coords="430,1065,577,1091"/>
+<area shape="poly" id="edge29_Node000029_Node000030" title=" " alt="" coords="347,1279,352,1275,368,1254,375,1233,375,1190,376,1145,383,1122,400,1100,429,1083,431,1088,404,1104,388,1125,381,1146,381,1190,380,1234,373,1257,356,1279,350,1283"/>
+<area shape="rect" id="Node000031" href="$classTG4ExtDecayerPhysics.html" title="The builder for external decayer." alt="" coords="425,1115,582,1140"/>
+<area shape="poly" id="edge30_Node000029_Node000031" title=" " alt="" coords="347,1279,352,1275,365,1260,372,1246,375,1214,379,1181,387,1165,400,1149,423,1136,426,1140,404,1154,391,1168,384,1183,381,1215,377,1247,369,1263,356,1279,350,1283"/>
+<area shape="rect" id="Node000032" href="$classTG4FastSimulationPhysics.html" title="Physics builder which activates selected fast simulation models." alt="" coords="414,1164,593,1190"/>
+<area shape="poly" id="edge31_Node000029_Node000032" title=" " alt="" coords="347,1278,352,1275,368,1257,376,1238,383,1218,400,1199,420,1188,423,1192,404,1203,388,1221,381,1240,373,1260,356,1279,350,1283"/>
+<area shape="rect" id="Node000033" href="$classTG4ProcessMapPhysics.html" title="The special builder which fills the VMC process map." alt="" coords="421,1213,586,1239"/>
+<area shape="poly" id="edge32_Node000029_Node000033" title=" " alt="" coords="335,1281,353,1274,377,1261,401,1248,434,1237,436,1242,403,1253,379,1266,355,1279,336,1286"/>
+<area shape="rect" id="Node000034" href="$classTG4SpecialCutsPhysics.html" title="The builder for special cuts process." alt="" coords="422,1263,585,1288"/>
+<area shape="poly" id="edge33_Node000029_Node000034" title=" " alt="" coords="350,1288,422,1281,422,1286,351,1294"/>
+<area shape="rect" id="Node000035" href="$classTG4StackPopperPhysics.html" title="The builder for stack popper process." alt="" coords="420,1312,587,1338"/>
+<area shape="poly" id="edge34_Node000029_Node000035" title=" " alt="" coords="351,1308,420,1314,419,1320,350,1313"/>
+<area shape="rect" id="Node000036" href="$classTG4StepLimiterPhysics.html" title="The builder for step limiter process." alt="" coords="424,1361,583,1387"/>
+<area shape="poly" id="edge35_Node000029_Node000036" title=" " alt="" coords="305,1317,403,1348,443,1358,442,1363,401,1353,304,1322"/>
+<area shape="rect" id="Node000037" href="$classTG4TransitionRadiationPhysics.html" title="The builder for transition radiation processes." alt="" coords="402,1411,605,1436"/>
+<area shape="poly" id="edge36_Node000029_Node000037" title=" " alt="" coords="282,1321,336,1360,403,1397,433,1408,431,1413,401,1402,333,1365,279,1326"/>
+<area shape="rect" id="Node000038" href="$classTG4UserParticlesPhysics.html" title="The builder for user defined particles." alt="" coords="418,1460,589,1486"/>
+<area shape="poly" id="edge37_Node000029_Node000038" title=" " alt="" coords="273,1324,327,1386,363,1419,403,1446,428,1457,426,1462,401,1451,360,1423,323,1390,269,1328"/>
+<area shape="rect" id="Node000040" href="$classTG4RegionsManager.html" title="Manager class for converting VMC cuts in energy in G4 regions." alt="" coords="432,1509,575,1535"/>
+<area shape="poly" id="edge39_Node000039_Node000040" title=" " alt="" coords="343,1520,431,1520,431,1525,343,1525"/>
+<area shape="rect" id="Node000041" href="$classTG4RegionsManager2.html" title="Manager class for setting VMC cuts in energy in G4 regions." alt="" coords="428,1559,579,1584"/>
+<area shape="poly" id="edge40_Node000039_Node000041" title=" " alt="" coords="336,1536,435,1555,434,1561,335,1541"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="examples/E02/src/Ex02DetectorConstruction.cxx" name="examples/E02/src/Ex02DetectorConstruction.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the Ex02DetectorConstruction class." alt="" coords="230,5,436,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,77,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="261,49,92,95,91,89,259,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="100,94,214,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="290,49,199,90,197,85,288,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="237,94,317,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="321,48,297,83,292,79,317,45"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="341,94,437,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="349,45,374,79,369,83,345,48"/>
+<area shape="rect" id="Node000006" href="$Ex02ChamberParameterisation_8h.html" title="Definition of the Ex02ChamberParameterisation class." alt="" coords="462,94,671,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="392,44,517,86,515,91,390,49"/>
+<area shape="rect" id="Node000008" href="$Ex02DetectorConstruction_8h.html" title="Definition of the Ex02DetectorConstruction class." alt="" coords="696,94,877,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="436,42,702,88,701,93,435,47"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="588,168,665,193"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="578,118,609,154,604,157,574,122"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="760,123,668,163,666,159,758,118"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="750,168,823,193"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="789,120,789,152,784,152,784,120"/>
+</map>

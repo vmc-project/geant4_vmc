@@ -1,0 +1,7 @@
+<map id="TG4PrimaryGeneratorAction" name="TG4PrimaryGeneratorAction">
+<area shape="rect" id="Node000001" title="Primary generator action defined via TVirtualMCStack and TVirtualMCApplication." alt="" coords="108,79,292,105"/>
+<area shape="rect" id="Node000002" href="$classG4VUserPrimaryGeneratorAction.html" title=" " alt="" coords="5,5,219,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,39,187,77,184,81,137,43"/>
+<area shape="rect" id="Node000003" href="$classTG4Verbose.html" title="Base class for defining the verbose level and a common messenger." alt="" coords="242,5,336,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="264,43,217,81,213,77,261,39"/>
+</map>

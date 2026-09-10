@@ -1,0 +1,9 @@
+<map id="TVirtualMagField" name="TVirtualMagField">
+<area shape="rect" id="Node000001" title=" " alt="" coords="148,5,267,31"/>
+<area shape="rect" id="Node000002" href="$classA01LocalMagField.html" title="Definition of a uniform magnetic field within a given region." alt="" coords="5,79,135,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,41,95,81,92,76,169,36"/>
+<area shape="rect" id="Node000003" href="$classA01MagField.html" title="Definition of a uniform magnetic field within a given region." alt="" coords="159,79,256,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,46,210,79,205,79,205,46"/>
+<area shape="rect" id="Node000004" href="$classEx02MagField.html" title="Definition of a uniform magnetic field." alt="" coords="280,79,382,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="243,37,312,76,309,81,240,41"/>
+</map>

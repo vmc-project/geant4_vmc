@@ -1,0 +1,7 @@
+<map id="TG4RunAction" name="TG4RunAction">
+<area shape="rect" id="Node000001" title="Actions at the beginning and the end of run." alt="" coords="82,79,188,105"/>
+<area shape="rect" id="Node000002" href="$classG4UserRunAction.html" title=" " alt="" coords="5,5,132,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,40,126,77,122,80,88,44"/>
+<area shape="rect" id="Node000003" href="$classTG4Verbose.html" title="Base class for defining the verbose level and a common messenger." alt="" coords="156,5,250,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="183,44,149,80,145,77,179,40"/>
+</map>

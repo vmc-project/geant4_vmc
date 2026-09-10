@@ -1,0 +1,57 @@
+<map id="examples/E02/src/Ex02MCApplication.cxx" name="examples/E02/src/Ex02MCApplication.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the Ex02MCApplication class." alt="" coords="1142,5,1405,31"/>
+<area shape="rect" id="Node000002" href="$Ex02MCApplication_8h.html" title="Definition of the Ex02MCApplication class." alt="" coords="355,79,498,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1142,33,514,86,514,81,1141,28"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="541,160,678,186"/>
+<area shape="poly" id="edge25_Node000001_Node000010" title=" " alt="" coords="1142,32,996,50,918,64,841,82,735,118,648,156,646,151,733,113,839,76,917,59,995,45,1142,26"/>
+<area shape="rect" id="Node000011" href="$Ex02DetectorConstructionOld_8h.html" title="Definition of the Ex02DetectorConstructionOld class." alt="" coords="701,153,872,193"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1142,33,992,53,927,66,881,81,842,109,811,142,808,139,839,105,879,77,926,61,991,47,1142,28"/>
+<area shape="rect" id="Node000012" href="$Ex02MCStack_8h.html" title="Definition of the Ex02MCStack class." alt="" coords="892,79,1005,105"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="1219,34,1019,78,1018,73,1217,29"/>
+<area shape="rect" id="Node000018" href="$Ex02MagField_8h.html" title="Definition of the Ex02MagField class." alt="" coords="1029,79,1142,105"/>
+<area shape="poly" id="edge20_Node000001_Node000018" title=" " alt="" coords="1243,34,1133,75,1131,70,1241,29"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="1166,79,1256,105"/>
+<area shape="poly" id="edge22_Node000001_Node000020" title=" " alt="" coords="1265,33,1234,69,1230,65,1261,29"/>
+<area shape="rect" id="Node000021" title=" " alt="" coords="1280,79,1393,105"/>
+<area shape="poly" id="edge23_Node000001_Node000021" title=" " alt="" coords="1286,29,1317,65,1313,69,1282,33"/>
+<area shape="rect" id="Node000022" title=" " alt="" coords="1416,79,1515,105"/>
+<area shape="poly" id="edge24_Node000001_Node000022" title=" " alt="" coords="1307,29,1420,71,1418,76,1305,34"/>
+<area shape="rect" id="Node000023" title=" " alt="" coords="1538,79,1636,105"/>
+<area shape="poly" id="edge26_Node000001_Node000023" title=" " alt="" coords="1328,29,1523,73,1522,79,1326,34"/>
+<area shape="rect" id="Node000024" title=" " alt="" coords="1659,79,1736,105"/>
+<area shape="poly" id="edge27_Node000001_Node000024" title=" " alt="" coords="1362,29,1491,49,1645,76,1644,81,1491,54,1361,34"/>
+<area shape="rect" id="Node000025" title=" " alt="" coords="1760,79,1894,105"/>
+<area shape="poly" id="edge28_Node000001_Node000025" title=" " alt="" coords="1376,29,1745,76,1745,81,1375,34"/>
+<area shape="rect" id="Node000026" title=" " alt="" coords="1917,79,2014,105"/>
+<area shape="poly" id="edge29_Node000001_Node000026" title=" " alt="" coords="1405,26,1633,45,1902,76,1902,81,1633,50,1405,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,160,166,186"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="375,108,153,159,152,154,374,103"/>
+<area shape="rect" id="Node000004" href="$Ex02DetectorConstruction_8h.html" title="Definition of the Ex02DetectorConstruction class." alt="" coords="336,160,518,186"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="430,105,430,144,424,144,424,105"/>
+<area shape="rect" id="Node000007" href="$Ex02TrackerSD_8h.html" title="Definition of the Ex02TrackerSD class." alt="" coords="190,160,312,186"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="401,108,293,156,290,151,399,103"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="456,103,569,151,567,156,454,108"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="748,241,826,267"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="483,184,734,239,733,244,482,189"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="520,241,593,267"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="448,184,525,231,522,235,445,189"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="256,241,366,267"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="262,185,295,227,290,231,258,188"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="150,241,232,267"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="244,188,211,231,207,227,240,185"/>
+<area shape="poly" id="edge11_Node000011_Node000005" title=" " alt="" coords="790,194,790,226,784,226,784,194"/>
+<area shape="poly" id="edge12_Node000011_Node000006" title=" " alt="" coords="730,196,607,238,605,233,728,191"/>
+<area shape="rect" id="Node000013" href="$Ex02Particle_8h.html" title="Definition of the Ex02Particle class." alt="" coords="896,160,1000,186"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="951,105,951,144,946,144,946,105"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="1024,160,1155,186"/>
+<area shape="poly" id="edge18_Node000012_Node000016" title=" " alt="" coords="971,103,1056,150,1053,155,968,107"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="1179,160,1232,186"/>
+<area shape="poly" id="edge19_Node000012_Node000017" title=" " alt="" coords="1005,103,1083,123,1168,150,1170,151,1168,156,1166,155,1081,128,1004,108"/>
+<area shape="poly" id="edge15_Node000013_Node000005" title=" " alt="" coords="924,189,826,237,824,232,922,184"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="884,241,943,267"/>
+<area shape="poly" id="edge16_Node000013_Node000014" title=" " alt="" coords="945,187,927,228,923,226,940,185"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="968,241,1057,267"/>
+<area shape="poly" id="edge17_Node000013_Node000015" title=" " alt="" coords="960,185,995,227,991,231,956,188"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="1257,160,1386,186"/>
+<area shape="poly" id="edge21_Node000018_Node000019" title=" " alt="" coords="1123,103,1272,152,1270,157,1121,108"/>
+</map>

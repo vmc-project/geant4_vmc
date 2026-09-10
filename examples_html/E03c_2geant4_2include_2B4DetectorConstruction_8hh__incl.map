@@ -1,0 +1,7 @@
+<map id="examples/E03/E03c/geant4/include/B4DetectorConstruction.hh" name="examples/E03/E03c/geant4/include/B4DetectorConstruction.hh">
+<area shape="rect" id="Node000001" title="Definition of the B4DetectorConstruction class." alt="" coords="85,5,310,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,220,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,48,139,85,135,81,175,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="244,94,323,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,44,261,81,257,85,217,48"/>
+</map>

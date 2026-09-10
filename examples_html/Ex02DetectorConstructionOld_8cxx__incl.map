@@ -1,0 +1,16 @@
+<map id="examples/E02/src/Ex02DetectorConstructionOld.cxx" name="examples/E02/src/Ex02DetectorConstructionOld.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the Ex02DetectorConstructionOld class." alt="" coords="134,5,340,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,102,77,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,49,83,97,81,92,191,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="101,102,197,127"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,48,174,93,170,89,215,45"/>
+<area shape="rect" id="Node000004" href="$Ex02ChamberParameterisation_8h.html" title="Definition of the Ex02ChamberParameterisation class." alt="" coords="222,102,431,127"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="259,45,305,89,301,93,255,48"/>
+<area shape="rect" id="Node000006" href="$Ex02DetectorConstructionOld_8h.html" title="Definition of the Ex02DetectorConstructionOld class." alt="" coords="455,94,627,135"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="307,44,458,87,457,92,306,49"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="345,183,422,208"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="337,126,368,168,364,171,333,129"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="503,138,423,178,420,173,501,133"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="504,183,578,208"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="544,135,544,167,538,167,538,135"/>
+</map>

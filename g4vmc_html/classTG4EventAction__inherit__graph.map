@@ -1,0 +1,7 @@
+<map id="TG4EventAction" name="TG4EventAction">
+<area shape="rect" id="Node000001" title="Actions at the beginning and the end of event." alt="" coords="85,79,201,105"/>
+<area shape="rect" id="Node000002" href="$classG4UserEventAction.html" title=" " alt="" coords="5,5,142,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,40,133,77,129,80,93,44"/>
+<area shape="rect" id="Node000003" href="$classTG4Verbose.html" title="Base class for defining the verbose level and a common messenger." alt="" coords="166,5,261,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,44,157,80,153,77,189,40"/>
+</map>

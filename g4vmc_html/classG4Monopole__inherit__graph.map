@@ -1,0 +1,5 @@
+<map id="G4Monopole" name="G4Monopole">
+<area shape="rect" id="Node000001" title=" " alt="" coords="26,79,120,105"/>
+<area shape="rect" id="Node000002" href="$classG4ParticleDefinition.html" title=" " alt="" coords="5,5,141,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,46,76,79,70,79,70,46"/>
+</map>
