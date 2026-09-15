@@ -1,16 +1,16 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.30/00                        https://root.cern |
-  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
-  | From tags/v6-30-00@                                              |
-  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
+  | Welcome to ROOT 6.36.14                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Jul 17 2026, 13:53:10                   |
+  | From tags/v6-36-14@v6-36-14                                      |
+  | With Apple clang version 21.0.0 (clang-2100.0.123.102)           |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+36
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -19,12 +19,12 @@ Processing test_E06.C("g4tgeoConfigOld.C",kTRUE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 10 February 2022 )
+ Version 2.2 ( 22 April 2026 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6 ( 9 February 2024 )
+ Version 6.6-update3.p3 ( 15 September 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -45,7 +45,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-02-ref-00    (8-December-2023)
+ Geant4 version Name: geant4-11-02    (8-December-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -669,25 +669,25 @@ Index : 1     used in the geometry : Yes
 
 ### Run 0 start.
 >>> Event 0
-Number of optical photons produced in this event : 1572
+Number of optical photons produced in this event : 1499
 >>> Event 1
-Number of optical photons produced in this event : 1556
+Number of optical photons produced in this event : 1579
 >>> Event 2
-Number of optical photons produced in this event : 1504
+Number of optical photons produced in this event : 1548
 >>> Event 3
-Number of optical photons produced in this event : 1539
+Number of optical photons produced in this event : 1434
 >>> Event 4
-Number of optical photons produced in this event : 1507
+Number of optical photons produced in this event : 1622
 >>> Event 5
-Number of optical photons produced in this event : 1677
+Number of optical photons produced in this event : 1406
 >>> Event 6
-Number of optical photons produced in this event : 1556
+Number of optical photons produced in this event : 1500
 >>> Event 7
-Number of optical photons produced in this event : 1561
+Number of optical photons produced in this event : 1539
 >>> Event 8
-Number of optical photons produced in this event : 1533
+Number of optical photons produced in this event : 1545
 >>> Event 9
-Number of optical photons produced in this event : 1444
-Time of this run:   User=0.220000s Real=0.228349s Sys=0.000000s
+Number of optical photons produced in this event : 1557
+Time of this run:   User=0.200000s Real=0.210826s Sys=0.000000s
 Number of events processed: 10
-Number of optical photons produced in this run : 15449
+Number of optical photons produced in this run : 15229

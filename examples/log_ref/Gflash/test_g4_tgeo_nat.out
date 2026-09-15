@@ -1,16 +1,16 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.30/00                        https://root.cern |
-  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
-  | From tags/v6-30-00@                                              |
-  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
+  | Welcome to ROOT 6.36.14                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Jul 17 2026, 13:53:10                   |
+  | From tags/v6-36-14@v6-36-14                                      |
+  | With Apple clang version 21.0.0 (clang-2100.0.123.102)           |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+36
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -19,18 +19,18 @@ Processing test_Gflash.C("g4Config.C")...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 10 February 2022 )
+ Version 2.2 ( 22 April 2026 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6 ( 9 February 2024 )
+ Version 6.6-update3.p3 ( 15 September 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-11-02-ref-00    (8-December-2023)
+ Geant4 version Name: geant4-11-02    (8-December-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -78,7 +78,7 @@ The have width of 3 cm and a lenght of 24 cm. The Material is PbWO4
 
 =============================================================
  Virtual Geometry Model 
- Version 5.2 ( 8 June 2023 )
+ Version 5.5 ( 15 September 2026 )
  WWW : https://vmc-project.github.io/vgm-documentation/
 =============================================================
 
@@ -862,9 +862,9 @@ Real time 0:00:00, CP time 0.020
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 1  -----
-  11923 hits are stored in HitsCollection 
-   e1  12.0522   e3x3  48.1818   e5x5  48.6184 GeV
- Total energy deposited in the calorimeter: 49.7261 (GeV)
+  11959 hits are stored in HitsCollection 
+   e1  11.974   e3x3  48.3931   e5x5  48.9417 GeV
+ Total energy deposited in the calorimeter: 49.7769 (GeV)
  Start generating event Nr 2
 
 ******************************************
@@ -873,9 +873,9 @@ Real time 0:00:00, CP time 0.010
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 2  -----
-  11988 hits are stored in HitsCollection 
-   e1  12.0938   e3x3  48.4436   e5x5  48.9364 GeV
- Total energy deposited in the calorimeter: 49.9396 (GeV)
+  11957 hits are stored in HitsCollection 
+   e1  12.1214   e3x3  48.5555   e5x5  49.0427 GeV
+ Total energy deposited in the calorimeter: 49.8539 (GeV)
  Start generating event Nr 3
 
 ******************************************
@@ -884,31 +884,31 @@ Real time 0:00:00, CP time 0.010
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 3  -----
-  11880 hits are stored in HitsCollection 
-   e1  11.9493   e3x3  48.1286   e5x5  48.5642 GeV
- Total energy deposited in the calorimeter: 49.3776 (GeV)
+  11971 hits are stored in HitsCollection 
+   e1  12.0606   e3x3  48.4742   e5x5  48.9216 GeV
+ Total energy deposited in the calorimeter: 49.9102 (GeV)
  Start generating event Nr 4
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.030
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 4  -----
+  11972 hits are stored in HitsCollection 
+   e1  12.0704   e3x3  48.4259   e5x5  48.9076 GeV
+ Total energy deposited in the calorimeter: 49.8428 (GeV)
+ Start generating event Nr 5
 
 ******************************************
 Elapsed Time: 
 Real time 0:00:00, CP time 0.010
 
 ******************************************
- ------ ExGflashEventAction::End of event nr. 4  -----
-  11946 hits are stored in HitsCollection 
-   e1  12.0313   e3x3  48.3796   e5x5  48.8529 GeV
- Total energy deposited in the calorimeter: 49.7224 (GeV)
- Start generating event Nr 5
-
-******************************************
-Elapsed Time: 
-Real time 0:00:00, CP time 0.020
-
-******************************************
  ------ ExGflashEventAction::End of event nr. 5  -----
-  11974 hits are stored in HitsCollection 
-   e1  12.0383   e3x3  48.456   e5x5  49.0146 GeV
- Total energy deposited in the calorimeter: 49.8912 (GeV)
+  11988 hits are stored in HitsCollection 
+   e1  12.1679   e3x3  48.5487   e5x5  48.9618 GeV
+ Total energy deposited in the calorimeter: 49.9159 (GeV)
  Start generating event Nr 6
 
 ******************************************
@@ -917,20 +917,20 @@ Real time 0:00:00, CP time 0.010
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 6  -----
-  12003 hits are stored in HitsCollection 
-   e1  12.2468   e3x3  48.5204   e5x5  48.9927 GeV
- Total energy deposited in the calorimeter: 49.8577 (GeV)
+  11942 hits are stored in HitsCollection 
+   e1  12.0345   e3x3  48.1026   e5x5  48.6753 GeV
+ Total energy deposited in the calorimeter: 49.7587 (GeV)
  Start generating event Nr 7
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.010
+Real time 0:00:00, CP time 0.020
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 7  -----
-  11943 hits are stored in HitsCollection 
-   e1  12.1183   e3x3  48.3516   e5x5  48.7905 GeV
- Total energy deposited in the calorimeter: 49.7009 (GeV)
+  11912 hits are stored in HitsCollection 
+   e1  11.967   e3x3  48.1988   e5x5  48.6401 GeV
+ Total energy deposited in the calorimeter: 49.6591 (GeV)
  Start generating event Nr 8
 
 ******************************************
@@ -939,9 +939,9 @@ Real time 0:00:00, CP time 0.010
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 8  -----
-  11936 hits are stored in HitsCollection 
-   e1  12.0961   e3x3  48.346   e5x5  48.7768 GeV
- Total energy deposited in the calorimeter: 49.7097 (GeV)
+  11929 hits are stored in HitsCollection 
+   e1  12.1035   e3x3  48.3544   e5x5  48.7903 GeV
+ Total energy deposited in the calorimeter: 49.69 (GeV)
  Start generating event Nr 9
 
 ******************************************
@@ -950,9 +950,9 @@ Real time 0:00:00, CP time 0.010
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 9  -----
-  11970 hits are stored in HitsCollection 
-   e1  12.0381   e3x3  48.4252   e5x5  48.8871 GeV
- Total energy deposited in the calorimeter: 49.8874 (GeV)
+  11902 hits are stored in HitsCollection 
+   e1  12.118   e3x3  48.0624   e5x5  48.6526 GeV
+ Total energy deposited in the calorimeter: 49.564 (GeV)
  Start generating event Nr 10
 
 ******************************************
@@ -961,8 +961,8 @@ Real time 0:00:00, CP time 0.010
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 10  -----
-  11974 hits are stored in HitsCollection 
-   e1  12.1691   e3x3  48.3275   e5x5  48.8211 GeV
- Total energy deposited in the calorimeter: 49.9002 (GeV)
-Time of this run:   User=0.130000s Real=0.124655s Sys=0.000000s
+  11886 hits are stored in HitsCollection 
+   e1  12.0019   e3x3  48.0278   e5x5  48.4743 GeV
+ Total energy deposited in the calorimeter: 49.5387 (GeV)
+Time of this run:   User=0.130000s Real=0.136000s Sys=0.010000s
 Number of events processed: 10
