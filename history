@@ -9,6 +9,15 @@
 
 Tags (history):
 ===============
+  15/09/2026
+  v6-6-update3-p3:
+    Geant4 VMC:
+    - Make CurrentVolOffID/Name count TGeo assembly levels (#87)
+    - Refactor assembly-level handling and add E03 regression test (#88)
+
+    Tested with VMC 2.2, Geant4 v11.2.0-alice (with embedded CLHEP 2.4.7.1)
+      Root 6.36/14, VGM 5.5
+
   22/04/2026
   v6-6-update2-p3:
     Geant4 VMC:
