@@ -502,7 +502,7 @@ const char* TG4StepManager::CurrentVolName() const
   /// Return the current physical volume name.
 
   fNameBuffer = TG4GeometryServices::Instance()->UserVolumeName(
-    GetCurrentPhysicalVolume()->GetLogicalVolume()->GetName());
+    GetCurrentPhysicalVolume()->GetLogicalVolume());
 
   return fNameBuffer.data();
 }
@@ -518,11 +518,10 @@ const char* TG4StepManager::CurrentVolOffName(Int_t off) const
   if (G4VPhysicalVolume* pv = GetOffLevel(off, component)) {
     const TG4AssemblyLevels& levels =
       TG4GeometryServices::Instance()->GetAssemblyLevels(pv);
-    const G4String& name =
-      (component >= 0 && component < G4int(levels.fNames.size()))
-        ? levels.fNames[component]
-        : pv->GetLogicalVolume()->GetName();
-    fNameBuffer = TG4GeometryServices::Instance()->UserVolumeName(name);
+    auto services = TG4GeometryServices::Instance();
+    fNameBuffer = (component >= 0 && component + 1 < G4int(levels.fNames.size()))
+      ? G4String(services->UserVolumeName(levels.fNames[component]))
+      : services->UserVolumeName(pv->GetLogicalVolume());
     return fNameBuffer.data();
   }
 
@@ -530,7 +529,7 @@ const char* TG4StepManager::CurrentVolOffName(Int_t off) const
 
   if (mother) {
     fNameBuffer = TG4GeometryServices::Instance()->UserVolumeName(
-      mother->GetLogicalVolume()->GetName());
+      mother->GetLogicalVolume());
   }
   else {
     fNameBuffer = "";

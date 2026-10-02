@@ -55,8 +55,18 @@ class Ex03DetectorConstruction : public TObject
   void SetGapThickness(Double_t value);
   void SetUseAssemblies(Bool_t value);
 
+  /// Split sensitive slabs into normal and reflected half-thickness placements.
+  void SetUseReflection(Bool_t value) { fUseReflection = value; }
+  /// Require reflected hits in every event of the optional regression test.
+  void SetRequireReflectedHits(Bool_t value) { fRequireReflectedHits = value; }
+
   //
   // get methods
+
+  /// \return Whether reflected sensitive placements are enabled
+  Bool_t GetUseReflection() const { return fUseReflection; }
+  /// \return Whether each event must contain reflected absorber and gap hits
+  Bool_t GetRequireReflectedHits() const { return fRequireReflectedHits; }
 
   /// \return The number of calorimeter layers
   Int_t GetNbOfLayers() const { return fNbOfLayers; }
@@ -115,6 +125,9 @@ class Ex03DetectorConstruction : public TObject
   TString fGapMaterial;      ///< The gap material name
 
   Bool_t fUseAssemblies; ///< Option to place the calorimeter in assemblies
+
+  Bool_t fUseReflection; ///< Enable reflected sensitive placements
+  Bool_t fRequireReflectedHits; ///< Enable the per-event regression check
 
   ClassDef(Ex03DetectorConstruction, 1) // Ex03DetectorConstruction
 };

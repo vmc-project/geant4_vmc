@@ -21,6 +21,7 @@
 
 #include <map>
 #include <set>
+#include <vector>
 
 class TG4SensitiveDetector;
 
@@ -49,6 +50,7 @@ class TG4SDServices
   static G4int GetFirstVolumeId();
 
   // methods
+  void ClearVolumeMaps();
   void MapVolume(G4LogicalVolume* lv, G4int id, G4bool fillLVToVolIdMap);
   void MapUserSD(
     const G4String& volumeName, TVirtualMCSensitiveDetector* userSD);
@@ -67,6 +69,8 @@ class TG4SDServices
   G4int GetVolumeID(G4LogicalVolume* volume) const;
   G4int GetMediumID(G4LogicalVolume* volume) const;
   G4String GetVolumeName(G4int volumeId) const;
+  std::vector<G4LogicalVolume*> GetLogicalVolumes(G4int volumeId) const;
+  // Representative only; not suitable for applying settings to all variants.
   G4LogicalVolume* GetLogicalVolume(G4int volumeId, G4bool warn = true) const;
   G4int GetMediumId(G4int volumeId) const;
   TVirtualMCSensitiveDetector* GetUserSD(
@@ -98,11 +102,14 @@ class TG4SDServices
   /// map volume name -> volume id
   std::map<G4String, G4int> fVolNameToIdMap;
 
-  /// map volume id ->  logical volume
-  std::map<G4int, G4LogicalVolume*> fVolIdToLVMap;
+  /// one VMC source ID -> all its Geant4 representations
+  std::multimap<G4int, G4LogicalVolume*> fVolIdToLVMap;
 
   /// map logical volume -> volume id
   std::map<G4LogicalVolume*, G4int> fLVToVolIdMap;
+
+  /// Dense read-only stepping cache, indexed by Geant4 instance ID
+  std::vector<G4int> fInstanceToVolId;
 
   /// vector of user SDs
   static G4ThreadLocal std::set<TVirtualMCSensitiveDetector*>* fgUserSDs;

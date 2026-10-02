@@ -44,7 +44,6 @@
 #include <G4Material.hh>
 #include <G4MonopoleFieldSetup.hh>
 #include <G4PVPlacement.hh>
-#include <G4ReflectionFactory.hh>
 //#include <G4SystemOfUnits.hh>
 #include <G4TransportationManager.hh>
 
@@ -385,11 +384,7 @@ void TG4GeometryManager::FillMediumMapFromG3()
 
     // Get medium ID from G3 tables
     G4String name = lv->GetName();
-    G4String g3Name(name);
-    // Filter out the reflected volume name extension
-    // added by reflection factory
-    G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
-    if (name.find(ext)) g3Name = g3Name.substr(0, g3Name.find(ext));
+    G4String g3Name = fGeometryServices->UserVolumeName(lv);
     G4int mediumID = G3Vol.GetVTE(g3Name)->GetNmed();
 
     if (VerboseLevel() > 2)
@@ -511,12 +506,7 @@ void TG4GeometryManager::FillMediumMapFromRoot()
     TGeoVolume* geoVolume = nullptr;
 
     if (fRootDetectorConstruction == nullptr) {
-      G4String volName = lv->GetName();
-
-      // Filter out the reflected volumes name extension
-      // added by reflection factory
-      G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
-      if (volName.find(ext)) volName = volName.substr(0, volName.find(ext));
+      const G4String& volName = fGeometryServices->GetConstituentVolumeName(lv);
 
       geoVolume = gGeoManager->GetVolume(volName.data());
     }
@@ -748,9 +738,8 @@ void TG4GeometryManager::ConstructLocalFields()
     G4String volumeName = geoVolume->GetName();
 
     // Get Geant4 volume
-    G4LogicalVolume* lv =
-      TG4GeometryServices::Instance()->FindLogicalVolume(volumeName);
-    if (!lv) {
+    auto volumes = fGeometryServices->FindLogicalVolumes(volumeName);
+    if (volumes.empty()) {
       TString message = geoVolume->GetName();
       message += " volume not found in Geant4 geometry.";
       TG4Globals::Warning("TG4GeometryManager", "ConstructLocalFields",
@@ -758,20 +747,16 @@ void TG4GeometryManager::ConstructLocalFields()
       continue;
     }
 
-    // Get or create user field parameters
+    // G4FieldBuilder indexes parameters by the actual Geant4 name.
     auto fieldBuilder = G4FieldBuilder::Instance();
-    // Activate this code when G4FieldBuilder::GetFieldParameters
-    // provides an option to suppress a warning if parameters do not exist
-    // auto fieldParameters = fieldBuilder->GetFieldParameters(volumeName);
-    // if (fieldParameters == nullptr) {
-    //   fieldParameters = fieldBuilder->CreateFieldParameters(volumeName);
-    // }
-
-    // Create G4 user field parameters
-    auto fieldParameters = fieldBuilder->CreateFieldParameters(volumeName);
-
-    // Create magnetic field
-    CreateField(magField, fieldParameters, lv);
+    std::map<G4String, G4FieldParameters*> parameters;
+    for (auto lv : volumes) {
+      auto& fieldParameters = parameters[lv->GetName()];
+      if (!fieldParameters) {
+        fieldParameters = fieldBuilder->CreateFieldParameters(lv->GetName());
+      }
+      CreateField(magField, fieldParameters, lv);
+    }
   }
 }
 
@@ -800,6 +785,7 @@ void TG4GeometryManager::ConstructGeometry()
 
   // Construct G4 geometry
   ConstructG4Geometry();
+  fGeometryServices->BuildConstituentVolumes();
 
   // Fill medium map
   FillMediumMap();

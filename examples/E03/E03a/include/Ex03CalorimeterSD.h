@@ -19,11 +19,12 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
+#include "Ex03CalorHit.h"
+
 #include <TClonesArray.h>
 #include <TNamed.h>
 
 class Ex03DetectorConstruction;
-class Ex03CalorHit;
 class TVirtualMC;
 
 /// \ingroup E03
@@ -67,6 +68,8 @@ class Ex03CalorimeterSD : public TNamed
   Int_t fGapVolId;                     ///< The gap volume Id
   Bool_t fAssemblyHierarchyPrinted;    ///< Whether assembly levels were printed
   Int_t fVerboseLevel;                 ///< Verbosity level
+
+  Ex03CalorHit fReflectedHit; ///< Reflected contribution to the layer hits
 
   ClassDef(Ex03CalorimeterSD, 1) // Ex03CalorimeterSD
 };

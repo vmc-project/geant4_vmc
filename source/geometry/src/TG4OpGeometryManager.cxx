@@ -363,9 +363,9 @@ void TG4OpGeometryManager::SetSkinSurface(
   /// Define the optical skin surface
 
   // Get logical volume
-  G4LogicalVolume* lv = fGeometryServices->FindLogicalVolume(volName, true);
+  auto volumes = fGeometryServices->FindLogicalVolumes(volName, true);
 
-  if (!lv) {
+  if (volumes.empty()) {
     TG4Globals::Warning("TG4OpGeometryManager",
       "SetSkinSurface:", "Cannot find logical volume: " + TString(volName));
     return;
@@ -381,7 +381,7 @@ void TG4OpGeometryManager::SetSkinSurface(
   G4OpticalSurface* surface = (*it).second;
 
   // Create the skin surface
-  new G4LogicalSkinSurface(name, lv, surface);
+  for (auto lv : volumes) new G4LogicalSkinSurface(name, lv, surface);
 }
 
 //_____________________________________________________________________________

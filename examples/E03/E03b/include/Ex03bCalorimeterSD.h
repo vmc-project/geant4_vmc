@@ -19,11 +19,12 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
+#include "Ex03CalorHit.h"
+
 #include <TClonesArray.h>
 #include <TVirtualMCSensitiveDetector.h>
 
 class Ex03DetectorConstruction;
-class Ex03CalorHit;
 class TVirtualMC;
 
 /// \ingroup E03
@@ -71,6 +72,8 @@ class Ex03bCalorimeterSD : public TVirtualMCSensitiveDetector
   Int_t fGapVolId;                     ///< The gap volume Id
   Int_t fVerboseLevel;                 ///< Verbosity level
   Int_t fPrintModulo; ///< The event modulus number to be printed
+
+  Ex03CalorHit fReflectedHit; ///< Reflected contribution to the layer hits
 
   ClassDef(Ex03bCalorimeterSD, 1) // Ex03bCalorimeterSD
 };

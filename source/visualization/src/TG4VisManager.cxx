@@ -31,6 +31,7 @@
 
 #include "TG4VisManager.h"
 #include "TG4Globals.h"
+#include "TG4GeometryServices.h"
 
 #include <G4LogicalVolumeStore.hh>
 #include <G4Material.hh>
@@ -99,7 +100,9 @@ TG4VisManager::LogicalVolumesVector TG4VisManager::GetLVList(G4String name)
   if (pLVStore) {
     for (G4int i = 0; i < G4int(pLVStore->size()); i++) {
       pLV = (*pLVStore)[i];
-      if (CaseInsensitiveEqual(name, pLV->GetName())) {
+      if (CaseInsensitiveEqual(name, pLV->GetName()) ||
+          CaseInsensitiveEqual(name,
+            TG4GeometryServices::Instance()->UserVolumeName(pLV))) {
         if (!Contains(lvList, pLV)) lvList.push_back(pLV);
       }
     }

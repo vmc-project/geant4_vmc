@@ -43,7 +43,8 @@ Ex03bCalorimeterSD::Ex03bCalorimeterSD(
     fAbsorberVolId(0),
     fGapVolId(0),
     fVerboseLevel(1),
-    fPrintModulo(1)
+    fPrintModulo(1),
+    fReflectedHit()
 {
   /// Standard constructor.
   /// Create hits collection and an empty hit for each layer
@@ -67,7 +68,8 @@ Ex03bCalorimeterSD::Ex03bCalorimeterSD(
     fAbsorberVolId(origin.fAbsorberVolId),
     fGapVolId(origin.fGapVolId),
     fVerboseLevel(origin.fVerboseLevel),
-    fPrintModulo(origin.fPrintModulo)
+    fPrintModulo(origin.fPrintModulo),
+    fReflectedHit()
 {
   /// Copy constructor (for clonig on worker thread in MT mode).
   /// Create hits collection and an empty hit for each layer
@@ -88,7 +90,8 @@ Ex03bCalorimeterSD::Ex03bCalorimeterSD()
     fCalCollection(0),
     fAbsorberVolId(0),
     fGapVolId(0),
-    fVerboseLevel(1)
+    fVerboseLevel(1),
+    fReflectedHit()
 {
   /// Default constructor
 }
@@ -155,6 +158,7 @@ void Ex03bCalorimeterSD::ProcessHits()
 
   if (id != fAbsorberVolId && id != fGapVolId) return;
 
+  const Bool_t reflected = fDetector->GetUseReflection() && copyNo == 2;
   fMC->CurrentVolOffID(2, copyNo);
 
   Double_t edep = fMC->Edep();
@@ -168,10 +172,12 @@ void Ex03bCalorimeterSD::ProcessHits()
 
   if (id == fAbsorberVolId) {
     GetHit(copyNo)->AddAbs(edep, step);
+    if (reflected) fReflectedHit.AddAbs(edep, step);
   }
 
   if (id == fGapVolId) {
     GetHit(copyNo)->AddGap(edep, step);
+    if (reflected) fReflectedHit.AddGap(edep, step);
   }
 }
 
@@ -185,6 +191,19 @@ void Ex03bCalorimeterSD::EndOfEvent()
   }
 
   if (fVerboseLevel > 1) Print();
+
+  if (fDetector->GetUseReflection()) {
+    cout << "   Reflected placements (included in layer totals):" << endl;
+    fReflectedHit.Print();
+  }
+  if (fDetector->GetRequireReflectedHits()) {
+    if (fReflectedHit.GetEdepAbs() <= 0. || fReflectedHit.GetTrakAbs() <= 0. ||
+        fReflectedHit.GetEdepGap() <= 0. || fReflectedHit.GetTrakGap() <= 0.) {
+      Fatal("EndOfEvent", "Missing hits in reflected absorber or gap");
+    }
+    cout << "   Reflected hits test passed" << endl;
+  }
+  fReflectedHit.Reset();
 
   // Reset hits collection
   ResetHits();
