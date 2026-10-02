@@ -78,7 +78,8 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
   /// Set offset for passing copyNo to 1;
   /// to be equivalent to Root geometrical model
   /// (Root starts numbering from 1, while Geant4 from 0)
-  if (userGeometry == "RootToGeant4" || userGeometry == "Geant4")
+  if (userGeometry == "RootToGeant4" || userGeometry == "Geant4" ||
+      userGeometry == "VMC+RootToGeant4")
     fDivisionCopyNoOffset = 1;
 }
 

@@ -13,6 +13,8 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SDConstruction.h"
+
+#include <G4ReflectionFactory.hh>
 #include "TG4GeometryServices.h"
 #include "TG4GflashSensitiveDetector.h"
 #include "TG4SDServices.h"
@@ -75,7 +77,11 @@ void TG4SDConstruction::CreateSD(
     sdName = userSD->GetName();
   }
   else {
-    G4String lvName = lv->GetName();
+    // A reflected volume is a clone of its constituent and must share its sensitive
+    // detector, or a mirrored placement scores nothing.
+    G4LogicalVolume* constituentLV =
+      G4ReflectionFactory::Instance()->GetConstituentLV(lv);
+    G4String lvName = constituentLV ? constituentLV->GetName() : lv->GetName();
     sdName = "/" + lvName;
     // cut copy number from sdName
     sdName = geometryServices->UserVolumeName(sdName);
@@ -248,9 +254,17 @@ void TG4SDConstruction::Construct()
   for (G4int i = 0; i < G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
 
+    // A reflected volume carries the name <constituent>_refl, which matches neither the
+    // user sensitive detectors nor the selection taken from TGeo. Look both up under the
+    // name of the volume it is a copy of.
+    G4LogicalVolume* constituentLV =
+      G4ReflectionFactory::Instance()->GetConstituentLV(lv);
+    const G4String& selectionName =
+      constituentLV ? constituentLV->GetName() : lv->GetName();
+
     // Check if a user SD is defined
     TVirtualMCSensitiveDetector* userSD =
-      TG4SDServices::Instance()->GetUserSD(lv->GetName(), false);
+      TG4SDServices::Instance()->GetUserSD(selectionName, false);
 
     // Create SD calling user sensitive detector
 
@@ -266,7 +280,7 @@ void TG4SDConstruction::Construct()
       // in selection
       if ((!fExclusiveSDScoring) &&
           (!fSelection.size() ||
-            fSelection.find(lv->GetName()) != fSelection.end())) {
+            fSelection.find(selectionName) != fSelection.end())) {
 
         CreateSD(lv, 0);
       }
