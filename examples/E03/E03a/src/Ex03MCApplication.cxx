@@ -296,7 +296,7 @@ void Ex03MCApplication::ConstructGeometry()
   else {
     Ex03DetectorConstructionOld detConstructionOld;
     detConstructionOld.ConstructMaterials();
-    detConstructionOld.ConstructGeometry();
+    detConstructionOld.ConstructGeometry(fDetConstruction->GetUseReflection());
   }
 }
 

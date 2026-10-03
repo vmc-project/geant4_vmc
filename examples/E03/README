@@ -138,3 +138,41 @@ To run example (Ex03c)
   With G3 and G4 + TGeo (no other geometry available):
   root[0] .x load_multi.C
   root[1] .x run_multi.C
+
+Optional reflected-volume test (E03a and E03b)
+============================================
+  test_E03_9.C enables SetUseReflection(kTRUE) before initialization.
+  Each ABSO and GAPX slab is split into two adjacent half-thickness
+  placements: ordinary copy 1 and reflected copy 2. The material budget
+  and CELL layer numbers are unchanged. Both copies contribute to the
+  usual layer hits; the reflected contribution is also printed separately.
+  The option defaults to false. The test requires TGeo geometry converted
+  to Geant4 (geomRootToGeant4 or geomVMC+RootToGeant4).
+
+  From this directory, run either executable:
+    g4vmc_testE03a -g4g geomRootToGeant4 -g4vm "" -rm 'test_E03_9.C("",kFALSE)'
+    g4vmc_testE03b -g4g geomRootToGeant4 -g4vm "" -rm 'test_E03_9.C("",kFALSE)'
+
+  Or in ROOT, load load_g4a.C or load_g4b.C, then run:
+    .x test_E03_9.C("g4Config.C",kFALSE)
+
+  To test mixed VMC/ROOT construction, use oldGeometry=kTRUE:
+    g4vmc_testE03a -g4g geomVMC+RootToGeant4 -g4vm "" -rm 'test_E03_9.C("",kTRUE)'
+    g4vmc_testE03b -g4g geomVMC+RootToGeant4 -g4vm "" -rm 'test_E03_9.C("",kTRUE)'
+
+  Or, after loading the corresponding libraries in ROOT:
+    .x test_E03_9.C("g4ConfigMixed.C",kTRUE)
+
+  In this mode, materials, volumes, CELL divisions and ordinary sensitive
+  placements are defined using VMC calls. Reflected copy 2 is added directly
+  with TGeoVolume::AddNode to the same VMC-created LAYE volume, before the
+  combined geometry is closed and converted to Geant4. The hit checks are
+  identical in both modes. Both test-suite scripts exercise both modes.
+
+  Three events with a centred muon check positive deposited energy and
+  charged track length in both reflected materials in every event.
+  Missing reflected hits cause a fatal error; success prints
+  "Reflected hits test passed". The check runs on each worker in MT mode.
+  geomRootToGeant4 exercises Geant4 reflected logical-volume clones and
+  the sensitive-detector inheritance fixed by PR #89. geomRoot navigation
+  currently fails the reflected-hit check and is not supported by this test.

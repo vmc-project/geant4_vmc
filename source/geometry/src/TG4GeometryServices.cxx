@@ -24,6 +24,8 @@
 
 #include <G4Element.hh>
 #include <G4LogicalVolume.hh>
+#include <G4ReflectionFactory.hh>
+#include <G4Threading.hh>
 #include <G4LogicalVolumeStore.hh>
 #include <G4Material.hh>
 #include <G4MaterialPropertiesTable.hh>
@@ -54,7 +56,7 @@
 #include <vector>
 
 TG4GeometryServices* TG4GeometryServices::fgInstance = 0;
-G4String TG4GeometryServices::fgBuffer = "";
+thread_local G4String TG4GeometryServices::fgBuffer = "";
 const G4double TG4GeometryServices::fgkAZTolerance = 0.001;
 const G4double TG4GeometryServices::fgkDensityTolerance = 0.005;
 
@@ -62,6 +64,7 @@ const G4double TG4GeometryServices::fgkDensityTolerance = 0.005;
 TG4GeometryServices::TG4GeometryServices()
   : TG4Verbose("geometryServices"),
     fIsG3toG4(false),
+    fConstituentVolumes(),
     fMediumMap(0),
     fOpSurfaceMap(0),
     fWorld(0),
@@ -388,6 +391,38 @@ const G4String& TG4GeometryServices::UserVolumeName(const G4String& name) const
 }
 
 //_____________________________________________________________________________
+void TG4GeometryServices::BuildConstituentVolumes()
+{
+  // The factory is thread-local; workers do not construct these clones.
+  if (G4Threading::IsWorkerThread()) return;
+  fConstituentVolumes.clear();
+  for (auto lv : *G4LogicalVolumeStore::GetInstance()) {
+    auto constituent = G4ReflectionFactory::Instance()->GetConstituentLV(lv);
+    if (constituent) fConstituentVolumes.emplace(lv, constituent);
+  }
+}
+
+//_____________________________________________________________________________
+const G4String& TG4GeometryServices::GetConstituentVolumeName(G4LogicalVolume* lv) const
+{
+  auto it = fConstituentVolumes.find(lv);
+  if (it != fConstituentVolumes.end()) return it->second->GetName();
+  // Also support master-side queries before the geometry snapshot is built.
+  if (!G4Threading::IsWorkerThread()) {
+    auto constituent = G4ReflectionFactory::Instance()->GetConstituentLV(lv);
+    if (constituent) return constituent->GetName();
+  }
+  return lv->GetName();
+}
+
+//_____________________________________________________________________________
+G4String TG4GeometryServices::UserVolumeName(G4LogicalVolume* lv) const
+{
+  // Return by value: the string overload may return the shared Gsposp buffer.
+  return UserVolumeName(GetConstituentVolumeName(lv));
+}
+
+//_____________________________________________________________________________
 G4OpticalSurfaceModel TG4GeometryServices::SurfaceModel(
   EMCOpSurfaceModel model) const
 {
@@ -564,11 +599,9 @@ void TG4GeometryServices::PrintVolumeLimits(const G4String& volumeName) const
   /// Find a logical volume with the specified name and prints
   /// its limits.
 
-  G4LogicalVolume* lv = FindLogicalVolume(volumeName, false);
-
-  if (lv) {
+  for (auto lv : FindLogicalVolumes(volumeName, false)) {
     TG4Limits* limits = GetLimits(lv->GetUserLimits());
-    G4cout << volumeName << "  ";
+    G4cout << lv->GetName() << "  ";
     if (limits)
       limits->Print();
     else
@@ -872,23 +905,36 @@ TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits,
 }
 
 //_____________________________________________________________________________
+std::vector<G4LogicalVolume*> TG4GeometryServices::FindLogicalVolumes(
+  const G4String& name, G4bool silent) const
+{
+  std::vector<G4LogicalVolume*> result;
+  for (auto lv : *G4LogicalVolumeStore::GetInstance()) {
+    if (UserVolumeName(lv) == name) result.push_back(lv);
+  }
+  // Preserve explicit lookup of a generated Geant4 name.
+  if (result.empty()) {
+    for (auto lv : *G4LogicalVolumeStore::GetInstance()) {
+      if (lv->GetName() == name) result.push_back(lv);
+    }
+  }
+  if (result.empty() && !silent) {
+    TG4Globals::Warning("TG4GeometryServices", "FindLogicalVolumes",
+      "Logical volume " + TString(name) + " not found.");
+  }
+  return result;
+}
+
+//_____________________________________________________________________________
 G4LogicalVolume* TG4GeometryServices::FindLogicalVolume(
   const G4String& name, G4bool silent) const
 {
-  /// Find a logical volume with the specified name in G4LogicalVolumeStore.
-
-  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-
-  for (G4int i = 0; i < G4int(lvStore->size()); i++) {
-    G4LogicalVolume* lv = (*lvStore)[i];
-    if (lv->GetName() == name) return lv;
+  // Preserve the singular API for queries needing one representative.
+  auto volumes = FindLogicalVolumes(name, silent);
+  for (auto lv : volumes) {
+    if (GetConstituentVolumeName(lv) == lv->GetName()) return lv;
   }
-
-  if (!silent) {
-    TG4Globals::Warning("TG4GeometryServices", "FindLogicalVolume",
-      "Logical volume " + TString(name) + " not found.");
-  }
-  return 0;
+  return volumes.empty() ? nullptr : volumes.front();
 }
 
 //_____________________________________________________________________________

@@ -337,6 +337,10 @@ do
         if [ "$OPTION" = "E03a" ]; then
           run_test_case "$RUNG4_OPT test_E03_8.C(\"g4Config.C\",kFALSE)"
         fi
+        if [ "$OPTION" = "E03a" ] || [ "$OPTION" = "E03b" ]; then
+          run_test_case "$RUNG4_OPT test_E03_9.C(\"g4Config.C\",kFALSE)"
+          run_test_case "$RUNG4_OPT test_E03_9.C(\"g4ConfigMixed.C\",kTRUE)"
+        fi
         finish_test "$OUT_SUB/test_g4_tgeo_nat.out"
 
         start_test "... Running test with G4, geometry via TGeo, TGeo navigation"

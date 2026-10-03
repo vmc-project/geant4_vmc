@@ -23,6 +23,9 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <Riostream.h>
+#include <TGeoManager.h>
+#include <TGeoMatrix.h>
+#include <TGeoVolume.h>
 #include <TVirtualMC.h>
 
 #include "Ex03DetectorConstructionOld.h"
@@ -253,9 +256,11 @@ void Ex03DetectorConstructionOld::ConstructMaterials()
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstructionOld::ConstructGeometry()
+void Ex03DetectorConstructionOld::ConstructGeometry(Bool_t useReflection)
 {
-  /// Contruct volumes using VMC functions
+  /// Construct volumes using VMC functions. In the optional mixed-geometry
+  /// test, add the reflected sensitive placements directly with TGeo.
+  /// \param useReflection Enable the mixed VMC/ROOT reflected-volume test
 
   // Complete the Calor parameters definition
   ComputeCalorParameters();
@@ -313,7 +318,7 @@ void Ex03DetectorConstructionOld::ConstructGeometry()
   if (fAbsorberThickness > 0.) {
 
     Double_t abso[3];
-    abso[0] = fAbsorberThickness / 2;
+    abso[0] = fAbsorberThickness / (useReflection ? 4. : 2.);
     abso[1] = fCalorSizeYZ / 2.;
     abso[2] = fCalorSizeYZ / 2.;
     gMC->Gsvolu(
@@ -322,7 +327,24 @@ void Ex03DetectorConstructionOld::ConstructGeometry()
     Double_t posX = -fGapThickness / 2.;
     Double_t posY = 0.;
     Double_t posZ = 0.;
-    gMC->Gspos("ABSO", 1, "LAYE", posX, posY, posZ, 0, "ONLY");
+    if (useReflection) {
+      // VMC defines the ordinary placement; ROOT adds its reflected copy.
+      gMC->Gspos("ABSO", 1, "LAYE", posX + abso[0], posY, posZ, 0, "ONLY");
+      auto volume = gGeoManager ? gGeoManager->GetVolume("ABSO") : nullptr;
+      auto mother = gGeoManager ? gGeoManager->GetVolume("LAYE") : nullptr;
+      if (!volume || !mother || gGeoManager->IsClosed()) {
+        Fatal("ConstructGeometry",
+          "Reflected VMC geometry requires geomVMC+RootToGeant4");
+        return;
+      }
+      auto reflection = new TGeoHMatrix();
+      reflection->ReflectX(kTRUE);
+      reflection->SetDx(posX - abso[0]);
+      mother->AddNode(volume, 2, reflection);
+    }
+    else {
+      gMC->Gspos("ABSO", 1, "LAYE", posX, posY, posZ, 0, "ONLY");
+    }
   }
 
   //
@@ -332,7 +354,7 @@ void Ex03DetectorConstructionOld::ConstructGeometry()
   if (fGapThickness > 0.) {
 
     Double_t gap[3];
-    gap[0] = fGapThickness / 2;
+    gap[0] = fGapThickness / (useReflection ? 4. : 2.);
     gap[1] = fCalorSizeYZ / 2.;
     gap[2] = fCalorSizeYZ / 2.;
     gMC->Gsvolu("GAPX", "BOX", gMC->MediumId(fGapMaterial.Data()), gap, 3);
@@ -340,7 +362,24 @@ void Ex03DetectorConstructionOld::ConstructGeometry()
     Double_t posX = fAbsorberThickness / 2.;
     Double_t posY = 0.;
     Double_t posZ = 0.;
-    gMC->Gspos("GAPX", 1, "LAYE", posX, posY, posZ, 0, "ONLY");
+    if (useReflection) {
+      // VMC defines the ordinary placement; ROOT adds its reflected copy.
+      gMC->Gspos("GAPX", 1, "LAYE", posX + gap[0], posY, posZ, 0, "ONLY");
+      auto volume = gGeoManager ? gGeoManager->GetVolume("GAPX") : nullptr;
+      auto mother = gGeoManager ? gGeoManager->GetVolume("LAYE") : nullptr;
+      if (!volume || !mother || gGeoManager->IsClosed()) {
+        Fatal("ConstructGeometry",
+          "Reflected VMC geometry requires geomVMC+RootToGeant4");
+        return;
+      }
+      auto reflection = new TGeoHMatrix();
+      reflection->ReflectX(kTRUE);
+      reflection->SetDx(posX - gap[0]);
+      mother->AddNode(volume, 2, reflection);
+    }
+    else {
+      gMC->Gspos("GAPX", 1, "LAYE", posX, posY, posZ, 0, "ONLY");
+    }
   }
 
   /*

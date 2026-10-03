@@ -79,6 +79,8 @@ class TG4GeometryServices : public TG4Verbose
 
   // methods
   void BuildAssemblyLevels();
+  // Snapshot reflection provenance on the master for worker name lookups.
+  void BuildConstituentVolumes();
   const TG4AssemblyLevels& GetAssemblyLevels(const G4VPhysicalVolume* pv) const;
   // utilities
   G4double* CreateG4doubleArray(Float_t* array, G4int size, G4bool copyValues = true) const;
@@ -88,6 +90,10 @@ class TG4GeometryServices : public TG4Verbose
   G4String CutVolumePath(
     const G4String& volumePath, G4String& volName, G4int& copyNo) const;
   const G4String& UserVolumeName(const G4String& name) const;
+  // Reflection provenance, without guessing from a name suffix.
+  const G4String& GetConstituentVolumeName(G4LogicalVolume* lv) const;
+  // VMC source name: constituent name followed by Gsposp normalization.
+  G4String UserVolumeName(G4LogicalVolume* lv) const;
 
   G4OpticalSurfaceModel SurfaceModel(EMCOpSurfaceModel model) const;
   G4SurfaceType SurfaceType(EMCOpSurfaceType surfType) const;
@@ -126,6 +132,10 @@ class TG4GeometryServices : public TG4Verbose
   TG4Limits* GetLimits(G4UserLimits* limits, const TG4G3CutVector& cuts,
     const TG4G3ControlVector& controls) const;
 
+  // All Geant4 representations of a VMC source volume.
+  std::vector<G4LogicalVolume*> FindLogicalVolumes(
+    const G4String& name, G4bool silent = false) const;
+  // Representative only; use the plural form for assignments.
   G4LogicalVolume* FindLogicalVolume(
     const G4String& name, G4bool silent = false) const;
   G4VPhysicalVolume* FindPhysicalVolume(
@@ -162,7 +172,7 @@ class TG4GeometryServices : public TG4Verbose
 
   // static data members
   static TG4GeometryServices* fgInstance;    ///< this instance
-  static G4String fgBuffer;                  ///< string buffer
+  static thread_local G4String fgBuffer;                  ///< string buffer
   static const G4double fgkAZTolerance;      ///< A,Z tolerance
   static const G4double fgkDensityTolerance; ///< density tolerance (percentual)
 
@@ -171,6 +181,9 @@ class TG4GeometryServices : public TG4Verbose
 
   /// info if user geometry is defined via G3toG4
   G4bool fIsG3toG4;
+
+  /// Master-built reflection provenance, read-only during tracking
+  std::map<G4LogicalVolume*, G4LogicalVolume*> fConstituentVolumes;
 
   /// map of madia
   TG4MediumMap* fMediumMap;
