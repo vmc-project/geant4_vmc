@@ -43,7 +43,8 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(
     fAbsorberVolId(0),
     fGapVolId(0),
     fAssemblyHierarchyPrinted(kFALSE),
-    fVerboseLevel(1)
+    fVerboseLevel(1),
+    fReflectedHit()
 {
   /// Standard constructor.
   /// Create hits collection and an empty hit for each layer
@@ -67,7 +68,8 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(
     fAbsorberVolId(origin.fAbsorberVolId),
     fGapVolId(origin.fGapVolId),
     fAssemblyHierarchyPrinted(kFALSE),
-    fVerboseLevel(origin.fVerboseLevel)
+    fVerboseLevel(origin.fVerboseLevel),
+    fReflectedHit()
 {
   /// Copy constructor (for clonig on worker thread in MT mode).
   /// Create hits collection and an empty hit for each layer
@@ -89,7 +91,8 @@ Ex03CalorimeterSD::Ex03CalorimeterSD()
     fAbsorberVolId(0),
     fGapVolId(0),
     fAssemblyHierarchyPrinted(kFALSE),
-    fVerboseLevel(1)
+    fVerboseLevel(1),
+    fReflectedHit()
 {
   /// Default constructor
 }
@@ -168,6 +171,7 @@ Bool_t Ex03CalorimeterSD::ProcessHits()
     }
   }
 
+  const Bool_t reflected = fDetector->GetUseReflection() && copyNo == 2;
   fMC->CurrentVolOffID(2, copyNo);
   // cout << "Got copyNo "<< copyNo << " " << fMC->CurrentVolPath() << endl;
 
@@ -183,10 +187,12 @@ Bool_t Ex03CalorimeterSD::ProcessHits()
 
   if (id == fAbsorberVolId) {
     GetHit(copyNo)->AddAbs(edep, step);
+    if (reflected) fReflectedHit.AddAbs(edep, step);
   }
 
   if (id == fGapVolId) {
     GetHit(copyNo)->AddGap(edep, step);
+    if (reflected) fReflectedHit.AddGap(edep, step);
   }
 
   return true;
@@ -198,6 +204,19 @@ void Ex03CalorimeterSD::EndOfEvent()
   /// Print hits collection (if verbose) and reset hits afterwards.
 
   if (fVerboseLevel > 1) Print();
+
+  if (fDetector->GetUseReflection()) {
+    cout << "   Reflected placements (included in layer totals):" << endl;
+    fReflectedHit.Print();
+  }
+  if (fDetector->GetRequireReflectedHits()) {
+    if (fReflectedHit.GetEdepAbs() <= 0. || fReflectedHit.GetTrakAbs() <= 0. ||
+        fReflectedHit.GetEdepGap() <= 0. || fReflectedHit.GetTrakGap() <= 0.) {
+      Fatal("EndOfEvent", "Missing hits in reflected absorber or gap");
+    }
+    cout << "   Reflected hits test passed" << endl;
+  }
+  fReflectedHit.Reset();
 
   // Reset hits collection
   ResetHits();

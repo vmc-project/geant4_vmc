@@ -39,7 +39,8 @@ class Ex03DetectorConstructionOld : public TObject
 
  public:
   void ConstructMaterials();
-  void ConstructGeometry();
+  // useReflection requires VMC geometry backed by TGeo (geomVMC+RootToGeant4).
+  void ConstructGeometry(Bool_t useReflection = kFALSE);
   void PrintCalorParameters();
   // void UpdateGeometry();
 

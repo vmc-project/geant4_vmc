@@ -94,16 +94,15 @@ void TG4MediumMap::MapMedium(const G4String& lvName, G4int mediumID)
   /// Map the medium with the given \em mediumID to the logical volume
   /// with given name \em lvName
 
-  G4LogicalVolume* lv =
-    TG4GeometryServices::Instance()->FindLogicalVolume(lvName);
+  auto volumes = TG4GeometryServices::Instance()->FindLogicalVolumes(lvName);
 
-  if (!lv) {
+  if (volumes.empty()) {
     TG4Globals::Warning("TG4MediumMap", "MapMedium",
       "Logical volume " + TString(lvName) + " not defined.");
     return;
   }
 
-  MapMedium(lv, mediumID);
+  for (auto lv : volumes) MapMedium(lv, mediumID);
 }
 
 //_____________________________________________________________________________

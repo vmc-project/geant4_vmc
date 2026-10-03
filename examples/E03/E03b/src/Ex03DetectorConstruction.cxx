@@ -27,6 +27,7 @@
 #include <TGeoElement.h>
 #include <TGeoManager.h>
 #include <TGeoMaterial.h>
+#include <TGeoMatrix.h>
 #include <TList.h>
 #include <TThread.h>
 #include <TVirtualMC.h>
@@ -54,7 +55,9 @@ ClassImp(Ex03DetectorConstruction)
     fGapThickness(0.),
     fDefaultMaterial("Galactic"),
     fAbsorberMaterial("Lead"),
-    fGapMaterial("liquidArgon")
+    fGapMaterial("liquidArgon"),
+    fUseReflection(kFALSE),
+    fRequireReflectedHits(kFALSE)
 {
   /// Default constuctor
 
@@ -321,7 +324,7 @@ void Ex03DetectorConstruction::ConstructGeometry()
   if (fAbsorberThickness > 0.) {
 
     Double_t abso[3];
-    abso[0] = fAbsorberThickness / 2;
+    abso[0] = fAbsorberThickness / (fUseReflection ? 4. : 2.);
     abso[1] = fCalorSizeYZ / 2.;
     abso[2] = fCalorSizeYZ / 2.;
     gGeoManager->Volume("ABSO", "BOX", absorberMediumId, abso, 3);
@@ -329,7 +332,20 @@ void Ex03DetectorConstruction::ConstructGeometry()
     Double_t posX = -fGapThickness / 2.;
     Double_t posY = 0.;
     Double_t posZ = 0.;
-    gGeoManager->Node("ABSO", 1, "LAYE", posX, posY, posZ, 0, kTRUE, ubuf);
+    if (fUseReflection) {
+      // Two adjacent halves retain the original material thickness.
+      // Copy 2 is reflected; copy 1 uses an ordinary translation.
+      auto volume = gGeoManager->GetVolume("ABSO");
+      auto mother = gGeoManager->GetVolume("LAYE");
+      mother->AddNode(volume, 1, new TGeoTranslation(posX + abso[0], 0., 0.));
+      auto reflection = new TGeoHMatrix();
+      reflection->ReflectX(kTRUE);
+      reflection->SetDx(posX - abso[0]);
+      mother->AddNode(volume, 2, reflection);
+    }
+    else {
+      gGeoManager->Node("ABSO", 1, "LAYE", posX, posY, posZ, 0, kTRUE, ubuf);
+    }
   }
 
   //
@@ -339,7 +355,7 @@ void Ex03DetectorConstruction::ConstructGeometry()
   if (fGapThickness > 0.) {
 
     Double_t gap[3];
-    gap[0] = fGapThickness / 2;
+    gap[0] = fGapThickness / (fUseReflection ? 4. : 2.);
     gap[1] = fCalorSizeYZ / 2.;
     gap[2] = fCalorSizeYZ / 2.;
     gGeoManager->Volume("GAPX", "BOX", gapMediumId, gap, 3);
@@ -347,7 +363,20 @@ void Ex03DetectorConstruction::ConstructGeometry()
     Double_t posX = fAbsorberThickness / 2.;
     Double_t posY = 0.;
     Double_t posZ = 0.;
-    gGeoManager->Node("GAPX", 1, "LAYE", posX, posY, posZ, 0, kTRUE, ubuf);
+    if (fUseReflection) {
+      // Two adjacent halves retain the original material thickness.
+      // Copy 2 is reflected; copy 1 uses an ordinary translation.
+      auto volume = gGeoManager->GetVolume("GAPX");
+      auto mother = gGeoManager->GetVolume("LAYE");
+      mother->AddNode(volume, 1, new TGeoTranslation(posX + gap[0], 0., 0.));
+      auto reflection = new TGeoHMatrix();
+      reflection->ReflectX(kTRUE);
+      reflection->SetDx(posX - gap[0]);
+      mother->AddNode(volume, 2, reflection);
+    }
+    else {
+      gGeoManager->Node("GAPX", 1, "LAYE", posX, posY, posZ, 0, kTRUE, ubuf);
+    }
   }
 
   /*

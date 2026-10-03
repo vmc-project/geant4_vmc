@@ -14,7 +14,6 @@
 
 #include "TG4SDConstruction.h"
 
-#include <G4ReflectionFactory.hh>
 #include "TG4GeometryServices.h"
 #include "TG4GflashSensitiveDetector.h"
 #include "TG4SDServices.h"
@@ -77,14 +76,7 @@ void TG4SDConstruction::CreateSD(
     sdName = userSD->GetName();
   }
   else {
-    // A reflected volume is a clone of its constituent and must share its sensitive
-    // detector, or a mirrored placement scores nothing.
-    G4LogicalVolume* constituentLV =
-      G4ReflectionFactory::Instance()->GetConstituentLV(lv);
-    G4String lvName = constituentLV ? constituentLV->GetName() : lv->GetName();
-    sdName = "/" + lvName;
-    // cut copy number from sdName
-    sdName = geometryServices->UserVolumeName(sdName);
+    sdName = "/" + geometryServices->UserVolumeName(lv);
   }
 
   // create/retrieve the sensitive detector
@@ -169,27 +161,21 @@ void TG4SDConstruction::FillSDSelectionFromTGeo()
 //_____________________________________________________________________________
 void TG4SDConstruction::MapVolumesToInstanceIds()
 {
-  /// Define VMC volume Ids when new sensitive detectors framework is used.
-  /// The volume Ids correspond to the Geant4 logical volume instance number.
-  ///
-  /// A special care is needed whin combining the old way of geometry definition
-  /// with the new sensitive detectors framework.  Note that in this case, if
-  /// geometry is defined via the VMC functions like gsposp, then the "same"
-  /// volume in the context of Geant3, which is represented by more than one
-  /// logical volumes in Geant4, will have several volume ids.
+  // Use the first instance ID as the candidate for each source volume.
+  // MapVolume reuses that ID for all other representations of the source.
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   for (G4int i = 0; i < G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
 
     if (VerboseLevel() > 1) {
-      G4cout << "Setting volId as instance Id "
+      G4cout << "Candidate volId from instance Id "
              << lv->GetInstanceID() + TG4SDServices::GetFirstVolumeId()
              << " to " << lv->GetName() << G4endl;
     }
 
     TG4SDServices::Instance()->MapVolume(
-      lv, lv->GetInstanceID() + TG4SDServices::GetFirstVolumeId(), false);
+      lv, lv->GetInstanceID() + TG4SDServices::GetFirstVolumeId(), true);
   }
 }
 
@@ -198,11 +184,10 @@ void TG4SDConstruction::MapVolumesToSDIds()
 {
   /// Define VMC volume Ids if new sensitive detectors framework is not used,
   /// The volume ID is defined via sensitive detector Id.
-  /// The sensitive detector is associated with maximum one logical volume,
-  /// that's why it can hold volume and medium Id.
+  /// Generated representations of one source share the sensitive detector.
 
   // Set volume IDs to volumes which have not SD
-  G4int counter = TG4SensitiveDetector::GetTotalNofSensitiveDetectors();
+  G4int counter = TG4SensitiveDetector::GetTotalNofSensitiveDetectors() + 1;
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   for (G4int i = 0; i < G4int(lvStore->size()); i++) {
@@ -218,7 +203,7 @@ void TG4SDConstruction::MapVolumesToSDIds()
     }
 
     if (VerboseLevel() > 1) {
-      G4cout << "Setting volId as SD id " << id << " to " << lv->GetName()
+      G4cout << "Candidate volId from SD id " << id << " to " << lv->GetName()
              << G4endl;
     }
 
@@ -248,19 +233,16 @@ void TG4SDConstruction::Construct()
   TVirtualMCApplication::Instance()->ConstructSensitiveDetectors();
   TG4StateManager::Instance()->SetNewState(kNotInApplication);
 
+  if (isMaster) TG4GeometryServices::Instance()->BuildConstituentVolumes();
+
   G4bool isUserSD = false;
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
 
   for (G4int i = 0; i < G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
 
-    // A reflected volume carries the name <constituent>_refl, which matches neither the
-    // user sensitive detectors nor the selection taken from TGeo. Look both up under the
-    // name of the volume it is a copy of.
-    G4LogicalVolume* constituentLV =
-      G4ReflectionFactory::Instance()->GetConstituentLV(lv);
-    const G4String& selectionName =
-      constituentLV ? constituentLV->GetName() : lv->GetName();
+    const G4String selectionName =
+      TG4GeometryServices::Instance()->UserVolumeName(lv);
 
     // Check if a user SD is defined
     TVirtualMCSensitiveDetector* userSD =
@@ -290,6 +272,7 @@ void TG4SDConstruction::Construct()
   // Define volume Ids if VMC SD is not defined for all volumes
   // (either due to user defined SDs or user selection of sensitive volumes)
   if (isMaster) {
+    TG4SDServices::Instance()->ClearVolumeMaps();
     if (isUserSD) {
       MapVolumesToInstanceIds();
     }

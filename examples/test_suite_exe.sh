@@ -297,6 +297,14 @@ do
           if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
           cat tmpfile >> $OUT/test_g4_tgeo_nat.out
         fi
+        if [ "$OPTION" = "E03a" ] || [ "$OPTION" = "E03b" ]; then
+          $EXE -g4g geomRootToGeant4 -g4vm "" -rm "test_E03_9.C(\"\", kFALSE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+          $EXE -g4g geomVMC+RootToGeant4 -g4vm "" -rm "test_E03_9.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+        fi
         evaluate_test "$TMP_FAILED"
 
         start_test "... Running test with G4, geometry via TGeo, TGeo navigation"
