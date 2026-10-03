@@ -1,0 +1,21 @@
+<map id="examples/Gflash/src/PrimaryGenerator.cxx" name="examples/Gflash/src/PrimaryGenerator.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the Gflash::PrimaryGenerator class." alt="" coords="487,5,635,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,128,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="487,41,144,96,143,91,486,36"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="151,94,248,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="487,46,264,94,263,89,486,41"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="272,94,384,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="504,49,379,91,377,86,502,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="408,94,496,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="536,49,482,87,479,82,533,44"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="519,94,603,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="564,46,564,78,558,78,558,46"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="628,94,724,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="591,44,647,83,644,87,588,49"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="748,94,908,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="629,44,773,86,771,92,627,49"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="932,94,1062,120"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="636,38,917,88,916,94,635,43"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1087,94,1219,120"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="636,34,1072,91,1071,96,635,39"/>
+</map>

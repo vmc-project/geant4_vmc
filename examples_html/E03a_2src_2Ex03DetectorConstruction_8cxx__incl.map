@@ -1,0 +1,25 @@
+<map id="examples/E03/E03a/src/Ex03DetectorConstruction.cxx" name="examples/E03/E03a/src/Ex03DetectorConstruction.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the Ex03DetectorConstruction class." alt="" coords="602,5,800,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,96,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="602,38,381,61,111,96,110,91,381,55,602,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="119,94,230,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="602,43,246,96,245,91,602,38"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="254,94,367,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="604,49,383,94,382,88,603,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="392,94,501,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="638,49,501,91,500,86,637,44"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="525,94,624,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="671,49,608,88,606,83,668,44"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="648,94,755,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="704,46,704,78,698,78,698,46"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="778,94,840,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="729,44,782,82,779,87,726,49"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="864,94,944,120"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="753,44,860,85,858,90,751,49"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="968,94,1064,120"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="780,44,953,87,952,92,779,49"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1088,94,1128,120"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="801,37,927,59,1074,91,1072,96,926,64,800,43"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="1152,94,1333,120"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="801,39,1144,89,1143,94,800,44"/>
+</map>

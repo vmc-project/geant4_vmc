@@ -1,0 +1,5 @@
+<map id="G4VSolid" name="G4VSolid">
+<area shape="rect" id="Node000001" title=" " alt="" coords="18,5,95,31"/>
+<area shape="rect" id="Node000002" href="$classTG4RootSolid.html" title="GEANT4 solid implemented by a ROOT shape." alt="" coords="5,79,108,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="59,46,59,79,54,79,54,46"/>
+</map>

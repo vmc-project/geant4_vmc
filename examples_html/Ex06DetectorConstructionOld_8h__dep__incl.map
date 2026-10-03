@@ -1,0 +1,7 @@
+<map id="examples/E06/include/Ex06DetectorConstructionOld.h" name="examples/E06/include/Ex06DetectorConstructionOld.h">
+<area shape="rect" id="Node000001" title="Definition of the Ex06DetectorConstructionOld class." alt="" coords="133,5,339,46"/>
+<area shape="rect" id="Node000002" href="$Ex06DetectorConstructionOld_8cxx.html" title="Implementation of the Ex06DetectorConstructionOld class." alt="" coords="5,94,211,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,57,138,96,135,91,193,53"/>
+<area shape="rect" id="Node000003" href="$Ex06MCApplication_8cxx.html" title="Implementation of the Ex06MCApplication class." alt="" coords="234,102,496,127"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="279,53,349,99,346,103,276,57"/>
+</map>

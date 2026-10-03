@@ -1,0 +1,9 @@
+<map id="G4VModularPhysicsList" name="G4VModularPhysicsList">
+<area shape="rect" id="Node000001" title=" " alt="" coords="154,5,315,31"/>
+<area shape="rect" id="Node000002" href="$classTG4EmPhysicsList.html" title="The standard EM physics list." alt="" coords="5,79,139,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,40,101,81,99,76,192,35"/>
+<area shape="rect" id="Node000003" href="$classTG4ExtraPhysicsList.html" title="The physics list with extra physics builders." alt="" coords="163,79,306,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="237,46,237,79,232,79,232,46"/>
+<area shape="rect" id="Node000004" href="$classTG4SpecialPhysicsList.html" title="The Geant4 VMC special physics list helper class." alt="" coords="331,79,488,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="279,35,381,76,379,81,277,40"/>
+</map>

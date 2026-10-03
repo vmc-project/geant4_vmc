@@ -1,0 +1,7 @@
+<map id="examples/TR/run_g3.C" name="examples/TR/run_g3.C">
+<area shape="rect" id="Node000001" title="Macro for running Example TR with Geant3." alt="" coords="5,5,158,31"/>
+<area shape="rect" id="Node000002" href="$TR_2set__g3__vis_8C.html" title="Macro for setting G3 visualization for Example TR." alt="" coords="33,79,130,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,31,84,63,79,63,79,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="33,153,130,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="84,105,84,137,79,137,79,105"/>
+</map>

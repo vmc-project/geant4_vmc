@@ -1,0 +1,15 @@
+<map id="examples/ExGarfield/include/GarfieldPhysics.h" name="examples/ExGarfield/include/GarfieldPhysics.h">
+<area shape="rect" id="Node000001" title="Definition of the GarfieldPhysics class." alt="" coords="453,5,624,46"/>
+<area shape="rect" id="Node000002" href="$GarfieldG4FastSimulationModel_8h.html" title="Definition of the GarfieldG4FastSimulationModel class." alt="" coords="123,94,298,150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="456,53,298,98,297,93,454,48"/>
+<area shape="rect" id="Node000005" href="$GarfieldMessenger_8cxx.html" title=" " alt="" coords="322,102,542,142"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="507,58,455,103,452,99,503,54"/>
+<area shape="rect" id="Node000006" href="$GarfieldPhysics_8cxx.html" title="Definition of the GarfieldPhysics class." alt="" coords="565,102,725,142"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="574,54,625,99,621,103,570,58"/>
+<area shape="rect" id="Node000007" href="$ExGarfield_2src_2SensitiveDetector_8cxx.html" title="Implementation of the ExGarfield::SensitiveDetector class." alt="" coords="748,102,920,142"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="615,49,773,98,772,103,614,54"/>
+<area shape="rect" id="Node000003" href="$FastSimulation_8cxx.html" title="Implementation of the ExGarfield::FastSimulation class." alt="" coords="5,205,205,246"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="173,163,127,207,123,203,169,159"/>
+<area shape="rect" id="Node000004" href="$GarfieldG4FastSimulationModel_8cxx.html" title="Implementation of the GarfieldG4FastSimulationModel class." alt="" coords="228,198,406,253"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="252,159,290,195,287,199,248,162"/>
+</map>

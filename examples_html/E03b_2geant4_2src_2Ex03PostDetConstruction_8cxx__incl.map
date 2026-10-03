@@ -1,0 +1,11 @@
+<map id="examples/E03/E03b/geant4/src/Ex03PostDetConstruction.cxx" name="examples/E03/E03b/geant4/src/Ex03PostDetConstruction.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the Ex03PostDetConstruction class." alt="" coords="273,5,490,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,185,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="311,49,155,92,153,87,309,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="208,94,371,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="361,48,317,86,314,82,357,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="395,94,555,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="406,44,451,82,447,86,403,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="578,94,708,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="448,44,589,86,587,92,446,49"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="examples/E01/testE01.cxx" name="examples/E01/testE01.cxx">
+<area shape="rect" id="Node000001" title="The Geant4 VMC example E01 test application." alt="" coords="265,5,437,31"/>
+<area shape="rect" id="Node000002" href="$Ex01MCApplication_8h.html" title="Definition of the Ex01MCApplication class." alt="" coords="98,79,241,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="321,34,216,75,214,70,319,29"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="265,79,341,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="345,33,322,67,317,64,341,30"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="364,79,436,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="361,30,386,65,381,68,357,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="460,79,514,105"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="375,29,452,69,449,74,373,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,153,166,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="157,107,113,144,110,140,154,103"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="190,153,320,178"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="186,103,231,141,227,145,182,107"/>
+</map>

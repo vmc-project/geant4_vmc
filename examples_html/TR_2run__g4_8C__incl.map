@@ -1,0 +1,8 @@
+<map id="examples/TR/run_g4.C" name="examples/TR/run_g4.C">
+<area shape="rect" id="Node000001" title="Macro for loading libraries to run ExamplTR with Geant4." alt="" coords="5,5,158,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="33,153,130,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,32,67,79,67,109,74,137,69,139,62,110,62,79,74,31"/>
+<area shape="rect" id="Node000003" href="$TR_2set__g4__vis_8C.html" title="Macro for setting G4 visualization for Example TR." alt="" coords="76,79,172,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="91,30,111,64,107,67,86,33"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="119,106,99,141,94,138,115,104"/>
+</map>

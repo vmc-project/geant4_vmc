@@ -1,0 +1,36 @@
+<map id="examples/E03/E03a/exampleE03a.cxx" name="examples/E03/E03a/exampleE03a.cxx">
+<area shape="rect" id="Node000001" title="The Geant4 VMC example E03a application executable." alt="" coords="532,5,719,46"/>
+<area shape="rect" id="Node000002" href="$Ex03MCApplication_8h.html" title="Definition of the Ex03MCApplication class." alt="" coords="378,94,521,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="582,49,491,90,489,85,580,44"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="545,94,705,120"/>
+<area shape="poly" id="edge16_Node000001_Node000016" title=" " alt="" coords="628,46,628,78,622,78,622,46"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="730,94,806,120"/>
+<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="662,44,734,84,731,88,660,49"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="6,168,167,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="388,123,164,167,163,162,387,118"/>
+<area shape="rect" id="Node000004" href="$Ex03CalorimeterSD_8h.html" title="Definition of the Ex03CalorimeterSD class." alt="" coords="191,168,334,193"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="418,123,309,164,308,159,417,118"/>
+<area shape="rect" id="Node000010" href="$E03a_2include_2Ex03DetectorConstruction_8h.html" title="Definition of the Ex03DetectorConstruction class." alt="" coords="358,168,540,193"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="452,120,452,152,446,152,446,120"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="564,168,726,193"/>
+<area shape="poly" id="edge14_Node000002_Node000014" title=" " alt="" coords="483,118,599,159,597,165,482,123"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="750,168,858,193"/>
+<area shape="poly" id="edge15_Node000002_Node000015" title=" " alt="" coords="510,118,736,163,735,168,509,123"/>
+<area shape="rect" id="Node000005" href="$E03a_2include_2Ex03CalorHit_8h.html" title="Definition of the Ex03CalorHit class." alt="" coords="5,241,112,267"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="229,196,108,238,106,233,227,191"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="136,241,245,267"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="252,195,215,232,212,228,249,192"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="270,241,351,267"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="273,192,296,227,292,230,268,195"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="237,315,314,341"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="96,265,225,307,224,312,95,270"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="16,315,101,341"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="61,267,61,299,56,299,56,267"/>
+<area shape="poly" id="edge12_Node000010_Node000006" title=" " alt="" coords="441,195,408,230,366,269,310,309,307,304,362,265,405,226,437,192"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="426,241,472,267"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="452,194,452,226,446,226,446,194"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="496,241,586,267"/>
+<area shape="poly" id="edge11_Node000010_Node000012" title=" " alt="" coords="466,192,516,230,512,234,463,196"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="610,241,683,267"/>
+<area shape="poly" id="edge13_Node000010_Node000013" title=" " alt="" coords="484,191,600,233,598,238,482,196"/>
+</map>
