@@ -763,12 +763,12 @@ void TG4GeometryManager::ConstructLocalFields()
       continue;
     }
 
-    // Get or create user field parameters
-    TG4FieldParameters* fieldParameters =
-      GetOrCreateFieldParameters(volumeName);
-
-    // Create magnetic field
-    CreateField(magField, fieldParameters, lv);
+    // TG4FieldParameters indexes parameters by the actual Geant4 name.
+    for (auto lv : volumes) {
+      // Get or create user field parameters
+      auto* fieldParameters = GetOrCreateFieldParameters(lv->GetName());
+      CreateField(magField, fieldParameters, lv);
+    }
   }
 }
 
