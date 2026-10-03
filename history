@@ -9,6 +9,17 @@
 
 Tags (history):
 ===============
+  3/10/2026
+  v6-6-update4-p4:
+    Geant4 VMC:
+    - Give reflected volumes a sensitive detector and fix division copy numbers for VMC+RootToGeant4 (#89)
+    - Unify VMC volume IDs across Geant4 volume representations (#91)
+    - Add reflected-hit tests for E03a and E03b with ROOT and mixed VMC/ROOT
+      geometry construction.
+
+  Tested with VMC 2.2, Geant4 v11.2.0-alice (with embedded CLHEP 2.4.7.1)
+      Root 6.36/14, VGM 5.5
+
   15/09/2026
   v6-6-update3-p3:
     Geant4 VMC:
