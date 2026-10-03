@@ -27,7 +27,7 @@ Processing test_E03_1.C("g4Config2.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6-update3.p3 ( 15 September 2026 )
+ Version 6.6-update4.p4 ( 3 October 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -831,7 +831,7 @@ Max 2J for sampling of angular correlations         10
 ---> Begin of event: 5
    Absorber: total energy (MeV): 923.348       total track length (cm):  65.7455
    Gap:      total energy (MeV): 30.7489       total track length (cm):  15.5886
-Time of this run:   User=0.040000s Real=0.037399s Sys=0.000000s
+Time of this run:   User=0.030000s Real=0.037788s Sys=0.000000s
 Number of events processed: 5
    ------------------------------------------------------------------
   | Welcome to ROOT 6.36.14                        https://root.cern |
@@ -863,7 +863,7 @@ Processing test_E03_2.C("g4Config2.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6-update3.p3 ( 15 September 2026 )
+ Version 6.6-update4.p4 ( 3 October 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -2360,7 +2360,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  47.868       total track length (cm):    3.454
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.000000s Real=0.003709s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.003473s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
@@ -2393,7 +2393,7 @@ Processing test_E03_3.C("g4Config2.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6-update3.p3 ( 15 September 2026 )
+ Version 6.6-update4.p4 ( 3 October 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3230,7 +3230,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.137
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.000000s Real=0.000740s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.000827s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
@@ -3262,7 +3262,7 @@ Processing test_E03_4.C("g4Config2.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6-update3.p3 ( 15 September 2026 )
+ Version 6.6-update4.p4 ( 3 October 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -4070,5 +4070,5 @@ Max 2J for sampling of angular correlations         10
 
    Absorber: total energy (MeV):  1578.5       total track length (cm):  112.376
    Gap:      total energy (MeV):   74.45       total track length (cm):  35.6813
-Time of this run:   User=0.010000s Real=0.014788s Sys=0.000000s
+Time of this run:   User=0.010000s Real=0.013931s Sys=0.000000s
 Number of events processed: 1

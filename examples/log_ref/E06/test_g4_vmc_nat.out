@@ -24,7 +24,7 @@ Processing test_E06.C("g4ConfigOld.C",kTRUE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6-update3.p3 ( 15 September 2026 )
+ Version 6.6-update4.p4 ( 3 October 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -666,6 +666,6 @@ Number of optical photons produced in this event : 1549
 Number of optical photons produced in this event : 1455
 >>> Event 9
 Number of optical photons produced in this event : 1467
-Time of this run:   User=0.140000s Real=0.145678s Sys=0.010000s
+Time of this run:   User=0.140000s Real=0.141007s Sys=0.000000s
 Number of events processed: 10
 Number of optical photons produced in this run : 15112

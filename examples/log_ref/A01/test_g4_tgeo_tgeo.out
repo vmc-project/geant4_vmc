@@ -24,7 +24,7 @@ Processing test_A01_1.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6-update3.p3 ( 15 September 2026 )
+ Version 6.6-update4.p4 ( 3 October 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -909,9 +909,9 @@ Chamber1 has 532 hits.
 Chamber2 has 538 hits.
 EmCalorimeter has 45 hits. Total Edep is 28276.4 (MeV)
 HadCalorimeter has 14 hits. Total Edep is 75.8799 (MeV)
-Time of this run:   User=2.630000s Real=2.680868s Sys=0.030000s
+Time of this run:   User=2.580000s Real=2.609373s Sys=0.020000s
 Number of events processed: 5
-Real time 0:00:03, CP time 3.500
+Real time 0:00:03, CP time 3.370
    ------------------------------------------------------------------
   | Welcome to ROOT 6.36.14                        https://root.cern |
   | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
@@ -938,7 +938,7 @@ Processing test_A01_2.C("g4tgeoConfig2.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6-update3.p3 ( 15 September 2026 )
+ Version 6.6-update4.p4 ( 3 October 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -1805,6 +1805,6 @@ Chamber1 has 517 hits.
 Chamber2 has 490 hits.
 EmCalorimeter has 49 hits. Total Edep is 28261.2 (MeV)
 HadCalorimeter has 13 hits. Total Edep is 87.2874 (MeV)
-Time of this run:   User=2.420000s Real=2.452412s Sys=0.020000s
+Time of this run:   User=2.370000s Real=2.412059s Sys=0.020000s
 Number of events processed: 5
-Real time 0:00:03, CP time 3.260
+Real time 0:00:03, CP time 3.180

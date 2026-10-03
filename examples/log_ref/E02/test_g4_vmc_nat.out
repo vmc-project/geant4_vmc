@@ -24,7 +24,7 @@ Processing test_E02.C("g4ConfigOld.C",kTRUE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.6-update3.p3 ( 15 September 2026 )
+ Version 6.6-update4.p4 ( 3 October 2026 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3979,5 +3979,5 @@ TParticle: e-             p: 0.000044 -0.000109 0.000066 Vertex: 1.052251e+01 -3
 Mother:    proton  with ID: 557
 Number of daughters: 0
 
-Time of this run:   User=0.020000s Real=0.022698s Sys=0.000000s
+Time of this run:   User=0.010000s Real=0.021877s Sys=0.010000s
 Number of events processed: 5
