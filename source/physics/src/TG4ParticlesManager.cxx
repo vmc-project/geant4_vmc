@@ -38,6 +38,8 @@
 #include <TParticle.h>
 #include <TVirtualMCApplication.h>
 
+#include <unordered_map>
+
 // Moved after Root includes to avoid shadowed variables
 // generated from short units names
 #include <G4SystemOfUnits.hh>
@@ -461,6 +463,27 @@ void TG4ParticlesManager::SetUserDecay(Int_t pdg)
 
 //_____________________________________________________________________________
 G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle)
+{
+  /// Return the PDG code of particle, cached per particle definition and
+  /// thread, as each TDatabasePDG query takes the global ROOT lock
+
+  static G4ThreadLocal std::unordered_map<const G4ParticleDefinition*, G4int>*
+    pdgCache = nullptr;
+  if (pdgCache == nullptr) {
+    pdgCache = new std::unordered_map<const G4ParticleDefinition*, G4int>();
+  }
+  auto it = pdgCache->find(particle);
+  if (it != pdgCache->end()) {
+    return it->second;
+  }
+  G4int pdgEncoding = GetPDGEncodingFromDatabase(particle);
+  pdgCache->emplace(particle, pdgEncoding);
+  return pdgEncoding;
+}
+
+//_____________________________________________________________________________
+G4int TG4ParticlesManager::GetPDGEncodingFromDatabase(
+  G4ParticleDefinition* particle)
 {
   /// Return the PDG code of particle;
   /// if standard PDG code is not defined the TDatabasePDG
