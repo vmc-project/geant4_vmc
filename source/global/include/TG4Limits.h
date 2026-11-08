@@ -68,6 +68,7 @@ class TG4Limits : public G4UserLimits
   // get methods
   G4String GetName() const;
   G4double GetMaxUserStep() const;
+  virtual G4double GetMaxAllowedStep(const G4Track& track);
   const TG4G3CutVector* GetCutVector() const;
   const TG4G3ControlVector* GetControlVector() const;
   G4bool IsCut() const;
@@ -130,12 +131,6 @@ inline G4String TG4Limits::GetName() const
 {
   /// Return name
   return fName;
-}
-
-inline G4double TG4Limits::GetMaxUserStep() const
-{
-  /// Return max step
-  return fMaxStep;
 }
 
 inline const TG4G3CutVector* TG4Limits::GetCutVector() const

@@ -226,15 +226,24 @@ void TG4Limits::SetG3DefaultControls()
   fIsControl = true;
 }
 
+namespace
+{
+// The limits objects are attached to logical volumes and so shared by all
+// threads in multithreaded mode; the max step set on fly is kept per thread
+G4ThreadLocal const TG4Limits* gLimitsModifiedOnFly = nullptr;
+G4ThreadLocal G4double gMaxStepOnFly = DBL_MAX;
+} // namespace
+
 //_____________________________________________________________________________
 void TG4Limits::SetCurrentMaxAllowedStep(G4double step)
 {
-  /// Set the new value of max step in the base class
+  /// Set the new value of max step for the current thread
 
   // G4cout << "TG4Limits::SetCurrentMaxStep: in " << GetName()
   //       << " step " << step << G4endl;
 
-  fMaxStep = step;
+  gLimitsModifiedOnFly = this;
+  gMaxStepOnFly = step;
 }
 
 //_____________________________________________________________________________
@@ -258,7 +267,28 @@ void TG4Limits::SetMaxAllowedStepBack()
   // G4cout << "TG4Limits::SetMaxAllowedStepBack: in " << GetName()
   //       << " step " << fDefaultMaxStep << G4endl;
 
-  fMaxStep = fDefaultMaxStep;
+  // the configured fMaxStep was never changed, so dropping the value set on
+  // fly restores it
+  if (gLimitsModifiedOnFly == this) {
+    gLimitsModifiedOnFly = nullptr;
+  }
+}
+
+//_____________________________________________________________________________
+G4double TG4Limits::GetMaxUserStep() const
+{
+  /// Return max step; the value set on fly takes precedence for the thread
+  /// which set it
+
+  return (gLimitsModifiedOnFly == this) ? gMaxStepOnFly : fMaxStep;
+}
+
+//_____________________________________________________________________________
+G4double TG4Limits::GetMaxAllowedStep(const G4Track& /*track*/)
+{
+  /// Return max step for G4StepLimiter, including the value set on fly
+
+  return GetMaxUserStep();
 }
 
 //_____________________________________________________________________________
