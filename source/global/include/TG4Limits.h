@@ -59,7 +59,6 @@ class TG4Limits : public G4UserLimits
   void SetG3DefaultCuts();
   void SetG3DefaultControls();
   void SetCurrentMaxAllowedStep(G4double step);
-  void SetDefaultMaxAllowedStep();
   void SetMaxAllowedStepBack();
 
   // methods
@@ -98,7 +97,6 @@ class TG4Limits : public G4UserLimits
   G4bool fIsControl;                 ///< true if any control value is set
   TG4G3CutVector fCutVector;         ///< the vector of G3 cut values
   TG4G3ControlVector fControlVector; ///< the vector of G3 control values
-  G4double fDefaultMaxStep;          ///< the default max step value
 };
 
 // inline methods
