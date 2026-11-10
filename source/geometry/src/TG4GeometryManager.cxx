@@ -922,9 +922,6 @@ void TG4GeometryManager::SetUserLimits(
         lv->GetMaterial()->GetDensity() < fLimitDensity)
       tg4Limits->SetMaxAllowedStep(fMaxStepInLowDensityMaterials);
 
-    // set max step the default value
-    tg4Limits->SetDefaultMaxAllowedStep();
-
     // update controls in limits according to the setup
     // in the passed vector
     tg4Limits->Update(controls);

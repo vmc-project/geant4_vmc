@@ -29,8 +29,7 @@ TG4Limits::TG4Limits(
     fIsCut(false),
     fIsControl(false),
     fCutVector(cuts),
-    fControlVector(),
-    fDefaultMaxStep(DBL_MAX)
+    fControlVector()
 {
   /// Standard constructor
 
@@ -48,8 +47,7 @@ TG4Limits::TG4Limits(const G4String& name, const TG4G3CutVector& cuts,
     fIsCut(false),
     fIsControl(false),
     fCutVector(cuts),
-    fControlVector(),
-    fDefaultMaxStep(DBL_MAX)
+    fControlVector()
 {
   /// Standard constructor with specified \em name
 
@@ -64,8 +62,7 @@ TG4Limits::TG4Limits(const G4UserLimits& g4Limits, const TG4G3CutVector& cuts,
     fIsCut(false),
     fIsControl(false),
     fCutVector(cuts),
-    fControlVector(),
-    fDefaultMaxStep(DBL_MAX)
+    fControlVector()
 {
   /// Standard constructor with specified \em g4Limits
 
@@ -82,8 +79,7 @@ TG4Limits::TG4Limits()
     fIsCut(false),
     fIsControl(false),
     fCutVector(),
-    fControlVector(),
-    fDefaultMaxStep(DBL_MAX)
+    fControlVector()
 {
   /// Default constructor
 
@@ -97,8 +93,7 @@ TG4Limits::TG4Limits(const TG4Limits& right)
     fIsCut(right.fIsCut),
     fIsControl(right.fIsControl),
     fCutVector(right.fCutVector),
-    fControlVector(right.fControlVector),
-    fDefaultMaxStep(right.fDefaultMaxStep)
+    fControlVector(right.fControlVector)
 {
   /// Copy constructor
 
@@ -226,39 +221,52 @@ void TG4Limits::SetG3DefaultControls()
   fIsControl = true;
 }
 
+namespace
+{
+// The limits objects are attached to logical volumes and so shared by all
+// threads in multithreaded mode; the max step set on fly is kept per thread
+G4ThreadLocal const TG4Limits* gLimitsModifiedOnFly = nullptr;
+G4ThreadLocal G4double gMaxStepOnFly = DBL_MAX;
+} // namespace
+
 //_____________________________________________________________________________
 void TG4Limits::SetCurrentMaxAllowedStep(G4double step)
 {
-  /// Set the new value of max step in the base class
+  /// Set the new value of max step for the current thread
 
   // G4cout << "TG4Limits::SetCurrentMaxStep: in " << GetName()
   //       << " step " << step << G4endl;
 
-  fMaxStep = step;
-}
-
-//_____________________________________________________________________________
-void TG4Limits::SetDefaultMaxAllowedStep()
-{
-  /// Set the max stap value in base class as the default value
-  /// (in fDefaultMaxStep)
-
-  // G4cout << "TG4Limits::SetDefaultMaxAllowedStep: in " << GetName()
-  //       << " step " << fMaxStep << G4endl;
-
-  fDefaultMaxStep = fMaxStep;
+  gLimitsModifiedOnFly = this;
+  gMaxStepOnFly = step;
 }
 
 //_____________________________________________________________________________
 void TG4Limits::SetMaxAllowedStepBack()
 {
-  /// Set the default max stap value (stored in  fDefaultMaxStep) back
-  /// as the max step value in the base class
+  /// Drop the max step set on fly for the current thread, so that the
+  /// configured max step (fMaxStep) applies again
 
-  // G4cout << "TG4Limits::SetMaxAllowedStepBack: in " << GetName()
-  //       << " step " << fDefaultMaxStep << G4endl;
+  if (gLimitsModifiedOnFly == this) {
+    gLimitsModifiedOnFly = nullptr;
+  }
+}
 
-  fMaxStep = fDefaultMaxStep;
+//_____________________________________________________________________________
+G4double TG4Limits::GetMaxUserStep() const
+{
+  /// Return max step; the value set on fly takes precedence for the thread
+  /// which set it
+
+  return (gLimitsModifiedOnFly == this) ? gMaxStepOnFly : fMaxStep;
+}
+
+//_____________________________________________________________________________
+G4double TG4Limits::GetMaxAllowedStep(const G4Track& /*track*/)
+{
+  /// Return max step for G4StepLimiter, including the value set on fly
+
+  return GetMaxUserStep();
 }
 
 //_____________________________________________________________________________
@@ -267,7 +275,7 @@ void TG4Limits::Print() const
   /// Print limits.
 
   G4cout << "\"" << fName << "\"  limits:" << G4endl;
-  G4cout << "  Max step length (mm):  " << fMaxStep / mm << G4endl;
+  G4cout << "  Max step length (mm):  " << GetMaxUserStep() / mm << G4endl;
   G4cout << "  Max track length (mm): " << fMaxTrack / mm << G4endl;
   G4cout << "  Max time (s)           " << fMaxTime / s << G4endl;
   G4cout << "  Min kin. energy (MeV)  " << fMinEkine / MeV << G4endl;
