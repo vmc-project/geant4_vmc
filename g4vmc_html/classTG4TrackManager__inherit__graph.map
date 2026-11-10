@@ -1,0 +1,5 @@
+<map id="TG4TrackManager" name="TG4TrackManager">
+<area shape="rect" id="Node000001" title="The class for storing G4 tracks in VMC sack." alt="" coords="5,79,135,105"/>
+<area shape="rect" id="Node000002" href="$classTG4Verbose.html" title="Base class for defining the verbose level and a common messenger." alt="" coords="23,5,117,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,46,73,79,67,79,67,46"/>
+</map>

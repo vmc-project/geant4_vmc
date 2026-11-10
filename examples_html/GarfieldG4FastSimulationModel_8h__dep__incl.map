@@ -1,0 +1,7 @@
+<map id="examples/ExGarfield/geant4/include/GarfieldG4FastSimulationModel.h" name="examples/ExGarfield/geant4/include/GarfieldG4FastSimulationModel.h">
+<area shape="rect" id="Node000001" title="Definition of the GarfieldG4FastSimulationModel class." alt="" coords="123,5,298,61"/>
+<area shape="rect" id="Node000002" href="$FastSimulation_8cxx.html" title="Implementation of the ExGarfield::FastSimulation class." alt="" coords="5,116,205,157"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,74,127,118,123,114,169,70"/>
+<area shape="rect" id="Node000003" href="$GarfieldG4FastSimulationModel_8cxx.html" title="Implementation of the GarfieldG4FastSimulationModel class." alt="" coords="228,109,406,165"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="252,70,290,106,287,110,248,74"/>
+</map>

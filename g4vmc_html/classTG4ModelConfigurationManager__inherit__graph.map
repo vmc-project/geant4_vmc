@@ -1,0 +1,7 @@
+<map id="TG4ModelConfigurationManager" name="TG4ModelConfigurationManager">
+<area shape="rect" id="Node000001" title="The model configuration vector with suitable setters and a messenger." alt="" coords="5,79,212,105"/>
+<area shape="rect" id="Node000003" href="$classTG4BiasingManager.html" title="The biasing manager." alt="" coords="39,153,178,178"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="111,120,111,152,106,152,106,120"/>
+<area shape="rect" id="Node000002" href="$classTG4Verbose.html" title="Base class for defining the verbose level and a common messenger." alt="" coords="61,5,156,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,46,111,79,106,79,106,46"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="examples/A01/geant4/include/A01DetectorConstruction.hh" name="examples/A01/geant4/include/A01DetectorConstruction.hh">
+<area shape="rect" id="Node000001" title="Definition of the A01DetectorConstruction class." alt="" coords="200,5,432,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,85,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="249,49,100,92,99,87,247,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="108,94,323,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="293,49,244,86,241,82,289,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="346,94,485,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="342,44,390,82,387,86,339,49"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="509,94,642,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="381,44,522,86,520,92,380,49"/>
+</map>

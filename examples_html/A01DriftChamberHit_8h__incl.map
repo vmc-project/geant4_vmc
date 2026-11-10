@@ -1,0 +1,9 @@
+<map id="examples/A01/include/A01DriftChamberHit.h" name="examples/A01/include/A01DriftChamberHit.h">
+<area shape="rect" id="Node000001" title="Definition of the A01DriftChamberHit class." alt="" coords="67,5,218,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,80,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,49,71,86,68,82,116,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="104,94,181,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="145,46,145,78,140,78,140,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="206,94,290,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="170,44,221,82,218,86,167,49"/>
+</map>

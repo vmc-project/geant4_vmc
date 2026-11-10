@@ -1,0 +1,7 @@
+<map id="TG4SpecialCutsForElectron" name="TG4SpecialCutsForElectron">
+<area shape="rect" id="Node000001" title="Special process that activates kinetic energy cuts for e&#45;." alt="" coords="5,153,188,178"/>
+<area shape="rect" id="Node000002" href="$classTG4VSpecialCuts.html" title="Abstract base class for a special process that activates kinetic energy cuts." alt="" coords="34,79,159,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,120,99,152,94,152,94,120"/>
+<area shape="rect" id="Node000003" href="$classG4VProcess.html" title=" " alt="" coords="49,5,144,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,46,99,79,94,79,94,46"/>
+</map>

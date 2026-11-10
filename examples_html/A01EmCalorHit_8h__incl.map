@@ -1,0 +1,9 @@
+<map id="examples/A01/include/A01EmCalorHit.h" name="examples/A01/include/A01EmCalorHit.h">
+<area shape="rect" id="Node000001" title="Definition of the A01EmCalorHit class." alt="" coords="92,5,241,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,104,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,49,86,87,83,82,137,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="128,94,205,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,46,169,78,164,78,164,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="230,94,314,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="194,44,245,82,242,86,191,49"/>
+</map>

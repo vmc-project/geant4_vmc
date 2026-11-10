@@ -1,0 +1,33 @@
+<map id="examples/ExGarfield/geant4/include/GarfieldG4FastSimulationModel.h" name="examples/ExGarfield/geant4/include/GarfieldG4FastSimulationModel.h">
+<area shape="rect" id="Node000001" title="Definition of the GarfieldG4FastSimulationModel class." alt="" coords="674,5,848,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="580,109,766,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="736,63,698,100,694,96,732,59"/>
+<area shape="rect" id="Node000003" href="$GarfieldPhysics_8h.html" title="Definition of the GarfieldPhysics class." alt="" coords="790,109,911,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="791,59,829,96,825,100,787,63"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,183,77,208"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="789,136,779,137,587,153,436,157,285,163,197,172,92,185,92,180,196,166,285,158,436,152,587,148,778,132,789,131"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="100,183,147,208"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="789,136,779,137,686,146,606,151,470,153,334,160,255,169,162,185,162,180,255,164,334,154,470,148,606,145,685,141,778,132,789,131"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="171,183,228,208"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="789,136,779,137,629,151,512,156,394,164,244,185,243,180,393,158,511,151,629,146,778,132,789,131"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="252,183,371,208"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="789,136,779,137,584,161,387,185,386,179,583,156,778,132,789,130"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="395,183,564,208"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="790,138,558,182,557,177,789,132"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="588,183,766,208"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="822,138,722,179,720,174,820,133"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="790,183,911,208"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="853,135,853,167,848,167,848,135"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="935,183,1070,208"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="877,133,964,173,961,178,875,138"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="1094,183,1230,208"/>
+<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="904,133,1095,176,1094,181,903,138"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="1255,183,1334,208"/>
+<area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="912,129,1057,149,1239,180,1239,185,1056,155,911,134"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="1358,183,1454,208"/>
+<area shape="poly" id="edge13_Node000003_Node000014" title=" " alt="" coords="912,126,1101,147,1344,180,1343,185,1100,152,911,132"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="1479,183,1582,208"/>
+<area shape="poly" id="edge14_Node000003_Node000015" title=" " alt="" coords="912,125,1149,144,1464,180,1463,185,1149,150,911,130"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="1605,183,1717,208"/>
+<area shape="poly" id="edge15_Node000003_Node000016" title=" " alt="" coords="912,124,1200,142,1392,159,1590,180,1590,185,1391,164,1200,148,911,129"/>
+</map>

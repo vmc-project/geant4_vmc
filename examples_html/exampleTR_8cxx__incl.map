@@ -1,0 +1,9 @@
+<map id="examples/TR/exampleTR.cxx" name="examples/TR/exampleTR.cxx">
+<area shape="rect" id="Node000001" title="The Geant4 VMC example TR application executable." alt="" coords="117,5,305,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,121,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,34,103,74,101,69,185,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="145,79,277,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="214,31,214,63,208,63,208,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="301,79,377,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="234,29,305,69,303,73,231,34"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="TG4FastSimulationPhysics" name="TG4FastSimulationPhysics">
+<area shape="rect" id="Node000001" title="Physics builder which activates selected fast simulation models." alt="" coords="72,153,251,178"/>
+<area shape="rect" id="Node000002" href="$classTG4VPhysicsConstructor.html" title="Abstract base class for physics constructors with verbose." alt="" coords="77,79,246,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="164,120,164,152,159,152,159,120"/>
+<area shape="rect" id="Node000003" href="$classG4VPhysicsConstructor.html" title=" " alt="" coords="5,5,166,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="111,40,151,77,147,81,108,44"/>
+<area shape="rect" id="Node000004" href="$classTG4Verbose.html" title="Base class for defining the verbose level and a common messenger." alt="" coords="190,5,285,31"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="215,44,176,81,172,77,212,40"/>
+</map>

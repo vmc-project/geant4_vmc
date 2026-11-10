@@ -1,0 +1,30 @@
+<map id="examples/E03/E03c/src/Ex03cDetectorConstruction.cxx" name="examples/E03/E03c/src/Ex03cDetectorConstruction.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the Ex03cDetectorConstruction class." alt="" coords="411,5,616,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="374,168,464,193"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="411,36,294,46,169,59,65,76,31,86,13,96,8,107,13,118,36,135,70,148,114,158,163,166,267,174,359,177,358,182,267,180,163,171,113,164,69,153,33,139,9,121,3,107,9,92,29,81,64,71,168,54,293,40,411,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="22,94,133,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="411,48,149,95,148,90,410,43"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="157,94,270,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="439,49,275,92,274,87,438,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="295,94,404,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="474,49,389,89,387,85,472,44"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="428,94,490,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="502,48,478,83,474,79,498,45"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="514,94,623,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="529,45,553,79,549,83,525,48"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="647,94,727,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="558,44,648,85,645,90,556,49"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="751,94,847,120"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="586,44,741,87,740,92,584,49"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="871,94,911,120"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="617,40,729,61,857,91,856,96,727,66,616,45"/>
+<area shape="rect" id="Node000011" href="$Ex03cDetectorConstruction_8h.html" title="Definition of the Ex03cDetectorConstruction class." alt="" coords="934,94,1122,120"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="616,40,934,88,933,94,616,45"/>
+<area shape="poly" id="edge12_Node000011_Node000002" title=" " alt="" coords="934,122,480,175,479,169,933,117"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="920,168,966,193"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="1016,122,970,160,967,156,1012,118"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="990,168,1067,193"/>
+<area shape="poly" id="edge13_Node000011_Node000013" title=" " alt="" coords="1031,120,1031,152,1026,152,1026,120"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="1092,168,1165,193"/>
+<area shape="poly" id="edge14_Node000011_Node000014" title=" " alt="" coords="1047,118,1100,156,1097,160,1044,122"/>
+</map>

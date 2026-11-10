@@ -1,0 +1,5 @@
+<map id="TG4ComposedPhysicsMessenger" name="TG4ComposedPhysicsMessenger">
+<area shape="rect" id="Node000001" title="Messenger class that defines commands for Geant4 VMC composed physics list and related classes." alt="" coords="5,79,224,105"/>
+<area shape="rect" id="Node000002" href="$classG4UImessenger.html" title=" " alt="" coords="56,5,173,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,46,117,79,112,79,112,46"/>
+</map>

@@ -1,0 +1,23 @@
+<map id="examples/Gflash/src/DetectorConstruction.cxx" name="examples/Gflash/src/DetectorConstruction.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the Gflash::DetectorConstruction class." alt="" coords="546,5,715,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,96,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="546,39,351,62,112,96,111,91,351,57,545,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="119,94,214,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="546,43,230,96,229,91,545,38"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="238,94,348,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="547,49,361,92,360,87,546,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="372,94,486,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="581,49,475,90,473,85,579,44"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="510,94,620,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="616,48,587,83,583,80,612,45"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="644,94,751,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="649,45,679,80,675,83,645,48"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="774,94,836,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="675,44,766,85,764,90,673,49"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="860,94,940,120"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="699,44,846,87,845,92,697,49"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="964,94,1060,120"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="716,42,949,90,948,95,715,47"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1084,94,1238,120"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="716,37,1069,89,1069,95,715,42"/>
+</map>

@@ -1,0 +1,43 @@
+<map id="G4UImessenger" name="G4UImessenger">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,475,122,500"/>
+<area shape="rect" id="Node000002" href="$classG4MonopolePhysicsMessenger.html" title=" " alt="" coords="185,5,389,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,459,76,365,97,239,111,176,127,119,146,72,168,40,183,29,186,33,172,44,151,75,132,121,116,177,102,240,81,366,70,460"/>
+<area shape="rect" id="Node000003" href="$classTG4ComposedPhysicsMessenger.html" title="Messenger class that defines commands for Geant4 VMC composed physics list and related classes." alt="" coords="178,55,396,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="66,459,79,374,100,263,130,158,148,117,168,90,182,79,186,83,172,93,152,120,135,160,105,265,84,375,71,460"/>
+<area shape="rect" id="Node000004" href="$classTG4CrossSectionMessenger.html" title="Messenger class that defines commands for TG4CrossSectionManager." alt="" coords="193,104,381,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="62,459,65,393,79,307,93,261,111,216,136,175,168,139,191,124,194,129,171,143,140,178,116,219,98,263,85,308,70,394,67,459"/>
+<area shape="rect" id="Node000005" href="$classTG4DetConstructionMessenger.html" title="Messenger class that defines commands for TG4DetConstruction." alt="" coords="185,153,388,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="63,459,70,402,86,328,100,290,117,253,140,218,168,188,184,177,187,182,171,192,144,221,122,255,105,292,91,330,75,402,69,459"/>
+<area shape="rect" id="Node000006" href="$classTG4EventActionMessenger.html" title="Messenger class that defines commands for TG4EventAction." alt="" coords="197,203,377,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="66,459,75,410,93,350,123,289,144,261,168,237,195,222,197,227,171,242,148,265,128,292,98,352,80,412,71,460"/>
+<area shape="rect" id="Node000007" href="$classTG4ExtDecayerMessenger.html" title="Messenger class that defines commands for the stack popper special process." alt="" coords="199,252,374,278"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="69,459,81,420,101,373,130,326,148,305,168,287,198,271,200,276,171,291,151,309,134,329,106,375,86,422,74,461"/>
+<area shape="rect" id="Node000008" href="$classTG4GflashFastSimulationMessenger.html" title="Messenger class that defines commands for the Gflash fast simulation model." alt="" coords="170,301,404,327"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="74,459,109,396,136,363,168,336,189,325,191,330,171,340,140,367,114,399,79,462"/>
+<area shape="rect" id="Node000009" href="$classTG4ModelConfigurationMessenger.html" title="Messenger class that defines commands for the special physica models." alt="" coords="177,351,397,376"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="82,461,119,421,143,402,168,385,194,375,196,379,171,390,146,406,123,425,86,464"/>
+<area shape="rect" id="Node000010" href="$classTG4ParticlesCheckerMessenger.html" title="Messenger class that defines commands for TG4ParticlesChecker." alt="" coords="182,400,392,426"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="101,465,169,434,207,424,208,429,171,439,103,469"/>
+<area shape="rect" id="Node000011" href="$classTG4PrimaryGeneratorMessenger.html" title="Messenger class that defines commands for TG4PrimaryGeneratorAction." alt="" coords="181,449,392,475"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="137,477,181,472,181,477,137,482"/>
+<area shape="rect" id="Node000012" href="$classTG4RegionsMessenger.html" title="Messenger class that defines commands for TG4RegionsManager[2]." alt="" coords="208,499,366,524"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="138,493,208,500,207,506,137,498"/>
+<area shape="rect" id="Node000013" href="$classTG4RunActionMessenger.html" title="Messenger class that defines commands for TG4RunAction." alt="" coords="202,548,372,574"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="103,505,171,534,209,545,207,550,169,539,101,510"/>
+<area shape="rect" id="Node000014" href="$classTG4RunMessenger.html" title="Messenger class that defines commands for TG4RunManager." alt="" coords="220,597,354,623"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="86,510,123,549,146,568,171,584,220,600,219,606,169,589,143,572,119,553,82,514"/>
+<area shape="rect" id="Node000015" href="$classTG4SDMessenger.html" title="Messenger class that defines commands for the SD construction." alt="" coords="223,647,351,672"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="79,513,114,575,140,607,171,633,196,645,223,653,221,658,194,650,168,638,136,611,110,578,74,516"/>
+<area shape="rect" id="Node000016" href="$classTG4SpecialStackingActionMessenger.html" title="Messenger class that defines commands for TG4StackingAction." alt="" coords="198,696,376,737"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="74,514,87,553,107,598,135,644,171,683,199,699,196,703,168,687,131,647,102,601,82,555,69,516"/>
+<area shape="rect" id="Node000017" href="$classTG4StackPopperMessenger.html" title="Messenger class that defines commands for the stack popper special process." alt="" coords="194,761,380,787"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="70,516,79,566,97,629,127,693,147,722,171,747,195,761,192,765,168,751,143,725,122,696,92,631,74,567,65,516"/>
+<area shape="rect" id="Node000018" href="$classTG4SteppingActionMessenger.html" title="Messenger class that defines commands for TG4SteppingAction." alt="" coords="188,811,386,836"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="68,516,74,575,89,652,103,692,120,731,143,767,171,797,189,809,186,813,168,802,139,770,116,733,98,694,84,653,68,576,63,516"/>
+<area shape="rect" id="Node000019" href="$classTG4TrackingActionMessenger.html" title="Messenger class that defines commands for TG4TrackingAction." alt="" coords="188,860,386,886"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="67,516,69,584,83,673,96,721,114,767,139,810,171,847,189,859,186,863,168,851,135,813,110,770,91,723,77,675,64,584,61,516"/>
+<area shape="rect" id="Node000020" href="$classTG4VGMMessenger.html" title="Messenger class that defines commands for VGM XML Exporter." alt="" coords="217,909,357,935"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="71,515,83,603,104,718,134,827,152,868,172,896,193,910,217,918,216,923,190,915,168,900,147,871,129,828,99,719,78,604,66,516"/>
+<area shape="rect" id="Node000021" href="$classTG4VerboseMessenger.html" title="Messenger class that defines commands for the verbose classes." alt="" coords="208,959,366,984"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="70,516,81,613,101,742,115,807,131,866,150,914,172,946,188,958,208,965,206,970,186,962,168,949,145,916,126,868,110,809,96,743,76,613,65,516"/>
+</map>

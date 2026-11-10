@@ -1,0 +1,5 @@
+<map id="G4VExtDecayer" name="G4VExtDecayer">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,118,31"/>
+<area shape="rect" id="Node000002" href="$classTG4ExtDecayer.html" title="Implements the G4VExtDecayer abstract class with the TVirtualMCDecayer." alt="" coords="6,79,117,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,46,64,79,59,79,59,46"/>
+</map>
