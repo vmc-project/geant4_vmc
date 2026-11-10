@@ -59,7 +59,6 @@ class TG4Limits : public G4UserLimits
   void SetG3DefaultCuts();
   void SetG3DefaultControls();
   void SetCurrentMaxAllowedStep(G4double step);
-  void SetDefaultMaxAllowedStep();
   void SetMaxAllowedStepBack();
 
   // methods
@@ -68,6 +67,7 @@ class TG4Limits : public G4UserLimits
   // get methods
   G4String GetName() const;
   G4double GetMaxUserStep() const;
+  virtual G4double GetMaxAllowedStep(const G4Track& track);
   const TG4G3CutVector* GetCutVector() const;
   const TG4G3ControlVector* GetControlVector() const;
   G4bool IsCut() const;
@@ -97,7 +97,6 @@ class TG4Limits : public G4UserLimits
   G4bool fIsControl;                 ///< true if any control value is set
   TG4G3CutVector fCutVector;         ///< the vector of G3 cut values
   TG4G3ControlVector fControlVector; ///< the vector of G3 control values
-  G4double fDefaultMaxStep;          ///< the default max step value
 };
 
 // inline methods
@@ -130,12 +129,6 @@ inline G4String TG4Limits::GetName() const
 {
   /// Return name
   return fName;
-}
-
-inline G4double TG4Limits::GetMaxUserStep() const
-{
-  /// Return max step
-  return fMaxStep;
 }
 
 inline const TG4G3CutVector* TG4Limits::GetCutVector() const
