@@ -468,7 +468,7 @@ G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle)
   /// thread, as each TDatabasePDG query takes the global ROOT lock
 
   // owned by the thread and destroyed when the thread exits
-  static thread_local std::unordered_map<const G4ParticleDefinition*, G4int>
+  static G4ThreadLocal std::unordered_map<const G4ParticleDefinition*, G4int>
     pdgCache;
   auto it = pdgCache.find(particle);
   if (it != pdgCache.end()) {
