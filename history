@@ -9,6 +9,16 @@
 
 Tags (history):
 ===============
+  10/11/2026
+  v6-6-update4-p5:
+    Geant4 VMC:
+    - Fix shared state between threads in max step and PDG encoding (#92)
+      - Keep the max step set on fly per thread
+      - Cache the PDG encoding per particle definition and thread
+
+  Tested with VMC 2.2, Geant4 v11.2.0-alice (with embedded CLHEP 2.4.7.1)
+      Root 6.36/14, VGM 5.5
+
   3/10/2026
   v6-6-update4-p4:
     Geant4 VMC:
