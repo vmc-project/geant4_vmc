@@ -193,4 +193,12 @@ void TG4RegionsManager2::UpdateProductionCutsTable()
       G4cout << "... table updated for proton with HADR values" << G4endl;
     }
   }
+
+  // Flag the cuts as modified, so that the energy cuts are applied also to the
+  // couples already built (MT master), and the physics tables are rebuilt
+  for (std::size_t i = 0; i < g4ProductionCutsTable->GetTableSize(); ++i) {
+    auto cuts = g4ProductionCutsTable->GetMaterialCutsCouple(i)->GetProductionCuts();
+    std::vector<G4double> rangeCuts = cuts->GetProductionCuts();
+    cuts->SetProductionCuts(rangeCuts);
+  }
 }
