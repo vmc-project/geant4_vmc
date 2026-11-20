@@ -21,7 +21,7 @@
 
 // static data members
 
-G4ThreadLocal TG4G3Defaults* TG4G3Defaults::fgInstance = 0;
+TG4G3Defaults* TG4G3Defaults::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4G3Defaults::TG4G3Defaults() : fCutVector(), fControlVector()
