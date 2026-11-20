@@ -52,6 +52,12 @@ class TG4VRegionsManager : public TG4Verbose
   virtual void SaveRegions();
   virtual void DumpRegionStore() const;
 
+  // Pass the VMC kill cuts (CUTELE, CUTGAM) of each region to G4HepEm,
+  // if it is used for e-, e+, gamma
+  void SetG4HepEmTrackingCuts() const;
+  // the SpecialUrbanMsc step limitation in G4HepEm
+  void SetG4HepEmMscParameters() const;
+
   // set methods
   void SetFileName(const G4String& fileName);
   void SetApplyForGamma(G4bool applyForGamma);

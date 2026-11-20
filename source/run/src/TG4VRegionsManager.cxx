@@ -16,10 +16,14 @@
 #include "TG4G3CutVector.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3Units.h"
+#include "TG4GeometryManager.h"
 #include "TG4GeometryServices.h"
 #include "TG4Globals.h"
 #include "TG4Limits.h"
 #include "TG4Medium.h"
+#include "TG4MediumMap.h"
+#include "TG4ModelConfiguration.h"
+#include "TG4ModelConfigurationManager.h"
 #include "TG4RegionsMessenger.h"
 
 #include <G4LogicalVolumeStore.hh>
@@ -31,6 +35,12 @@
 #include <G4UnitsTable.hh>
 #include <G4VUserPhysicsList.hh>
 #include <G4Version.hh>
+#ifdef USE_G4HEPEM
+#include <G4Electron.hh>
+#include <G4HepEmConfig.hh>
+#include <G4HepEmTrackingManager.hh>
+#include <G4Material.hh>
+#endif
 
 #include <map>
 #include <set>
@@ -360,4 +370,101 @@ void TG4VRegionsManager::DumpRegionStore() const
 
   G4cout << "========= End Region Store Dump =================================="
          << G4endl;
+}
+
+//_____________________________________________________________________________
+void TG4VRegionsManager::SetG4HepEmTrackingCuts() const
+{
+  /// Pass the VMC kill cuts (CUTELE, CUTGAM) of each region to G4HepEm, if its
+  /// tracking manager is used for e-, e+, gamma. They are taken, as the production
+  /// cuts, from the first medium of the region material. G4HepEm then applies
+  /// them at the start of each step, as TG4VSpecialCuts does.
+
+#ifdef USE_G4HEPEM
+  auto hepEmTrackingManager =
+    dynamic_cast<G4HepEmTrackingManager*>(G4Electron::Definition()->GetTrackingManager());
+  if (hepEmTrackingManager == nullptr) return;
+
+  auto config = hepEmTrackingManager->GetConfig();
+  auto mediumMap = TG4GeometryServices::Instance()->GetMediumMap();
+  auto worldMaterial =
+    TG4GeometryServices::Instance()->GetWorld()->GetLogicalVolume()->GetMaterial();
+  auto cutEleGlobal = GetGlobalEnergyCut(kCUTELE);
+  auto cutGamGlobal = GetGlobalEnergyCut(kCUTGAM);
+
+  auto worldRegion = G4RegionStore::GetInstance()->GetRegion("DefaultRegionForTheWorld", false);
+
+  G4int counter = 0;
+  for (auto region : *G4RegionStore::GetInstance()) {
+    // regions are per material; the world volume stays in the default region
+    auto material = (region == worldRegion)
+                      ? worldMaterial
+                      : G4Material::GetMaterial(region->GetName(), false);
+    if (material == nullptr) continue;
+
+    auto medium = mediumMap->GetMedium(material, false);
+    auto limits = (medium != nullptr) ? (TG4Limits*)medium->GetLimits() : nullptr;
+    auto cutEle = (limits != nullptr) ? GetEnergyCut(limits, kCUTELE, cutEleGlobal) : cutEleGlobal;
+    auto cutGam = (limits != nullptr) ? GetEnergyCut(limits, kCUTGAM, cutGamGlobal) : cutGamGlobal;
+
+    config->SetElectronTrackingCut(cutEle, region->GetName());
+    config->SetGammaTrackingCut(cutGam, region->GetName());
+    ++counter;
+
+    if (VerboseLevel() > 1) {
+      G4cout << "G4HepEm tracking cuts for region " << region->GetName()
+             << ": e-/e+ " << G4BestUnit(cutEle, "Energy")
+             << " gamma " << G4BestUnit(cutGam, "Energy") << G4endl;
+    }
+  }
+  config->SetTrackingCutsAtStepStart(true);
+
+  // rebuild the G4HepEm data with the VMC regions and energy cuts; in sequential
+  // mode the tables are built later anyway, in MT the master has already built
+  // them (BeamOn(0) in Initialize) and rebuilds all of them once more
+  G4RunManager::GetRunManager()->PhysicsHasBeenModified();
+
+  if (VerboseLevel() > 0) {
+    G4cout << "G4HepEm tracking cuts set for " << counter << " regions." << G4endl;
+  }
+#endif
+}
+
+//_____________________________________________________________________________
+void TG4VRegionsManager::SetG4HepEmMscParameters() const
+{
+  /// Apply the step limitation of SpecialUrbanMsc in its regions with the
+  /// G4HepEm Urban msc (UseSafety, range factor 0.04, safety factor 0.6), if
+  /// G4HepEm is used for e-, e+. G4HepEm does not take user msc models.
+
+#ifdef USE_G4HEPEM
+  auto hepEmTrackingManager =
+    dynamic_cast<G4HepEmTrackingManager*>(G4Electron::Definition()->GetTrackingManager());
+  if (hepEmTrackingManager == nullptr) return;
+
+  auto config = hepEmTrackingManager->GetConfig();
+  for (auto model : TG4GeometryManager::Instance()->GetEmModelsManager()->GetVector()) {
+    // the G4HepEm msc parameters are shared by e- and e+
+    if (model->GetModelName() != "SpecialUrbanMsc" ||
+        (model->GetParticles() != "all" && !model->HasParticle("e-") &&
+          !model->HasParticle("e+"))) {
+      continue;
+    }
+    for (const auto& regionName : model->GetRegions()) {
+      // G4HepEmConfig exits on an unknown region
+      if (G4RegionStore::GetInstance()->GetRegion(regionName, false) == nullptr) {
+        TG4Globals::Warning("TG4VRegionsManager", "SetG4HepEmMscParameters",
+          TString("SpecialUrbanMsc region not found: ") + regionName.data());
+        continue;
+      }
+      config->SetMinimalMSCStepLimit(false, regionName);
+      config->SetMSCRangeFactor(0.04, regionName);
+      config->SetMSCSafetyFactor(0.6, regionName);
+      if (VerboseLevel() > 0) {
+        G4cout << "G4HepEm msc in region " << regionName
+               << ": UseSafety, range factor 0.04 (as SpecialUrbanMsc)" << G4endl;
+      }
+    }
+  }
+#endif
 }

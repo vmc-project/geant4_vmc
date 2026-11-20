@@ -39,6 +39,7 @@ include(VMCBuildMode)
 #--- Options -------------------------------------------------------------------
 option(Geant4VMC_USE_G4Root        "Build with G4Root" ON)
 option(Geant4VMC_USE_VGM           "Build with VGM" OFF)
+option(Geant4VMC_USE_G4HepEm       "Build with G4HepEm" OFF)
 option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
 option(Geant4VMC_USE_GEANT4_VIS    "Build with Geant4 Vis drivers" ON)
 option(Geant4VMC_USE_GEANT4_G3TOG4 "Build with Geant4 G3toG4 library" OFF)
@@ -103,6 +104,15 @@ else(Geant4VMC_USE_VGM)
   set(VGM_LIBRARIES)
 endif(Geant4VMC_USE_VGM)
 
+#-- G4HepEm (optional) ---------------------------------------------------------
+if (Geant4VMC_USE_G4HepEm)
+  find_package(G4HepEm CONFIG REQUIRED)
+  include_directories(${G4HepEm_INCLUDE_DIR})
+  add_definitions(-DUSE_G4HEPEM)
+else()
+  set(G4HepEm_LIBRARIES)
+endif()
+
 #--- Utility to defined installation lib directory -----------------------------
 if("${CMAKE_INSTALL_LIBDIR}" MATCHES "")
   include(VMCInstallLibDir)
@@ -165,7 +175,7 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/*/include/*.h ${PROJECT_SOURCE_DIR}/incl
 add_library(${library_name} ${sources} ${root_dict} ${headers})
 # Make g4root optional
 target_link_libraries(${library_name} ${G4Root_LIBRARIES}
-  ${VGM_LIBRARIES} ${VMC_LIBRARIES} ${Geant4_LIBRARIES} ${ROOT_DEPS})
+  ${G4HepEm_LIBRARIES} ${VGM_LIBRARIES} ${VMC_LIBRARIES} ${Geant4_LIBRARIES} ${ROOT_DEPS})
 target_include_directories(${library_name} INTERFACE $<INSTALL_INTERFACE:include/${library_name}>)
 
 #----Installation---------------------------------------------------------------
