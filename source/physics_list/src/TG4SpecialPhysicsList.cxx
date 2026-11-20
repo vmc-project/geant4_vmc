@@ -196,6 +196,9 @@ void TG4SpecialPhysicsList::ConstructProcess()
 {
   /// Construct all processes.
 
+  // the worker threads share this object, so set the thread-local instance here too
+  if (!fgInstance) fgInstance = this;
+
   // lock physics manager
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
   g3PhysicsManager->Lock();
