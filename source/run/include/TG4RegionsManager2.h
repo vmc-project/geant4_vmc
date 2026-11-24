@@ -41,6 +41,8 @@ class G4MaterialCutsCouple;
 /// - UpdateProductionCutsTable: create material cuts couples in
 ///   G4ProductionCutsTable and construct energy cuts vectors in the order 
 ///   of created material cuts couples and set them to the table
+///   using the lowest cut for each particle type when a material has
+///   more than one tracking medium (a warning is issued)
 ///
 /// User can select several levels of verbosity; the following information
 /// is then printed:

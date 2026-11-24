@@ -47,7 +47,8 @@ class TG4MediumMap
   TG4Medium* GetMedium(G4int mediumID, G4bool warn = true) const;
   TG4Medium* GetMedium(const G4String& name, G4bool warn = true) const;
   TG4Medium* GetMedium(G4LogicalVolume* lv, G4bool warn = true) const;
-  TG4Medium* GetMedium(const G4Material* material, G4bool warn = true) const;
+  void GetMedia(const G4Material* material, std::vector<TG4Medium*>& media,
+    G4bool warn = true) const;
   void GetMedia(const G4String& namePattern, std::vector<TG4Medium*>& media,
     G4bool warn = true) const;
 
@@ -67,7 +68,7 @@ class TG4MediumMap
   std::map<G4LogicalVolume*, TG4Medium*> fLVMap;
 
   /// map of materials to medias
-  std::map<const G4Material*, TG4Medium*> fMaterialMap;
+  std::multimap<const G4Material*, TG4Medium*> fMaterialMap;
 };
 
 #endif // TG4_MEDIUM_MAP_H

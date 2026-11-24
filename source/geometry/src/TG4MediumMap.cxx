@@ -83,9 +83,13 @@ void TG4MediumMap::MapMedium(G4LogicalVolume* lv, G4int mediumID)
 
   fLVMap[lv] = medium;
 
-  if (fMaterialMap.find(lv->GetMaterial()) == fMaterialMap.end()) {
-    fMaterialMap[lv->GetMaterial()] = medium;
+  // Store each material-medium association only once, even when several
+  // logical volumes share the same medium.
+  auto range = fMaterialMap.equal_range(lv->GetMaterial());
+  for (auto it = range.first; it != range.second; ++it) {
+    if (it->second == medium) return;
   }
+  fMaterialMap.emplace(lv->GetMaterial(), medium);
 }
 
 //_____________________________________________________________________________
@@ -187,24 +191,21 @@ TG4Medium* TG4MediumMap::GetMedium(G4LogicalVolume* lv, G4bool warn) const
 }
 
 //_____________________________________________________________________________
-TG4Medium* TG4MediumMap::GetMedium(
-  const G4Material* material, G4bool warn) const
+void TG4MediumMap::GetMedia(const G4Material* material,
+  std::vector<TG4Medium*>& media, G4bool warn) const
 {
-  /// Return medium for the given material
+  /// Fill the 'media' vector with all media for the given material.
 
-  std::map<const G4Material*, TG4Medium*>::const_iterator it =
-    fMaterialMap.find(material);
-
-  if (it == fMaterialMap.end()) {
-    if (warn) {
-      TG4Globals::Warning("TG4MediumMap", "GetMedium",
-        "Medium for material " + TString(material->GetName()) +
-          " is not found.");
-    }
-    return 0;
+  auto range = fMaterialMap.equal_range(material);
+  for (auto it = range.first; it != range.second; ++it) {
+    media.push_back(it->second);
   }
 
-  return it->second;
+  if (warn && range.first == range.second) {
+    TG4Globals::Warning("TG4MediumMap", "GetMedia",
+      "Medium for material " + TString(material->GetName()) +
+        " is not found.");
+  }
 }
 
 //_____________________________________________________________________________

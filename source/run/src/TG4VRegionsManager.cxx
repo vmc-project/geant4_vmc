@@ -32,6 +32,7 @@
 #include <G4VUserPhysicsList.hh>
 #include <G4Version.hh>
 
+#include <algorithm>
 #include <map>
 #include <set>
 #include <fstream>
@@ -216,8 +217,8 @@ void TG4VRegionsManager::PrintRegionData(std::ostream& output,
 void TG4VRegionsManager::PrintFromG4Table(std::ostream& output) const
 {
   /// Loop over the production cuts table and print the production ranges
-  /// and cuts from the table and the VMC cuts from the TG4Limits
-  /// associated with the production cuts material.
+  /// and cuts from the table and the lowest effective VMC cuts across
+  /// all tracking media associated with the production cuts material.
 
   G4ProductionCutsTable* productionCutsTable =
     G4ProductionCutsTable::GetProductionCutsTable();
@@ -228,6 +229,10 @@ void TG4VRegionsManager::PrintFromG4Table(std::ostream& output) const
   }
 
   PrintLegend(output);
+
+  auto mediumMap = TG4GeometryServices::Instance()->GetMediumMap();
+  auto cutGamGlobal = GetGlobalEnergyCut(kCUTGAM);
+  auto cutEleGlobal = GetGlobalEnergyCut(kCUTELE);
 
   for (G4int i = 0; i < G4int(productionCutsTable->GetTableSize()); i++) {
     const G4MaterialCutsCouple* couple =
@@ -251,20 +256,17 @@ void TG4VRegionsManager::PrintFromG4Table(std::ostream& output) const
     G4double cutGam = (*energyCutsGam)[couple->GetIndex()];
     G4double cutEle = (*energyCutsEle)[couple->GetIndex()];
 
-    // Get limits via material
-    TG4Limits* limits =
-      TG4GeometryServices::Instance()->FindLimits(material, true);
+    std::vector<TG4Medium*> media;
+    mediumMap->GetMedia(material, media);
 
-    G4double cutGamLimits = DBL_MAX;
-    G4double cutEleLimits = DBL_MAX;
-    if (!limits) {
-      TG4Globals::Warning("TG4VRegionsManager", "CheckRegions",
-        "Limits for material " + TString(material->GetName()) + " not found. " +
-          TG4Globals::Endl());
-    }
-    else {
-      cutGamLimits = GetEnergyCut(limits, kCUTGAM, DBL_MAX);
-      cutEleLimits = GetEnergyCut(limits, kCUTELE, DBL_MAX);
+    G4double cutGamLimits = media.empty() ? cutGamGlobal : DBL_MAX;
+    G4double cutEleLimits = media.empty() ? cutEleGlobal : DBL_MAX;
+    for (auto medium : media) {
+      auto limits = static_cast<TG4Limits*>(medium->GetLimits());
+      cutGamLimits = std::min(cutGamLimits,
+        limits ? GetEnergyCut(limits, kCUTGAM, cutGamGlobal) : cutGamGlobal);
+      cutEleLimits = std::min(cutEleLimits,
+        limits ? GetEnergyCut(limits, kCUTELE, cutEleGlobal) : cutEleGlobal);
     }
 
     G4String matName = material->GetName();
