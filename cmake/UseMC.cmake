@@ -84,12 +84,7 @@ if(VMC_WITH_Geant3)
   add_definitions(-DUSE_GEANT3)
   include_directories(${Geant3_INCLUDE_DIRS})
 
-  #Pythia6
-  if(Pythia6_FOUND)
-    set(MCPackages_LIBRARIES ${MCPackages_LIBRARIES} ${Pythia6_LIBRARIES} ${Geant3_LIBRARIES})
-  else()
-    set(MCPackages_LIBRARIES ${Geant3_LIBRARIES} ${MCPackages_LIBRARIES})
-  endif(Pythia6_FOUND)
+  set(MCPackages_LIBRARIES ${Geant3_LIBRARIES} ${MCPackages_LIBRARIES})
   set(MC_PREFIX "g3")
 endif(VMC_WITH_Geant3)
 
