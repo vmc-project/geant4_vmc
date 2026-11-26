@@ -38,7 +38,7 @@
 #define G4MT_physicsVector \
   ((G4VMPLsubInstanceManager.offset[g4vmplInstanceID]).physicsVector)
 
-G4ThreadLocal TG4SpecialPhysicsList* TG4SpecialPhysicsList::fgInstance = 0;
+TG4SpecialPhysicsList* TG4SpecialPhysicsList::fgInstance = 0;
 
 //
 // static methods
