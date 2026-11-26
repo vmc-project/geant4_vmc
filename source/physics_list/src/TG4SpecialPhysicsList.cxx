@@ -38,7 +38,7 @@
 #define G4MT_physicsVector \
   ((G4VMPLsubInstanceManager.offset[g4vmplInstanceID]).physicsVector)
 
-G4ThreadLocal TG4SpecialPhysicsList* TG4SpecialPhysicsList::fgInstance = 0;
+TG4SpecialPhysicsList* TG4SpecialPhysicsList::fgInstance = 0;
 
 //
 // static methods
@@ -195,9 +195,6 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
 void TG4SpecialPhysicsList::ConstructProcess()
 {
   /// Construct all processes.
-
-  // the worker threads share this object, so set the thread-local instance here too
-  if (!fgInstance) fgInstance = this;
 
   // lock physics manager
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
