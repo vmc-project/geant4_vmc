@@ -60,9 +60,11 @@ RUNG4="root.exe -b -q load_g4.C"
 RUNG3_E03a="root.exe -b -q load_g3a.C"
 RUNG3_E03b="root.exe -b -q load_g3b.C"
 RUNG3_E03c="root.exe -b -q load_g3c.C"
+RUNG3_E03d="root.exe -b -q load_g3d.C"
 RUNG4_E03a="root.exe -b -q load_g4a.C"
 RUNG4_E03b="root.exe -b -q load_g4b.C"
 RUNG4_E03c="root.exe -b -q load_g4c.C"
+RUNG4_E03d="root.exe -b -q load_g4d.C"
 RUNMULTI="root.exe -b -q load_multi.C"
 
 # The default list of examples (all)
@@ -275,7 +277,7 @@ do
 
   if [ "$EXAMPLE" = "E03" ]; then
 
-    for OPTION in E03a E03b E03c
+    for OPTION in E03a E03b E03c E03d
     do
 
       OUT_SUB=$OUT/$OPTION
@@ -286,6 +288,7 @@ do
       #cd $CURDIR/$EXAMPLE
       echo "... Example $EXAMPLE/$OPTION"
 
+      TEST_OLDGEOM="1"
       if [ "$OPTION" = "E03a" ]; then
         RUNG3_OPT=$RUNG3_E03a
         RUNG4_OPT=$RUNG4_E03a
@@ -298,6 +301,11 @@ do
         RUNG3_OPT=$RUNG3_E03c
         RUNG4_OPT=$RUNG4_E03c
         TEST_OLDGEOM="0"
+      fi
+
+      if [ "$OPTION" = "E03d" ]; then
+        RUNG3_OPT=$RUNG3_E03d
+        RUNG4_OPT=$RUNG4_E03d
       fi
 
       # Run three macro + special configuration available only in E03 example

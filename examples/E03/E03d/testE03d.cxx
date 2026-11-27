@@ -303,6 +303,9 @@ int main(int argc, char** argv)
     appl->RunMC(5);
   }
   else {
+    // Allow the shared E03 test macros to use this application.
+    gROOT->ProcessLine("using Ex03MCApplication = Ex03dMCApplication;");
+
     // Run from Root macro
     gROOT->Macro(rootMacro.data());
   }
