@@ -18,6 +18,11 @@
 #
 # By I. Hrivnacova, IPN Orsay
 
+# Disable both native and web ROOT graphics for executable tests.
+# ROOT_BATCH alone does not disable the web geometry viewer.
+export ROOT_BATCH=1
+export ROOT_WEBDISPLAY=off
+
 CURDIR=`pwd`
 OUTDIR=$CURDIR/logs/run_exe
 
@@ -102,6 +107,7 @@ do
       run_mc_exe_option g3 a
       run_mc_exe_option g3 b
       run_mc_exe_option g3 c
+      run_mc_exe_option g3 d
     else
       run_mc_exe g3
     fi
@@ -112,6 +118,7 @@ do
       run_mc_exe_option g4 a
       run_mc_exe_option g4 b
       run_mc_exe_option g4 c
+      run_mc_exe_option g4 d
     else
       run_mc_exe g4
     fi

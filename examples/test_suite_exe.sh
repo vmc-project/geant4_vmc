@@ -18,6 +18,11 @@
 #
 # By I. Hrivnacova, IPN Orsay
 
+# Disable both native and web ROOT graphics for executable tests.
+# ROOT_BATCH alone does not disable the web geometry viewer.
+export ROOT_BATCH=1
+export ROOT_WEBDISPLAY=off
+
 CURDIR=`pwd`
 OUTDIR=$CURDIR/logs/test_exe
 EXEDIR=""
@@ -193,7 +198,7 @@ do
   fi
 
   if [ "$EXAMPLE" = "E03" ]; then
-    for OPTION in E03a E03b E03c
+    for OPTION in E03a E03b E03c E03d
     do
       OUT=$OUTDIR/$EXAMPLE/$OPTION
       if [ ! -d $OUT ]; then
@@ -204,6 +209,7 @@ do
         EXEDIR=${BUILDDIR}/examples/$EXAMPLE/$OPTION/
       fi
 
+      TEST_OLDGEOM="1"
       if [ "$OPTION" = "E03c" ]; then
         TEST_OLDGEOM="0"
       fi

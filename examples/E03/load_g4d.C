@@ -23,4 +23,7 @@ void load_g4d()
 
   // Load library with a user run configuration
   gSystem->Load("libgeant4_E03d");
+
+  // Allow the shared E03 run and test macros to use this application.
+  gROOT->ProcessLine("using Ex03MCApplication = Ex03dMCApplication;");
 }

@@ -12,7 +12,7 @@
 # (called from Root macro set_g4_vis.C)
 
 # Use these open statements to open selected visualization
-/vis/open OGL
+/vis/open TSG_X11_ZB
 #/vis/open DAWNFILE
 
 # Disable auto refresh and quieten vis messages whilst scene and

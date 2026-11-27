@@ -100,6 +100,7 @@ do
       run_mc g3a g3 g3tgeo
       run_mc g3b g3 g3tgeo
       run_mc g3c g3 g3tgeo
+      run_mc g3d g3 g3tgeo
     else
       run_mc g3 g3 g3tgeo
     fi
@@ -110,6 +111,7 @@ do
       run_mc g4a g4 g4tgeo
       run_mc g4b g4 g4tgeo
       run_mc g4c g4 g4tgeo
+      run_mc g4d g4 g4tgeo
     else
       run_mc g4 g4 g4tgeo
     fi

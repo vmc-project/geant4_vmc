@@ -72,7 +72,7 @@ int main(int argc, char** argv)
   geant4->ProcessGeantMacro("g4vis.in");
 #endif
 
-  appl->RunMC(1000);
+  appl->RunMC(5);
 
   delete appl;
 }
