@@ -18,6 +18,23 @@
 
 #include "G4PhysListFactory.hh"
 
+#ifdef USE_G4HEPEM
+#include "TG4HepEmTrackingPhysics.h"
+#include <G4VModularPhysicsList.hh>
+#endif
+
+namespace
+{
+// the suffix that selects G4HepEm for e-, e+ and gamma, eg. FTFP_BERT_EMV_HEP
+const G4String kHepEmSuffix = "_HEP";
+
+G4bool HasHepEmSuffix(const G4String& selection)
+{
+  return selection.size() > kHepEmSuffix.size() &&
+         G4StrUtil::ends_with(selection, kHepEmSuffix);
+}
+} // namespace
+
 const G4double TG4HadronPhysicsList::fgkDefaultCutValue = 1.0 * mm;
 
 //
@@ -67,6 +84,12 @@ G4bool TG4HadronPhysicsList::IsAvailableSelection(const G4String& selection)
   /// Return list of all available selections
 
   G4PhysListFactory physListFactory;
+#ifdef USE_G4HEPEM
+  if (HasHepEmSuffix(selection)) {
+    return physListFactory.IsReferencePhysList(
+      selection.substr(0, selection.size() - kHepEmSuffix.size()));
+  }
+#endif
   return physListFactory.IsReferencePhysList(selection);
 }
 
@@ -108,6 +131,17 @@ void TG4HadronPhysicsList::Configure(const G4String& sel)
 
   G4PhysListFactory phyListFactory;
 
+#ifdef USE_G4HEPEM
+  if (HasHepEmSuffix(sel)) {
+    // the EM constructor of the base list is replaced by G4HepEm
+    auto physList = phyListFactory.GetReferencePhysList(
+      sel.substr(0, sel.size() - kHepEmSuffix.size()));
+    physList->ReplacePhysics(new TG4HepEmTrackingPhysics(physList->GetVerboseLevel()));
+    G4cout << "### Replaced the EM physics with TG4HepEmTrackingPhysics" << G4endl;
+    fPhysicsList = physList;
+    return;
+  }
+#endif
   fPhysicsList = phyListFactory.GetReferencePhysList(sel);
 }
 

@@ -34,7 +34,9 @@
 
 #include <G4PrimaryParticle.hh>
 #include <G4PrimaryVertex.hh>
+#include <G4Step.hh>
 #include <G4SystemOfUnits.hh>
+#include <G4Track.hh>
 #include <G4TrackVector.hh>
 #include <G4TrackingManager.hh>
 #include <G4UImanager.hh>
@@ -148,7 +150,9 @@ TG4TrackInformation* TG4TrackManager::SetTrackInformation(
     // create track information and set it to G4Track
     // if it does not yet exist
     trackInfo = new TG4TrackInformation();
-    fG4TrackingManager->SetUserTrackInformation(trackInfo);
+    // set on the track itself, which also works with non default tracking
+    // managers (eg. g4hepem)
+    const_cast<G4Track*>(track)->SetUserInformation(trackInfo);
     // the track information is deleted together with its
     // G4Track object
   }
@@ -220,8 +224,10 @@ void TG4TrackManager::SetParentToTrackInformation(const G4Track* track)
   }
 #endif
 
+  // take the secondaries from the track's step, which is also filled by
+  // non default tracking managers (eg. g4hepem)
   const G4TrackVector* secondaryTracks =
-    fG4TrackingManager->GetSteppingManager()->GetSecondary();
+    track->GetStep() ? track->GetStep()->GetSecondary() : nullptr;
 
   if (!secondaryTracks) return;
 

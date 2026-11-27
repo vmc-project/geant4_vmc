@@ -15,6 +15,7 @@
 #  Geant4VMC_USE_G4Root        - build option: with internal G4Root
 #  Geant4VMC_USE_EXTERN_G4Root - build option: with external G4Root
 #  Geant4VMC_USE_VGM           - build option: with VGM
+#  Geant4VMC_USE_G4HepEm       - build option: with G4HepEm
 #  Geant4VMC_USE_GEANT4_UI     - build option: with Geant4 UI drivers
 #  Geant4VMC_USE_GEANT4_VIS    - build option: with Geant4 Vis drivers
 #  Geant4VMC_USE_GEANT4_G3TOG4 - build option: with Geant4 G3toG4 library
@@ -33,10 +34,17 @@ set(Geant4VMC_PREFIX "${_prefix}")
 set(Geant4VMC_USE_G4Root @Geant4VMC_USE_G4Root@)
 set(Geant4VMC_USE_EXTERN_G4Root @Geant4VMC_USE_EXTERN_G4Root@)
 set(Geant4VMC_USE_VGM    @Geant4VMC_USE_VGM@)
+set(Geant4VMC_USE_G4HepEm @Geant4VMC_USE_G4HepEm@)
 set(Geant4VMC_USE_GEANT4_UI  @Geant4VMC_USE_GEANT4_UI@)
 set(Geant4VMC_USE_GEANT4_VIS @Geant4VMC_USE_GEANT4_VIS@)
 set(Geant4VMC_USE_GEANT4_G3TOG4 @Geant4VMC_USE_GEANT4_G3TOG4@)
 set(Geant4VMC_CMAKE_INSTALL_LIBDIR @CMAKE_INSTALL_LIBDIR@)
+
+# The geant4vmc target links the G4HepEm targets
+if (Geant4VMC_USE_G4HepEm)
+  include(CMakeFindDependencyMacro)
+  find_dependency(G4HepEm CONFIG)
+endif()
 
 # Import targets
 if (Geant4VMC_USE_G4Root AND (NOT Geant4VMC_USE_EXTERN_G4Root))
