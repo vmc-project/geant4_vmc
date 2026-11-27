@@ -1,0 +1,23 @@
+<map id="examples/E02/exampleE02.cxx" name="examples/E02/exampleE02.cxx">
+<area shape="rect" id="Node000001" title="The Geant4 VMC example E02 application executable." alt="" coords="336,5,534,31"/>
+<area shape="rect" id="Node000002" href="$Ex02MCApplication_8h.html" title="Definition of the Ex02MCApplication class." alt="" coords="296,79,440,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="426,33,392,69,388,66,422,29"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="463,79,540,105"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="448,29,482,66,478,69,444,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,153,166,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="321,108,149,151,148,146,320,103"/>
+<area shape="rect" id="Node000004" href="$Ex02DetectorConstruction_8h.html" title="Definition of the Ex02DetectorConstruction class." alt="" coords="190,153,371,178"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="355,107,308,145,305,141,352,103"/>
+<area shape="rect" id="Node000007" href="$Ex02TrackerSD_8h.html" title="Definition of the Ex02TrackerSD class." alt="" coords="396,153,517,178"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="385,103,431,141,428,145,381,107"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="541,153,678,178"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="410,103,555,145,553,150,408,108"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="156,226,234,252"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="267,181,222,218,219,214,264,177"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="258,226,332,252"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="285,178,292,210,287,211,280,179"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="386,226,495,252"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="456,179,449,211,444,210,451,178"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="520,226,601,252"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="475,177,532,215,529,220,472,181"/>
+</map>

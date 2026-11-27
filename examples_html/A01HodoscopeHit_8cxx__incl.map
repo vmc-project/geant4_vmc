@@ -1,0 +1,13 @@
+<map id="examples/A01/src/A01HodoscopeHit.cxx" name="examples/A01/src/A01HodoscopeHit.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the A01HodoscopeHit class." alt="" coords="9,5,228,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,96,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,48,73,84,69,80,100,45"/>
+<area shape="rect" id="Node000003" href="$A01HodoscopeHit_8h.html" title="Definition of the A01HodoscopeHit class." alt="" coords="119,94,256,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,45,169,80,165,84,134,48"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="27,168,125,193"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="170,122,109,161,106,157,167,118"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="149,168,226,193"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="190,120,190,152,185,152,185,120"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="251,168,335,193"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="207,118,264,156,261,161,204,122"/>
+</map>

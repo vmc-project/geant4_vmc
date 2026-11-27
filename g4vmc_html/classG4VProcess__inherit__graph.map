@@ -1,0 +1,21 @@
+<map id="G4VProcess" name="G4VProcess">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,96,101,121"/>
+<area shape="rect" id="Node000002" href="$classG4MonopoleTransportation.html" title=" " alt="" coords="149,46,326,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,89,186,70,188,75,117,94"/>
+<area shape="rect" id="Node000003" href="$classTG4StackPopper.html" title="The process which pops particles defined by user from the VMC stack and passes them to tracking." alt="" coords="177,96,298,121"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="116,106,176,106,176,111,116,111"/>
+<area shape="rect" id="Node000004" href="$classTG4VSpecialCuts.html" title="Abstract base class for a special process that activates kinetic energy cuts." alt="" coords="175,145,300,170"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="117,122,188,142,186,147,115,128"/>
+<area shape="rect" id="Node000005" href="$classTG4SpecialCutsForChargedHadron.html" title="Special process that activates kinetic energy cuts for charged hadrons." alt="" coords="374,5,557,46"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="313,139,324,132,340,114,348,95,356,75,372,56,390,44,393,49,376,60,360,78,353,97,345,117,328,136,316,143"/>
+<area shape="rect" id="Node000006" href="$classTG4SpecialCutsForElectron.html" title="Special process that activates kinetic energy cuts for e&#45;." alt="" coords="374,70,557,96"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="308,137,325,131,349,118,373,105,404,94,406,99,375,109,351,123,327,136,310,142"/>
+<area shape="rect" id="Node000007" href="$classTG4SpecialCutsForGamma.html" title="Special process that activates kinetic energy cuts for gamma." alt="" coords="375,120,556,145"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="315,146,374,140,375,145,316,152"/>
+<area shape="rect" id="Node000008" href="$classTG4SpecialCutsForMuon.html" title="Special process that activates kinetic energy cuts for muon." alt="" coords="382,169,549,194"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="316,163,382,170,381,176,315,168"/>
+<area shape="rect" id="Node000009" href="$classTG4SpecialCutsForNeutralHadron.html" title="Special process that activates kinetic energy cuts for neutral hadrons." alt="" coords="377,219,554,259"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="290,174,375,204,406,216,404,221,373,210,289,179"/>
+<area shape="rect" id="Node000010" href="$classTG4SpecialCutsForNeutron.html" title="Special process that activates kinetic energy cuts for neutrons,." alt="" coords="375,284,556,309"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="263,180,312,225,343,249,375,269,404,280,402,285,373,273,340,253,309,229,259,184"/>
+</map>

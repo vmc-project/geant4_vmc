@@ -1,0 +1,9 @@
+<map id="examples/E02/include/Ex02ChamberParameterisation.h" name="examples/E02/include/Ex02ChamberParameterisation.h">
+<area shape="rect" id="Node000001" title="Definition of the Ex02ChamberParameterisation class." alt="" coords="234,5,447,46"/>
+<area shape="rect" id="Node000002" href="$Ex02ChamberParameterisation_8cxx.html" title="Implementation of the Ex02ChamberParameterisation class." alt="" coords="5,94,214,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="275,54,163,96,161,91,273,49"/>
+<area shape="rect" id="Node000003" href="$Ex02DetectorConstruction_8cxx.html" title="Implementation of the Ex02DetectorConstruction class." alt="" coords="238,94,443,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="343,62,343,94,338,94,338,62"/>
+<area shape="rect" id="Node000004" href="$Ex02DetectorConstructionOld_8cxx.html" title="Implementation of the Ex02DetectorConstructionOld class." alt="" coords="467,94,672,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="407,49,518,91,516,96,405,54"/>
+</map>

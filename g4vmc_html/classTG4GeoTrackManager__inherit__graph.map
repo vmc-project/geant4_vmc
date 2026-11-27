@@ -1,0 +1,5 @@
+<map id="TG4GeoTrackManager" name="TG4GeoTrackManager">
+<area shape="rect" id="Node000001" title="The manager class for collecting TGeo tracks for visualization." alt="" coords="5,79,159,105"/>
+<area shape="rect" id="Node000002" href="$classTG4Verbose.html" title="Base class for defining the verbose level and a common messenger." alt="" coords="35,5,129,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,46,85,79,79,79,79,46"/>
+</map>

@@ -1,0 +1,27 @@
+<map id="examples/macro/g4libs_old.C" name="examples/macro/g4libs_old.C">
+<area shape="rect" id="Node000001" title="Old macro for loading Geant4 and Geant4 VMC libraries." alt="" coords="462,5,616,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,63,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="462,38,290,60,78,96,77,91,289,55,461,32"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="87,94,141,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="462,40,324,63,156,96,155,91,323,57,461,35"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="165,94,234,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="462,47,249,96,248,90,461,42"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="257,94,328,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="479,49,344,92,342,87,477,44"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="353,94,419,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="502,49,424,89,421,84,500,44"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="443,94,526,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="528,48,504,83,500,79,524,45"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="550,94,640,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="555,45,580,79,576,83,551,48"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="664,94,726,120"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="579,44,659,84,657,89,577,49"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="750,94,816,120"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="601,44,736,88,734,93,599,49"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="841,94,910,120"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="617,42,827,91,825,96,616,47"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="933,94,1036,120"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="618,38,918,91,917,96,617,43"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="1060,94,1136,120"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="617,32,808,55,1045,91,1044,96,807,60,617,37"/>
+</map>

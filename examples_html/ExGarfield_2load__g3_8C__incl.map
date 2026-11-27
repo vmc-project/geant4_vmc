@@ -1,0 +1,11 @@
+<map id="examples/ExGarfield/load_g3.C" name="examples/ExGarfield/load_g3.C">
+<area shape="rect" id="Node000001" title="Macro for loading libraries to run ExGarfield example with Geant3." alt="" coords="73,5,212,46"/>
+<area shape="rect" id="Node000002" href="$g3libs_8C.html" title="Macro for loading Geant3 libraries." alt="" coords="84,94,201,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,46,145,78,140,78,140,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,168,77,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="127,122,72,160,69,156,124,118"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="101,168,184,193"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="145,120,145,152,140,152,140,120"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="208,168,282,193"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="161,118,217,156,214,161,158,122"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="TG4HadronPhysicsList" name="TG4HadronPhysicsList">
+<area shape="rect" id="Node000001" title="The hadron physics list helper class." alt="" coords="70,79,226,105"/>
+<area shape="rect" id="Node000002" href="$classG4VUserPhysicsList.html" title=" " alt="" coords="5,5,149,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,40,138,77,134,80,97,44"/>
+<area shape="rect" id="Node000003" href="$classTG4Verbose.html" title="Base class for defining the verbose level and a common messenger." alt="" coords="172,5,267,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,44,162,80,158,77,195,40"/>
+</map>

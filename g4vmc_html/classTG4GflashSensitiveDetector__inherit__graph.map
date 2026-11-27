@@ -1,0 +1,9 @@
+<map id="TG4GflashSensitiveDetector" name="TG4GflashSensitiveDetector">
+<area shape="rect" id="Node000001" title="Sensitive detector with Gflash." alt="" coords="85,153,271,178"/>
+<area shape="rect" id="Node000002" href="$classTG4SensitiveDetector.html" title="Sensitive detector class for calling a user defined stepping function." alt="" coords="6,79,155,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,112,163,150,160,154,108,116"/>
+<area shape="rect" id="Node000003" href="$classG4VSensitiveDetector.html" title=" " alt="" coords="5,5,156,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="83,46,83,79,78,79,78,46"/>
+<area shape="rect" id="Node000004" href="$classG4VGFlashSensitiveDetector.html" title=" " alt="" coords="179,79,371,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="248,116,196,154,193,150,245,112"/>
+</map>

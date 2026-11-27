@@ -1,0 +1,11 @@
+<map id="examples/ExGarfield/geant4/src/RunConfiguration.cxx" name="examples/ExGarfield/geant4/src/RunConfiguration.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the ExGarfield::RunConfiguration class." alt="" coords="72,5,282,46"/>
+<area shape="rect" id="Node000002" href="$RunConfiguration_8h.html" title="Definition of the ExGarfield::RunConfiguration class." alt="" coords="39,94,168,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,48,127,84,123,81,157,45"/>
+<area shape="rect" id="Node000004" href="$FastSimulation_8h.html" title="Definition of the ExGarfield::FastSimulation class." alt="" coords="203,94,322,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="200,44,240,81,236,85,196,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,168,160,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="103,121,93,153,88,152,98,119"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="184,168,365,193"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="267,119,273,152,267,153,262,120"/>
+</map>

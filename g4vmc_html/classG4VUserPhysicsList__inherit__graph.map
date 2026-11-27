@@ -1,0 +1,7 @@
+<map id="G4VUserPhysicsList" name="G4VUserPhysicsList">
+<area shape="rect" id="Node000001" title=" " alt="" coords="116,5,260,31"/>
+<area shape="rect" id="Node000002" href="$classTG4ComposedPhysicsList.html" title="The Geant4 VMC physics list builder." alt="" coords="5,79,182,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,43,111,81,108,77,158,39"/>
+<area shape="rect" id="Node000003" href="$classTG4HadronPhysicsList.html" title="The hadron physics list helper class." alt="" coords="206,79,362,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="218,38,270,76,267,81,215,43"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="TG4CrossSectionManager" name="TG4CrossSectionManager">
+<area shape="rect" id="Node000001" title="The manager class for accessing hadronic cross sections." alt="" coords="5,79,180,105"/>
+<area shape="rect" id="Node000002" href="$classTG4Verbose.html" title="Base class for defining the verbose level and a common messenger." alt="" coords="45,5,140,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,46,95,79,90,79,90,46"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="examples/A01/src/A01HadCalorHit.cxx" name="examples/A01/src/A01HadCalorHit.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the A01HadCalorHit class." alt="" coords="13,5,219,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,96,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,48,72,83,68,80,98,45"/>
+<area shape="rect" id="Node000003" href="$A01HadCalorHit_8h.html" title="Definition of the A01HadCalorHit class." alt="" coords="120,94,245,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,45,164,80,160,83,130,48"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="21,168,120,193"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="165,122,104,161,101,157,162,118"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="144,168,221,193"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="185,120,185,152,180,152,180,120"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="246,168,330,193"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="202,118,259,156,256,161,199,122"/>
+</map>

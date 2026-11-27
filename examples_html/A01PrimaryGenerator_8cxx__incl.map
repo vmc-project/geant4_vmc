@@ -1,0 +1,24 @@
+<map id="examples/A01/src/A01PrimaryGenerator.cxx" name="examples/A01/src/A01PrimaryGenerator.cxx">
+<area shape="rect" id="Node000001" title="Implementation of the A01PrimaryGenerator class." alt="" coords="523,5,719,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,96,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="523,41,336,63,112,96,111,91,336,58,522,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="120,94,242,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="523,47,258,94,258,89,522,42"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="266,94,363,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="545,49,377,92,376,87,544,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="387,94,498,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="578,49,485,90,483,85,575,44"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="523,94,610,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="610,48,586,83,581,79,605,45"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="634,94,718,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="637,45,661,79,657,83,632,48"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="742,94,839,120"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="665,44,752,85,750,90,662,49"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="930,168,1091,193"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="704,44,776,65,852,92,977,158,975,163,849,96,775,70,702,49"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="913,94,1044,120"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="711,44,909,87,908,93,710,49"/>
+<area shape="rect" id="Node000011" href="$A01PrimaryGenerator_8h.html" title="Definition of the A01PrimaryGenerator class." alt="" coords="1068,94,1223,120"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="720,39,1052,89,1052,94,719,44"/>
+<area shape="poly" id="edge11_Node000011_Node000009" title=" " alt="" coords="1124,123,1048,162,1045,158,1121,118"/>
+</map>

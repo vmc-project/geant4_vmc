@@ -1,0 +1,40 @@
+<map id="examples/E03/E03d/testE03d.cxx" name="examples/E03/E03d/testE03d.cxx">
+<area shape="rect" id="Node000001" title="The Geant4 VMC example E03d test application." alt="" coords="633,5,845,31"/>
+<area shape="rect" id="Node000002" href="$Ex03dMCApplication_8h.html" title="Definition of the Ex03dMCApplication class." alt="" coords="478,79,629,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="708,34,600,75,598,71,706,29"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="653,79,729,105"/>
+<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="733,33,710,67,705,64,729,30"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="752,79,824,105"/>
+<area shape="poly" id="edge18_Node000001_Node000018" title=" " alt="" coords="749,30,774,65,769,68,745,33"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="848,79,902,105"/>
+<area shape="poly" id="edge19_Node000001_Node000019" title=" " alt="" coords="763,29,840,69,837,74,761,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,153,166,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="478,107,181,152,180,147,477,102"/>
+<area shape="rect" id="Node000004" href="$E03d_2include_2Ex03DetectorConstruction_8h.html" title="Definition of the Ex03DetectorConstruction class." alt="" coords="190,153,371,178"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="508,108,342,151,340,146,506,103"/>
+<area shape="rect" id="Node000009" href="$Ex03dCalorimeterSD_8h.html" title="Definition of the Ex03dCalorimeterSD class." alt="" coords="394,153,545,178"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="541,107,497,144,494,140,538,103"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="569,153,706,178"/>
+<area shape="poly" id="edge14_Node000002_Node000014" title=" " alt="" coords="569,103,613,140,610,144,566,107"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="730,153,892,178"/>
+<area shape="poly" id="edge15_Node000002_Node000015" title=" " alt="" coords="598,103,753,145,752,151,596,108"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="916,153,1023,178"/>
+<area shape="poly" id="edge16_Node000002_Node000016" title=" " alt="" coords="626,103,901,149,900,155,625,108"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="82,226,129,252"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="252,181,144,225,142,220,250,176"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="152,226,243,252"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="268,181,225,218,221,214,264,177"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="376,300,454,326"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="284,178,291,213,298,233,309,250,335,274,366,291,363,296,332,278,305,254,293,235,285,214,278,179"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="318,226,392,252"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="295,177,333,214,330,218,291,181"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="416,226,497,252"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="470,179,464,211,459,210,465,178"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="521,226,578,252"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="485,177,527,214,523,218,481,181"/>
+<area shape="rect" id="Node000012" href="$E03d_2include_2Ex03CalorHit_8h.html" title="Definition of the Ex03CalorHit class." alt="" coords="602,226,708,252"/>
+<area shape="poly" id="edge11_Node000009_Node000012" title=" " alt="" coords="502,176,610,218,608,223,500,181"/>
+<area shape="poly" id="edge12_Node000012_Node000007" title=" " alt="" coords="615,255,469,298,468,293,613,250"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="613,300,697,326"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="658,252,658,284,652,284,652,252"/>
+</map>
