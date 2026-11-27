@@ -27,6 +27,9 @@
 #include <G4RegionStore.hh>
 #include <G4SystemOfUnits.hh>
 
+#include <algorithm>
+#include <limits>
+
 //_____________________________________________________________________________
 TG4RegionsManager2::TG4RegionsManager2()
  : fMessenger(this)
@@ -177,12 +180,34 @@ void TG4RegionsManager2::UpdateProductionCutsTable()
   for (std::size_t i = 0; i < g4ProductionCutsTable->GetTableSize(); ++i) {
     auto couple = g4ProductionCutsTable->GetMaterialCutsCouple(i);
     auto material = couple->GetMaterial();
-    auto medium = mediumMap->GetMedium(material);
+    std::vector<TG4Medium*> media;
+    mediumMap->GetMedia(material, media);
 
-    auto limits = (TG4Limits*)medium->GetLimits();
-    auto cutEle = GetEnergyCut(limits, kCUTELE, cutEleGlobal);
-    auto cutGam = GetEnergyCut(limits, kCUTGAM, cutGamGlobal);
-    auto cutHad = GetEnergyCut(limits, kCUTHAD, cutHadGlobal);
+    auto cutEle = media.empty() ? cutEleGlobal
+                               : std::numeric_limits<G4double>::max();
+    auto cutGam = media.empty() ? cutGamGlobal
+                               : std::numeric_limits<G4double>::max();
+    auto cutHad = media.empty() ? cutHadGlobal
+                               : std::numeric_limits<G4double>::max();
+    for (auto medium : media) {
+      auto limits = static_cast<TG4Limits*>(medium->GetLimits());
+      cutEle = std::min(cutEle,
+        limits ? GetEnergyCut(limits, kCUTELE, cutEleGlobal) : cutEleGlobal);
+      cutGam = std::min(cutGam,
+        limits ? GetEnergyCut(limits, kCUTGAM, cutGamGlobal) : cutGamGlobal);
+      cutHad = std::min(cutHad,
+        limits ? GetEnergyCut(limits, kCUTHAD, cutHadGlobal) : cutHadGlobal);
+    }
+
+    if (media.size() > 1) {
+      TG4Globals::Warning("TG4RegionsManager2", "UpdateProductionCutsTable",
+        "More than one tracking medium is associated with material " +
+          TString(material->GetName()) + "." + TG4Globals::Endl() +
+          "Production thresholds use the lowest tracking cut for each particle type "
+          "across these media." + TG4Globals::Endl() +
+          "Consequently, production thresholds may be lower than the tracking cuts "
+          "in some of the associated media.");
+    }
 
     gamCuts.push_back(cutGam);
     eleCuts.push_back(cutEle);

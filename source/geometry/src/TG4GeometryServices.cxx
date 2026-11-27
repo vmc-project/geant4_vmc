@@ -1031,19 +1031,6 @@ TG4Limits* TG4GeometryServices::FindLimits2(
 }
 
 //_____________________________________________________________________________
-TG4Limits* TG4GeometryServices::FindLimits(
-  const G4Material* material, G4bool silent) const
-{
-  /// Find limits with the specified name.
-
-  // Get medium
-  TG4Medium* medium = fMediumMap->GetMedium(material, !silent);
-  if (!medium) return 0;
-
-  return FindLimits(medium->GetName(), silent);
-}
-
-//_____________________________________________________________________________
 G4int TG4GeometryServices::GetMediumId(G4LogicalVolume* lv) const
 {
   /// Return the second index for materials (having its origin in
